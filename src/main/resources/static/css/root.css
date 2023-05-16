@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+/* ---------- header ---------- */
+:root {
+	--header-background-color: #c7f1de;
+    --header-text-color: #66bb6a; 
+    --header-hoverMenu-color: #ffb300;
+    --header-hoverMenu-under: #ffffa8;
+    --header-selectedMenu-color: beige;
+    --header-selectedMenu-under: #2e7d32;
+}
+
+/* ---------- aside ---------- */
+:root {
+    --aside-background-color: #ffffa8;
+    --aside-text-color: #ffb300; 
+    --aside-hoverMenu-color: #66bb6a;
+    --aside-hoverMenu-under: #2e7d32;
+    --aside-selectedMenu-color: beige;
+    --aside-selectedMenu-under: #2e7d32;
+}
+
+/* ---------- main ---------- */
+:root {
+    --main-background-color: #ffffa8;
+    --main-text-color: #ffb300;
+    --main-hoverMenu-color: #66bb6a;
+    --main-hoverMenu-under: #2e7d32;
+    --main-selectedMenu-color: beige;
+    --main-selectedMenu-under: #2e7d32;
+}
+
+/* ---------- footer ---------- */
+:root {
+    --footer-background-color: #c7f1de;
+    --footer-text-color: #66bb6a; 
+    --header-hoverMenu-color: #ffb300;
+    --header-hoverMenu-under: #ffffa8;
+    --header-selectedMenu-color: beige;
+    --header-selectedMenu-under: #2e7d32;
+}
+
+/* ---------- layout 확인용 보더&컬러 ---------- */
+header{
+	border: solid 1px red;
+}
+#middle{
+	border: solid 1px blue;
+	background-color: var(--main-background-color);
+}
+aside{
+	border: solid 1px orange;
+}
+main{
+	border: solid 1px green;
+}
+footer{
+	border: solid 1px red;
+}

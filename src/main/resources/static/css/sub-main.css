@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+	main {
+		background-color: var(--main-background-color);
+		float: right;
+		width: 80%;
+		min-height: 500px;
+		padding: 2em;
+		margin: auto;
+	}
+	
+	main .contMain { 
+		min-width:500px; 
+		min-height:300px; 
+		background-color: white; 
+		text-align:center; 
+		padding:20px; 
+		border-radius: 15px;
+	} 
+	main .title {
+		font-size: 20px;
+		font-weight: bold;
+		margin: 10px 0 20px; 
+ 		color:var(--header-hoverMenu-color); 
+	}
+	main .count {
+		margin: 10px 0 20px; 
+	}
+	main .cnt {
+		color: var(--aside-hoverMenu-color);
+		font-weight: bold;
+	}
+
+	main .id, .seqno, .cate_code { display:none; }
+
+	main .table {
+		margin: auto;
+		padding: 10px;
+		min-width: 400px;
+	} 
+	main tr {height : 25px; }
+	main .form {
+		margin: auto;
+		padding: 30px;
+		min-width: 200px;
+	} 
+	main .item {
+		display: float;
+		justify-content: center;
+		border: solid 1px blue;
+		margin: 0 0 10px;
+	}
+	main .item div {
+		margin: 5px 10px 5px;
+		border: solid 1px green;
+	}
+	#guide {
+		color: red;
+	}
+	main .buttons {
+		margin: 20px 0 0;
+		border: solid 1px orange;
+	}
+	main .btn {
+		display: float;
+	    border: 1px solid var(--main-selectedMenu-color);
+	    font-size: 0.8rem;
+	    font-weight: 400; 
+	    padding: 0.1rem 0;
+	    margin: auto;
+	    width: 100px;
+	    border-radius: 5px;
+	    text-decoration: none;
+	    text-align: center;
+	    background-color: var(--aside-background-color);
+	    color: var(--main-text-color);
+	}
+	main .add { 
+		display: block;
+		height: 1.5rem;
+	    width: 150px;
+		font-size: 1rem;
+	    font-weight: 400; 
+	    text-align: center;
+	}

@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+	aside {
+		background-color: var(--aside-background-color);
+		min-height: inherit;
+		float: left;
+		width: 20%;
+		padding: 2em;
+	}
+	aside li {
+		margin-bottom: 2rem;
+	}
+	aside li a {
+		font-weight: 600;
+	    padding-bottom: 5px;
+	    color: var(--aside-text-color); 
+	}
+	aside a:active {
+	    border-bottom: 5px solid var(--aside-selectedMenu-under);
+	    color: var(--aside-selectedMenu-color);
+	}
+	aside a:hover {
+	    border-bottom: 5px solid var(--aside-hoverMenu-under);
+	    color: var(--aside-hoverMenu-color);
+	}

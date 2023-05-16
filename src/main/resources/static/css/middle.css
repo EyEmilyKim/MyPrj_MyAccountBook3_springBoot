@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+	#middle {
+		margin-top: 80px; /* margin-top = header height; */
+	}
+	#middle:after { /* middle 정상 높이 가지게함 */
+		content: "";
+		display: block;
+		clear: both;
+	}

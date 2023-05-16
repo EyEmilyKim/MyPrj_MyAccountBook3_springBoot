@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+	*{
+		margin: 0; 
+		padding: 0;
+		box-sizing: border-box; /* 길이 계산 편하도록 */
+	}
+	body {
+		font-family: sans-serif;
+		background-color: darkgray;
+/* 		color: ; */
+	}
+	a {
+		text-decoration: none;	/* 기본 밑줄 제거 */
+	}
+	a:hover {
+/* 		text-decoration: underline;	마우스 올릴시 밑줄 */
+	}
+	li {
+		list-style: none;
+	}
