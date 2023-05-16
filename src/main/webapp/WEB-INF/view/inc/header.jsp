@@ -3,7 +3,7 @@
 
 <header>
 	<div id="home">
-		<a href="/index"><h1>My 가계부 Ver2.</h1></a>
+		<a href="/index"><h1>My 가계부 Ver3.</h1></a>
 	</div>
 	<nav id="menu">
 		<ul>
