@@ -31,7 +31,7 @@
 		font-weight: bold;
 	}
 
-	main .id, .seqno, .cate_code { display:none; }
+	main .id, .seqno, .cate_code, .meth_code { /* display:none; */ }
 
 	main .table {
 		margin: auto;
