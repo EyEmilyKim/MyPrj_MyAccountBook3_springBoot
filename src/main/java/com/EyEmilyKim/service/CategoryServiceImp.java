@@ -11,23 +11,21 @@ import com.EyEmilyKim.entity.Category;
 @Service
 public class CategoryServiceImp implements CategoryService {
 
-//	@Autowired
-//	private CategoryDao cateDao;
+	@Autowired
+	private CategoryDao categoryDao;
 	
 	@Override
 	public List<Category> getList(String id) {
 		System.out.println("CateService > getList() called");
 		
-//		return cateDao.getList(id);
-		return null;
+		return categoryDao.getList(id);
 	}
 
 	@Override
 	public int getCount(String id) {
 		System.out.println("CateService > getCount() called");
 		
-//		return cateDao.getCount(id);
-		return 0;
+		return categoryDao.getCount(id);
 	}
 
 }

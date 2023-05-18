@@ -11,16 +11,6 @@
 	ID in ('id', 'system')  
 	</where> 
 	order by CATE_CODE 
-  	
-<!-- 	select * from noticeview  -->
-<!-- 	<trim prefix="WHERE" prefixOverrides="AND | OR "> -->
-<!-- 	<if test="query != null and query != ''"> -->
-<!-- 		${field} like '%${query}%'  -->
-<!-- 	</if>	 -->
-<!-- 		and pub = #{pub}  -->
-<!-- 	</trim>	  -->
-<!-- 	order by id desc  -->
-<!-- 	limit #{offset}, #{size} -->
   </select>
   <select id="getCount" resultType="int">
 	select count(cate_code) from mab_categories
