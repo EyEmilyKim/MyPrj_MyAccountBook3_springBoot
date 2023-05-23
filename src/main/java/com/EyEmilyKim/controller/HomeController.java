@@ -8,6 +8,8 @@ public class HomeController {
 
 	@RequestMapping("/index")
 	public String index() {
+		System.out.println("HomeController > index() called");
+		
 		return "root.index";
 	}
 }
