@@ -8,9 +8,10 @@
 	<title>알림창</title>
 </head>
 <body>
-	<script type="text/javascript">
-		alert("${msg}");
-		location.href = "${url}";
+	<script>
+		alert("HI");
+		alert("${MSG}");
+		location.href = "${URL}";
 	</script>
 </body>
 </html>
