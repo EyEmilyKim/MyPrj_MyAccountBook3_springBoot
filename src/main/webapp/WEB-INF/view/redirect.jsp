@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script>
-		alert("HI");
+		console.log("Hi Redirect");
 		alert("${MSG}");
 		location.href = "${URL}";
 	</script>

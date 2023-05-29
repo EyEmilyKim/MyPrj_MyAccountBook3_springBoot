@@ -8,7 +8,3 @@
 		<div><img src="images/image.png" width="200px" /></div>
 	</section>
 </main>
-
-<script>
-	alert("test");
-</script>

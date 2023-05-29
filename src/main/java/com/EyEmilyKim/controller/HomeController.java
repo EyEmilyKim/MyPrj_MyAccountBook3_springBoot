@@ -38,11 +38,11 @@ public class HomeController {
 		int result = userService.login(ID, PWD);
 		System.out.println("result : "+result);
 		if(result == 1) {
-			msg = "로그인에 성공했습니다.\n환영합니다~ "+ID+"님~!";
-			url = "root.index";
+			msg = "로그인에 성공했습니다. \\n환영합니다~ "+ID+"님~!";
+			url = "index";
 		}else {
-			msg = "로그인에 실패했습니다.\n계정 또는 비밀번호를 확인해주세요...";
-			url = "root.login";
+			msg = "로그인에 실패했습니다. \\n계정 또는 비밀번호를 확인해주세요...";
+			url = "login";
 		}
 		model.addAttribute("MSG", msg);
 		model.addAttribute("URL", url);
