@@ -1,5 +1,7 @@
 package com.EyEmilyKim.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +31,7 @@ public class HomeController {
 		return "root.login";
 	}
 	@PostMapping("/login")
-	public String login(String ID, String PWD, Model model) {
+	public String login(String ID, String PWD, Model model, HttpSession session) {
 		System.out.println("HomeController > login()@Post called");
 		
 		String msg;
@@ -40,6 +42,7 @@ public class HomeController {
 		if(result == 1) {
 			msg = "로그인에 성공했습니다. \\n환영합니다~ "+ID+"님~!";
 			url = "index";
+			session.setAttribute("USER_ID", ID);
 		}else {
 			msg = "로그인에 실패했습니다. \\n계정 또는 비밀번호를 확인해주세요...";
 			url = "login";
@@ -50,4 +53,12 @@ public class HomeController {
 		System.out.println("url : "+url);
 		return "redirect";
 	}
+	
+	@GetMapping("logout")
+	public String logout(HttpSession session, Model model) {
+		session.invalidate();
+		model.addAttribute("MSG", "정상적으로 로그아웃되었습니다.");
+		model.addAttribute("URL", "index");
+		return "redirect";
+	} 
 }
