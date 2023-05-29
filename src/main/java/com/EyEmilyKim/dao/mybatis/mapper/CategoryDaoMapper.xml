@@ -13,7 +13,10 @@
 	order by CATE_CODE 
   </select>
   <select id="getCount" resultType="int">
-	select count(CATE_CODE) from MAB_CATEGORIES
+	select count(CATE_CODE) from MAB_CATEGORIES 
+	<where> 
+	ID in (#{id}, 'system')  
+	</where> 
   </select>
 
 </mapper>
