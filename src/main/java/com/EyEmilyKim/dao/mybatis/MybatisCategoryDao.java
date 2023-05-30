@@ -53,5 +53,10 @@ public class MybatisCategoryDao implements CategoryDao {
 	public int insert(Category cate) {
 		return mapper.insert(cate);
 	}
+
+	@Override
+	public int update(Category cate) {
+		return mapper.update(cate);
+	}
 	
 }

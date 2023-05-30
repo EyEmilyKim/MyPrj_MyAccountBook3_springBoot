@@ -23,4 +23,6 @@ public interface CategoryDao {
 	
 	int insert(Category cate);
 
+	int update(Category cate);
+
 }

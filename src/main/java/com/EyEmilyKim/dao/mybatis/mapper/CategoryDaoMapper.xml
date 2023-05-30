@@ -48,4 +48,12 @@
   	insert into MAB_CATEGORIES values(
   	#{seqno}, #{inex}, #{cate_code}, #{cate_name}, #{id}	)
   </insert>
+  
+  <update id="update" parameterType="com.EyEmilyKim.entity.Category">
+  	update MAB_CATEGORIES 
+  	set CATE_NAME = #{cate_name} 
+  	<where> 
+	CATE_CODE = #{cate_code} 
+	</where> 
+  </update>
 </mapper>

@@ -19,5 +19,7 @@ public interface CategoryService {
 	List<String> getNameList(String id);
 
 	int insert(Category cate);
+
+	int update(Category cate);
 	
 }

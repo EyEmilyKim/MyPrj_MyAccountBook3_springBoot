@@ -63,4 +63,11 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDao.insert(cate);
 	}
 
+	@Override
+	public int update(Category cate) {
+		System.out.println("CateService > update() called");
+		
+		return categoryDao.update(cate);
+	}
+
 }

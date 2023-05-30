@@ -33,6 +33,16 @@
 	</form>
 	</div>
 		
+		<!-- 중복확인용 기존 목록 -->
+		<div class=""> 
+			<input type="text" value="${LIST.size() }" id="slct_name_cnt">
+			<select class="" id="slct_name">
+				<c:forEach items="${LIST }" var="c">
+					<option>${c }</option>
+				</c:forEach>
+			</select>
+		</div>
+		
 	</section>
 </main>
 
@@ -41,6 +51,17 @@ function guideInex(){
 // 	alert("guideInex()호출됨");
 	let guideInex = "수입/지출 구분은 수정할 수 없습니다. 목록에서 삭제 후 다시 등록해주세요.";
 	document.getElementById("guide").innerHTML = guideInex;
+}
+function nameDupCheck(n_cname){
+// 	alert("nameDupCheck()호출됨");
+	let slct_name = document.getElementById("slct_name");
+	let slct_name_cnt = document.getElementById("slct_name_cnt");
+	let cnt = slct_name_cnt.value;
+	for(i=0; i<cnt; i++){
+		if(n_cname == slct_name.options[i].value){
+			alert("이미 사용중인 카테고리명입니다."); return false; }
+	}
+	return true;
 }
 function check(){
 // 	alert("check()호출됨");
@@ -53,6 +74,8 @@ function check(){
 	let detailConf = "구분 : "+s_inex+"\n수정 전 : "+cname+"\n수정 후 : "+n_cname;
 // 	alert("let OK");
 	if(n_cname == ''){ alert("카테고리명을 입력해주세요."); return false }
+	//기존 카테고리명과 중복 확인
+	if(! nameDupCheck(n_cname) ) return false;
 	if(! confirm( guideConf+"\n\n저장하시겠습니까?\n\n---\n"+detailConf ) ) return false;
 // 	if(! confirm("수정될 cate_code : "+document.fm.CCODE.value) ) return false;
 }

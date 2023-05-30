@@ -119,4 +119,46 @@ public class CategoryController {
 		System.out.println("result : "+result);
 		return "redirect";
 	}
+	
+	@GetMapping("upd")
+	public String upd(String CCODE, Model model) {
+		System.out.println("CategoryController > upd()@Get called");
+		System.out.println(CCODE);
+
+		String id = (String) httpSession.getAttribute("USER_ID");
+		if(id == null) id = "master";
+		System.out.println("id : "+id);
+		
+		Category cate = categoryService.getOne(CCODE);
+		System.out.println(cate.getCate_code()+" - "+cate.getCate_name());
+		model.addAttribute("C", cate);
+		List<String> list = categoryService.getNameList(id);
+		model.addAttribute("LIST", list);
+		return "set.category.upd";
+	}
+	@PostMapping("upd")
+	public String upd(@RequestParam Map<String,String> fm, Model model) {
+		System.out.println("CategoryController > upd()@Post called");
+		for(Map.Entry<String,String> entry : fm.entrySet()) {
+			System.out.println(entry.getKey()+" : "+entry.getValue());
+		}		
+		System.out.println(fm.get("CCODE")+" - "+fm.get("CNAME")+" -> "+fm.get("N_CNAME"));
+		
+		Category cate = new Category();
+		cate.setCate_code(fm.get("CCODE"));
+		cate.setCate_name(fm.get("N_CNAME"));
+
+		int result = 0;
+		try {
+			result = categoryService.update(cate);
+			model.addAttribute("MSG", succMsg);
+			model.addAttribute("URL", nextUrl);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", nextUrl);
+		}
+		System.out.println("result : "+result);
+		return "redirect";
+	}
 }
