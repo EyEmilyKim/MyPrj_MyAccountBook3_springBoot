@@ -9,5 +9,9 @@ public interface CategoryService {
 	List<Category> getList(String id);
 
 	int getCount(String id);
+
+	Category getOne(String ccode);
+
+	int delete(String ccode);
 	
 }

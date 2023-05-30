@@ -13,4 +13,8 @@ public interface CategoryDao {
 
 	int getCount(String id);
 
+	Category getOne(String ccode);
+
+	int delete(String ccode);
+
 }

@@ -28,5 +28,15 @@ public class MybatisCategoryDao implements CategoryDao {
 	public int getCount(String id) {
 		return mapper.getCount(id);
 	}
+
+	@Override
+	public Category getOne(String ccode) {
+		return mapper.getOne(ccode);
+	}
+
+	@Override
+	public int delete(String ccode) {
+		return mapper.delete(ccode);
+	}
 	
 }

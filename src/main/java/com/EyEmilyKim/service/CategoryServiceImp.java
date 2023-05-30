@@ -28,4 +28,18 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDao.getCount(id);
 	}
 
+	@Override
+	public Category getOne(String ccode) {
+		System.out.println("CateService > getOne() called");
+		
+		return categoryDao.getOne(ccode);
+	}
+
+	@Override
+	public int delete(String ccode) {
+		System.out.println("CateService > delete() called");
+		
+		return categoryDao.delete(ccode);
+	}
+
 }

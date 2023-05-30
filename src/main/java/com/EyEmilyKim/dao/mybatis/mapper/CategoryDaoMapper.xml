@@ -19,4 +19,17 @@
 	</where> 
   </select>
 
+  <select id="getOne" resultType="com.EyEmilyKim.entity.Category">
+  	select * from MAB_CATEGORIES 
+	<where> 
+	CATE_CODE = #{ccode} 
+	</where> 
+  </select>
+  
+  <delete id="delete">
+  	delete from MAB_CATEGORIES 
+	<where> 
+	CATE_CODE = #{ccode} 
+	</where> 
+  </delete>
 </mapper>
