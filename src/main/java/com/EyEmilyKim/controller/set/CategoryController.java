@@ -1,6 +1,7 @@
 package com.EyEmilyKim.controller.set;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.service.CategoryService;
@@ -21,11 +23,18 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	private String failMsg = "해당 기능이 준비되지 않아 처리하지 못했습니다.";
+	private String succMsg = "정상적으로 처리되었습니다.";
+	private String nextUrl = "/set/category/list";
+	
+	@Autowired
+	private HttpSession httpSession;
+	
 	@RequestMapping("list")
-	public String list(Model model, HttpSession session) {
+	public String list(Model model) {
 		System.out.println("CategoryController > list() called");
 		
-		String id = (String) session.getAttribute("USER_ID");
+		String id = (String) httpSession.getAttribute("USER_ID");
 		if(id == null || id == "") id = "master";
 		System.out.println("id : "+id);
 		
@@ -53,20 +62,61 @@ public class CategoryController {
 		System.out.println(CCODE+" - "+CNAME);
 		
 		int result = 0;
-		String url = "list";
 		try {
 			result = categoryService.delete(CCODE);
+			model.addAttribute("MSG", succMsg);
+			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", nextUrl);
 		}
-		String msg;
-		if(result == 1) {
-			msg = "정상적으로 처리되었습니다.";
-		}else {
-			msg = "처리에 실패했습니다... 관리자에게 문의해주세요.";
+		System.out.println("result : "+result);
+		return "redirect";
+	}
+	
+	@GetMapping("add")
+	public String add(Model model) {
+		System.out.println("CategoryController > add()@Get called");
+		String id = (String) httpSession.getAttribute("USER_ID");
+		if(id == null) id = "master";
+		System.out.println("id : "+id);
+		
+		List<String> list = categoryService.getNameList(id);
+		model.addAttribute("LIST", list);
+		int maxSqn = categoryService.getMaxSqn();
+		System.out.println("maxSqn : "+maxSqn);
+		model.addAttribute("MSN", maxSqn);
+		return "set.category.add";
+	}
+	@PostMapping("add")
+	public String add(@RequestParam Map<String,String> fm, Model model) {
+		System.out.println("CategoryController > add()@Post called");
+		for(Map.Entry<String,String> entry : fm.entrySet()) {
+			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
-		model.addAttribute("MSG", msg);
-		model.addAttribute("URL", url);
+		String id = (String) httpSession.getAttribute("USER_ID");
+		if(id == null) id = "master";
+		System.out.println("id : "+id);
+		
+		Category cate = new Category();
+		cate.setSeqno(Integer.parseInt(fm.get("SEQNO")));
+		cate.setInex(fm.get("INEX"));
+		cate.setCate_code(fm.get("INEX")+fm.get("SEQNO"));
+		cate.setCate_name(fm.get("CNAME"));
+		cate.setId(id);
+		
+		int result = 0;
+		try {
+			result = categoryService.insert(cate);
+			model.addAttribute("MSG", succMsg);
+			model.addAttribute("URL", nextUrl);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", nextUrl);
+		}
+		System.out.println("result : "+result);
 		return "redirect";
 	}
 }

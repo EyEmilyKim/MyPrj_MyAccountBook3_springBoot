@@ -32,4 +32,20 @@
 	CATE_CODE = #{ccode} 
 	</where> 
   </delete>
+  
+  <select id="getMaxSqn" resultType="int">
+  	select max(SEQNO) from MAB_CATEGORIES
+  </select>
+  <select id="getNameList" resultType="String">
+  	select CATE_NAME from MAB_CATEGORIES 
+	<where> 
+	ID in (#{id}, 'system')  
+	</where> 
+	order by CATE_CODE
+  </select>
+  
+  <insert id="insert" parameterType="com.EyEmilyKim.entity.Category">
+  	insert into MAB_CATEGORIES values(
+  	#{seqno}, #{inex}, #{cate_code}, #{cate_name}, #{id}	)
+  </insert>
 </mapper>

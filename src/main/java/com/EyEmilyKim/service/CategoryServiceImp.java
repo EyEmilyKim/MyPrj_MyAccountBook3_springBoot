@@ -42,4 +42,25 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDao.delete(ccode);
 	}
 
+	@Override
+	public int getMaxSqn() {
+		System.out.println("CateService > getMaxSqn() called");
+		
+		return categoryDao.getMaxSqn();
+	}
+	
+	@Override
+	public List<String> getNameList(String id) {
+		System.out.println("CateService > getNameList() called");
+
+		return categoryDao.getNameList(id);
+	}
+
+	@Override
+	public int insert(Category cate) {
+		System.out.println("CateService > insert() called");
+		
+		return categoryDao.insert(cate);
+	}
+
 }

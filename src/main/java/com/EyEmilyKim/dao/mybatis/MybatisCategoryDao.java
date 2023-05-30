@@ -38,5 +38,20 @@ public class MybatisCategoryDao implements CategoryDao {
 	public int delete(String ccode) {
 		return mapper.delete(ccode);
 	}
+
+	@Override
+	public int getMaxSqn() {
+		return mapper.getMaxSqn();
+	}
+	
+	@Override
+	public List<String> getNameList(String id) {
+		return mapper.getNameList(id);
+	}
+
+	@Override
+	public int insert(Category cate) {
+		return mapper.insert(cate);
+	}
 	
 }

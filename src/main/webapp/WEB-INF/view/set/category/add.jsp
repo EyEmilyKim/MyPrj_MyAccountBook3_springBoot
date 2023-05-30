@@ -33,7 +33,7 @@
 			<input type="text" value="${LIST.size() }" id="slct_name_cnt">
 			<select class="" id="slct_name">
 				<c:forEach items="${LIST }" var="c">
-					<option>${c.cate_name }</option>
+					<option>${c }</option>
 				</c:forEach>
 			</select>
 		</div>

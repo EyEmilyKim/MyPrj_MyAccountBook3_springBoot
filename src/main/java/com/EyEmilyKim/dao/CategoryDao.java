@@ -17,4 +17,10 @@ public interface CategoryDao {
 
 	int delete(String ccode);
 
+	int getMaxSqn();
+
+	List<String> getNameList(String id);
+	
+	int insert(Category cate);
+
 }
