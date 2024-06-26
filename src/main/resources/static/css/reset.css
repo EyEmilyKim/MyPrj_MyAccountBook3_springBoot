@@ -5,16 +5,20 @@
 		padding: 0;
 		box-sizing: border-box; /* 길이 계산 편하도록 */
 	}
+	html, body {
+		height: 100%;
+	}
 	body {
+		display: flex;
+		flex-direction: column;
 		font-family: sans-serif;
 		background-color: darkgray;
-/* 		color: ; */
 	}
 	a {
 		text-decoration: none;	/* 기본 밑줄 제거 */
 	}
 	a:hover {
-/* 		text-decoration: underline;	마우스 올릴시 밑줄 */
+		text-decoration: none;	/* 마우스 올릴시 밑줄 제거 */
 	}
 	li {
 		list-style: none;

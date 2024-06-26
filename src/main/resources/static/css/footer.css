@@ -1,10 +1,11 @@
 @charset "UTF-8";
 
 	footer {
-		background-color: var(--footer-background-color);
+		flex: 0 0 auto; /* 확장, 축소 없이 지정된 높이로 고정 */
 		min-height: 100px;
+		width: 100%;
+		background-color: var(--footer-background-color);
 		padding: 1.8rem;
-		margin: auto;
 		text-align: center;
 		color: var(--footer-text-color);
 	}

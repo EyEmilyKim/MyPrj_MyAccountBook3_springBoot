@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 	aside {
+		height: 100%; /* #middle 높이 모두 차지 */
+		flex: 0 0 20%; /* #middle 안에서 너비 설정 */
 		background-color: var(--aside-background-color);
-		min-height: inherit;
-		float: left;
-		width: 20%;
 		padding: 2em;
+		float: left;
 	}
 	aside li {
 		margin-bottom: 2rem;

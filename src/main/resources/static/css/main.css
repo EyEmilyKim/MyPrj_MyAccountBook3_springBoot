@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 	main {
+		height:100%;
+		width: 100%;
 		background-color: var(--main-background-color);
-		min-height: 580px;
-		padding: 20px;
-		margin: auto;
+		padding: 50px;
 		text-align: center;
 	}
