@@ -6,6 +6,10 @@
 	.margin-bot{
 		margin-bottom: 0.5rem;
 	}
+	.textGray { color:gray; }
+	.borderDashed {
+		border: dashed darkgray 1px; padding:10px;
+	}
 	
 	.hidden { display:none; }
 	#in { color:blue; } 

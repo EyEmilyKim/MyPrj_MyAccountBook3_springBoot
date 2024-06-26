@@ -5,11 +5,11 @@
 <main>
 	<section class="contMain">
 	
-		<h2 class="title border">결제수단 목록</h2>
-		<div class="count border">총 <span class="cnt">${COUNT }</span> 건</div>
+		<h2 class="title ">결제수단 목록</h2>
+		<div class="count ">총 <span class="cnt">${COUNT }</span> 건</div>
 	
-	<table class="table borderRed" border="1">
-	<thead class="">
+	<table class="table " >
+	<thead class="hidden">
 	<tr>
 		<td class="id">id</td>
 		<td class="seqno">seqno</td>
@@ -30,8 +30,8 @@
 				<td class="id">${m.id }</td>
 				<td class="seqno">${m.seqno }</td><td class="meth_code">${m.meth_code }</td>
 				<td>기본</td><td>${m.meth_name }</td>
-				<td class="hidden"><a href="${urlUpd }" onClick="popupUpd(this); return false;">수정</a></td>
-				<td class="hidden"><a href="${urlDel }" onClick="popupDel(this); return false;">삭제</a></td>
+				<td class=""></td>
+				<td class=""></td>
 				<td class="hidden">url : <c:out value="${url }"></c:out></td></tr>
 		</c:when>
 		<c:otherwise>
@@ -42,7 +42,7 @@
 				<c:if test="${m.mncrd == 'CRD' }"><td id="ex">카드</td><td>${m.meth_name }</td></c:if>
 				<td><a class="btn" href="${urlUpd }" onClick="popupUpd(this); return false;">수정</a></td>
 				<td><a class="btn" href="${urlDel }" onClick="popupDel(this); return false;">삭제</a></td>
-				<td class="">url : <c:out value="${urlUpd}"></c:out></td>
+				<td class="hidden">url : <c:out value="${urlUpd}"></c:out></td>
 			</tr>
 	    </c:otherwise>
 	  </c:choose>

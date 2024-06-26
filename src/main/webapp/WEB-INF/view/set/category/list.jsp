@@ -5,12 +5,12 @@
 <main>
 	<section class="contMain">
 	
-		<h2 class="title border">카테고리 목록</h2>
-		<div class="count border">총 <span class="cnt">${COUNT }</span> 건</div>
+		<h2 class="title ">카테고리 목록</h2>
+		<div class="count ">총 <span class="cnt">${COUNT }</span> 건</div>
 	
-	<table class="table borderRed" border="1">
+	<table class="table " >
 	<thead class="">
-	<tr>
+	<tr class="hidden">
 		<td class="id">id</td>
 		<td class="seqno">seqno</td>
 		<td class="cate_code">cate_code</td>
@@ -30,8 +30,8 @@
 				<td class="id">${c.id }</td>
 				<td class="seqno">${c.seqno }</td><td class="cate_code">${c.cate_code }</td>
 				<td>기본</td><td>${c.cate_name }</td>
-				<td class="hidden"><a href="${urlUpd }" onClick="popupUpd(this); return false;">수정</a></td>
-				<td class="hidden"><a href="${urlDel }" onClick="popupDel(this); return false;">삭제</a></td>
+				<td class=""></td>
+				<td class=""></td>
 				<td class="hidden">url : <c:out value="${url }"></c:out></td></tr>
 		</c:when>
 		<c:otherwise>
@@ -42,7 +42,7 @@
 				<c:if test="${c.inex == 'EX' }"><td id="ex">지출</td><td>${c.cate_name }</td></c:if>
 				<td><a class="btn" href="${urlUpd }" onClick="popupUpd(this); return false;">수정</a></td>
 				<td><a class="btn" href="${urlDel }" onClick="popupDel(this); return false;">삭제</a></td>
-				<td class="">url : <c:out value="${urlUpd}"></c:out></td>
+				<td class="hidden">url : <c:out value="${urlUpd}"></c:out></td>
 			</tr>
 	    </c:otherwise>
 	  </c:choose>

@@ -5,10 +5,10 @@
 <main>
 	<section class="contMain">
 	
-	<h2 class="title border">카테고리 수정 화면입니다.</h2>
+	<h2 class="title">카테고리 수정 화면입니다.</h2>
 	
 	<!-- Form 영역 -->
-	<div class="form borderRed"> 
+	<div class="form"> 
 	<form action="upd" name="fm" onSubmit="return check()" method="post">
 		<input type="hidden" name="CCODE" value="${C.cate_code }">
 		<input type="hidden" name="CNAME" value="${C.cate_name }">
@@ -34,7 +34,8 @@
 	</div>
 		
 		<!-- 중복확인용 기존 목록 -->
-		<div class=""> 
+		<div class="borderDashed"> 
+		<p class="textGray">중복 확인용 기준 목록 / 개발자용 임시!!!</p>
 			<input type="text" value="${LIST.size() }" id="slct_name_cnt">
 			<select class="" id="slct_name">
 				<c:forEach items="${LIST }" var="c">
@@ -81,8 +82,7 @@ function check(){
 }
 function backToList(){
 	if(confirm("취소하고 목록으로 돌아가시겠습니까?")){
-		opener.location.reload();
-		window.close();
+		history.back();
 	}else{
 		document.getElementById("guide").innerHTML = "";
 	}

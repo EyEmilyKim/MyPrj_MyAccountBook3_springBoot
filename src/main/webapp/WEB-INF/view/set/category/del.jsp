@@ -6,8 +6,8 @@
 <main>
 	<section class="contMain">
 	
-		<h2 class="title border">카테고리 삭제 화면입니다.</h2>
-		<div class="form borderRed">
+		<h2 class="title ">카테고리 삭제 화면입니다.</h2>
+		<div class="form ">
 		<form action="del" name="fm" onSubmit="return check(this)" method="post">
 				<input type="hidden" name="CCODE" value="${C.cate_code }">
 				<input type="hidden" name="CNAME" value="${C.cate_name }">

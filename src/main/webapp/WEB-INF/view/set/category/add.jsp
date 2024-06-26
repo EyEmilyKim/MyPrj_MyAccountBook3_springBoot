@@ -5,10 +5,10 @@
 <main>
 	<section class="contMain">
 	
-		<h2 class="title border">카테고리 추가 화면입니다.</h2>
+		<h2 class="title ">카테고리 추가 화면입니다.</h2>
 		
 		<!-- Form 영역 -->
-		<div class="form borderRed"> 
+		<div class="form "> 
 		<form action="add" name="fm" onSubmit="return check(this)" method="post">
 			<input type="hidden" name="SEQNO" value="${MSN +1 }">
 			<div class="item">
