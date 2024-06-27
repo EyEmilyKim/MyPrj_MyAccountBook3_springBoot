@@ -20,8 +20,8 @@
 	</thead>
 	<tbody>
 	<c:forEach items="${LIST }" var="m">
-		<c:set var="urlDel" value="del?CCODE=${m.meth_code }"/>	
-		<c:set var="urlUpd" value="upd?CCODE=${m.meth_code }"/>	
+		<c:set var="urlDel" value="del?MCODE=${m.meth_code }"/>	
+		<c:set var="urlUpd" value="upd?MCODE=${m.meth_code }"/>	
 	  <!-- choose when: system용 '미지정'은 별도 tr로.   -->
 	  <!-- otherwise: 사용자용 '현금'/'카드'는 같은 tr 내 일부 td만 다르게 처리  -->
 	  <c:choose>
@@ -40,8 +40,8 @@
 				<td class="seqno">${m.seqno }</td><td class="meth_code">${m.meth_code }</td>
 				<c:if test="${m.mncrd == 'MN' }"><td id="in">현금</td><td>${m.meth_name }</td></c:if>
 				<c:if test="${m.mncrd == 'CRD' }"><td id="ex">카드</td><td>${m.meth_name }</td></c:if>
-				<td><a class="btn" href="${urlUpd }" onClick="popupUpd(this); return false;">수정</a></td>
-				<td><a class="btn" href="${urlDel }" onClick="popupDel(this); return false;">삭제</a></td>
+				<td><a class="btn" href="${urlUpd }" >수정</a></td>
+				<td><a class="btn" href="${urlDel }" >삭제</a></td>
 				<td class="hidden">url : <c:out value="${urlUpd}"></c:out></td>
 			</tr>
 	    </c:otherwise>

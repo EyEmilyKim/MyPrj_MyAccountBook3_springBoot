@@ -30,6 +30,8 @@ public class CategoryController {
 	@Autowired
 	private HttpSession httpSession;
 	
+	/*-------- 카테고리 목록 --------*/
+	
 	@RequestMapping("list")
 	public String list(Model model) {
 		System.out.println("CategoryController > list() called");
@@ -46,6 +48,8 @@ public class CategoryController {
 		return "set.category.list";
 	}
 	
+	/*-------- 카테고리 삭제 --------*/
+	
 	@GetMapping("del")
 	public String del(String CCODE, Model model) {
 		System.out.println("CategoryController > del()@Get called");
@@ -56,6 +60,7 @@ public class CategoryController {
 		model.addAttribute("C", cate);
 		return "set.category.del";
 	}
+	
 	@PostMapping("del")
 	public String del(String CCODE, Model model, String CNAME) {
 		System.out.println("CategoryController > del()@Post called");
@@ -75,6 +80,8 @@ public class CategoryController {
 		return "redirect";
 	}
 	
+	/*-------- 카테고리 추가 --------*/
+	
 	@GetMapping("add")
 	public String add(Model model) {
 		System.out.println("CategoryController > add()@Get called");
@@ -89,6 +96,7 @@ public class CategoryController {
 		model.addAttribute("MSN", maxSqn);
 		return "set.category.add";
 	}
+	
 	@PostMapping("add")
 	public String add(@RequestParam Map<String,String> fm, Model model) {
 		System.out.println("CategoryController > add()@Post called");
@@ -120,6 +128,8 @@ public class CategoryController {
 		return "redirect";
 	}
 	
+	/*-------- 카테고리 수정 --------*/ 
+	
 	@GetMapping("upd")
 	public String upd(String CCODE, Model model) {
 		System.out.println("CategoryController > upd()@Get called");
@@ -136,6 +146,7 @@ public class CategoryController {
 		model.addAttribute("LIST", list);
 		return "set.category.upd";
 	}
+	
 	@PostMapping("upd")
 	public String upd(@RequestParam Map<String,String> fm, Model model) {
 		System.out.println("CategoryController > upd()@Post called");
