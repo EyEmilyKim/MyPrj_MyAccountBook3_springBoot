@@ -13,4 +13,10 @@ public interface MethodDao {
 
 	int getCount(String id);
 
+	Method getOne(String mcode);
+
+	List<String> getNameList(String id);
+
+	int update(Method meth);
+
 }

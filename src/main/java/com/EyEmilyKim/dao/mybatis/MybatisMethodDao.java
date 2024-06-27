@@ -27,4 +27,19 @@ public class MybatisMethodDao implements MethodDao {
 		return mapper.getCount(id);
 	}
 
+	@Override
+	public Method getOne(String mcode) {
+		return mapper.getOne(mcode);
+	}
+
+	@Override
+	public List<String> getNameList(String id) {
+		return mapper.getNameList(id);
+	}
+
+	@Override
+	public int update(Method meth) {
+		return mapper.update(meth);
+	}
+
 }

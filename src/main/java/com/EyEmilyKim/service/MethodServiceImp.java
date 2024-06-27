@@ -27,4 +27,22 @@ public class MethodServiceImp implements MethodService {
 		return methodDao.getCount(id);
 	}
 
+	@Override
+	public Method getOne(String mcode) {
+		System.out.println("MethodService > getOne() called");
+		return methodDao.getOne(mcode);
+	}
+
+	@Override
+	public List<String> getNameList(String id) {
+		System.out.println("MethodService > getNameList() called");
+		return methodDao.getNameList(id);
+	}
+
+	@Override
+	public int update(Method meth) {
+		System.out.println("MethodService > update() called");
+		return methodDao.update(meth);
+	}
+
 }

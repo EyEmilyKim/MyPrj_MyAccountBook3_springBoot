@@ -16,4 +16,26 @@
 	select count(METH_CODE) from MAB_METHODS
   </select>
 
+  <select id="getOne" resultType="com.EyEmilyKim.entity.Method">
+	select * from MAB_METHODS 
+	<where>
+	METH_CODE = #{mcode}
+	</where>
+  </select>
+  
+  <select id="getNameList" resultType="String">
+  	select METH_NAME from MAB_METHODS 
+  	<where>
+  	ID in (#{id}, 'system') 
+  	</where>
+  	order by METH_CODE 
+  </select>
+  
+  <update id="update" parameterType="com.EyEmilyKim.entity.Method">
+  	update MAB_METHODS 
+  	set METH_NAME = #{meth_name} 
+  	<where>
+  	METH_CODE = #{meth_code} 
+  	</where>
+  </update>
 </mapper>
