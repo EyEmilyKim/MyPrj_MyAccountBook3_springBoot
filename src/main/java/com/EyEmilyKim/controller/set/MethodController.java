@@ -44,6 +44,21 @@ public class MethodController {
 		return "set.method.list";
 	}
 
+	/*-------- 결제수단 삭제 --------*/
+	
+	@GetMapping("del")
+	public String del(String MCODE, Model model) {
+		System.out.println("CategoryController > del()@Get called");
+		System.out.println(MCODE);
+		
+		Method meth= methodService.getOne(MCODE);
+		System.out.println(meth.getMeth_code()+" - "+meth.getMeth_name());
+		model.addAttribute("M", meth);
+		return "set.method.del";
+	}
+	
+	/*-------- 결제수단 추가 --------*/
+	
 	/*-------- 결제수단 수정 --------*/ 
 	
 	@GetMapping("upd")
