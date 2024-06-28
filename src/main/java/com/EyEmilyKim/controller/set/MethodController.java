@@ -3,7 +3,7 @@ package com.EyEmilyKim.controller.set;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,17 +26,15 @@ public class MethodController {
 	private String failMsg = "해당 기능이 준비되지 않아 처리하지 못했습니다.";
 	private String succMsg = "정상적으로 처리되었습니다.";
 	private String nextUrl = "/set/category/list";
-	@Autowired
-	private HttpSession httpSession;
+	
 	
 	/*-------- 결제수단 목록 --------*/ 
 	
-	@RequestMapping("list")
-	public String list(Model model) {
+	@GetMapping("list")
+	public String list(HttpServletRequest req, Model model) {
 		System.out.println("MethodController > list() called");
-		
-		String id =(String) httpSession.getAttribute("USER_ID"); 
-		if(id == null || id == ""	) id = "master";
+		String id = (String) req.getAttribute("userId"); 
+		System.out.println("id : "+id);
 		
 		List<Method> list = methodService.getList(id);
 		model.addAttribute("LIST", list);
@@ -49,11 +47,11 @@ public class MethodController {
 	/*-------- 결제수단 수정 --------*/ 
 	
 	@GetMapping("upd")
-	public String upd(String MCODE, Model model) {
+	public String upd(String MCODE, HttpServletRequest req, Model model) {
 		System.out.println("MethodController > upd()@Get called");
 		System.out.println(MCODE);
 		
-		String id = (String) httpSession.getAttribute("USER_ID");
+		String id = (String) req.getAttribute("USER_ID");
 		if(id == null || id == "") id = "master";
 		System.out.println("id : "+id);
 		
