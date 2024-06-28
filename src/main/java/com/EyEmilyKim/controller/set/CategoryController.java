@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,18 +27,19 @@ public class CategoryController {
 	private String failMsg = "해당 기능이 준비되지 않아 처리하지 못했습니다.";
 	private String succMsg = "정상적으로 처리되었습니다.";
 	private String nextUrl = "/set/category/list";
-	
-	@Autowired
-	private HttpSession httpSession;
+		
+	@ModelAttribute("userId")
+	public String populateUserId(HttpSession httpSession) {
+		String id = (String) httpSession.getAttribute("USER_ID");
+		if(id == null || id == "") id = "master";
+		return id;  
+	}
 	
 	/*-------- 카테고리 목록 --------*/
 	
-	@RequestMapping("list")
-	public String list(Model model) {
+	@GetMapping("list")
+	public String list(@ModelAttribute("userId") String id, Model model) {
 		System.out.println("CategoryController > list() called");
-		
-		String id = (String) httpSession.getAttribute("USER_ID");
-		if(id == null || id == "") id = "master";
 		System.out.println("id : "+id);
 		
 		List<Category> list = categoryService.getList(id);
@@ -83,10 +85,8 @@ public class CategoryController {
 	/*-------- 카테고리 추가 --------*/
 	
 	@GetMapping("add")
-	public String add(Model model) {
+	public String add(@ModelAttribute("userId") String id, Model model) {
 		System.out.println("CategoryController > add()@Get called");
-		String id = (String) httpSession.getAttribute("USER_ID");
-		if(id == null) id = "master";
 		System.out.println("id : "+id);
 		
 		List<String> list = categoryService.getNameList(id);
@@ -98,14 +98,12 @@ public class CategoryController {
 	}
 	
 	@PostMapping("add")
-	public String add(@RequestParam Map<String,String> fm, Model model) {
+	public String add(@RequestParam Map<String,String> fm, @ModelAttribute("userId") String id,Model model) {
 		System.out.println("CategoryController > add()@Post called");
+		System.out.println("id : "+id);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
-		String id = (String) httpSession.getAttribute("USER_ID");
-		if(id == null) id = "master";
-		System.out.println("id : "+id);
 		
 		Category cate = new Category();
 		cate.setSeqno(Integer.parseInt(fm.get("SEQNO")));
@@ -131,13 +129,11 @@ public class CategoryController {
 	/*-------- 카테고리 수정 --------*/ 
 	
 	@GetMapping("upd")
-	public String upd(String CCODE, Model model) {
+	public String upd(@ModelAttribute("userId") String id, String CCODE, Model model) {
 		System.out.println("CategoryController > upd()@Get called");
+		System.out.println("id : "+id);
 		System.out.println(CCODE);
 
-		String id = (String) httpSession.getAttribute("USER_ID");
-		if(id == null) id = "master";
-		System.out.println("id : "+id);
 		
 		Category cate = categoryService.getOne(CCODE);
 		System.out.println(cate.getCate_code()+" - "+cate.getCate_name());
