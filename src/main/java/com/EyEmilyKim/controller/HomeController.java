@@ -17,12 +17,16 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/index")
+	/*-------- 홈 화면 --------*/
+	
+	@GetMapping("/index")
 	public String index() {
 		System.out.println("HomeController > index() called");
 		
 		return "root.index";
 	}
+	
+	/*-------- 로그인 --------*/
 	
 	@GetMapping("/login")
 	public String login() {
@@ -30,6 +34,7 @@ public class HomeController {
 		
 		return "root.login";
 	}
+	
 	@PostMapping("/login")
 	public String login(String ID, String PWD, Model model, HttpSession session) {
 		System.out.println("HomeController > login()@Post called");
@@ -49,10 +54,10 @@ public class HomeController {
 		}
 		model.addAttribute("MSG", msg);
 		model.addAttribute("URL", url);
-		System.out.println("msg : "+msg);
-		System.out.println("url : "+url);
 		return "redirect";
 	}
+	
+	/*-------- 로그아웃 --------*/
 	
 	@GetMapping("logout")
 	public String logout(HttpSession session, Model model) {
