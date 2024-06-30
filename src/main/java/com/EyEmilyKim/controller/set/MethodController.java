@@ -25,7 +25,7 @@ public class MethodController {
 	
 	private String failMsg = "해당 기능이 준비되지 않아 처리하지 못했습니다.";
 	private String succMsg = "정상적으로 처리되었습니다.";
-	private String nextUrl = "/set/category/list";
+	private String nextUrl = "/set/method/list";
 	
 	
 	/*-------- 결제수단 목록 --------*/ 
@@ -84,15 +84,10 @@ public class MethodController {
 		for(Map.Entry<String, String> entry : fm.entrySet()) {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
-		System.out.println(fm.get("MCODE")+" - "+fm.get("MNAME")+" -> "+fm.get("N_MNAME"));
-		
-		Method meth = new Method();
-		meth.setMeth_code(fm.get("MCODE"));
-		meth.setMeth_name(fm.get("N_MNAME"));
 		
 		int result = 0;
 		try {
-			result = methodService.update(meth);
+			result = methodService.update(fm);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {

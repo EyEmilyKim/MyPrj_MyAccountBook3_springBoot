@@ -100,16 +100,9 @@ public class CategoryController {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
 		
-		Category cate = new Category();
-		cate.setSeqno(Integer.parseInt(fm.get("SEQNO")));
-		cate.setInex(fm.get("INEX"));
-		cate.setCate_code(fm.get("INEX")+fm.get("SEQNO"));
-		cate.setCate_name(fm.get("CNAME"));
-		cate.setId(id);
-		
 		int result = 0;
 		try {
-			result = categoryService.insert(cate);
+			result = categoryService.insert(fm, id);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
@@ -129,7 +122,6 @@ public class CategoryController {
 		String id = (String) req.getAttribute("userId");
 		System.out.println("id : "+id);
 		System.out.println(CCODE);
-
 		
 		Category cate = categoryService.getOne(CCODE);
 		System.out.println(cate.getCate_code()+" - "+cate.getCate_name());
@@ -144,16 +136,11 @@ public class CategoryController {
 		System.out.println("CategoryController > upd()@Post called");
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
-		}		
-		System.out.println(fm.get("CCODE")+" - "+fm.get("CNAME")+" -> "+fm.get("N_CNAME"));
-		
-		Category cate = new Category();
-		cate.setCate_code(fm.get("CCODE"));
-		cate.setCate_name(fm.get("N_CNAME"));
+		}
 
 		int result = 0;
 		try {
-			result = categoryService.update(cate);
+			result = categoryService.update(fm);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {

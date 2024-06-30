@@ -1,6 +1,7 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,15 +58,26 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public int insert(Category cate) {
+	public int insert(Map<String,String> fm, String id) {
 		System.out.println("CateService > insert() called");
+		
+		Category cate = new Category();
+		cate.setSeqno(Integer.parseInt(fm.get("SEQNO")));
+		cate.setInex(fm.get("INEX"));
+		cate.setCate_code(fm.get("INEX")+fm.get("SEQNO"));
+		cate.setCate_name(fm.get("CNAME"));
+		cate.setId(id);
 		
 		return categoryDao.insert(cate);
 	}
 
 	@Override
-	public int update(Category cate) {
+	public int update(Map<String,String> fm) {
 		System.out.println("CateService > update() called");
+
+		Category cate = new Category();
+		cate.setCate_code(fm.get("CCODE"));
+		cate.setCate_name(fm.get("N_CNAME"));
 		
 		return categoryDao.update(cate);
 	}

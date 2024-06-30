@@ -1,10 +1,8 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.EyEmilyKim.dao.MethodDao;
 import com.EyEmilyKim.entity.Method;
 
 public interface MethodService {
@@ -17,6 +15,6 @@ public interface MethodService {
 
 	List<String> getNameList(String id);
 
-	int update(Method meth);
+	int update(Map<String,String> fm);
 
 }

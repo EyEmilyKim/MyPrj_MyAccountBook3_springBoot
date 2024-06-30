@@ -1,6 +1,7 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.EyEmilyKim.entity.Category;
 
@@ -18,8 +19,8 @@ public interface CategoryService {
 	
 	List<String> getNameList(String id);
 
-	int insert(Category cate);
+	int insert(Map<String,String> fm, String id);
 
-	int update(Category cate);
+	int update(Map<String,String> fm);
 	
 }

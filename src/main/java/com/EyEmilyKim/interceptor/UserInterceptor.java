@@ -13,7 +13,7 @@ public class UserInterceptor implements HandlerInterceptor {
 		String userId = (String)session.getAttribute("USER_ID");
 		if(userId == null || userId == "") userId = "master"; 
 		req.setAttribute("userId", userId);
-		System.out.println("userId : "+userId);
+//		System.out.println("userId : "+userId);
 		return true; // 다음 인터셉터 또는 컨트롤러로 요청 전달
 	}
 }

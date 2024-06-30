@@ -1,6 +1,7 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,13 @@ public class MethodServiceImp implements MethodService {
 	}
 
 	@Override
-	public int update(Method meth) {
+	public int update(Map<String,String> fm) {
 		System.out.println("MethodService > update() called");
+
+		Method meth = new Method();
+		meth.setMeth_code(fm.get("MCODE"));
+		meth.setMeth_name(fm.get("N_MNAME"));
+		
 		return methodDao.update(meth);
 	}
 
