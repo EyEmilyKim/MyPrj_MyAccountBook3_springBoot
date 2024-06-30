@@ -4,6 +4,16 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+  <definition name="tranAdd.*" template="/WEB-INF/view/tranAdd/inc/layout.jsp" extends="common-layout">
+    <put-attribute name="title" value="My가계부3 - 가계부 쓰기" />
+    <put-attribute name="aside" value="/WEB-INF/view/tranAdd/inc/aside.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/tranAdd/{1}.jsp" />
+  </definition>
+  <definition name="tran.*" template="/WEB-INF/view/tran/inc/layout.jsp" extends="common-layout">
+    <put-attribute name="title" value="My가계부3 - 가계부 보기" />
+    <put-attribute name="aside" value="/WEB-INF/view/tran/inc/aside.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/tran/{1}.jsp" />
+  </definition>
   <definition name="set.*.*" template="/WEB-INF/view/set/inc/layout.jsp" extends="common-layout">
     <put-attribute name="title" value="My가계부3 - 설정" />
     <put-attribute name="aside" value="/WEB-INF/view/set/inc/aside.jsp" />
