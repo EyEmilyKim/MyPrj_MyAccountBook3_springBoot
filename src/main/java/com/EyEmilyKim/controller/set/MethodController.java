@@ -48,7 +48,7 @@ public class MethodController {
 	
 	@GetMapping("del")
 	public String del(String MCODE, Model model) {
-		System.out.println("CategoryController > del()@Get called");
+		System.out.println("MethodController > del()@Get called");
 		System.out.println(MCODE);
 		
 		Method meth= methodService.getOne(MCODE);
@@ -57,7 +57,63 @@ public class MethodController {
 		return "set.method.del";
 	}
 	
+	@PostMapping("del")
+	public String del(String MCODE, Model model, String MNAME) {
+		System.out.println("MethodController > del()@Post called");
+		System.out.println(MCODE+" - "+MNAME);
+		
+		int result = 0;
+		try {
+			result = methodService.delete(MCODE);
+			model.addAttribute("MSG", succMsg);
+			model.addAttribute("URL", nextUrl);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", nextUrl);
+		}
+		System.out.println("result : "+result);
+		return "redirect";
+	}
+	
 	/*-------- 결제수단 추가 --------*/
+
+	@GetMapping("add")
+	public String add(HttpServletRequest req, Model model) {
+		System.out.println("MethodController > add()@Get called");
+		String id = (String) req.getAttribute("userId");
+		System.out.println("id : "+id);
+		
+		List<String> list = methodService.getNameList(id);
+		model.addAttribute("LIST", list);
+		int maxSqn = methodService.getMaxSqn();
+		System.out.println("maxSqn : "+maxSqn);
+		model.addAttribute("MSN", maxSqn);
+		return "set.method.add";
+	}
+	
+	@PostMapping("add")
+	public String add(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
+		System.out.println("MethodController > add()@Post called");
+		String id = (String) req.getAttribute("userId");
+		System.out.println("id : "+id);
+		for(Map.Entry<String,String> entry : fm.entrySet()) {
+			System.out.println(entry.getKey()+" : "+entry.getValue());
+		}
+		
+		int result = 0;
+		try {
+			result = methodService.insert(fm, id);
+			model.addAttribute("MSG", succMsg);
+			model.addAttribute("URL", nextUrl);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", nextUrl);
+		}
+		System.out.println("result : "+result);
+		return "redirect";
+	}
 	
 	/*-------- 결제수단 수정 --------*/ 
 	

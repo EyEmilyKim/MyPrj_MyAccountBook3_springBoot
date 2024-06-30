@@ -33,8 +33,23 @@ public class MybatisMethodDao implements MethodDao {
 	}
 
 	@Override
+	public int delete(String mcode) {
+		return mapper.delete(mcode);
+	}
+	
+	@Override
+	public int getMaxSqn() {
+		return mapper.getMaxSqn();
+	}
+	
+	@Override
 	public List<String> getNameList(String id) {
 		return mapper.getNameList(id);
+	}
+
+	@Override
+	public int insert(Method meth) {
+		return mapper.insert(meth);
 	}
 
 	@Override

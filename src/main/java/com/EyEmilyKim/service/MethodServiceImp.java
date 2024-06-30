@@ -35,9 +35,37 @@ public class MethodServiceImp implements MethodService {
 	}
 
 	@Override
+	public int delete(String mcode) {
+		System.out.println("MethodService > delete() called");
+		
+		return methodDao.delete(mcode);
+	}
+
+	@Override
+	public int getMaxSqn() {
+System.out.println("MethodService > getMaxSqn() called");
+		
+		return methodDao.getMaxSqn();
+	}
+
+	@Override
 	public List<String> getNameList(String id) {
 		System.out.println("MethodService > getNameList() called");
 		return methodDao.getNameList(id);
+	}
+
+	@Override
+	public int insert(Map<String, String> fm, String id) {
+		System.out.println("MethodService > insert() called");
+				
+		Method meth = new Method();
+		meth.setSeqno(Integer.parseInt(fm.get("SEQNO")));
+		meth.setMncrd(fm.get("MNCRD"));
+		meth.setMeth_code(fm.get("MNCRD")+fm.get("SEQNO"));
+		meth.setMeth_name(fm.get("MNAME"));
+		meth.setId(id);
+		
+		return methodDao.insert(meth);
 	}
 
 	@Override

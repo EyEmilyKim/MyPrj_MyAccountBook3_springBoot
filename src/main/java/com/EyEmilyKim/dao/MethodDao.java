@@ -15,7 +15,13 @@ public interface MethodDao {
 
 	Method getOne(String mcode);
 
+	int delete(String mcode);
+
+	int getMaxSqn();
+
 	List<String> getNameList(String id);
+
+	int insert(Method meth);
 
 	int update(Method meth);
 

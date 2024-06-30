@@ -12,9 +12,14 @@ public interface MethodService {
 	int getCount(String id);
 
 	Method getOne(String mcode);
+	
+	int delete(String mcode);
+
+	int getMaxSqn();
 
 	List<String> getNameList(String id);
 
-	int update(Map<String,String> fm);
+	int insert(Map<String, String> fm, String id);
 
+	int update(Map<String,String> fm);
 }

@@ -23,6 +23,16 @@
 	</where>
   </select>
   
+  <delete id="delete">
+  	delete from MAB_METHODS
+	<where> 
+	METH_CODE = #{mcode} 
+	</where> 
+  </delete>
+  
+  <select id="getMaxSqn" resultType="int">
+  	select max(SEQNO) from MAB_METHODS
+  </select>
   <select id="getNameList" resultType="String">
   	select METH_NAME from MAB_METHODS 
   	<where>
@@ -30,6 +40,11 @@
   	</where>
   	order by METH_CODE 
   </select>
+  
+  <insert id="insert" parameterType="com.EyEmilyKim.entity.Method">
+  	insert into MAB_METHODS values(
+  	#{seqno}, #{mncrd}, #{meth_code}, #{meth_name}, #{id}	)
+  </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Method">
   	update MAB_METHODS 
