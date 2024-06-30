@@ -4,17 +4,18 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-  <definition name="set.*.*" template="/WEB-INF/view/set/inc/layout.jsp">
+  <definition name="set.*.*" template="/WEB-INF/view/set/inc/layout.jsp" extends="common-layout">
     <put-attribute name="title" value="My가계부3 - 설정" />
-    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
     <put-attribute name="aside" value="/WEB-INF/view/set/inc/aside.jsp" />
     <put-attribute name="main" value="/WEB-INF/view/set/{1}/{2}.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
   </definition>
-  <definition name="root.*" template="/WEB-INF/view/inc/layout.jsp">
+  <definition name="root.*" template="/WEB-INF/view/inc/layout.jsp" extends="common-layout">
     <put-attribute name="title" value="My가계부3 - 홈" />
-    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
     <put-attribute name="main" value="/WEB-INF/view/{1}.jsp" />
+  </definition>
+  
+  <definition name="common-layout" template="/WEB-INF/view/inc/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
   </definition>
 </tiles-definitions>

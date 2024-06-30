@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><tiles:getAsString name="title"/></title>
-	<link href="/css/homelayout.css" rel="stylesheet" />
+	<link href="/css/home/layout.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/f747bc5595.js" crossorigin="anonymous"> </script>
 </head>
 
