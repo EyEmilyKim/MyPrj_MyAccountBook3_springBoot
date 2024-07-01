@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.contMain {
+  min-width: 500px;
+  min-height: 300px;
+  background-color: white;
+  align: center;
+  padding: 20px;
+  border-radius: 15px;
+}
+#slct_in,
+#slct_ex,
+#row_meth,
+#slct_mn,
+#slct_crd {
+  display: none;
+}
+#guide {
+  color: red;
+}
+h3 {
+  margin: 10px 0 20px;
+  color: var(--hoverMenu-color);
+}
+#ccode,
+#mcode {
+  border: orange solid 1px;
+  display: none;
+}
+.hidden {
+  display: none;
+}
+.test {
+  border: red solid 1px;
+  color: orange;
+}

@@ -12,8 +12,9 @@
 	<script src="https://kit.fontawesome.com/f747bc5595.js" crossorigin="anonymous"> </script>
 </head>
 
-<body onload="startClock()">
+<body onload="startClock(); alertJSloaded()">
 <script src="../../js/clock.js"></script>
+<script src="../../js/tranAdd/makeTran.js"></script>
 	
 	<!----------- header 부분 ----------->
 	<tiles:insertAttribute name="header" />
