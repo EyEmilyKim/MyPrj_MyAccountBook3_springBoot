@@ -19,7 +19,7 @@ public interface MethodDao {
 
 	int getMaxSqn();
 
-	List<String> getNameList(String id);
+	List<String> getNameList(int userId);
 
 	int insert(Method meth);
 

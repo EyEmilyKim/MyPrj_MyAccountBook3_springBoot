@@ -17,9 +17,9 @@ public interface MethodService {
 
 	int getMaxSqn();
 
-	List<String> getNameList(String id);
+	List<String> getNameList(int userId);
 
-	int insert(Map<String, String> fm, String id);
+	int insert(Map<String, String> fm, int userId);
 
 	int update(Map<String,String> fm);
 }

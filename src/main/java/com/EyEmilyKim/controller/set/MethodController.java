@@ -81,10 +81,10 @@ public class MethodController {
 	@GetMapping("add")
 	public String add(HttpServletRequest req, Model model) {
 		System.out.println("MethodController > add()@Get called");
-		String id = (String) req.getAttribute("userId");
-		System.out.println("id : "+id);
+		int userId = (int) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
 		
-		List<String> list = methodService.getNameList(id);
+		List<String> list = methodService.getNameList(userId);
 		model.addAttribute("LIST", list);
 		int maxSqn = methodService.getMaxSqn();
 		System.out.println("maxSqn : "+maxSqn);
@@ -95,15 +95,14 @@ public class MethodController {
 	@PostMapping("add")
 	public String add(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
 		System.out.println("MethodController > add()@Post called");
-		String id = (String) req.getAttribute("userId");
-		System.out.println("id : "+id);
+		int userId = (int) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
 		
-		int result = 0;
 		try {
-			result = methodService.insert(fm, id);
+			methodService.insert(fm, userId);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
@@ -111,7 +110,6 @@ public class MethodController {
 			model.addAttribute("MSG", failMsg);
 			model.addAttribute("URL", nextUrl);
 		}
-		System.out.println("result : "+result);
 		return "redirect";
 	}
 	

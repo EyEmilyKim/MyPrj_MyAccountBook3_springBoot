@@ -39,14 +39,14 @@
   <select id="getNameList" resultType="String">
   	select METH_NAME from MAB_METHODS 
   	<where>
-  	ID in (#{id}, 'system') 
+  	USER_ID in (#{userId}, 0) 
   	</where>
   	order by METH_CODE 
   </select>
   
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Method">
   	insert into MAB_METHODS values(
-  	#{seqno}, #{mncrd}, #{meth_code}, #{meth_name}, #{id}	)
+  	 #{user_id}, #{seqno}, #{mncrd}, #{meth_code}, #{meth_name} )
   </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Method">

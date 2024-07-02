@@ -26,12 +26,4 @@ h3 {
   display: none;
 }
 
-.selected_ex {
-	background-color : blue;
-	color: white;
-}
-.selected_in {
-	background-color : red;
-	color: white;
-}
 

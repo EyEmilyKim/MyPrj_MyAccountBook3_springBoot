@@ -49,21 +49,21 @@ System.out.println("MethodService > getMaxSqn() called");
 	}
 
 	@Override
-	public List<String> getNameList(String id) {
+	public List<String> getNameList(int userId) {
 		System.out.println("MethodService > getNameList() called");
-		return methodDao.getNameList(id);
+		return methodDao.getNameList(userId);
 	}
 
 	@Override
-	public int insert(Map<String, String> fm, String id) {
+	public int insert(Map<String, String> fm, int userId) {
 		System.out.println("MethodService > insert() called");
 				
 		Method meth = new Method();
 		meth.setSeqno(Integer.parseInt(fm.get("SEQNO")));
 		meth.setMncrd(fm.get("MNCRD"));
-		meth.setMeth_code(fm.get("MNCRD")+fm.get("SEQNO"));
+		meth.setMeth_code(fm.get("MNCRD")+fm.get("SEQNO")+"_"+userId);
 		meth.setMeth_name(fm.get("MNAME"));
-		meth.setId(id);
+		meth.setUser_id(userId);
 		
 		return methodDao.insert(meth);
 	}
