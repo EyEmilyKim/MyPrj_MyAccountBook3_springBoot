@@ -10,8 +10,8 @@
 	
 	<table class="table " >
 	<thead class="">
-	<tr class="hidden">
-		<td class="id">id</td>
+	<tr class="">
+		<td class="id">useId</td>
 		<td class="seqno">seqno</td>
 		<td class="cate_code">cate_code</td>
 		<td>inex</td>
@@ -27,7 +27,7 @@
 	  <c:choose>
 		<c:when test="${c.inex == 'caNN' }">
 			<tr id="sys">
-				<td class="id">${c.id }</td>
+				<td class="id">${c.user_id }</td>
 				<td class="seqno">${c.seqno }</td><td class="cate_code">${c.cate_code }</td>
 				<td>기본</td><td>${c.cate_name }</td>
 				<td class=""></td>
@@ -36,7 +36,7 @@
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td class="id">${c.id }</td>
+				<td class="id">${c.user_id }</td>
 				<td class="seqno">${c.seqno }</td><td class="cate_code">${c.cate_code }</td>
 				<c:if test="${c.inex == 'IN' }"><td id="in">수입</td><td>${c.cate_name }</td></c:if>
 				<c:if test="${c.inex == 'EX' }"><td id="ex">지출</td><td>${c.cate_name }</td></c:if>

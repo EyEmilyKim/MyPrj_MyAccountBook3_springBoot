@@ -9,9 +9,9 @@ import com.EyEmilyKim.entity.Category;
 @Mapper
 public interface CategoryDao {
 
-	List<Category> getList(String id);
+	List<Category> getList(int userId);
 
-	int getCount(String id);
+	int getCount(int userId);
 
 	Category getOne(String ccode);
 

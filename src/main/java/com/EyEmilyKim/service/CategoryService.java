@@ -7,9 +7,9 @@ import com.EyEmilyKim.entity.Category;
 
 public interface CategoryService {
 
-	List<Category> getList(String id);
+	List<Category> getList(int user_id);
 
-	int getCount(String id);
+	int getCount(int user_id);
 
 	Category getOne(String ccode);
 

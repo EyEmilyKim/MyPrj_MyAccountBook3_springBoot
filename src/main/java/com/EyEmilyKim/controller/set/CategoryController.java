@@ -32,12 +32,12 @@ public class CategoryController {
 	@GetMapping("list")
 	public String list(HttpServletRequest req, Model model) {
 		System.out.println("CategoryController > list() called");
-		String id = (String) req.getAttribute("userId"); 
-		System.out.println("id : "+id);
+		int userId = (int) req.getAttribute("userId"); 
+		System.out.println("userId : "+userId);
 		
-		List<Category> list = categoryService.getList(id);
+		List<Category> list = categoryService.getList(userId);
 		model.addAttribute("LIST", list);
-		int cnt = categoryService.getCount(id);
+		int cnt = categoryService.getCount(userId);
 		model.addAttribute("COUNT", cnt);
 		
 		return "set.category.list";

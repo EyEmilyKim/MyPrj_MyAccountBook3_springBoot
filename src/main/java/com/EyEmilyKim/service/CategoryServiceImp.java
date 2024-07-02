@@ -16,17 +16,17 @@ public class CategoryServiceImp implements CategoryService {
 	private CategoryDao categoryDao;
 	
 	@Override
-	public List<Category> getList(String id) {
+	public List<Category> getList(int userId) {
 		System.out.println("CateService > getList() called");
 		
-		return categoryDao.getList(id);
+		return categoryDao.getList(userId);
 	}
 
 	@Override
-	public int getCount(String id) {
+	public int getCount(int userId) {
 		System.out.println("CateService > getCount() called");
 		
-		return categoryDao.getCount(id);
+		return categoryDao.getCount(userId);
 	}
 
 	@Override

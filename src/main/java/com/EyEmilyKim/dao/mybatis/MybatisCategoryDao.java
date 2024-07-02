@@ -18,13 +18,13 @@ public class MybatisCategoryDao implements CategoryDao {
 	}
 	
 	@Override
-	public List<Category> getList(String id) {
-		return mapper.getList(id);
+	public List<Category> getList(int userId) {
+		return mapper.getList(userId);
 	}
 
 	@Override
-	public int getCount(String id) {
-		return mapper.getCount(id);
+	public int getCount(int userId) {
+		return mapper.getCount(userId);
 	}
 
 	@Override
