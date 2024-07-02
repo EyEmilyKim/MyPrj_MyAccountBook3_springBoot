@@ -21,6 +21,42 @@
 			<input type="button" value="지출" id="btn_ex">
 		</div>
 
+	<!-- 3.카테고리 -->
+		<div>
+		
+		<!-- 드롭다운 : 초기화면 -->
+			<input type="text" name="CCODE" id="ccode" placeholder="ccode 자동수신">
+			
+			<select name="SLCT_NN" id="slct_nn">
+				<option value="">--카테고리(미지정)--</option>
+			</select>
+			
+		<!-- 드롭다운 : 수입 -->
+			<select name="SLCT_IN" id="slct_in" class="hidden" onChange="setCCODE(this)">
+				<option value="">--카테고리(수입)--</option>
+				<c:forEach items="${CATELIST }" var="c">
+					<c:set var="cate_code" value="${c.cate_code }" />
+					<c:set var="cate_name" value="${c.cate_name }" />
+					<c:if test="${ fn:startsWith(cate_code,'IN') }">
+						<option value="${c.cate_code }">${c.cate_name }</option>
+					</c:if>
+				</c:forEach>
+			</select> 
+			
+		<!-- 드롭다운 : 지출 -->
+			<select name="SLCT_EX" id="slct_ex" class="hidden" onChange="setCCODE(this)">
+				<option value="">--카테고리(지출)--</option>
+				<c:forEach items="${CATELIST }" var="c">
+					<c:set var="cate_code" value="${c.cate_code }" />
+					<c:set var="cate_name" value="${c.cate_name }" />
+					<c:if test="${ fn:startsWith(cate_code,'EX') }">
+						<option value="${c.cate_code }">${c.cate_name }</option>
+					</c:if>
+				</c:forEach>
+			</select>
+			
+		</div> <!-- 3.카테고리 끝 -->
+
 	<!-- 8.form 등록/취소 -->
 			<div class="marginTop">
 				<input type="submit" value="등록"> 
