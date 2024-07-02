@@ -5,8 +5,8 @@
 <main>
 	<section>
 		<h1 class="margin-bot">스프링Boot로 만들어보는 My가계부3 ~♪</h1>
-	<c:if test="${! empty sessionScope.USER_ID }">	
-		<h2 class="margin-bot">반갑습니다 ${sessionScope.USER_ID }님~~</h2>
+	<c:if test="${! empty sessionScope.NICKNAME }">	
+		<h2 class="margin-bot">반갑습니다 ${sessionScope.NICKNAME }님~~</h2>
 	</c:if>
 		<div><img src="images/ocean.jpg" width="200px" /></div>
 		<div><img src="images/image.png" width="200px" /></div>

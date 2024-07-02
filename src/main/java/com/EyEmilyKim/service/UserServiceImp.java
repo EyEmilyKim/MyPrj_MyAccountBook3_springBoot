@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.dao.UserDao;
+import com.EyEmilyKim.dto.UserSessionDto;
+import com.EyEmilyKim.entity.User;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -12,15 +14,14 @@ public class UserServiceImp implements UserService {
 	private UserDao userDao;
 	
 	@Override
-	public int login(String id, String pwd) {
-		int result;
-		//PWD 일치 -> 1 : 로그인 성공
-		//PWD 불일치-> 0 : 계정 또는 비밀번호를 확인해주세요 
-		String dbPwd = userDao.getPwd(id);
-		if(pwd.equals(dbPwd)) 
-			result = 1;
-		else result = 0;		
-		return result;
+	public UserSessionDto login(String lid, String pwd) throws Exception {
+		User user = userDao.findByLid(lid);
+		if (user == null)
+			throw new Exception("사용자를 찾을 수 없습니다.");
+		if (!user.getPwd().equals(pwd)) {
+			throw new Exception("비밀번호가 일치하지 않습니다.");
+		}
+		return new UserSessionDto(user.getUser_id(), user.getNickname(), user.getBirthday());
 	}
 
 }

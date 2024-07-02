@@ -5,11 +5,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.EyEmilyKim.dao.UserDao">
 
-  <select id="getPwd" resultType="String">
-  	select PWD from MAB_USERS
-	<where> 
-	ID = #{id}  
-	</where> 
-  </select>
+	<select id="findByLid" resultType="com.EyEmilyKim.entity.User">
+		select USER_ID, PWD, NICKNAME, BIRTHDAY from MAB_USERS
+		<where>
+			LOGIN_ID = #{login_id}
+		</where>
+	</select>
 
 </mapper>

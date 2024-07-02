@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.EyEmilyKim.dao.UserDao;
+import com.EyEmilyKim.entity.User;
 
 @Repository
 public class MybatisUserDao implements UserDao {
@@ -15,8 +16,8 @@ public class MybatisUserDao implements UserDao {
 	}
 	
 	@Override
-	public String getPwd(String id) {
-		return mapper.getPwd(id);
+	public User findByLid(String lid) {
+		return mapper.findByLid(lid);
 	}
 
 }

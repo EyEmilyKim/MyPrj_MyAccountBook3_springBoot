@@ -1,7 +1,9 @@
 package com.EyEmilyKim.dao;
 
+import com.EyEmilyKim.entity.User;
+
 public interface UserDao {
 
-	String getPwd(String id);
+	User findByLid(String lid);
 
 }

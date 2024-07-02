@@ -1,4 +1,4 @@
-package com.EyEmilyKim.entity;
+package com.EyEmilyKim.dto;
 
 import java.util.Date;
 
@@ -13,12 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
+public class UserSessionDto {
 	private int user_id;
-	private String login_id;
-	private String pwd;
 	private String nickname;
-	private String email;
 	private Date birthday;
-	private Date reg_date;
 }

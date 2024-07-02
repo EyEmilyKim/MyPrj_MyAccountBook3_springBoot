@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.EyEmilyKim.dto.UserSessionDto;
 import com.EyEmilyKim.service.UserService;
 
 @Controller
@@ -35,24 +36,19 @@ public class HomeController {
 	}
 	
 	@PostMapping("/login")
-	public String login(String ID, String PWD, Model model, HttpSession session) {
+	public String login(String LID, String PWD, Model model, HttpSession session) {
 		System.out.println("HomeController > login()@Post called");
-		
-		String msg;
-		String url;
-		
-		int result = userService.login(ID, PWD);
-		System.out.println("result : "+result);
-		if(result == 1) {
-			msg = "로그인에 성공했습니다. \\n환영합니다~ "+ID+"님~!";
-			url = "index";
-			session.setAttribute("USER_ID", ID);
-		}else {
-			msg = "로그인에 실패했습니다. \\n계정 또는 비밀번호를 확인해주세요...";
-			url = "login";
+		try {
+			UserSessionDto userSess = userService.login(LID, PWD);
+			session.setAttribute("USER_ID", userSess.getUser_id());
+			session.setAttribute("NICKNAME", userSess.getNickname());
+			String msg = "로그인에 성공했습니다. \\n환영합니다~ " + userSess.getNickname() + "님~!";
+			model.addAttribute("MSG", msg);
+			model.addAttribute("URL", "/index");
+		} catch (Exception e) {
+			model.addAttribute("MSG", e.getMessage());
+			model.addAttribute("URL", "/login");
 		}
-		model.addAttribute("MSG", msg);
-		model.addAttribute("URL", url);
 		return "redirect";
 	}
 	
@@ -62,7 +58,7 @@ public class HomeController {
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
 		model.addAttribute("MSG", "정상적으로 로그아웃되었습니다.");
-		model.addAttribute("URL", "index");
+		model.addAttribute("URL", "/index");
 		return "redirect";
 	} 
 }

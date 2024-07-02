@@ -7,7 +7,7 @@
 	
 		<div>
 			<form action="login" method="post" name="fm" onSubmit="return check()">
-				<div><input type="text" size="30" name="ID" placeholder="아이디"></div>
+				<div><input type="text" size="30" name="LID" placeholder="아이디"></div>
 				<div><input type="password" size="30" name="PWD" placeholder="비밀번호"></div>
 				<div><input type="submit" value="로그인"></div>
 			</form>
