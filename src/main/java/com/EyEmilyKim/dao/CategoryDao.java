@@ -19,7 +19,7 @@ public interface CategoryDao {
 
 	int getMaxSqn();
 
-	List<String> getNameList(String id);
+	List<String> getNameList(int userId);
 	
 	int insert(Category cate);
 

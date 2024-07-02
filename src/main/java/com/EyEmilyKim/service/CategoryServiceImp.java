@@ -51,22 +51,22 @@ public class CategoryServiceImp implements CategoryService {
 	}
 	
 	@Override
-	public List<String> getNameList(String id) {
+	public List<String> getNameList(int userId) {
 		System.out.println("CateService > getNameList() called");
 
-		return categoryDao.getNameList(id);
+		return categoryDao.getNameList(userId);
 	}
 
 	@Override
-	public int insert(Map<String,String> fm, String id) {
+	public int insert(Map<String,String> fm, int userId) {
 		System.out.println("CateService > insert() called");
 		
 		Category cate = new Category();
 		cate.setSeqno(Integer.parseInt(fm.get("SEQNO")));
 		cate.setInex(fm.get("INEX"));
-		cate.setCate_code(fm.get("INEX")+fm.get("SEQNO"));
+		cate.setCate_code(fm.get("INEX")+fm.get("SEQNO")+"_"+userId);
 		cate.setCate_name(fm.get("CNAME"));
-		cate.setId(id);
+		cate.setUser_id(userId);
 		
 		return categoryDao.insert(cate);
 	}

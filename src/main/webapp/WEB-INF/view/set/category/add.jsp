@@ -18,7 +18,7 @@
 					<input type="button" value="지출" onClick="setEX()" id="btn_ex">
 				</div>
 				<div class="cname">
-					<input type="text" placeholder="카테고리명을 입력하세요" value="" name="CNAME" id="cname"></td></tr>
+					<input type="text" placeholder="카테고리명을 입력하세요" value="" name="CNAME" id="cname">
 				</div>
 			</div>
 			<div class="buttons">

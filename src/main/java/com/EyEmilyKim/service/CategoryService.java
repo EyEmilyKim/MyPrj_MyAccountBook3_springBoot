@@ -17,9 +17,9 @@ public interface CategoryService {
 
 	int getMaxSqn();
 	
-	List<String> getNameList(String id);
+	List<String> getNameList(int user_id);
 
-	int insert(Map<String,String> fm, String id);
+	int insert(Map<String,String> fm, int user_id);
 
 	int update(Map<String,String> fm);
 	

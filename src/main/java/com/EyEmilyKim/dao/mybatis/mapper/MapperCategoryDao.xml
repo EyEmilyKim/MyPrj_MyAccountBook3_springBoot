@@ -39,14 +39,14 @@
   <select id="getNameList" resultType="String">
   	select CATE_NAME from MAB_CATEGORIES 
 	<where> 
-	ID in (#{id}, 'system')  
+	USER_ID in (#{userId}, 'system')  
 	</where> 
 	order by CATE_CODE
   </select>
   
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Category">
   	insert into MAB_CATEGORIES values(
-  	#{seqno}, #{inex}, #{cate_code}, #{cate_name}, #{id}	)
+  	 #{user_id}, #{seqno}, #{inex}, #{cate_code}, #{cate_name} )
   </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Category">
