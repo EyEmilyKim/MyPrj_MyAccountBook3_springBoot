@@ -8,14 +8,14 @@
   <select id="getList" resultType="com.EyEmilyKim.entity.Category">
   	select * from MAB_CATEGORIES 
 	<where> 
-	USER_ID in (#{userId}, 'system')  
+	USER_ID in (#{userId}, 0)  
 	</where> 
 	order by CATE_CODE 
   </select>
   <select id="getCount" resultType="int">
 	select count(CATE_CODE) from MAB_CATEGORIES 
 	<where> 
-	USER_ID in (#{userId}, 'system')  
+	USER_ID in (#{userId}, 0)  
 	</where> 
   </select>
 
@@ -39,7 +39,7 @@
   <select id="getNameList" resultType="String">
   	select CATE_NAME from MAB_CATEGORIES 
 	<where> 
-	USER_ID in (#{userId}, 'system')  
+	USER_ID in (#{userId}, 0)  
 	</where> 
 	order by CATE_CODE
   </select>
