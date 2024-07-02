@@ -9,6 +9,18 @@
 
 		<form action="add" method="post" name="fm" onSubmit="return catchSub()">
 		
+	<!-- 0.일련번호(hidden)-->
+		<div>
+			<input type="hidden" name="SEQNO" value="${requestScope.MSN +1 }">
+		</div>
+			
+	<!-- 1.수입/지출 구분 -->
+		<div>
+			<input type="text" name="INEX" id="inex" size ="5" placeholder="자동변경"> 
+			<input type="button" value="수입" onClick="doIN()" id="btn_in"> 
+			<input type="button" value="지출" id="btn_ex">
+		</div>
+
 	<!-- 8.form 등록/취소 -->
 			<div class="marginTop">
 				<input type="submit" value="등록"> 
