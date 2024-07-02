@@ -7,9 +7,9 @@ import com.EyEmilyKim.entity.Method;
 
 public interface MethodService {
 	
-	List<Method> getList(String id);
+	List<Method> getList(int userId);
 
-	int getCount(String id);
+	int getCount(int userId);
 
 	Method getOne(String mcode);
 	

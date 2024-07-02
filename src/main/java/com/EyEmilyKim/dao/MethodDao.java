@@ -9,9 +9,9 @@ import com.EyEmilyKim.entity.Method;
 @Mapper
 public interface MethodDao {
 
-	List<Method> getList(String id);
+	List<Method> getList(int userId);
 
-	int getCount(String id);
+	int getCount(int userId);
 
 	Method getOne(String mcode);
 

@@ -8,12 +8,15 @@
   <select id="getList" resultType="com.EyEmilyKim.entity.Method">
   	select * from MAB_METHODS 
 	<where> 
-	ID in (#{id}, 'system')  
+	USER_ID in (#{userid}, 0)  
 	</where> 
-	order by seqno, METH_CODE desc
+	order by seqno, METH_CODE desc 
   </select>
   <select id="getCount" resultType="int">
-	select count(METH_CODE) from MAB_METHODS
+	select count(METH_CODE) from MAB_METHODS 
+	<where> 
+	USER_ID in (#{userid}, 0)  
+	</where> 
   </select>
 
   <select id="getOne" resultType="com.EyEmilyKim.entity.Method">

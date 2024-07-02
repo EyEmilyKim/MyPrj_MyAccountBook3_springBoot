@@ -12,10 +12,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Method {
+	private int user_id;
 	private Integer seqno;
 	private String mncrd;
 	private String meth_name;
 	private String meth_code;
-	private String id;
 	
 }

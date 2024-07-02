@@ -33,12 +33,12 @@ public class MethodController {
 	@GetMapping("list")
 	public String list(HttpServletRequest req, Model model) {
 		System.out.println("MethodController > list() called");
-		String id = (String) req.getAttribute("userId"); 
-		System.out.println("id : "+id);
+		int userId = (int) req.getAttribute("userId"); 
+		System.out.println("userId : "+userId);
 		
-		List<Method> list = methodService.getList(id);
+		List<Method> list = methodService.getList(userId);
 		model.addAttribute("LIST", list);
-		int cnt = methodService.getCount(id);
+		int cnt = methodService.getCount(userId);
 		model.addAttribute("COUNT", cnt);
 		
 		return "set.method.list";

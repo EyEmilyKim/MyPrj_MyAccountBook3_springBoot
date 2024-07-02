@@ -16,16 +16,16 @@ public class MethodServiceImp implements MethodService {
 	private MethodDao methodDao;
 	
 	@Override
-	public List<Method> getList(String id) {
+	public List<Method> getList(int userId) {
 		System.out.println("MethodService > list() called");
 		
-		return methodDao.getList(id);
+		return methodDao.getList(userId);
 	}
 
 	@Override
-	public int getCount(String id) {
+	public int getCount(int userId) {
 		System.out.println("MethodService > getCount() called");
-		return methodDao.getCount(id);
+		return methodDao.getCount(userId);
 	}
 
 	@Override
