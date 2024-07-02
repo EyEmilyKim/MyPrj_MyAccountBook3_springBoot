@@ -34,3 +34,7 @@ h3 {
   border: red solid 1px;
   color: orange;
 }
+
+.marginTop {
+	margin-top: 30px;
+}
