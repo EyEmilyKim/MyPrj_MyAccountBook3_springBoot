@@ -56,4 +56,5 @@
 	CATE_CODE = #{cate_code} 
 	</where> 
   </update>
+
 </mapper>

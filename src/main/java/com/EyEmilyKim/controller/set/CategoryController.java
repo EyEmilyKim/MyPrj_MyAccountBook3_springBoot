@@ -61,9 +61,8 @@ public class CategoryController {
 		System.out.println("CategoryController > del()@Post called");
 		System.out.println(CCODE+" - "+CNAME);
 		
-		int result = 0;
 		try {
-			result = categoryService.delete(CCODE);
+			categoryService.delete(CCODE);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
@@ -71,7 +70,6 @@ public class CategoryController {
 			model.addAttribute("MSG", failMsg);
 			model.addAttribute("URL", nextUrl);
 		}
-		System.out.println("result : "+result);
 		return "redirect";
 	}
 	
@@ -117,14 +115,14 @@ public class CategoryController {
 	@GetMapping("upd")
 	public String upd(HttpServletRequest req, String CCODE, Model model) {
 		System.out.println("CategoryController > upd()@Get called");
-		String id = (String) req.getAttribute("userId");
-		System.out.println("id : "+id);
+		int userId = (int) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
 		System.out.println(CCODE);
 		
 		Category cate = categoryService.getOne(CCODE);
 		System.out.println(cate.getCate_code()+" - "+cate.getCate_name());
 		model.addAttribute("C", cate);
-		List<String> list = categoryService.getNameList(id);
+		List<String> list = categoryService.getNameList(userId);
 		model.addAttribute("LIST", list);
 		return "set.category.upd";
 	}
@@ -136,9 +134,8 @@ public class CategoryController {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
 
-		int result = 0;
 		try {
-			result = categoryService.update(fm);
+			categoryService.update(fm);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
@@ -146,7 +143,6 @@ public class CategoryController {
 			model.addAttribute("MSG", failMsg);
 			model.addAttribute("URL", nextUrl);
 		}
-		System.out.println("result : "+result);
 		return "redirect";
 	}
 }

@@ -34,7 +34,7 @@
 	</div>
 		
 		<!-- 중복확인용 기존 목록 -->
-		<div class="borderDashed"> 
+		<div class="hidden"> 
 		<p class="textGray">중복 확인용 기준 목록 / 개발자용 임시!!!</p>
 			<input type="text" value="${LIST.size() }" id="slct_name_cnt">
 			<select class="" id="slct_name">
@@ -50,7 +50,7 @@
 <script type="text/javascript">
 function guideInex(){
 // 	alert("guideInex()호출됨");
-	let guideInex = "수입/지출 구분은 수정할 수 없습니다. 목록에서 삭제 후 다시 등록해주세요.";
+	let guideInex = "수입/지출 구분은 수정할 수 없습니다.<br/>목록에서 삭제 후 다시 등록해주세요.";
 	document.getElementById("guide").innerHTML = guideInex;
 }
 function nameDupCheck(n_cname){
