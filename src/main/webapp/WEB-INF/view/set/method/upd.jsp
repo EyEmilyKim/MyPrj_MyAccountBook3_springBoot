@@ -34,7 +34,7 @@
 	</div>
 		
 		<!-- 중복확인용 기존 목록 -->
-		<div class="borderDashed"> 
+		<div class="hidden"> 
 		<p class="textGray">중복 확인용 기준 목록 / 개발자용 임시!!!</p>
 			<input type="text" value="${LIST.size() }" id="slct_name_cnt">
 			<select class="" id="slct_name">
@@ -48,13 +48,12 @@
 </main>
 
 <script type="text/javascript">
+
 function guideMncrd(){
-// 	alert("guideMncrd()호출됨");
-	let guideMncrd = "현금/카드 구분은 수정할 수 없습니다. 목록에서 삭제 후 다시 등록해주세요.";
+	let guideMncrd = "현금/카드 구분은 수정할 수 없습니다.<br/>목록에서 삭제 후 다시 등록해주세요.";
 	document.getElementById("guide").innerHTML = guideMncrd;
 }
 function nameDupCheck(n_mname){
-// 	alert("nameDupCheck()호출됨");
 	let slct_name = document.getElementById("slct_name");
 	let slct_name_cnt = document.getElementById("slct_name_cnt");
 	let cnt = slct_name_cnt.value;
@@ -65,7 +64,6 @@ function nameDupCheck(n_mname){
 	return true;
 }
 function check(){
-// 	alert("check()호출됨");
 	document.getElementById("guide").innerHTML = "";
 	let mncrd = document.fm.MNCRD.value;
 	let s_mncrd = ""; if(mncrd == "MN") s_mncrd = "현금"; else s_mncrd = "카드";
@@ -73,12 +71,9 @@ function check(){
 	let n_mname = document.fm.N_MNAME.value;
 	let guideConf = "기존에 이 결제수단을 사용해 입력한 가계부 기록에도 변경된 결제수단명이 반영됩니다.";
 	let detailConf = "구분 : "+s_mncrd+"\n수정 전 : "+mname+"\n수정 후 : "+n_mname;
-// 	alert("let OK");
 	if(n_mname == ''){ alert("결제수단명을 입력해주세요."); return false }
-	//기존 카테고리명과 중복 확인
-	if(! nameDupCheck(n_mname) ) return false;
+	if(! nameDupCheck(n_mname) ) return false; // 기존 카테고리명과 중복 확인
 	if(! confirm( guideConf+"\n\n저장하시겠습니까?\n\n---\n"+detailConf ) ) return false;
-// 	if(! confirm("수정될 meth_code : "+document.fm.MCODE.value) ) return false;
 }
 function backToList(){
 	if(confirm("취소하고 목록으로 돌아가시겠습니까?")){
@@ -87,4 +82,5 @@ function backToList(){
 		document.getElementById("guide").innerHTML = "";
 	}
 }
+
 </script>

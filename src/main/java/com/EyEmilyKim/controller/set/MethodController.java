@@ -62,9 +62,8 @@ public class MethodController {
 		System.out.println("MethodController > del()@Post called");
 		System.out.println(MCODE+" - "+MNAME);
 		
-		int result = 0;
 		try {
-			result = methodService.delete(MCODE);
+			methodService.delete(MCODE);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
@@ -72,7 +71,6 @@ public class MethodController {
 			model.addAttribute("MSG", failMsg);
 			model.addAttribute("URL", nextUrl);
 		}
-		System.out.println("result : "+result);
 		return "redirect";
 	}
 	
@@ -118,16 +116,14 @@ public class MethodController {
 	@GetMapping("upd")
 	public String upd(String MCODE, HttpServletRequest req, Model model) {
 		System.out.println("MethodController > upd()@Get called");
+		int userId = (int) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
 		System.out.println(MCODE);
-		
-		String id = (String) req.getAttribute("USER_ID");
-		if(id == null || id == "") id = "master";
-		System.out.println("id : "+id);
 		
 		Method meth = methodService.getOne(MCODE);
 		System.out.println(meth.getMeth_code()+" - "+meth.getMeth_name());
 		model.addAttribute("M", meth);
-		List<String> list = methodService.getNameList(id);
+		List<String> list = methodService.getNameList(userId);
 		model.addAttribute("LIST", list);
 		return "set.method.upd";
 	}
@@ -139,9 +135,8 @@ public class MethodController {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
 		
-		int result = 0;
 		try {
-			result = methodService.update(fm);
+			methodService.update(fm);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
@@ -149,7 +144,6 @@ public class MethodController {
 			 model.addAttribute("MSG", failMsg);
 			 model.addAttribute("URL", nextUrl);
 		}
-		System.out.println("result : "+result);
 		return "redirect";
 	}
 }
