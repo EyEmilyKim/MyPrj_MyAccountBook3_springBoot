@@ -3,7 +3,7 @@
 
 <main>
 	<section>
-		<h1 class="margin-bot">로그인해주세요~♪</h1>
+		<h1 class="marginBot">로그인해주세요~♪</h1>
 	
 		<div>
 			<form action="login" method="post" name="fm" onSubmit="return check()">

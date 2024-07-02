@@ -1,17 +1,24 @@
 @charset "UTF-8";
 
-	.border { border: solid darkgray 1px; }
-	.borderBlue { border: solid red 1px; }
-	.borderRed { border: solid red 1px; }
-	.margin-bot{
-		margin-bottom: 0.5rem;
-	}
-	.textGray { color:gray; }
-	.borderDashed {
-		border: dashed darkgray 1px; padding:10px;
-	}
-	
-	.hidden { display:none; }
-	#in { color:blue; } 
-	#ex { color:red; } 
-	#sys { background-color:beige; }
+/* --------- 단순 서식 ----------- */
+
+.hidden { display:none; }
+
+.border { border: solid darkgray 1px; }
+.borderBlue { border: solid red 1px; }
+.borderRed { border: solid red 1px; }
+.borderDashed {
+	border: dashed darkgray 1px; 
+	padding:10px;
+}
+
+.textGray { color:gray; }	
+
+.marginBot { margin-bottom: 0.5rem; }
+.marginTop { margin-top: 30px; }
+
+/* --------- 페이지 기능 별 ----------- */
+
+.in, .mn { color:blue; } 
+.ex, .crd { color:red; } 
+.sys { background-color:beige; }

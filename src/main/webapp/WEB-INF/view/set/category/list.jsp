@@ -26,7 +26,7 @@
 	  <!-- otherwise: 사용자용 '수입'/'지출'은 같은 tr 내 일부 td만 다르게 처리  -->
 	  <c:choose>
 		<c:when test="${c.inex == 'caNN' }">
-			<tr id="sys">
+			<tr class="sys">
 				<td class="id">${c.user_id }</td>
 				<td class="seqno">${c.seqno }</td><td class="cate_code">${c.cate_code }</td>
 				<td>기본</td><td>${c.cate_name }</td>
@@ -38,8 +38,8 @@
 			<tr>
 				<td class="id">${c.user_id }</td>
 				<td class="seqno">${c.seqno }</td><td class="cate_code">${c.cate_code }</td>
-				<c:if test="${c.inex == 'IN' }"><td id="in">수입</td><td>${c.cate_name }</td></c:if>
-				<c:if test="${c.inex == 'EX' }"><td id="ex">지출</td><td>${c.cate_name }</td></c:if>
+				<c:if test="${c.inex == 'IN' }"><td class="in">수입</td><td>${c.cate_name }</td></c:if>
+				<c:if test="${c.inex == 'EX' }"><td class="ex">지출</td><td>${c.cate_name }</td></c:if>
 				<td><a class="btn" href="${urlUpd }" >수정</a></td>
 				<td><a class="btn" href="${urlDel }" >삭제</a></td>
 				<td class="hidden">url : <c:out value="${urlUpd}"></c:out></td>
