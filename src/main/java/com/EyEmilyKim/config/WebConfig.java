@@ -10,6 +10,6 @@ import com.EyEmilyKim.interceptor.UserInterceptor;
 public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new UserInterceptor()).addPathPatterns("/set/**/**");
+		registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**");
 	}
 }
