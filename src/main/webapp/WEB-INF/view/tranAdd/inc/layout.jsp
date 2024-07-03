@@ -12,7 +12,7 @@
 	<script src="https://kit.fontawesome.com/f747bc5595.js" crossorigin="anonymous"> </script>
 </head>
 
-<body onload="startClock(); alertJSloaded()">
+<body onload="startClock()">
 <script src="../../js/clock.js"></script>
 <script src="../../js/tranAdd/makeTran.js"></script>
 	

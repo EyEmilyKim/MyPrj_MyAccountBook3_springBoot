@@ -7,23 +7,28 @@
   padding: 20px;
   border-radius: 15px;
 }
+form > div {
+	margin: 5px;
+}
 
-#row_meth,
-#slct_mn,
-#slct_crd {
-  display: none;
+/* ------- 영역별 지정 서식 ------- */
+
+#item {
+	width: 200px;
+	height: 80px;
 }
 #guide {
   color: red;
 }
-h3 {
-  margin: 10px 0 20px;
-  color: var(--hoverMenu-color);
-}
+
+/* ------- hidden input values ------- */
+
+#seqno, #inex, 
 #ccode,
+#mncrd, 
 #mcode {
-  border: orange solid 1px;
-  display: none;
+	border: plum solid 1px;
+	width: 80px;
 }
 
 
