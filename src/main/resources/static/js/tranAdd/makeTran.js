@@ -8,30 +8,52 @@ function alertJSloaded() {
 
 /* ------------ form 입력 과정 func ------------ */
 /* 수입 or 지출 버튼 */
-function doIN(){ //[수입]
-//	onoffROW_METH("OFF"); //결제수단 row 가리기
-//	clearValCCODE(); //카테고리 선택값 초기화
-//	clearValMCODE(); //결제수단 선택값 초기화
+function doIN() { //[수입]
+	//	onoffROW_METH("OFF"); //결제수단 row 가리기
+	//	clearValCCODE(); //카테고리 선택값 초기화
+	//	clearValMCODE(); //결제수단 선택값 초기화
 }
 
 document.addEventListener('DOMContentLoaded', () => {
 
-	const btn_in = document.getElementById("btn_in");
-	const btn_ex = document.getElementById("btn_ex");
+	// 직접 event 갖지 않는 요소들
 	const slct_nn = document.getElementById("slct_nn");
 	const slct_in = document.getElementById("slct_in");
 	const slct_ex = document.getElementById("slct_ex");
-
+	const keepDeclared = { slct_nn, slct_in, slct_ex };
+	// 수입 or 지출 설정
+	const btn_in = document.getElementById("btn_in");
+	const btn_ex = document.getElementById("btn_ex");
 	btn_in.addEventListener('click', () => {
-		setINEX("IN"); // INEX : 수입(EX)
-		colorBtnINEX("IN"); // 버튼색 바꾸기
-		showSlct_XX("IN"); // 카테고리 드롭다운 설정
+		setINEX("IN");
+		colorBtnINEX("IN");
+		showSlct_XX("IN");
+	})
+	btn_ex.addEventListener('click', () => {
+		setINEX("EX");
+		colorBtnINEX("EX");
+		showSlct_XX("EX");
 	})
 
-	btn_ex.addEventListener('click', () => {
-		setINEX("EX"); // INEX : 지출(EX)
-		colorBtnINEX("EX"); // 버튼색 바꾸기
-		showSlct_XX("EX"); // 카테고리 드롭다운 설정
+	// 오늘 날짜 설정
+	const btn_today = document.getElementById("btn_today");
+	btn_today.addEventListener('click', () => {
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = String(today.getMonth() + 1).padStart(2, '0');
+		const day = String(today.getDate()).padStart(2, '0');
+		const formattedDate = `${year}-${month}-${day}`;
+		document.fm.DATE.value = formattedDate;
+	})
+
+	// 금액 세자리마다 ',' 표시
+	const amount = document.getElementById('amount');
+	amount.addEventListener('input', () => {
+		let value = amount.value.replace(/,/g, '');
+		if (!isNaN(value) && value.trim() !== '') {
+			value = parseInt(value, 10).toLocaleString('ko-KR');
+			amount.value = value;
+		}
 	})
 
 });

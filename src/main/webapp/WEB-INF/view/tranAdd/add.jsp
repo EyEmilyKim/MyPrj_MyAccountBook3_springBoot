@@ -20,17 +20,20 @@
 			<input type="button" value="수입" onClick="doIN()" id="btn_in"> 
 			<input type="button" value="지출" id="btn_ex">
 		</div>
+		
+	<!-- 2.거래날짜 -->
+		<div>
+			<input type="date" name="DATE" id="date">
+			<input type="button" value="오늘" id="btn_today">
+		</div>
 
 	<!-- 3.카테고리 -->
-		<div>
-		
+		<div>	
 		<!-- 드롭다운 : 초기화면 -->
-			<input type="text" name="CCODE" id="ccode" placeholder="ccode 자동수신">
-			
+			<input type="text" name="CCODE" id="ccode" placeholder="ccode 자동수신">		
 			<select name="SLCT_NN" id="slct_nn">
 				<option value="">--카테고리(미지정)--</option>
-			</select>
-			
+			</select>		
 		<!-- 드롭다운 : 수입 -->
 			<select name="SLCT_IN" id="slct_in" class="hidden" onChange="setCCODE(this)">
 				<option value="">--카테고리(수입)--</option>
@@ -41,8 +44,7 @@
 						<option value="${c.cate_code }">${c.cate_name }</option>
 					</c:if>
 				</c:forEach>
-			</select> 
-			
+			</select> 	
 		<!-- 드롭다운 : 지출 -->
 			<select name="SLCT_EX" id="slct_ex" class="hidden" onChange="setCCODE(this)">
 				<option value="">--카테고리(지출)--</option>
@@ -53,10 +55,19 @@
 						<option value="${c.cate_code }">${c.cate_name }</option>
 					</c:if>
 				</c:forEach>
-			</select>
-			
+			</select>		
 		</div> <!-- 3.카테고리 끝 -->
 
+	<!-- 4.거래내용 -->
+		<div>
+			<textarea name="ITEM" placeholder="내용을 입력하세요" cols="20" rows="3"></textarea>
+		</div>
+		
+	<!-- 5.거래금액 -->
+		<div>
+			<input type="text" placeholder="금액을 입력하세요" name="AMOUNT" id="amount">
+		</div>
+		
 	<!-- 8.form 등록/취소 -->
 			<div class="marginTop">
 				<input type="submit" value="등록"> 
