@@ -25,11 +25,11 @@
 
 /* --------- 선택적으로 변하는 클래스 ----------- */
 
-.selected_ex, .selected_mn {
+.selected_in, .selected_mn {
 	background-color : blue;
 	color: white;
 }
-.selected_in, .selected_crd {
+.selected_ex, .selected_crd {
 	background-color : red;
 	color: white;
 }
