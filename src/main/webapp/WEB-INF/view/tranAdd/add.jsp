@@ -69,7 +69,7 @@
 		</div>
 
 	<!-- 6.결제수단 블럭 -->
-		<div id="methBlock" class="hidden">
+		<div id="methBlock" class="hidden borderBlue">
 		<!-- 6-1. 현금/카드 구분 -->
 			<div>
 				<input type="text" name="MNCRD" id="mncrd" placeholder="MNCRD 자동" /> 
@@ -109,7 +109,6 @@
 				<c:forEach items="${METHLIST }" var="m">
 					<c:set var="meth_code" value="${m.meth_code }" />
 					<c:set var="meth_name" value="${m.meth_name }" />
-						${m.meth_code } / ${m.meth_name }<br>
 					<c:out value="${m.meth_code }" /> / <c:out value="${m.meth_name }" /><br>
 				</c:forEach>
 			</div>

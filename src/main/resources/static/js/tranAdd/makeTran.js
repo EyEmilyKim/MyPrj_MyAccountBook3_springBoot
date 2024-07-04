@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	const slct_nn = document.getElementById("slct_nn");
 	const slct_in = document.getElementById("slct_in");
 	const slct_ex = document.getElementById("slct_ex");
-	const row_meth = document.getElementById("row_meth");
+	const methBlock = document.getElementById("methBlock");
 	const slct_mn = document.getElementById("slct_mn");
 	const slct_crd = document.getElementById("slct_crd");
-	const declaredForUse = { slct_nn, slct_in, slct_ex, row_meth, slct_mn, slct_crd };
+	const declaredForUse = { slct_nn, slct_in, slct_ex, methBlock, slct_mn, slct_crd };
 	
 	// 1 수입 or 지출 설정 => 3. 카테고리 드롭다운
 	const btn_in = document.getElementById("btn_in");
