@@ -4,14 +4,13 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-	// 직접 event 갖지 않는 요소들
 	const slct_nn = document.getElementById("slct_nn");
 	const slct_in = document.getElementById("slct_in");
 	const slct_ex = document.getElementById("slct_ex");
 	const methBlock = document.getElementById("methBlock");
 	const slct_mn = document.getElementById("slct_mn");
 	const slct_crd = document.getElementById("slct_crd");
-	const declaredForUse = { slct_nn, slct_in, slct_ex, methBlock, slct_mn, slct_crd };
+	const declaredForUse = { slct_nn, methBlock, }; // 직접 event 갖지 않는 요소들
 	
 	// 1 수입 or 지출 설정 => 3. 카테고리 드롭다운
 	const btn_in = document.getElementById("btn_in");
@@ -20,16 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		setINEX("IN");
 		colorBtn("IN");
 		showSlct("IN");
-		resetMethBlock(); // 결제수단 블럭 초기화
-		// clearValCCODE(); //카테고리 선택값 초기화
-		// clearValMCODE(); //결제수단 선택값 초기화
+		resetSLCT_INEX(); // slct_in, slct_ex 선택상태 + CCODE 입력값 초기화
+		closeMethBlock(); // 결제수단 블럭 초기화, 숨기기
 	})
 	btn_ex.addEventListener('click', () => {
 		setINEX("EX");
 		colorBtn("EX");
 		showSlct("EX");
-		openMethBlock(); // 결제수단 블럭 보이기
-		// clearValCCODE(); //카테고리 선택값 초기화
+		resetSLCT_INEX(); // slct_in, slct_ex 선택상태 + CCODE 입력값 초기화
+		openMethBlock(); // 결제수단 블럭 초기화, 보이기
 	})
 
 	// 2. 오늘 날짜 설정
@@ -43,6 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.fm.DATE.value = formattedDate;
 	})
 
+	// 3. 카테고리 드롭다운 선택 시 CCODE 설정
+	const forCCODE = [slct_in, slct_ex];
+	for(let i of forCCODE){
+		i.addEventListener('change', () =>{
+			setCCODE(i.value);
+		})
+	}
+	
 	// 5. 금액 세자리마다 ',' 표시
 	const amount = document.getElementById("amount");
 	amount.addEventListener('input', () => {
@@ -53,28 +59,33 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// 6. 현금 or 카드 설정 => 결제수단 드롭다운
+	// 6. 현금 or 카드 설정 => 6-2. 결제수단 드롭다운
 	const btn_mn = document.getElementById("btn_mn");
 	const btn_crd = document.getElementById("btn_crd");
 	btn_mn.addEventListener('click', () => {
 		setMNCRD("MN");
 		colorBtn("MN");
 		showSlct("MN");
-		// clearValMCODE();
+		resetSLCT_MNCRD(); // slct_mn, slct_crd 선택상태 + MCODE 입력값 초기화
 	})
 	btn_crd.addEventListener('click', () => {
 		setMNCRD("CRD");
 		colorBtn("CRD");
 		showSlct("CRD");
-		// clearValMCODE();
+		resetSLCT_MNCRD(); // slct_mn, slct_crd 선택상태 + MCODE 입력값 초기화
 	})
+	
+	// 6-2. 결제수단 드롭다운 선택 시 MCODE 설정
+	const forMCode = [slct_mn, slct_crd];
+	for (let i of forMCode) {
+		i.addEventListener('change', () => {
+			setMCODE(i.value);
+		})
+	}
 });
 
 /* ------------ 공통 기능 func ------------ */
 
-function setINEX(v) { // INEX 입력값 설정
-	document.fm.INEX.value = v;
-}
 function colorBtn(v) { // 수입/지출, 현금/카드 버튼색 바꾸기
 	switch(v){
 		case "IN":
@@ -126,16 +137,42 @@ function showSlct(v) { // 카테고리, 결제수단 드롭다운 설정
 			slct_crd.classList.add('hidden'); break;
 	}
 }
-function openMethBlock() { // 결제수단 블럭 보이기
-	methBlock.classList.remove('hidden');
+
+function setINEX(v) { // INEX 입력값 설정
+	document.fm.INEX.value = v;
 }
 function setMNCRD(v) { // MNCRD 입력값 설정
 	document.fm.MNCRD.value = v;
 }
+function setCCODE(v) { // CCODE 입력값 설정
+	document.fm.CCODE.value = v;
+}
+function setMCODE(v) { // MCODE 입력값 설정
+	document.fm.MCODE.value = v;
+}
+
+function resetSLCT_INEX() { // slct_in, slct_ex 선택상태 + CCODE 입력값 초기화
+	document.fm.SLCT_IN.value = "";
+	document.fm.SLCT_EX.value = "";
+	setCCODE("");
+}
+function resetSLCT_MNCRD() { // slct_mn, slct_crd 선택상태 + MCODE 입력값 초기화
+	document.fm.SLCT_MN.value = "";
+	document.fm.SLCT_CRD.value = "";
+	setMCODE("");
+}
 function resetMethBlock() { // 결제수단 블럭 초기화
 	setMNCRD("");
+	resetSLCT_MNCRD();
 	colorBtn("reset_MNCRD");
 	showSlct("reset_MNCRD");
+}
+function openMethBlock() { // 결제수단 블럭 초기화, 보이기
+	resetMethBlock();
+	methBlock.classList.remove('hidden');
+}
+function closeMethBlock() { // 결제수단 블럭 초기화, 숨기기
+	resetMethBlock();
 	methBlock.classList.add('hidden');
 }
 
@@ -147,7 +184,7 @@ function backToHome() {
 	else {
 		colorBtn("NN"); // 수입/지출, 현금/카드 버튼색 초기화
 		showSlct("NN"); // 카테고리, 결제수단 드롭다운 초기화
-		resetMethBlock(); // 결제수단 블럭 초기화
+		closeMethBlock(); // 결제수단 블럭 초기화
 		return false;
 	}
 }

@@ -35,7 +35,7 @@
 				<option value="">--카테고리(미지정)--</option>
 			</select>		
 		<!-- 드롭다운 : 수입 -->
-			<select name="SLCT_IN" id="slct_in" class="hidden" onChange="setCCODE(this)">
+			<select name="SLCT_IN" id="slct_in" class="hidden">
 				<option value="">--카테고리(수입)--</option>
 				<c:forEach items="${CATELIST }" var="c">
 					<c:set var="cate_code" value="${c.cate_code }" />
@@ -46,7 +46,7 @@
 				</c:forEach>
 			</select> 	
 		<!-- 드롭다운 : 지출 -->
-			<select name="SLCT_EX" id="slct_ex" class="hidden" onChange="setCCODE(this)">
+			<select name="SLCT_EX" id="slct_ex" class="hidden">
 				<option value="">--카테고리(지출)--</option>
 				<c:forEach items="${CATELIST }" var="c">
 					<c:set var="cate_code" value="${c.cate_code }" />
@@ -81,7 +81,7 @@
 			<div>
 				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" />
 			<!-- 드롭다운 : 현금 -->
-				<select name="SLCT_MN" id="slct_mn" class="hidden" onChange="setMCODE(this.value)">
+				<select name="SLCT_MN" id="slct_mn" class="hidden">
 					<option value="">--결제수단(현금)--</option>
 					<c:forEach items="${METHLIST }" var="m">
 						<c:set var="meth_code" value="${m.meth_code }" />
@@ -92,7 +92,7 @@
 					</c:forEach>
 				</select>
 			<!-- 드롭다운 : 카드 -->
-				<select name="SLCT_CRD" id="slct_crd" class="hidden" onChange="setMCODE(this.value)">
+				<select name="SLCT_CRD" id="slct_crd" class="hidden">
 					<option value="">--결제수단(카드)--</option>
 					<c:forEach items="${METHLIST }" var="m">
 						<c:set var="meth_code" value="${m.meth_code }" />
