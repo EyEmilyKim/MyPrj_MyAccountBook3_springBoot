@@ -12,7 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Method {
-	private int user_id;
+	private Integer user_id;
 	private Integer seqno;
 	private String mncrd;
 	private String meth_name;

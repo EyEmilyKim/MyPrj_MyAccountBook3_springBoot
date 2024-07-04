@@ -12,7 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Category {
-	private int user_id;
+	private Integer user_id;
 	private Integer seqno;
 	private String inex;
 	private String cate_code;

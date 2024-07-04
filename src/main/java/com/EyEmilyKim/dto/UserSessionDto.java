@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserSessionDto {
-	private int user_id;
+	private Integer user_id;
 	private String nickname;
 	private Date birthday;
 }

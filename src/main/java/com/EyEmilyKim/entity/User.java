@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class User {
-	private int user_id;
+	private Integer user_id;
 	private String login_id;
 	private String pwd;
 	private String nickname;
