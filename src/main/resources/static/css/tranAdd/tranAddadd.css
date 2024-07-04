@@ -17,8 +17,9 @@ form > div {
 	width: 200px;
 	height: 80px;
 }
-#guide {
+.guide {
   color: red;
+  font-size: small;
 }
 
 /* ------- hidden input values ------- */

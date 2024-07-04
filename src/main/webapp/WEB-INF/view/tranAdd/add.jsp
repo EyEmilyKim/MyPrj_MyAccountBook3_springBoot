@@ -60,7 +60,7 @@
 
 	<!-- 4.거래내용 -->
 		<div>
-			<textarea name="ITEM" id="item" placeholder="내역을 입력하세요"></textarea>
+			<textarea name="ITEM" id="item" placeholder="거래내용을 입력하세요"></textarea>
 		</div>
 		
 	<!-- 5.거래금액 -->
@@ -116,7 +116,8 @@
 
 	<!-- 7.안내문구 출력row -->
 		<div>
-			<div id="guide"></div>
+			<div id="guide1" class="guide"></div>
+			<div id="guide2" class="guide">가이드2</div>
 		</div>
 
 	<!-- 8.form 등록/취소 -->
