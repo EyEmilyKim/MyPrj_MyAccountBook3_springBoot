@@ -125,7 +125,7 @@
 	<!-- 8.form 등록/취소 -->
 		<div class="marginTop">
 			<input type="submit" value="등록" /> 
-			<input type="reset" value="취소" onClick="backToHome()" />
+			<input type="reset" value="취소" />
 		</div>
 			
 		</form>
