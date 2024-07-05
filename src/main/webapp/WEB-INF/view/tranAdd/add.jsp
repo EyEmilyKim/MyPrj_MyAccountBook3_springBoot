@@ -69,7 +69,7 @@
 		</div>
 
 	<!-- 6.결제수단 블럭 -->
-		<div id="methBlock" class="hidden borderBlue">
+		<div id="methBlock" class="hidden">
 		<!-- 6-1. 현금/카드 구분 -->
 			<div>
 				<input type="text" name="MNCRD" id="mncrd" placeholder="MNCRD 자동" /> 
@@ -105,7 +105,7 @@
 			</div> <!-- 6-2. 결제수단 코드 끝-->
 			
 		<!-- 6-3. (확인용 hidden) 전체 결제수단 출력-->
-			<div class="borderDashed">
+			<div class="hidden">
 				<c:forEach items="${METHLIST }" var="m">
 					<c:set var="meth_code" value="${m.meth_code }" />
 					<c:set var="meth_name" value="${m.meth_name }" />
@@ -116,8 +116,10 @@
 
 	<!-- 7.안내문구 출력row -->
 		<div>
-			<div id="guide1" class="guide"></div>
-			<div id="guide2" class="guide">가이드2</div>
+			<div class="guideRed">
+				<p id="guide_item_length"></p>
+				<p id="guide_amount"></p>
+			</div>
 		</div>
 
 	<!-- 8.form 등록/취소 -->

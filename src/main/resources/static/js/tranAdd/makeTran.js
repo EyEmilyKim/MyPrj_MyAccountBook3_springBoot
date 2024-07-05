@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const methBlock = document.getElementById("methBlock"); // declaredForUse
 	const slct_mn = document.getElementById("slct_mn");
 	const slct_crd = document.getElementById("slct_crd");
-	const guide1 = document.getElementById("guide1"); // declaredForUse
-	const guide2 = document.getElementById("guide2"); // declaredForUse
-	const declaredForUse = { slct_nn, methBlock, guide1, guide2 }; // 직접 event 갖지 않는 요소들
-	
+	const declaredForUse = { slct_nn, methBlock, }; // 직접 event 갖지 않는 요소들
+	const guide_item_length = document.getElementById("guide_item_length");
+	const guide_amount = document.getElementById("guide_amount");
 	// 1 수입 or 지출 설정 => 3. 카테고리 드롭다운
 	const btn_in = document.getElementById("btn_in");
 	const btn_ex = document.getElementById("btn_ex");
@@ -45,37 +44,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// 3. 카테고리 드롭다운 선택 시 CCODE 설정
 	const forCCODE = [slct_in, slct_ex];
-	for(let i of forCCODE){
-		i.addEventListener('change', () =>{
+	for (let i of forCCODE) {
+		i.addEventListener('change', () => {
 			setCCODE(i.value);
 		})
 	}
 	
 	// 4. 거래내용 입력값 길이 제한 안내
 	const item = document.getElementById("item");
-	const itemLengthMsg = '최대 20자 한글 또는 60자 영문/숫자로 입력해주세요.';
+	const itemLengthMsg = "거래내용은 최대 20자 한글 또는 60자 영문/숫자로 입력해주세요.";
 	item.addEventListener('input', () => {
 		const val = item.value; 
 		const byteLength = calculateByteLength(val);
 		console.log(byteLength);		
-		if (byteLength > 60) guide1.innerHTML = itemLengthMsg;
-		else guide1.innerHTML = "";
-		return true;
+		if (byteLength > 60) guide_item_length.innerHTML = itemLengthMsg;
+		else guide_item_length.innerHTML = "";
 	})
-	function calculateByteLength(str) { // 문자열 byte 길이 계산
-		let len = 0;
-		for (let i = 0 ; i < str.length ; i++) {
-			let charCode = str.charCodeAt(i);
-			if (charCode <= 0x007F) {
-	            len += 1; // 1바이트: ASCII 문자
-	        } else if (charCode <= 0x07FF) {
-	            len += 2; // 2바이트: 확장 ASCII 문자
-	        } else {
-	            len += 3; // 3바이트: 한글 및 기타 문자
-	        }
-		}
-		return len;
-	}
 	
 	// 5. 금액 세자리마다 ',' 표시
 	const amount = document.getElementById("amount");
@@ -202,6 +186,20 @@ function openMethBlock() { // 결제수단 블럭 초기화, 보이기
 function closeMethBlock() { // 결제수단 블럭 초기화, 숨기기
 	resetMethBlock();
 	methBlock.classList.add('hidden');
+}
+function calculateByteLength(str) { // 문자열 byte 길이 계산
+	let len = 0;
+	for (let i = 0 ; i < str.length ; i++) {
+		let charCode = str.charCodeAt(i);
+		if (charCode <= 0x007F) {
+            len += 1; // 1바이트: ASCII 문자
+        } else if (charCode <= 0x07FF) {
+            len += 2; // 2바이트: 확장 ASCII 문자
+        } else {
+            len += 3; // 3바이트: 한글 및 기타 문자
+        }
+	}
+	return len;
 }
 
 /* ------------ form 취소 ------------ */
