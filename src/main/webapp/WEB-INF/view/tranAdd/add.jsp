@@ -22,17 +22,17 @@
 
 		<div id="inexCateBlock"> <!-- 2.3. inexCateBlock -->
 	<!-- 2.수입/지출 구분 -->
-			<div>
+			<span>
 				<input type="text" name="INEX" id="inex" placeholder="INEX 자동" class="hidden" />
 				<input type="button" value="수입" id="btn_in" />
 				<input type="button" value="지출" id="btn_ex" />
-			</div>
+			</span>
 			
 	<!-- 3.카테고리 -->
-			<div>	
+			<span>	
 			<!-- 드롭다운 : 초기화면 -->
 				<input type="text" name="CCODE" id="ccode" placeholder="CCODE 자동" class="hidden" />		
-				<select name="SLCT_NN" id="slct_nn">
+				<select name="SLCT_NN_C" id="slct_nn_c">
 					<option value="">--카테고리(미지정)--</option>
 				</select>		
 			<!-- 드롭다운 : 수입 -->
@@ -57,7 +57,7 @@
 						</c:if>
 					</c:forEach>
 				</select>		
-			</div> <!-- 3.카테고리 끝 -->
+			</span> <!-- 3.카테고리 끝 -->
 		</div> <!-- 2.3. inexCateBlock 끝 -->
 
 	<!-- 4.거래내용 -->
@@ -73,15 +73,19 @@
 	<!-- 6.결제수단 블럭 -->
 		<div id="methBlock" class="hidden">
 		<!-- 6-1. 현금/카드 구분 -->
-			<div>
+			<span>
 				<input type="text" name="MNCRD" id="mncrd" placeholder="MNCRD 자동" class="hidden" /> 
 				<input type="button" value="현금" id="btn_mn" />
 				<input type="button" value="카드" id="btn_crd" />
-			</div>
+			</span>
 			
 		<!-- 6-2. 결제수단 코드 -->
-			<div>
-				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" class="hidden" />
+			<span>
+			<!-- 드롭다운 : 초기화면 -->
+				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" />
+				<select name="SLCT_NN_M" id="slct_nn_m">
+					<option value="">--결제수단(미지정)--</option>
+				</select>	
 			<!-- 드롭다운 : 현금 -->
 				<select name="SLCT_MN" id="slct_mn" class="hidden">
 					<option value="">--결제수단(현금)--</option>
@@ -104,7 +108,7 @@
 						</c:if>
 					</c:forEach>
 				</select>
-			</div> <!-- 6-2. 결제수단 코드 끝-->
+			</span> <!-- 6-2. 결제수단 코드 끝-->
 			
 		<!-- 6-3. (확인용 hidden) 전체 결제수단 출력-->
 			<div class="hidden">
@@ -119,12 +123,15 @@
 	<!-- 7.안내문구 출력row -->
 		<div>
 			<div class="guideRed">
-				<p id="guide_item_length"></p>
+				<p id="guide_date"></p>
+				<p id="guide_inex"></p>
 				<p id="guide_amount"></p>
+				<p id="guide_amount_type"></p>
+				<p id="guide_item_length"></p>
 			</div>
 			<div class="guideBlue">
-				<p id="guide_opt_ccode"></p>
 				<p id="guide_opt_item"></p>
+				<p id="guide_opt_ccode"></p>
 				<p id="guide_opt_mcode"></p>
 			</div>
 		</div>
