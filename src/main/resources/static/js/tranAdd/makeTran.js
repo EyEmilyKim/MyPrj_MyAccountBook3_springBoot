@@ -2,9 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+	const btn_today = document.getElementById("btn_today");
 	const btn_in = document.getElementById("btn_in");
 	const btn_ex = document.getElementById("btn_ex");
-	const btn_today = document.getElementById("btn_today");
 	const slct_nn = document.getElementById("slct_nn");
 	const slct_in = document.getElementById("slct_in");
 	const slct_ex = document.getElementById("slct_ex");
@@ -15,12 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	const btn_crd = document.getElementById("btn_crd");
 	const slct_mn = document.getElementById("slct_mn");
 	const slct_crd = document.getElementById("slct_crd");
-	const guide_item_length = document.getElementById("guide_item_length");
-	const guide_amount = document.getElementById("guide_amount");
-	const guide_opt_ccode = document.getElementById("guide_opt_ccode");
-	const guide_opt_item = document.getElementById("guide_opt_item");
-	const guide_opt_mcode = document.getElementById("guide_opt_mcode");
-	const forGuide = [ guide_item_length, guide_amount, guide_opt_ccode, guide_opt_item, guide_opt_mcode ];
+	const guide = {
+		item_length : document.getElementById("guide_item_length"),
+		amount : document.getElementById("guide_amount"),
+		opt_ccode : document.getElementById("guide_opt_ccode"),
+		opt_item : document.getElementById("guide_opt_item"),
+		opt_mcode : document.getElementById("guide_opt_mcode"),
+	}
+	
 	const fm = document.forms['fm'];
 	
 	const msg = {
@@ -36,8 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 	
 	/* ------------ form 입력 과정 func ------------ */
+	
+	// 1. 오늘 날짜 설정
+	btn_today.addEventListener('click', () => {
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = String(today.getMonth() + 1).padStart(2, '0');
+		const day = String(today.getDate()).padStart(2, '0');
+		const formattedDate = `${year}-${month}-${day}`;
+		document.fm.DATE.value = formattedDate;
+	})
 
-	// 1 수입 or 지출 설정 => 3. 카테고리 드롭다운
+	// 2. 수입 or 지출 설정 => 3. 카테고리 드롭다운
 	btn_in.addEventListener('click', () => {
 		setINEX("IN");
 		colorBtn("IN");
@@ -53,23 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		openMethBlock(); // 결제수단 블럭 초기화, 보이기
 	})
 
-	// 2. 오늘 날짜 설정
-	btn_today.addEventListener('click', () => {
-		const today = new Date();
-		const year = today.getFullYear();
-		const month = String(today.getMonth() + 1).padStart(2, '0');
-		const day = String(today.getDate()).padStart(2, '0');
-		const formattedDate = `${year}-${month}-${day}`;
-		document.fm.DATE.value = formattedDate;
-	})
-
 	// 3. 카테고리 드롭다운 선택 시 CCODE 설정, 미선택 안내(no필수)
 	const forCCODE = [slct_in, slct_ex];
 	for (let i of forCCODE) {
 		i.addEventListener('change', () => {
 			setCCODE(i.value);
-			if (ccode.value == "") guide_opt_ccode.innerHTML = msg.opt_ccode;
-			else guide_opt_ccode.innerHTML = "";
+			if (ccode.value == "") guide.opt_ccode.innerHTML = msg.opt_ccode;
+			else guide.opt_ccode.innerHTML = "";
 		})
 	}
 	
@@ -77,10 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	item.addEventListener('input', () => {
 		const val = item.value; 
 		const byteLength = calculateByteLength(val);
-		if (byteLength > 60) guide_item_length.innerHTML = msg.itemLength;
-		else guide_item_length.innerHTML = "";
-		if (val == "") guide_opt_item.innerHTML = msg.opt_item;
-		else guide_opt_item.innerHTML = "";
+		if (byteLength > 60) guide.item_length.innerHTML = msg.itemLength;
+		else guide.item_length.innerHTML = "";
+		if (val == "") guide.opt_item.innerHTML = msg.opt_item;
+		else guide.opt_item.innerHTML = "";
 	})
 	
 	// 5. 금액 세자리마다 ',' 표시
@@ -92,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// 6. 현금 or 카드 설정 => 6-2. 결제수단 드롭다운
+	// 6-1. 현금 or 카드 설정 => 6-2. 결제수단 드롭다운
 	btn_mn.addEventListener('click', () => {
 		setMNCRD("MN");
 		colorBtn("MN");
@@ -111,8 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let i of forMCode) {
 		i.addEventListener('change', () => {
 			setMCODE(i.value);
-			if (mcode.value == "") guide_opt_mcode.innerHTML = msg.opt_mcode;
-			else guide_opt_mcode.innerHTML = "";
+			if (mcode.value == "") guide.opt_mcode.innerHTML = msg.opt_mcode;
+			else guide.opt_mcode.innerHTML = "";
 		})
 	}
 	
@@ -220,10 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		methBlock.classList.add('hidden');
 	}
 	
-	function clearAllGuide() {
-		for (let i of forGuide) {
-			i.innerHTML = ""
-		}
+	function clearAllGuide() { // 모든 안내문 초기화
+		for (let key in guide) guide[key].innerHTML = ""
 	}
 	
 	function calculateByteLength(str) { // 문자열 byte 길이 계산
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (fmV.date == '') { alert(msg.date); return false; }
 		const byteLength = calculateByteLength(fmV.item);
 		if (byteLength > 60) { alert(msg.itemLength);
-			guide_item_length.innerHTML = msg.itemLength; return false; }
+			guide.item_length.innerHTML = msg.itemLength; return false; }
 		if (fmV.amount == 0) { alert(msg.amount); return false; }
 		if (isNaN(fmV.amount)) { alert(msg.amountType); return false; }
 		// 최종 컨펌
@@ -290,9 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	
 	function printOptGuide(fmV){ // no필수항목 미입력 안내문 출력
-		if (fmV.ccode == "") guide_opt_ccode.innerHTML = msg.opt_ccode;
-		if (fmV.item == "") guide_opt_item.innerHTML = msg.opt_item;
-		if (fmV.inex == "EX" && fmV.mcode == '') guide_opt_mcode.innerHTML = msg.opt_mcode;
+		if (fmV.ccode == "") guide.opt_ccode.innerHTML = msg.opt_ccode;
+		if (fmV.item == "") guide.opt_item.innerHTML = msg.opt_item;
+		if (fmV.inex == "EX" && fmV.mcode == '') guide.opt_mcode.innerHTML = msg.opt_mcode;
 	}
 	
 	function makeDetail(fmV) { // 입력 최종확인용 문자열 준비
@@ -322,6 +322,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		console.log('detail', detail);
 		return detail;
+	}
+
+	/* ------------ 개발자 편의용 ------------ */
+	
+	// hidden input 표시하기
+	const forDeveloper = [seqno, inex, ccode, mncrd, mcode];
+	showForDeveloper(forDeveloper, false);
+	function showForDeveloper(arr, boolean) {
+		if (boolean) {
+			for (let i of arr) i.classList.remove('hidden');
+		}
 	}
 		
 });

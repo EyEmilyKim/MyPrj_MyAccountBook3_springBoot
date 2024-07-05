@@ -11,52 +11,54 @@
 		
 	<!-- 0.일련번호(hidden)-->
 		<div>
-			<input type="text" name="SEQNO" value="${requestScope.MSN +1 }" id="seqno" placeholder="SEQNO 자동" />
+			<input type="text" name="SEQNO" value="${requestScope.MSN +1 }" id="seqno" placeholder="SEQNO 자동" class="hidden"/>
 		</div>
 			
-	<!-- 1.수입/지출 구분 -->
+	<!-- 1.거래날짜 -->
 		<div>
-			<input type="text" name="INEX" id="inex" placeholder="INEX 자동" />
-			<input type="button" value="수입" id="btn_in" />
-			<input type="button" value="지출" id="btn_ex" />
-		</div>
-		
-	<!-- 2.거래날짜 -->
-		<div>
-			<input type="date" name="DATE" id="date" />
 			<input type="button" value="오늘" id="btn_today" />
+			<input type="date" name="DATE" id="date" />
 		</div>
 
+		<div id="inexCateBlock"> <!-- 2.3. inexCateBlock -->
+	<!-- 2.수입/지출 구분 -->
+			<div>
+				<input type="text" name="INEX" id="inex" placeholder="INEX 자동" class="hidden" />
+				<input type="button" value="수입" id="btn_in" />
+				<input type="button" value="지출" id="btn_ex" />
+			</div>
+			
 	<!-- 3.카테고리 -->
-		<div>	
-		<!-- 드롭다운 : 초기화면 -->
-			<input type="text" name="CCODE" id="ccode" placeholder="CCODE 자동" />		
-			<select name="SLCT_NN" id="slct_nn">
-				<option value="">--카테고리(미지정)--</option>
-			</select>		
-		<!-- 드롭다운 : 수입 -->
-			<select name="SLCT_IN" id="slct_in" class="hidden">
-				<option value="">--카테고리(수입)--</option>
-				<c:forEach items="${CATELIST }" var="c">
-					<c:set var="cate_code" value="${c.cate_code }" />
-					<c:set var="cate_name" value="${c.cate_name }" />
-					<c:if test="${ fn:startsWith(cate_code,'IN') }">
-						<option value="${c.cate_code }">${c.cate_name }</option>
-					</c:if>
-				</c:forEach>
-			</select> 	
-		<!-- 드롭다운 : 지출 -->
-			<select name="SLCT_EX" id="slct_ex" class="hidden">
-				<option value="">--카테고리(지출)--</option>
-				<c:forEach items="${CATELIST }" var="c">
-					<c:set var="cate_code" value="${c.cate_code }" />
-					<c:set var="cate_name" value="${c.cate_name }" />
-					<c:if test="${ fn:startsWith(cate_code,'EX') }">
-						<option value="${c.cate_code }">${c.cate_name }</option>
-					</c:if>
-				</c:forEach>
-			</select>		
-		</div> <!-- 3.카테고리 끝 -->
+			<div>	
+			<!-- 드롭다운 : 초기화면 -->
+				<input type="text" name="CCODE" id="ccode" placeholder="CCODE 자동" class="hidden" />		
+				<select name="SLCT_NN" id="slct_nn">
+					<option value="">--카테고리(미지정)--</option>
+				</select>		
+			<!-- 드롭다운 : 수입 -->
+				<select name="SLCT_IN" id="slct_in" class="hidden">
+					<option value="">--카테고리(수입)--</option>
+					<c:forEach items="${CATELIST }" var="c">
+						<c:set var="cate_code" value="${c.cate_code }" />
+						<c:set var="cate_name" value="${c.cate_name }" />
+						<c:if test="${ fn:startsWith(cate_code,'IN') }">
+							<option value="${c.cate_code }">${c.cate_name }</option>
+						</c:if>
+					</c:forEach>
+				</select> 	
+			<!-- 드롭다운 : 지출 -->
+				<select name="SLCT_EX" id="slct_ex" class="hidden">
+					<option value="">--카테고리(지출)--</option>
+					<c:forEach items="${CATELIST }" var="c">
+						<c:set var="cate_code" value="${c.cate_code }" />
+						<c:set var="cate_name" value="${c.cate_name }" />
+						<c:if test="${ fn:startsWith(cate_code,'EX') }">
+							<option value="${c.cate_code }">${c.cate_name }</option>
+						</c:if>
+					</c:forEach>
+				</select>		
+			</div> <!-- 3.카테고리 끝 -->
+		</div> <!-- 2.3. inexCateBlock 끝 -->
 
 	<!-- 4.거래내용 -->
 		<div>
@@ -72,14 +74,14 @@
 		<div id="methBlock" class="hidden">
 		<!-- 6-1. 현금/카드 구분 -->
 			<div>
-				<input type="text" name="MNCRD" id="mncrd" placeholder="MNCRD 자동" /> 
+				<input type="text" name="MNCRD" id="mncrd" placeholder="MNCRD 자동" class="hidden" /> 
 				<input type="button" value="현금" id="btn_mn" />
 				<input type="button" value="카드" id="btn_crd" />
 			</div>
 			
 		<!-- 6-2. 결제수단 코드 -->
 			<div>
-				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" />
+				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" class="hidden" />
 			<!-- 드롭다운 : 현금 -->
 				<select name="SLCT_MN" id="slct_mn" class="hidden">
 					<option value="">--결제수단(현금)--</option>
