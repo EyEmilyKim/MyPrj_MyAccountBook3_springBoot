@@ -7,7 +7,7 @@
 	<div class="contMain">
 		<h3 class="title ">가계부 쓰기 화면입니다.</h3>
 
-		<form action="add" method="post" name="fm" onSubmit="return catchSub()">
+		<form action="add" method="post" name="fm">
 		
 	<!-- 0.일련번호(hidden)-->
 		<div>
@@ -119,6 +119,11 @@
 			<div class="guideRed">
 				<p id="guide_item_length"></p>
 				<p id="guide_amount"></p>
+			</div>
+			<div class="guideBlue">
+				<p id="guide_opt_ccode"></p>
+				<p id="guide_opt_item"></p>
+				<p id="guide_opt_mcode"></p>
 			</div>
 		</div>
 
