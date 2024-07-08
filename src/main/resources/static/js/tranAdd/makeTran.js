@@ -2,6 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+	/* ------------ form 요소 식별 변수 ------------ */
+	
 	const btn_today = document.getElementById("btn_today");
 	const date = document.getElementById("date");
 	const btn_in = document.getElementById("btn_in");
@@ -30,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	const fm = document.forms['fm'];
 	
+	/* ------------ form 유효성 검사 관련 ------------ */
+	
 	const msg = {
 		date : "거래날짜를 선택해주세요.",
 		inex : "수입/지출 구분을 선택해주세요.",
@@ -42,20 +46,45 @@ document.addEventListener('DOMContentLoaded', () => {
 		blank : " - ",
 	};
 	
+	const validate = {
+		date : () => { fm.DATE.value == "" ? setInnerHTML(guide.date, msg.date) : clearInnerHTML(guide.date); },
+		inex : () => { fm.INEX.value == "" ? setInnerHTML(guide.inex, msg.inex) : clearInnerHTML(guide.inex); },
+		amount : () => {
+			let val = fm.AMOUNT.value.replace(/,/g, '');
+			if (!isNaN(val) && val.trim() !== "") {
+				val = parseInt(val, 10).toLocaleString('ko-KR');
+				amount.value = val;
+			}
+			isNaN(Number(val.replace(/,/g, ''))) ? setInnerHTML(guide.amount_type, msg.amount_type) : clearInnerHTML(guide.amount_type);
+			val.trim() == "" ? setInnerHTML(guide.amount, msg.amount) : clearInnerHTML(guide.amount); 
+		},
+		opt_item : () => {
+			const val = fm.ITEM.value.trim(); 
+			const byteLength = calculateByteLength(val);
+			byteLength > 60 ? setInnerHTML(guide.item_length, msg.item_length) : clearInnerHTML(guide.item_length);
+			byteLength == 0 ? setInnerHTML(guide.opt_item, msg.opt_item) : clearInnerHTML(guide.opt_item);
+		},
+		opt_ccode : () => { fm.CCODE.value == "" ? setInnerHTML(guide.opt_ccode, msg.opt_ccode) : clearInnerHTML(guide.opt_ccode); },
+		opt_mcode : () => { fm.MCODE.value == "" ? setInnerHTML(guide.opt_mcode, msg.opt_mcode) : clearInnerHTML(guide.opt_mcode); },
+	}
+	
 	/* ------------ form 입력 과정 func ------------ */
 	
-	// 1. 오늘 날짜 설정
-	btn_today.addEventListener('click', () => {
-		const today = new Date();
-		const year = today.getFullYear();
-		const month = String(today.getMonth() + 1).padStart(2, '0');
-		const day = String(today.getDate()).padStart(2, '0');
-		const formattedDate = `${year}-${month}-${day}`;
+	// 1. 어제, 오늘 날짜 설정
+	btn_yesterday.addEventListener('click', () => {
+		const formattedDate = getFormattedDate(-1);
 		fm.DATE.value = formattedDate;
-		fm.DATE.value == "" ? setInnerHTML(guide.date, msg.date) : clearInnerHTML(guide.date);
+		colorBtn("YESTERDAY");
+		validate.date();
+	})
+	btn_today.addEventListener('click', () => {
+		const formattedDate = getFormattedDate(0);
+		fm.DATE.value = formattedDate;
+		colorBtn("TODAY");
+		validate.date();
 	})
 	date.addEventListener('change', () => {
-		date.value == "" ? setInnerHTML(guide.date, msg.date) : clearInnerHTML(guide.date);
+		validate.date();
 	})
 
 	// 2. 수입 or 지출 설정 => 3. 카테고리 드롭다운
@@ -65,7 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		showSlct("IN");
 		resetSLCT_INEX(); // slct_in, slct_ex 선택상태 + CCODE 입력값 초기화
 		closeMethBlock(); // 결제수단 블럭 초기화, 숨기기
-		inex.value == "" ? setInnerHTML(guide.inex, msg.inex) : clearInnerHTML(guide.inex);
+		validate.inex();
+		validate.opt_ccode();
+		clearMcodeGuide();
 	})
 	btn_ex.addEventListener('click', () => {
 		setINEX("EX");
@@ -73,8 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		showSlct("EX");
 		resetSLCT_INEX(); // slct_in, slct_ex 선택상태 + CCODE 입력값 초기화
 		openMethBlock(); // 결제수단 블럭 초기화, 보이기
-		inex.value == "" ? setInnerHTML(guide.inex, msg.inex) : clearInnerHTML(guide.inex);
-		mcode.value == "" ? setInnerHTML(guide.opt_mcode, msg.opt_mcode) : clearInnerHTML(guide.opt_mcode);
+		validate.inex();
+		validate.opt_ccode();
+		validate.opt_mcode();
 	})
 
 	// 3. 카테고리 드롭다운 선택 시 CCODE 설정
@@ -82,27 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let i of forCCODE) {
 		i.addEventListener('change', () => {
 			setCCODE(i.value);
-			ccode.value == "" ? setInnerHTML(guide.opt_ccode, msg.opt_ccode) : clearInnerHTML(guide.opt_ccode);
+			validate.opt_ccode();
 		})
 	}
 	
 	// 4. 거래내용 입력값 길이 제한 안내
 	item.addEventListener('input', () => {
-		const val = item.value.trim(); 
-		const byteLength = calculateByteLength(val);
-		byteLength > 60 ? setInnerHTML(guide.item_length, msg.item_length) : clearInnerHTML(guide.item_length);
-		byteLength == 0 ? setInnerHTML(guide.opt_item, msg.opt_item) : clearInnerHTML(guide.opt_item);
+		validate.opt_item();
 	})
 	
 	// 5. 금액 타입 제한 안내, 세자리 콤마 표시
 	amount.addEventListener('input', () => {
-		let val = amount.value.replace(/,/g, '');
-		if (!isNaN(val) && val.trim() !== "") {
-			val = parseInt(val, 10).toLocaleString('ko-KR');
-			amount.value = val;
-		}
-		isNaN(Number(val.replace(/,/g, ''))) ? setInnerHTML(guide.amount_type, msg.amount_type) : clearInnerHTML(guide.amount_type);
-		val.trim() == "" ? setInnerHTML(guide.amount, msg.amount) : clearInnerHTML(guide.amount); 
+		validate.amount();
 	})
 
 	// 6-1. 현금 or 카드 설정 => 6-2. 결제수단 드롭다운
@@ -124,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let i of forMCode) {
 		i.addEventListener('change', () => {
 			setMCODE(i.value);
-			mcode.value == "" ? setInnerHTML(guide.opt_mcode, msg.opt_mcode) : clearInnerHTML(guide.opt_mcode);
+			validate.opt_mcode();
 		})
 	}
 	
@@ -142,8 +165,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/* ------------ 공통 기능 func ------------ */
 	
+	function getFormattedDate(offset) {
+		const date = new Date(); // 오늘 날짜 가져오기
+		date.setDate(date.getDate() + offset); // 오프셋 만큼 날짜 조정
+		// YYYY-MM-DD 형식으로 포맷팅
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const day = String(date.getDate()).padStart(2, '0');
+		const formattedDate = `${year}-${month}-${day}`;
+		return formattedDate;
+	}
+	
 	function colorBtn(v) { // 수입/지출, 현금/카드 버튼색 바꾸기
 		switch(v){
+			case "YESTERDAY":
+				btn_yesterday.classList.add('selected_date');
+				btn_today.classList.remove('selected_date'); break;
+			case "TODAY":
+				btn_yesterday.classList.remove('selected_date');
+				btn_today.classList.add('selected_date'); break;
 			case "IN":
 				btn_in.classList.add('selected_in');
 				btn_ex.classList.remove('selected_ex'); break;
@@ -157,6 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				btn_mn.classList.remove('selected_mn');
 				btn_crd.classList.add('selected_crd');	 break;
 			case "NN":
+				btn_yesterday.classList.remove('selected_date');
+				btn_today.classList.remove('selected_date');
 				btn_in.classList.remove('selected_in');
 				btn_ex.classList.remove('selected_ex');
 				btn_mn.classList.remove('selected_mn');
@@ -244,6 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	function clearAllGuide() { // 모든 안내문 초기화
 		for (let key in guide) clearInnerHTML(guide[key]);
+	}
+	function clearMcodeGuide() {
+		clearInnerHTML(guide.opt_mcode);
 	}
 	
 	function calculateByteLength(str) { // 문자열 byte 길이 계산

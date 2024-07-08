@@ -16,6 +16,7 @@
 			
 	<!-- 1.거래날짜 -->
 		<div>
+			<input type="button" value="어제" id="btn_yesterday" />
 			<input type="button" value="오늘" id="btn_today" />
 			<input type="date" name="DATE" id="date" />
 		</div>
@@ -82,7 +83,7 @@
 		<!-- 6-2. 결제수단 코드 -->
 			<span>
 			<!-- 드롭다운 : 초기화면 -->
-				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" />
+				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" class="hidden"/>
 				<select name="SLCT_NN_M" id="slct_nn_m">
 					<option value="">--결제수단(미지정)--</option>
 				</select>	

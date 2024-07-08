@@ -27,7 +27,10 @@
 .sys { background-color:beige; }
 
 /* --------- 선택적으로 변하는 클래스 ----------- */
-
+.selected_date {
+	background-color : orange;
+	color: white;
+}
 .selected_in, .selected_mn {
 	background-color : blue;
 	color: white;
