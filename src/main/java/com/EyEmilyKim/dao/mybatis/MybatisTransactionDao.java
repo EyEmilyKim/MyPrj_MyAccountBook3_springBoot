@@ -24,7 +24,7 @@ public class MybatisTransactionDao implements TransactionDao {
 	}
 
 	@Override
-	public int getCount(int user_id) {
+	public Integer getCount(int user_id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -42,7 +42,7 @@ public class MybatisTransactionDao implements TransactionDao {
 	}
 
 	@Override
-	public int getMaxMySqn(int user_id) {
+	public Integer getMaxMySqn(int user_id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

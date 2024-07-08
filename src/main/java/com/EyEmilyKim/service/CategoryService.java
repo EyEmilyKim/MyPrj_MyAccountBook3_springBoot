@@ -9,13 +9,13 @@ public interface CategoryService {
 
 	List<Category> getList(int user_id);
 
-	int getCount(int user_id);
+	Integer getCount(int user_id);
 
 	Category getOne(String ccode);
 
 	int delete(String ccode);
 
-	int getMaxSqn();
+	Integer getMaxSqn();
 	
 	List<String> getNameList(int user_id);
 

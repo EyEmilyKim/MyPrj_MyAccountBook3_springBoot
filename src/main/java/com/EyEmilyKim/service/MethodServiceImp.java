@@ -23,7 +23,7 @@ public class MethodServiceImp implements MethodService {
 	}
 
 	@Override
-	public int getCount(int userId) {
+	public Integer getCount(int userId) {
 		System.out.println("MethodService > getCount() called");
 		return methodDao.getCount(userId);
 	}
@@ -42,7 +42,7 @@ public class MethodServiceImp implements MethodService {
 	}
 
 	@Override
-	public int getMaxSqn() {
+	public Integer getMaxSqn() {
 System.out.println("MethodService > getMaxSqn() called");
 		
 		return methodDao.getMaxSqn();

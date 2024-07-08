@@ -23,7 +23,7 @@ public class MybatisCategoryDao implements CategoryDao {
 	}
 
 	@Override
-	public int getCount(int userId) {
+	public Integer getCount(int userId) {
 		return mapper.getCount(userId);
 	}
 
@@ -38,7 +38,7 @@ public class MybatisCategoryDao implements CategoryDao {
 	}
 
 	@Override
-	public int getMaxSqn() {
+	public Integer getMaxSqn() {
 		return mapper.getMaxSqn();
 	}
 	

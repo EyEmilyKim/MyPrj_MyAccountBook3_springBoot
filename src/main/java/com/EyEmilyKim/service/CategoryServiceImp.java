@@ -23,7 +23,7 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public int getCount(int userId) {
+	public Integer getCount(int userId) {
 		System.out.println("CateService > getCount() called");
 		
 		return categoryDao.getCount(userId);
@@ -44,7 +44,7 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public int getMaxSqn() {
+	public Integer getMaxSqn() {
 		System.out.println("CateService > getMaxSqn() called");
 		
 		return categoryDao.getMaxSqn();

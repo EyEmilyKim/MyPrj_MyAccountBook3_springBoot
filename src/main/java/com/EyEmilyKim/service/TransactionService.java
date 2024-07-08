@@ -9,13 +9,13 @@ public interface TransactionService {
 
 	List<Transaction> getList(int user_id);
 
-	int getCount(int user_id);
+	Integer getCount(int user_id);
 
 	Transaction getOne(String tran_id);
 
 	int delete(String tran_id);
 
-	int getMaxMySqn(int user_id);
+	Integer getMaxMySqn(int user_id);
 	
 	int insert(Map<String,String> fm, int user_id) throws Exception;
 

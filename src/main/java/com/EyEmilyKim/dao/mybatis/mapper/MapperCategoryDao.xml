@@ -12,7 +12,7 @@
 	</where> 
 	order by CATE_CODE 
   </select>
-  <select id="getCount" resultType="int">
+  <select id="getCount" resultType="Integer">
 	select count(CATE_CODE) from MAB_CATEGORIES 
 	<where> 
 	USER_ID in (#{userId}, 0)  
@@ -33,7 +33,7 @@
 	</where> 
   </delete>
   
-  <select id="getMaxSqn" resultType="int">
+  <select id="getMaxSqn" resultType="Integer">
   	select max(SEQNO) from MAB_CATEGORIES
   </select>
   <select id="getNameList" resultType="String">

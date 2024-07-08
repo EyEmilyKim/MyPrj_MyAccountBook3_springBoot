@@ -11,13 +11,13 @@ public interface MethodDao {
 
 	List<Method> getList(int userId);
 
-	int getCount(int userId);
+	Integer getCount(int userId);
 
 	Method getOne(String mcode);
 
 	int delete(String mcode);
 
-	int getMaxSqn();
+	Integer getMaxSqn();
 
 	List<String> getNameList(int userId);
 

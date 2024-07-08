@@ -11,13 +11,13 @@ public interface CategoryDao {
 
 	List<Category> getList(int userId);
 
-	int getCount(int userId);
+	Integer getCount(int userId);
 
 	Category getOne(String ccode);
 
 	int delete(String ccode);
 
-	int getMaxSqn();
+	Integer getMaxSqn();
 
 	List<String> getNameList(int userId);
 	
