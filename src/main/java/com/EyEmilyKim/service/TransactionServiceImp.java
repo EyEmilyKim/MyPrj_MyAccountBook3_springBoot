@@ -44,8 +44,11 @@ public class TransactionServiceImp implements TransactionService {
 
 	@Override
 	public Integer getMaxMySqn(int user_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("TranService > getMaxMySqn() called");
+		
+		Integer maxMySqn = transactionDao.getMaxMySqn(user_id);
+		if(maxMySqn == null) maxMySqn = 0;
+		return maxMySqn;
 	}
 
 	@Override

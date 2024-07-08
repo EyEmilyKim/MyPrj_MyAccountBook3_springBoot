@@ -11,7 +11,7 @@
 		
 	<!-- 0.일련번호(hidden)-->
 		<div>
-			<input type="text" name="MY_SEQNO" value="${requestScope.MSN +1 }" id="my_seqno" placeholder="MY_SEQNO 자동" class="hidden"/>
+			<input type="text" name="MY_SEQNO" value="${MSN +1 }" id="my_seqno" placeholder="MY_SEQNO 자동" class="hidden"/>
 		</div>
 			
 	<!-- 1.거래날짜 -->

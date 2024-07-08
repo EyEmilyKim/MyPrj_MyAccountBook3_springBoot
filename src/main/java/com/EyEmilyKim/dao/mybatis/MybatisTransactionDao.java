@@ -43,8 +43,7 @@ public class MybatisTransactionDao implements TransactionDao {
 
 	@Override
 	public Integer getMaxMySqn(int user_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.getMaxMySqn(user_id);
 	}
 
 	@Override

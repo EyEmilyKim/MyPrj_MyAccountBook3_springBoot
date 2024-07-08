@@ -50,7 +50,8 @@ public class TransactionController {
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		
-		// maxSeqno 받아오기
+		Integer maxMySqn = transactionService.getMaxMySqn(userId);
+		model.addAttribute("MSN", maxMySqn);
 		List<Category> catelist = categoryService.getList(userId);
 		model.addAttribute("CATELIST", catelist);
 		List<Method> methlist = methodeService.getList(userId);

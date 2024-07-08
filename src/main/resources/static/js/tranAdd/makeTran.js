@@ -421,6 +421,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	// hidden input 표시하기
 	const forDeveloper = [my_seqno, inex, ccode, mncrd, mcode];
 	showForDeveloper(forDeveloper, false);
+	const onlyMySeqno = [my_seqno];
+	showForDeveloper(onlyMySeqno, false);
 	function showForDeveloper(arr, boolean) {
 		if (boolean) {
 			for (let i of arr) i.classList.remove('hidden');
