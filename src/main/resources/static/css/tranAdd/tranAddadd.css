@@ -28,7 +28,7 @@ form > div {
 
 /* ------- hidden input values ------- */
 
-#seqno, #inex, 
+#my_seqno, #inex, 
 #ccode,
 #mncrd, 
 #mcode {

@@ -11,7 +11,7 @@
 		
 	<!-- 0.일련번호(hidden)-->
 		<div>
-			<input type="text" name="SEQNO" value="${requestScope.MSN +1 }" id="seqno" placeholder="SEQNO 자동" class="hidden"/>
+			<input type="text" name="MY_SEQNO" value="${requestScope.MSN +1 }" id="my_seqno" placeholder="MY_SEQNO 자동" class="hidden"/>
 		</div>
 			
 	<!-- 1.거래날짜 -->
@@ -33,11 +33,11 @@
 			<span>	
 			<!-- 드롭다운 : 초기화면 -->
 				<input type="text" name="CCODE" id="ccode" placeholder="CCODE 자동" class="hidden" />		
-				<select name="SLCT_NN_C" id="slct_nn_c">
+				<select id="slct_nn_c">
 					<option value="">--카테고리(미지정)--</option>
 				</select>		
 			<!-- 드롭다운 : 수입 -->
-				<select name="SLCT_IN" id="slct_in" class="hidden">
+				<select id="slct_in" class="hidden">
 					<option value="">--카테고리(수입)--</option>
 					<c:forEach items="${CATELIST }" var="c">
 						<c:set var="cate_code" value="${c.cate_code }" />
@@ -48,7 +48,7 @@
 					</c:forEach>
 				</select> 	
 			<!-- 드롭다운 : 지출 -->
-				<select name="SLCT_EX" id="slct_ex" class="hidden">
+				<select id="slct_ex" class="hidden">
 					<option value="">--카테고리(지출)--</option>
 					<c:forEach items="${CATELIST }" var="c">
 						<c:set var="cate_code" value="${c.cate_code }" />
@@ -84,11 +84,11 @@
 			<span>
 			<!-- 드롭다운 : 초기화면 -->
 				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" class="hidden"/>
-				<select name="SLCT_NN_M" id="slct_nn_m">
+				<select id="slct_nn_m">
 					<option value="">--결제수단(미지정)--</option>
 				</select>	
 			<!-- 드롭다운 : 현금 -->
-				<select name="SLCT_MN" id="slct_mn" class="hidden">
+				<select id="slct_mn" class="hidden">
 					<option value="">--결제수단(현금)--</option>
 					<c:forEach items="${METHLIST }" var="m">
 						<c:set var="meth_code" value="${m.meth_code }" />
@@ -99,7 +99,7 @@
 					</c:forEach>
 				</select>
 			<!-- 드롭다운 : 카드 -->
-				<select name="SLCT_CRD" id="slct_crd" class="hidden">
+				<select id="slct_crd" class="hidden">
 					<option value="">--결제수단(카드)--</option>
 					<c:forEach items="${METHLIST }" var="m">
 						<c:set var="meth_code" value="${m.meth_code }" />

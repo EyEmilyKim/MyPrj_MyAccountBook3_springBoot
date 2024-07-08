@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/* ------------ form 요소 식별 변수 ------------ */
 	
+	const btn_yesterday = document.getElementById("btn_yesterday");
 	const btn_today = document.getElementById("btn_today");
 	const date = document.getElementById("date");
 	const btn_in = document.getElementById("btn_in");
@@ -143,12 +144,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		colorBtn("MN");
 		showSlct("MN");
 		resetSLCT_MNCRD(); // slct_mn, slct_crd 선택상태 + MCODE 입력값 초기화
+		validate.opt_mcode();
 	})
 	btn_crd.addEventListener('click', () => {
 		setMNCRD("CRD");
 		colorBtn("CRD");
 		showSlct("CRD");
 		resetSLCT_MNCRD(); // slct_mn, slct_crd 선택상태 + MCODE 입력값 초기화
+		validate.opt_mcode();
 	})
 	
 	// 6-2. 결제수단 드롭다운 선택 시 MCODE 설정
@@ -263,13 +266,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	
 	function resetSLCT_INEX() { // slct_in, slct_ex 선택상태 + CCODE 입력값 초기화
-		fm.SLCT_IN.value = "";
-		fm.SLCT_EX.value = "";
+		slct_in.value = "";
+		slct_ex.value = "";
 		setCCODE("");
 	}
 	function resetSLCT_MNCRD() { // slct_mn, slct_crd 선택상태 + MCODE 입력값 초기화
-		fm.SLCT_MN.value = "";
-		fm.SLCT_CRD.value = "";
+		slct_mn.value = "";
+		slct_crd.value = "";
 		setMCODE("");
 	}
 	function resetMethBlock() { // 결제수단 블럭 초기화
@@ -334,25 +337,25 @@ document.addEventListener('DOMContentLoaded', () => {
 	function checkSubmit(){ // 필수항목 확인, 미선택 no필수항목 안내, 최종 컨펌
 		//console.log('checkSubmit() called');
 		const fmV = { // 모든 입력사항 Object
-			seqno : fm.SEQNO.value,
-			inex : fm.INEX.value,
+			my_seqno : fm.MY_SEQNO.value,
 			date : fm.DATE.value,
+			inex : fm.INEX.value,
 			ccode : fm.CCODE.value,
-			slct_in : fm.SLCT_IN.value,
-			slct_ex : fm.SLCT_EX.value,
+			slct_in : slct_in.value,
+			slct_ex : slct_ex.value,
 			item : fm.ITEM.value,
-			amount : Number(fm.AMOUNT.value.replace(/,/g, '')),
+			amount : fm.AMOUNT.value,
 			mncrd : fm.MNCRD.value,
 			mcode : fm.MCODE.value,
-			slct_mn : fm.SLCT_MN.value,
-			slct_crd : fm.SLCT_CRD.value,
+			slct_mn : slct_mn.value,
+			slct_crd : slct_crd.value,
 		};
 		console.log('fmV', fmV);
 		printAllGuide(); // 모든 항목 안내문 출력
 		if (! checkEssential() ) return false; // 필수항목 미통과 시 return false
 		const detail = makeDetail(fmV);
 		if (! confirm("등록하시겠습니까?\n──────\n"+detail) ) return false; // 최종 컨펌
-		fm.AMOUNT.value = fmV.amount;
+		fm.AMOUNT.value = Number(fmV.amount.replace(/,/g, ''));
 		return true;
 	}
 	function checkEssential() { // 필수항목 미통과 시 return false
@@ -407,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	/* ------------ 개발자 편의용 ------------ */
 	
 	// hidden input 표시하기
-	const forDeveloper = [seqno, inex, ccode, mncrd, mcode];
+	const forDeveloper = [my_seqno, inex, ccode, mncrd, mcode];
 	showForDeveloper(forDeveloper, false);
 	function showForDeveloper(arr, boolean) {
 		if (boolean) {
