@@ -404,8 +404,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		else if (fmV.mncrd == "MN") txt_mcode = slct_mn.options[slct_mn.selectedIndex].text;
 		else if (fmV.mncrd == "CRD") txt_mcode = slct_crd.options[slct_crd.selectedIndex].text;
 		//최종 컨펌 txt
-		let detail = `● 구분 : ${txt_inex} ` //-----> ${fmV.inex}`
-			+ `\n● 거래날짜 : ${fmV.date}`
+		let detail = `● 거래날짜 : ${fmV.date}`
+			+ `\n● 구분 : ${txt_inex} ` //-----> ${fmV.inex}`
 			+ `\n● 카테고리 : ${txt_ccode} ` //-----> ${fmV.ccode}`
 			+ `\n● 내용 : ${txt_item}`
 			+ `\n● 금액 : ${fmV.amount} 원`
