@@ -5,7 +5,7 @@
 
 <main>
 	<div class="contMain">
-		<h3 class="title ">가계부 쓰기 화면입니다.</h3>
+		<h3 class="title ">가계부 쓰기</h3>
 
 		<form action="add" method="post" name="fm">
 		
@@ -15,22 +15,26 @@
 		</div>
 			
 	<!-- 1.거래날짜 -->
-		<div>
-			<input type="button" value="어제" id="btn_yesterday" />
-			<input type="button" value="오늘" id="btn_today" />
-			<input type="date" name="DATE" id="date" />
+		<div class="depth1">
+			<div class="depth2 col1">
+				<input type="button" value="어제" id="btn_yesterday" />
+				<input type="button" value="오늘" id="btn_today" />
+			</div>
+			<div class="depth2">
+				<input type="date" name="DATE" id="date" />
+			</div>
 		</div>
 
-		<div id="inexCateBlock"> <!-- 2.3. inexCateBlock -->
+		<div id="inexCateBlock" class="depth1"> <!-- 2.3. inexCateBlock -->
 	<!-- 2.수입/지출 구분 -->
-			<span>
+			<div class="depth2 col1">
 				<input type="text" name="INEX" id="inex" placeholder="INEX 자동" class="hidden" />
 				<input type="button" value="수입" id="btn_in" />
 				<input type="button" value="지출" id="btn_ex" />
-			</span>
+			</div>
 			
 	<!-- 3.카테고리 -->
-			<span>	
+			<div class="depth2">	
 			<!-- 드롭다운 : 초기화면 -->
 				<input type="text" name="CCODE" id="ccode" placeholder="CCODE 자동" class="hidden" />		
 				<select id="slct_nn_c">
@@ -58,30 +62,30 @@
 						</c:if>
 					</c:forEach>
 				</select>		
-			</span> <!-- 3.카테고리 끝 -->
+			</div> <!-- 3.카테고리 끝 -->
 		</div> <!-- 2.3. inexCateBlock 끝 -->
 
 	<!-- 4.거래내용 -->
-		<div>
-			<textarea name="ITEM" id="item" placeholder="거래내용을 입력하세요"></textarea>
+		<div class="depth1">
+			<input type="text" name="ITEM" id="item" placeholder="거래내용을 입력하세요">
 		</div>
 		
 	<!-- 5.거래금액 -->
-		<div>
+		<div class="depth1">
 			<input type="text" name="AMOUNT" id="amount" placeholder="금액을 입력하세요" />
 		</div>
 
 	<!-- 6.결제수단 블럭 -->
-		<div id="methBlock" class="hidden">
+		<div id="methBlock" class="depth1">
 		<!-- 6-1. 현금/카드 구분 -->
-			<span>
+			<div class="depth2 col1">
 				<input type="text" name="MNCRD" id="mncrd" placeholder="MNCRD 자동" class="hidden" /> 
 				<input type="button" value="현금" id="btn_mn" />
 				<input type="button" value="카드" id="btn_crd" />
-			</span>
+			</div>
 			
 		<!-- 6-2. 결제수단 코드 -->
-			<span>
+			<div class="depth2">
 			<!-- 드롭다운 : 초기화면 -->
 				<input type="text" name="MCODE" id="mcode" placeholder="MCODE 자동" class="hidden"/>
 				<select id="slct_nn_m">
@@ -109,36 +113,24 @@
 						</c:if>
 					</c:forEach>
 				</select>
-			</span> <!-- 6-2. 결제수단 코드 끝-->
+			</div> <!-- 6-2. 결제수단 코드 끝-->
 			
-		<!-- 6-3. (확인용 hidden) 전체 결제수단 출력-->
-			<div class="hidden">
-				<c:forEach items="${METHLIST }" var="m">
-					<c:set var="meth_code" value="${m.meth_code }" />
-					<c:set var="meth_name" value="${m.meth_name }" />
-					<c:out value="${m.meth_code }" /> / <c:out value="${m.meth_name }" /><br>
-				</c:forEach>
-			</div>
 		</div> <!-- 6.결제수단 블럭 끝 -->
 
 	<!-- 7.안내문구 출력row -->
-		<div>
-			<div class="guideRed">
-				<p id="guide_date"></p>
-				<p id="guide_inex"></p>
-				<p id="guide_amount"></p>
-				<p id="guide_amount_type"></p>
-				<p id="guide_item_length"></p>
-			</div>
-			<div class="guideBlue">
-				<p id="guide_opt_item"></p>
-				<p id="guide_opt_ccode"></p>
-				<p id="guide_opt_mcode"></p>
-			</div>
+		<div id="guideBlock">
+			<p id="guide_date" class="guideRed"></p>
+			<p id="guide_inex" class="guideRed"></p>
+			<p id="guide_amount" class="guideRed"></p>
+			<p id="guide_amount_type" class="guideRed"></p>
+			<p id="guide_item_length" class="guideRed"></p>
+			<p id="guide_opt_item" class="guideBlue"></p>
+			<p id="guide_opt_ccode" class="guideBlue"></p>
+			<p id="guide_opt_mcode" class="guideBlue"></p>
 		</div>
 
 	<!-- 8.form 등록/취소 -->
-		<div class="marginTop">
+		<div class="depth1">
 			<input type="submit" value="등록" /> 
 			<input type="reset" value="취소" />
 		</div>

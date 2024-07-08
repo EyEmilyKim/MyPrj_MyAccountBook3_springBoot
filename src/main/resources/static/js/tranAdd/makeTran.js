@@ -89,6 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		validate.date();
 	})
 	date.addEventListener('change', () => {
+		const val = date.value
+		const today = getFormattedDate(0);
+		const yesterday = getFormattedDate(-1);
+		if(val == today) colorBtn("TODAY");
+		else if(val == yesterday) colorBtn("YESTERDAY");
+		else colorBtn("PICK")
 		validate.date();
 	})
 
@@ -196,6 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			case "TODAY":
 				btn_yesterday.classList.remove('selected_date');
 				btn_today.classList.add('selected_date'); break;
+			case "PICK":
+				btn_yesterday.classList.remove('selected_date');
+				btn_today.classList.remove('selected_date'); break;
 			case "IN":
 				btn_in.classList.add('selected_in');
 				btn_ex.classList.remove('selected_ex'); break;
@@ -239,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				slct_mn.classList.add('hidden');
 				slct_crd.classList.remove('hidden'); break;
 			case "NN":
-				slct_nn_c.classList.add('hidden');
+				slct_nn_c.classList.remove('hidden');
 				slct_in.classList.add('hidden');
 				slct_ex.classList.add('hidden');
 				slct_nn_m.classList.add('hidden');
@@ -283,11 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	function openMethBlock() { // 결제수단 블럭 초기화, 보이기
 		resetMethBlock();
-		methBlock.classList.remove('hidden');
+		methBlock.style.display = 'flex';
 	}
 	function closeMethBlock() { // 결제수단 블럭 초기화, 숨기기
 		resetMethBlock();
-		methBlock.classList.add('hidden');
+		methBlock.style.display = 'none';
 	}
 	
 	function setInnerHTML(dom, val) {
