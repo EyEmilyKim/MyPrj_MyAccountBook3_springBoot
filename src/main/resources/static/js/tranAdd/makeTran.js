@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		opt_item : document.getElementById("guide_opt_item"),
 		opt_ccode : document.getElementById("guide_opt_ccode"),
 		opt_mcode : document.getElementById("guide_opt_mcode"),
-	}
+	};
 	
 	const fm = document.forms['fm'];
 	
@@ -46,31 +46,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		blank : " - ",
 	};
 	
+	const isInvalid = {
+		date : () => { const flag = fm.DATE.value == "" ? true : false; return flag; },
+		inex : () => { const flag = fm.INEX.value == "" ? true : false; return flag; },
+		amount : () => { const flag = fm.AMOUNT.value.trim() == "" ? true : false; return flag; },
+		amount_type : () => { const flag = isNaN(fm.AMOUNT.value.replace(/,/g, '')) ? true : false; return flag; },
+		item_length : () => { const flag = calculateByteLength(fm.ITEM.value.trim()) > 60 ? true : false; return flag; },
+		opt_item : () => { const flag = fm.ITEM.value.trim() == "" ? true : false; return flag; },
+		opt_ccode : () => { const flag = fm.CCODE.value == "" ? true : false; return flag; },
+		opt_mcode : () => { const flag = fm.MCODE.value == "" ? true : false; return flag; },
+	};
+
 	const validate = {
-		date : () => { fm.DATE.value == "" ? setInnerHTML(guide.date, msg.date) : clearInnerHTML(guide.date); },
-		inex : () => { fm.INEX.value == "" ? setInnerHTML(guide.inex, msg.inex) : clearInnerHTML(guide.inex); },
+		date : () => { isInvalid.date() ? setInnerHTML(guide.date, msg.date) : clearInnerHTML(guide.date); },
+		inex : () => { isInvalid.inex() ? setInnerHTML(guide.inex, msg.inex) : clearInnerHTML(guide.inex); },
 		amount : () => {
-			let val = fm.AMOUNT.value.replace(/,/g, '');
-			if (!isNaN(val) && val.trim() !== "") {
-				val = parseInt(val, 10).toLocaleString('ko-KR');
-				amount.value = val;
-			}
-			isNaN(Number(val.replace(/,/g, ''))) ? setInnerHTML(guide.amount_type, msg.amount_type) : clearInnerHTML(guide.amount_type);
-			val.trim() == "" ? setInnerHTML(guide.amount, msg.amount) : clearInnerHTML(guide.amount); 
+			isInvalid.amount() ? setInnerHTML(guide.amount, msg.amount) : clearInnerHTML(guide.amount); 
+			isInvalid.amount_type() ? setInnerHTML(guide.amount_type, msg.amount_type) : clearInnerHTML(guide.amount_type);
 		},
-		opt_item : () => {
-			const val = fm.ITEM.value.trim(); 
-			const byteLength = calculateByteLength(val);
-			byteLength > 60 ? setInnerHTML(guide.item_length, msg.item_length) : clearInnerHTML(guide.item_length);
-			byteLength == 0 ? setInnerHTML(guide.opt_item, msg.opt_item) : clearInnerHTML(guide.opt_item);
+		item : () => {
+			isInvalid.item_length() ? setInnerHTML(guide.item_length, msg.item_length) : clearInnerHTML(guide.item_length);
+			isInvalid.opt_item() ? setInnerHTML(guide.opt_item, msg.opt_item) : clearInnerHTML(guide.opt_item);
 		},
-		opt_ccode : () => { fm.CCODE.value == "" ? setInnerHTML(guide.opt_ccode, msg.opt_ccode) : clearInnerHTML(guide.opt_ccode); },
-		opt_mcode : () => { fm.MCODE.value == "" ? setInnerHTML(guide.opt_mcode, msg.opt_mcode) : clearInnerHTML(guide.opt_mcode); },
-	}
+		opt_ccode : () => { isInvalid.opt_ccode() ? setInnerHTML(guide.opt_ccode, msg.opt_ccode) : clearInnerHTML(guide.opt_ccode); },
+		opt_mcode : () => { isInvalid.opt_mcode() ? setInnerHTML(guide.opt_mcode, msg.opt_mcode) : clearInnerHTML(guide.opt_mcode); },
+	};
 	
 	/* ------------ form 입력 과정 func ------------ */
 	
-	// 1. 어제, 오늘 날짜 설정
+	// 1. 어제, 오늘 날짜 설정. 날짜 미입력 안내
 	btn_yesterday.addEventListener('click', () => {
 		const formattedDate = getFormattedDate(-1);
 		fm.DATE.value = formattedDate;
@@ -120,11 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 4. 거래내용 입력값 길이 제한 안내
 	item.addEventListener('input', () => {
-		validate.opt_item();
+		validate.item();
 	})
 	
-	// 5. 금액 타입 제한 안내, 세자리 콤마 표시
+	// 5. 금액 세자리 콤마 표시, 타입 제한 안내
 	amount.addEventListener('input', () => {
+		let val = fm.AMOUNT.value.replace(/,/g, '');
+		if (!isNaN(val) && val.trim() !== "") {
+			val = parseInt(val, 10).toLocaleString('ko-KR');
+			amount.value = val;
+		}
 		validate.amount();
 	})
 
@@ -323,6 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	/* ------------ form 제출 ------------ */
 	
 	function checkSubmit(){ // 필수항목 확인, 미선택 no필수항목 안내, 최종 컨펌
+		//console.log('checkSubmit() called');
 		const fmV = { // 모든 입력사항 Object
 			seqno : fm.SEQNO.value,
 			inex : fm.INEX.value,
@@ -338,35 +348,34 @@ document.addEventListener('DOMContentLoaded', () => {
 			slct_crd : fm.SLCT_CRD.value,
 		};
 		console.log('fmV', fmV);
-		printAllGuide(fmV); // 모든 항목 안내문 출력
-		if (! alertEssential(fmV) ) return false; // 필수항목 미통과 시 alert, return false
+		printAllGuide(); // 모든 항목 안내문 출력
+		if (! checkEssential() ) return false; // 필수항목 미통과 시 return false
 		const detail = makeDetail(fmV);
 		if (! confirm("등록하시겠습니까?\n──────\n"+detail) ) return false; // 최종 컨펌
+		fm.AMOUNT.value = fmV.amount;
 		return true;
 	}
-	function alertEssential(fmV) { // 필수항목 미통과 시 alert, return false
-		if (fmV.date == '') { alert(msg.date); return false; }
-		if (fmV.inex == '') { alert(msg.inex); return false; }
-		const byteLength = calculateByteLength(fmV.item);
-		if (byteLength > 60) { alert(msg.item_length); return false; }
-		if (fmV.amount == 0) { alert(msg.amount); return false; }
-		if (isNaN(fmV.amount)) { alert(msg.amount_type); return false; }
+	function checkEssential() { // 필수항목 미통과 시 return false
+		//console.log('checkEssential() called');
+		if (isInvalid.date()) return false;
+		if (isInvalid.inex()) return false;
+		if (isInvalid.amount() || isInvalid.amount_type()) return false;
+		if (isInvalid.item_length()) return false;
 		return true;
 	}
-	function printAllGuide(fmV){ // 모든 항목 안내문 출력
+	function printAllGuide(){ // 모든 항목 안내문 출력
+		//console.log('printAllGuide() called');
 		// 필수 사항
-		if (fmV.date == '') setInnerHTML(guide.date, msg.date);
-		if (fmV.inex == '') setInnerHTML(guide.inex, msg.inex);
-		const byteLength = calculateByteLength(fmV.item);
-		if (byteLength > 60) setInnerHTML(guide.item_length, msg.item_length);
-		if (fmV.amount == '') setInnerHTML(guide.amount, msg.amount);
-		if (isNaN(fmV.amount)) setInnerHTML(guide.amount_type, msg.amount_type);
+		validate.date();
+		validate.inex();
+		validate.amount();
 		// 선택 사항
-		if (fmV.item == "") setInnerHTML(guide.opt_item, msg.opt_item);
-		if (fmV.ccode == "") setInnerHTML(guide.opt_ccode, msg.opt_ccode);
-		if (fmV.inex == "EX" && fmV.mcode == '') setInnerHTML(guide.opt_mcode, msg.opt_mcode);
+		validate.opt_item;
+		validate.opt_ccode();
+		if (fm.INEX.value== "EX") validate.opt_mcode();
 	}
 	function makeDetail(fmV) { // 입력 최종확인용 문자열 준비
+		//console.log('makeDetail() called');
 		let txt_inex = fmV.inex == "IN" ? "수입" : "지출"; 
 		let txt_ccode;
 		if (fmV.inex == "IN" && fmV.slct_in == "" || fmV.inex == "EX" && fmV.slct_ex == "") 
