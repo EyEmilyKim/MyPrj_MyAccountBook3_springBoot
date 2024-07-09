@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <main>
@@ -83,7 +84,22 @@
 			</c:if>
 		</div> <!-- 실제 목록 끝 -->
 	
-	
+	<!-- 목록 화면 컨트롤 -->
+		<div class="rowCountBlock">
+		<!-- N줄보기 form -->
+			<c:set var="selectedRC" value="${param.RC != null ? param.RC : 10 }" />
+			<c:set var="optionString" value="5,10,15" />
+			<c:set var="optionList" value="${fn:split(optionString, ',')}" />
+			<form name="fmRC" id="fmRC">
+				<select name="RC" id="slct_rc">
+				<c:forEach var="option" items="${optionList }">
+					<option value="${option }" <c:if test="${option == selectedRC}">selected</c:if>>
+					${option }줄 보기
+					</option>
+				</c:forEach>
+				</select>
+			</form>
+		</div>
 	
 	
 	</div> <!-- contMain 끝 -->

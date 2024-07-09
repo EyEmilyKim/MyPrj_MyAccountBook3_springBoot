@@ -98,6 +98,7 @@ public class TransactionServiceImp implements TransactionService {
 	/* ------------- 공통 함수 ------------- */
 	
 	private TranSearchDto setTranSearchDto(TranSearchDto dto, int user_id) throws ParseException {
+		// 검색 조건 설정
 		String d_from = dto.getD_FROM();
 		String d_to = dto.getD_TO();
 		if (d_from != null && d_from != "") dto.setTS_FROM(DateUtil.stringToTimestamp(d_from));
@@ -105,6 +106,16 @@ public class TransactionServiceImp implements TransactionService {
 		if (d_to != null && d_to != "") dto.setTS_TO(DateUtil.stringToTimestamp(d_to));
 		if (d_to == "") dto.setTS_TO(null);
 		dto.setUser_id(user_id);
+		// 페이지 설정
+		if(dto.getPG() == null) dto.setPG(1);
+		int pg = dto.getPG();
+		// N줄 보기 설정
+		if(dto.getRC() == null) dto.setRC(10);
+		int rc = dto.getRC();
+		// DB 조회할 덩어리(offset, limit) 설정
+		int start = (pg - 1) * rc;
+		dto.setStart(start);
+		System.out.println("setTranSearchDto() > pg, rc, start : "+pg+", "+rc+", "+start);
 		
 		return dto;
 	}

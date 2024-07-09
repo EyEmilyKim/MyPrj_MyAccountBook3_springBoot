@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 검색 form
 	const fmSRCH = document.forms['fmSRCH'];
 	const search_reset = document.getElementById("search_reset");
+	// N줄보기 form
+	const fmRC = document.forms['fmRC'];
+	const slct_rc = document.getElementById("slct_rc");
 	
 	/* ------------ 검색 form ------------ */
 	
@@ -28,5 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		return true;
 	});
+	
+	/* ------------ N줄보기 form ------------ */
+	
+	slct_rc.addEventListener('change', () => {
+		fmRC.submit();
+	})
 	
 });
