@@ -3,11 +3,12 @@ package com.EyEmilyKim.service;
 import java.util.List;
 import java.util.Map;
 
+import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Transaction;
 
 public interface TransactionService {
 
-	List<Transaction> getList(int user_id);
+	List<TransactionDto> getListAll(int user_id);
 
 	Integer getCount(int user_id);
 

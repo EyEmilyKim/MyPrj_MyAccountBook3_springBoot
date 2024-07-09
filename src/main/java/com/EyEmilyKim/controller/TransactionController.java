@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.service.CategoryService;
@@ -36,9 +37,19 @@ public class TransactionController {
 	private String succMsg = "정상적으로 처리되었습니다.";
 	private String nextUrl = "/tran/add";
 	
+	/*-------- 거래내역 목록 --------*/
+	
 	@GetMapping("listAll")
-	public String listAll() {
+	public String listAll(HttpServletRequest req, Model model) {
 		System.out.println("TransactionController > listAll()@Get called");
+		Integer userId = (Integer) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
+		
+		List<TransactionDto> list = transactionService.getListAll(userId);
+		model.addAttribute("LIST", list);
+		int cnt = transactionService.getCount(userId);
+		model.addAttribute("COUNT", cnt);
+		
 		return "tran.listAll";
 	}
 	

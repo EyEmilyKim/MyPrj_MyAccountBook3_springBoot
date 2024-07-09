@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.dao.TransactionDao;
+import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Transaction;
 import com.EyEmilyKim.util.DateUtil;
 
@@ -19,15 +20,18 @@ public class TransactionServiceImp implements TransactionService {
 	private TransactionDao transactionDao;
 	
 	@Override
-	public List<Transaction> getList(int user_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TransactionDto> getListAll(int user_id) {
+		System.out.println("TranService > getListAll() called");
+		
+		List<TransactionDto> list = transactionDao.getListAll(user_id);
+		return list;
 	}
 
 	@Override
 	public Integer getCount(int user_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("TranService > getCount() called");
+		
+		return transactionDao.getCount(user_id);
 	}
 
 	@Override
