@@ -54,15 +54,6 @@ form * {
 	gap: 5px;
 }
 
-.guideRed {
-  color: red;
-  font-size: small;
-}
-.guideBlue {
-  color: blue;
-  font-size: small;
-}
-
 /* ------- hidden input values ------- */
 
 #my_seqno, #inex, 

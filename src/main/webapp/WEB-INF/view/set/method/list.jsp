@@ -11,11 +11,12 @@
 	<table class="table " >
 	<thead class="">
 	<tr>
-		<td class="id">user_id</td>
+		<td class="user_id">user_id</td>
 		<td class="seqno">seqno</td>
 		<td class="meth_code">meth_code</td>
 		<td>mncrd</td>
 		<td>meth_name</td>
+		<td>btn</td>
 	</tr>
 	</thead>
 	<tbody>
@@ -27,31 +28,26 @@
 	  <c:choose>
 		<c:when test="${m.mncrd == 'meNN' }">
 			<tr class="sys">
-				<td class="id">${m.user_id }</td>
+				<td class="user_id">${m.user_id }</td>
 				<td class="seqno">${m.seqno }</td><td class="meth_code">${m.meth_code }</td>
 				<td>기본</td><td>${m.meth_name }</td>
 				<td class=""></td>
-				<td class=""></td>
-				<td class="hidden">url : <c:out value="${url }"></c:out></td></tr>
 		</c:when>
 		<c:when test="${m.meth_code == 'MN1' }">
 			<tr class="sys">
-				<td class="id">${m.user_id }</td>
+				<td class="user_id">${m.user_id }</td>
 				<td class="seqno">${m.seqno }</td><td class="meth_code">${m.meth_code }</td>
 				<td class="mn">현금</td><td>${m.meth_name }</td>
 				<td class=""></td>
-				<td class=""></td>
-				<td class="hidden">url : <c:out value="${url }"></c:out></td></tr>
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td class="id">${m.user_id }</td>
+				<td class="user_id">${m.user_id }</td>
 				<td class="seqno">${m.seqno }</td><td class="meth_code">${m.meth_code }</td>
 				<c:if test="${m.mncrd == 'MN' }"><td class="mn">현금</td><td>${m.meth_name }</td></c:if>
 				<c:if test="${m.mncrd == 'CRD' }"><td class="crd">카드</td><td>${m.meth_name }</td></c:if>
-				<td><a class="btn" href="${urlUpd }" >수정</a></td>
-				<td><a class="btn" href="${urlDel }" >삭제</a></td>
-				<td class="hidden">url : <c:out value="${urlUpd}"></c:out></td>
+				<td><a class="btn" href="${urlUpd }" >수정</a>
+					<a class="btn" href="${urlDel }" >삭제</a></td>
 			</tr>
 	    </c:otherwise>
 	  </c:choose>

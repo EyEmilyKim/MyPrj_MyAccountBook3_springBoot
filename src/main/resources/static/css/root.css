@@ -40,22 +40,7 @@
     --header-selectedMenu-under: #2e7d32;
 }
 
-/* ---------- layout 확인용 보더&컬러 ---------- */
-/* 
-header{
-	border: solid 1px red;
-}
-#middle{
-	border: solid 1px blue;
-	background-color: var(--main-background-color);
-}
-aside{
-	border: solid 1px orange;
-}
-main{
-	border: solid 1px green;
-}
-footer{
-	border: solid 1px red;
-}
- */
+/* ---------- hidden ---------- */
+
+.hidden { display:none; }
+

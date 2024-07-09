@@ -11,7 +11,7 @@
 		<form action="del" name="fm" onSubmit="return check(this)" method="post">
 				<input type="hidden" name="CCODE" value="${C.cate_code }">
 				<input type="hidden" name="CNAME" value="${C.cate_name }">
-			<div class="item">
+			<div class="content">
 				<div>
 					<c:if test="${C.inex == 'IN' }">
 						<input type="button" value="수입" name="S_INEX" id="in"></c:if>

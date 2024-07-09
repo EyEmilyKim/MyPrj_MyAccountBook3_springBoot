@@ -11,11 +11,12 @@
 	<table class="table " >
 	<thead class="">
 	<tr class="">
-		<td class="id">useId</td>
+		<td class="user_id">user_id</td>
 		<td class="seqno">seqno</td>
 		<td class="cate_code">cate_code</td>
 		<td>inex</td>
 		<td>cate_name</td>
+		<td>btn</td>
 	</tr>
 	</thead>
 	<tbody>
@@ -27,22 +28,19 @@
 	  <c:choose>
 		<c:when test="${c.inex == 'caNN' }">
 			<tr class="sys">
-				<td class="id">${c.user_id }</td>
+				<td class="user_id">${c.user_id }</td>
 				<td class="seqno">${c.seqno }</td><td class="cate_code">${c.cate_code }</td>
 				<td>기본</td><td>${c.cate_name }</td>
 				<td class=""></td>
-				<td class=""></td>
-				<td class="hidden">url : <c:out value="${url }"></c:out></td></tr>
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td class="id">${c.user_id }</td>
+				<td class="user_id">${c.user_id }</td>
 				<td class="seqno">${c.seqno }</td><td class="cate_code">${c.cate_code }</td>
 				<c:if test="${c.inex == 'IN' }"><td class="in">수입</td><td>${c.cate_name }</td></c:if>
 				<c:if test="${c.inex == 'EX' }"><td class="ex">지출</td><td>${c.cate_name }</td></c:if>
-				<td><a class="btn" href="${urlUpd }" >수정</a></td>
-				<td><a class="btn" href="${urlDel }" >삭제</a></td>
-				<td class="hidden">url : <c:out value="${urlUpd}"></c:out></td>
+				<td><a class="btn" href="${urlUpd }" >수정</a>
+					<a class="btn" href="${urlDel }" >삭제</a></td>
 			</tr>
 	    </c:otherwise>
 	  </c:choose>

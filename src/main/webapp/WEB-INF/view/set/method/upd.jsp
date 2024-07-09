@@ -12,7 +12,7 @@
 	<form action="upd" name="fm" onSubmit="return check()" method="post">
 		<input type="hidden" name="MCODE" value="${M.meth_code }">
 		<input type="hidden" name="MNAME" value="${M.meth_name }">
-		<div class="item">
+		<div class="content">
 			<div class="mncrd">
 				<input type="hidden" value="${M.mncrd }" name="MNCRD">
 				<c:if test="${M.mncrd == 'MN' }">
@@ -25,7 +25,7 @@
 				<div><input type="text" placeholder="변경할 결제수단명" name="N_MNAME" size="30"></div>
 			</div>
 		</div>
-		<div><span id="guide"></span></div>
+		<div><span id="guide" class="guideRed"></span></div>
 		<div class="buttons">
 			<input type="submit" value="저장" class="btn">
 			<input type="reset" value="취소" onClick="backToList()" class="btn">		

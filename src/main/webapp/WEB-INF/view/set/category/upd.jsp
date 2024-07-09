@@ -12,7 +12,7 @@
 	<form action="upd" name="fm" onSubmit="return check()" method="post">
 		<input type="hidden" name="CCODE" value="${C.cate_code }">
 		<input type="hidden" name="CNAME" value="${C.cate_name }">
-		<div class="item">
+		<div class="content">
 			<div class="inex">
 				<input type="hidden" value="${C.inex }" name="INEX">
 				<c:if test="${C.inex == 'IN' }">
@@ -25,7 +25,7 @@
 				<div><input type="text" placeholder="변경할 카테고리명" name="N_CNAME" size="30"></div>
 			</div>
 		</div>
-		<div><span id="guide"></span></div>
+		<div><span id="guide" class="guideRed"></span></div>
 		<div class="buttons">
 			<input type="submit" value="저장" class="btn">
 			<input type="reset" value="취소" onClick="backToList()" class="btn">		

@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-/* --------- 단순 서식 ----------- */
-
-.hidden { display:none; }
+/* --------- 개발 편의용 단순 서식 ----------- */
 
 .border { border: solid darkgray 1px; }
 .borderBlue { border: solid blue 1px; }
@@ -22,10 +20,25 @@
 
 /* --------- 페이지 기능별 ----------- */
 
+.guideRed {
+  color: red;
+  font-size: small;
+}
+.guideBlue {
+  color: blue;
+  font-size: small;
+}
+
 .in, .mn { color:blue; } 
 .ex, .crd { color:red; } 
 .sys { background-color:beige; }
 
+.item {
+	padding: 0 15px 0;
+}
+.amount {
+	text-align: right;
+}
 /* --------- 선택적으로 변하는 클래스 ----------- */
 .selected_date {
 	background-color : orange;
@@ -38,4 +51,12 @@
 .selected_ex, .selected_crd {
 	background-color : red;
 	color: white;
+}
+
+/* ------- 개발 편의용 따로 관리 (to be hidden)------- */
+
+.user_id, .seqno, .cate_code, .meth_code, 
+.tran_id {
+	border: plum solid 1px;
+	width: 80px;
 }

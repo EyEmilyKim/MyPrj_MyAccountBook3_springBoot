@@ -11,7 +11,7 @@
 		<div class="form "> 
 		<form action="add" name="fm" onSubmit="return check(this)" method="post">
 			<input type="hidden" name="SEQNO" value="${MSN +1 }">
-			<div class="item">
+			<div class="content">
 				<div class="inex">
 					<input type="hidden" name="INEX">
 					<input type="button" value="수입" onClick="setIN()" id="btn_in">

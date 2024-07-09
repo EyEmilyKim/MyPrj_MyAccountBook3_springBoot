@@ -11,7 +11,7 @@
 		<form action="del" name="fm" onSubmit="return check(this)" method="post">
 				<input type="hidden" name="MCODE" value="${M.meth_code }">
 				<input type="hidden" name="MNAME" value="${M.meth_name }">
-			<div class="item">
+			<div class="content">
 				<div>
 					<c:if test="${M.mncrd == 'MN' }">
 						<input type="button" value="현금" name="S_MNCRD" id="mn"></c:if>
