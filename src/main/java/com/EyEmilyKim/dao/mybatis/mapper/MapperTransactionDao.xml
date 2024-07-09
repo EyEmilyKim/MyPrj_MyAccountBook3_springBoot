@@ -22,12 +22,21 @@
   	 #{reg_date} )
   </insert>
 
-  <select id="getListAll" resultType="com.EyEmilyKim.dto.TransactionDto">
-	select * from MAB_TRANSACTIONS_VIEW  
-	<where> 
-	USER_ID = #{userId} 
-	</where> 
-	order by MY_SEQNO
+  <select id="getListAll" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="com.EyEmilyKim.dto.TransactionDto">
+	select * from MAB_TRANSACTIONS_VIEW
+    <where>
+        USER_ID = #{user_id}
+        <if test="D_FROM != null">
+            AND TRAN_DATE >= #{D_FROM}
+        </if>
+        <if test="D_TO != null">
+            AND TRAN_DATE &lt;= #{D_TO}
+        </if>
+        <if test="ITEM != null and ITEM != ''">
+            AND ITEM LIKE CONCAT('%', #{ITEM}, '%')
+        </if>
+    </where>
+    order by MY_SEQNO
   </select>
   <select id="getCount" resultType="Integer">
 	select count(TRAN_ID) from MAB_TRANSACTIONS 

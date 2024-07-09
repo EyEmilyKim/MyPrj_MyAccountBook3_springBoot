@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Transaction;
 
 @Mapper
 public interface TransactionDao {
 
-	List<TransactionDto> getListAll(int user_id);
+	List<TransactionDto> getListAll(TranSearchDto dto);
 
 	Integer getCount(int user_id);
 

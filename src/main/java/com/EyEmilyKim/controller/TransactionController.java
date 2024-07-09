@@ -9,16 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.service.CategoryService;
 import com.EyEmilyKim.service.MethodService;
 import com.EyEmilyKim.service.TransactionService;
+import com.EyEmilyKim.util.DtoUtil;
 
 @RequestMapping("/tran/")
 @Controller
@@ -35,20 +38,27 @@ public class TransactionController {
 	
 	private String failMsg = "해당 기능이 준비되지 않아 처리하지 못했습니다.";
 	private String succMsg = "정상적으로 처리되었습니다.";
-	private String nextUrl = "/tran/add";
 	
 	/*-------- 거래내역 목록 --------*/
 	
 	@GetMapping("listAll")
-	public String listAll(HttpServletRequest req, Model model) {
+	public String listAll(@ModelAttribute TranSearchDto dto, HttpServletRequest req, Model model) {
 		System.out.println("TransactionController > listAll()@Get called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
+		DtoUtil.printDto(dto);
 		
-		List<TransactionDto> list = transactionService.getListAll(userId);
-		model.addAttribute("LIST", list);
-		int cnt = transactionService.getCount(userId);
-		model.addAttribute("COUNT", cnt);
+		try {
+			List<TransactionDto> list = transactionService.getListAll(dto, userId);
+			model.addAttribute("LIST", list);
+			int cnt = transactionService.getCount(userId);
+			model.addAttribute("COUNT", cnt);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", "/tran/listAll");
+			return "redirect";
+		}
 		
 		return "tran.listAll";
 	}
@@ -87,7 +97,7 @@ public class TransactionController {
 			e.printStackTrace();
 			model.addAttribute("MSG", failMsg);
 		}
-		model.addAttribute("URL", nextUrl);
+		model.addAttribute("URL", "/tran/add");
 		return "redirect";
 	}
 	

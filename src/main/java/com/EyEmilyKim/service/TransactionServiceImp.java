@@ -1,7 +1,9 @@
 package com.EyEmilyKim.service;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.dao.TransactionDao;
+import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Transaction;
 import com.EyEmilyKim.util.DateUtil;
@@ -20,10 +23,14 @@ public class TransactionServiceImp implements TransactionService {
 	private TransactionDao transactionDao;
 	
 	@Override
-	public List<TransactionDto> getListAll(int user_id) {
+	public List<TransactionDto> getListAll(TranSearchDto dto, int user_id) throws ParseException {
 		System.out.println("TranService > getListAll() called");
 		
-		List<TransactionDto> list = transactionDao.getListAll(user_id);
+		if (dto.getD_FROM() != null) dto.setTS_FROM(DateUtil.stringToTimestamp(dto.getD_FROM()));
+		if (dto.getD_TO() != null) dto.setTS_TO(DateUtil.stringToTimestamp(dto.getD_TO()));
+		dto.setUser_id(user_id);
+    
+		List<TransactionDto> list = transactionDao.getListAll(dto);
 		return list;
 	}
 
