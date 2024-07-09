@@ -13,9 +13,9 @@
 		<div class="listMain">
 		<!-- 거래내역 없음 -->
 			<c:if test="${COUNT == 0 }">
-			<div class="noTrans">
-				<p>	거래내역이 없습니다.</p>
-				<a href="makeAddTrans.do" class="addTrans">가계부 쓰러 가기</a><br><br>
+			<div class="noTran">
+				<p>거래내역이 없습니다.</p>
+				<a href="/tran/add">가계부 쓰러 가기</a>
 			</div>
 			</c:if>
 			

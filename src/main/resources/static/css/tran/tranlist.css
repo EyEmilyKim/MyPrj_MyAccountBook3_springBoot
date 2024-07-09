@@ -6,3 +6,13 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
+
+.noTran {
+	margin: 30px;
+}
+.noTran p {
+	margin-bottom: 20px;
+}
+.noTran a {
+	color: blue; 
+}
