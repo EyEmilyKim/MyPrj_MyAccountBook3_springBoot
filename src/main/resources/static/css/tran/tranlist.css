@@ -19,4 +19,22 @@ tbody tr:nth-child(even) {
 
 #searchBlock {
 	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+}
+#fmSRCH {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+#searchResult {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+#searchResult span {
+	font-weight: bold;
 }

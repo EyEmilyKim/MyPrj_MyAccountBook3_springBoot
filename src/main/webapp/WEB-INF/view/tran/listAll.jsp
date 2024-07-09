@@ -6,21 +6,28 @@
 <main>
 	<div class="contMain">
 		<h2 class="title ">가계부 목록 화면입니다.</h2>
-	
-		<div class="count ">총 <span class="cnt">${COUNT }</span> 건</div>
 		
-		<!-- 검색 블럭 -->
+	<!-- 검색 블럭 -->
 		<div id="searchBlock">
+		<!-- 검색 form -->
 			<form name="fmSRCH" id="fmSRCH">
 				<input type="date" name="D_FROM" value="${param.D_FROM}" id="search_d_from" />
 				 ~ <input type="date" name="D_TO" value="${param.D_TO}" id="search_d_to" /> 
 				<input type="text" name="ITEM" value="${param.ITEM}" placeholder="--내용--" id="search_item" />
 				<input type="submit" value="조회하기" id="search_submit" />
-				<c:if test="${not empty param}">
-					<input type="button" value="전체보기" id="search_reset" />		
-				</c:if>
 			</form>
+		<!-- 검색 결과 표시 -->
+			<c:if test="${not empty param}">
+			<div id="searchResult">
+				<p>기간 : [<span> ${param.D_FROM } </span> ~ <span> ${param.D_TO } </span>] / 
+					내용 : [<span> ${param.ITEM } </span>] 검색 결과입니다.</p> 
+				<input type="button" value="전체보기" id="search_reset" />		
+			</div>
+			</c:if>
 		</div>	<!-- 검색 블럭 끝 -->
+	
+	<!-- 전체 건 수 -->
+		<div class="count ">총 <span class="cnt">${COUNT }</span> 건</div>
 	
 	<!-- 실제 목록 -->
 		<div class="listMain">
