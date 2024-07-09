@@ -16,3 +16,7 @@ tbody tr:nth-child(even) {
 .noTran a {
 	color: blue; 
 }
+
+#searchBlock {
+	margin-bottom: 15px;
+}

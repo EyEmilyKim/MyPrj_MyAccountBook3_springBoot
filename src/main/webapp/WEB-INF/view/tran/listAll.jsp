@@ -9,6 +9,16 @@
 	
 		<div class="count ">총 <span class="cnt">${COUNT }</span> 건</div>
 		
+		<!-- 검색 블럭 -->
+		<div id="searchBlock">
+			<form action="" name="fmSRCH">
+				<input type="date" name="D_FROM" id="search_d_from" />
+				 ~ <input type="date" name="D_TO" id="search_d_to" /> 
+				<input type="text" name="ITEM" placeholder="--내용--" id="search_item" />
+				<input type="submit" value="조회하기" id="search_submit"/>
+			</form>
+		</div>	<!-- 검색 블럭 끝 -->
+	
 	<!-- 실제 목록 -->
 		<div class="listMain">
 		<!-- 거래내역 없음 -->
