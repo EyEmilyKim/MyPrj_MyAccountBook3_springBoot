@@ -14,6 +14,7 @@
 
 <body onload="startClock()">
 <script src="../../js/clock.js"></script>
+<script src="../../js/tran/list.js"></script>
 	
 	<!----------- header 부분 ----------->
 	<tiles:insertAttribute name="header" />

@@ -11,11 +11,14 @@
 		
 		<!-- 검색 블럭 -->
 		<div id="searchBlock">
-			<form action="" name="fmSRCH">
-				<input type="date" name="D_FROM" id="search_d_from" />
-				 ~ <input type="date" name="D_TO" id="search_d_to" /> 
-				<input type="text" name="ITEM" placeholder="--내용--" id="search_item" />
-				<input type="submit" value="조회하기" id="search_submit"/>
+			<form name="fmSRCH" id="fmSRCH">
+				<input type="date" name="D_FROM" value="${param.D_FROM}" id="search_d_from" />
+				 ~ <input type="date" name="D_TO" value="${param.D_TO}" id="search_d_to" /> 
+				<input type="text" name="ITEM" value="${param.ITEM}" placeholder="--내용--" id="search_item" />
+				<input type="submit" value="조회하기" id="search_submit" />
+				<c:if test="${not empty param}">
+					<input type="button" value="전체보기" id="search_reset" />		
+				</c:if>
 			</form>
 		</div>	<!-- 검색 블럭 끝 -->
 	
@@ -78,3 +81,4 @@
 	
 	</div> <!-- contMain 끝 -->
 </main>
+
