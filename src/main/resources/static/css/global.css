@@ -59,4 +59,5 @@
 .tran_id {
 	border: plum solid 1px;
 	width: 80px;
+	display: none;
 }

@@ -6,6 +6,7 @@
 		background-color: var(--main-background-color);
 		padding: 2em;
 		float: right;
+		overflow: hidden;
 	}
 	
 	.contMain { 
