@@ -13,7 +13,7 @@ public interface TransactionDao {
 
 	List<TransactionDto> getListAll(TranSearchDto dto);
 
-	Integer getCount(int user_id);
+	Integer getCount(TranSearchDto dto);
 
 	Transaction getOne(String tran_id);
 

@@ -25,8 +25,8 @@ public class MybatisTransactionDao implements TransactionDao {
 	}
 
 	@Override
-	public Integer getCount(int user_id) {
-		return mapper.getCount(user_id);
+	public Integer getCount(TranSearchDto dto) {
+		return mapper.getCount(dto);
 	}
 
 	@Override

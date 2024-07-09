@@ -26,19 +26,17 @@ public class TransactionServiceImp implements TransactionService {
 	public List<TransactionDto> getListAll(TranSearchDto dto, int user_id) throws ParseException {
 		System.out.println("TranService > getListAll() called");
 		
-		if (dto.getD_FROM() != null) dto.setTS_FROM(DateUtil.stringToTimestamp(dto.getD_FROM()));
-		if (dto.getD_TO() != null) dto.setTS_TO(DateUtil.stringToTimestamp(dto.getD_TO()));
-		dto.setUser_id(user_id);
-    
+		dto = this.setTranSearchDto(dto, user_id);
 		List<TransactionDto> list = transactionDao.getListAll(dto);
 		return list;
 	}
 
 	@Override
-	public Integer getCount(int user_id) {
+	public Integer getCount(TranSearchDto dto, int user_id) throws ParseException {
 		System.out.println("TranService > getCount() called");
 		
-		return transactionDao.getCount(user_id);
+		dto = this.setTranSearchDto(dto, user_id);
+		return transactionDao.getCount(dto);
 	}
 
 	@Override
@@ -97,4 +95,17 @@ public class TransactionServiceImp implements TransactionService {
 		return 0;
 	}
 
+	/* ------------- 공통 함수 ------------- */
+	
+	private TranSearchDto setTranSearchDto(TranSearchDto dto, int user_id) throws ParseException {
+		String d_from = dto.getD_FROM();
+		String d_to = dto.getD_TO();
+		if (d_from != null && d_from != "") dto.setTS_FROM(DateUtil.stringToTimestamp(d_from));
+		if (d_from == "") dto.setTS_FROM(null);
+		if (d_to != null && d_to != "") dto.setTS_TO(DateUtil.stringToTimestamp(d_to));
+		if (d_to == "") dto.setTS_TO(null);
+		dto.setUser_id(user_id);
+		
+		return dto;
+	}
 }

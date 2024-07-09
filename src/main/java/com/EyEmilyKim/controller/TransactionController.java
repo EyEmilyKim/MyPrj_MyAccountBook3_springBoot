@@ -51,7 +51,7 @@ public class TransactionController {
 		try {
 			List<TransactionDto> list = transactionService.getListAll(dto, userId);
 			model.addAttribute("LIST", list);
-			int cnt = transactionService.getCount(userId);
+			int cnt = transactionService.getCount(dto, userId);
 			model.addAttribute("COUNT", cnt);
 		} catch (Exception e) {
 			e.printStackTrace();

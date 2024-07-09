@@ -25,24 +25,33 @@
   <select id="getListAll" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="com.EyEmilyKim.dto.TransactionDto">
 	select * from MAB_TRANSACTIONS_VIEW
     <where>
-        USER_ID = #{user_id}
-        <if test="D_FROM != null">
-            AND TRAN_DATE >= #{D_FROM}
+        USER_ID = #{user_id} 
+        <if test="TS_FROM != null">
+            AND TRAN_DATE >= #{TS_FROM} 
         </if>
-        <if test="D_TO != null">
-            AND TRAN_DATE &lt;= #{D_TO}
+        <if test="TS_TO != null">
+            and TRAN_DATE &lt;= #{TS_TO} 
         </if>
         <if test="ITEM != null and ITEM != ''">
-            AND ITEM LIKE CONCAT('%', #{ITEM}, '%')
+            and ITEM like CONCAT('%', #{ITEM}, '%') 
         </if>
     </where>
     order by MY_SEQNO
   </select>
-  <select id="getCount" resultType="Integer">
+  <select id="getCount" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="Integer">
 	select count(TRAN_ID) from MAB_TRANSACTIONS 
-	<where> 
-	USER_ID = #{userId} 
-	</where> 
+	<where>
+        USER_ID = #{user_id} 
+        <if test="TS_FROM != null">
+            AND TRAN_DATE >= #{TS_FROM} 
+        </if>
+        <if test="TS_TO != null">
+            and TRAN_DATE &lt;= #{TS_TO} 
+        </if>
+        <if test="ITEM != null and ITEM != ''">
+            and ITEM like CONCAT('%', #{ITEM}, '%') 
+        </if>
+    </where>
   </select>
   
 </mapper>

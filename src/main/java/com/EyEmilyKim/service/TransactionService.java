@@ -12,7 +12,7 @@ public interface TransactionService {
 
 	List<TransactionDto> getListAll(TranSearchDto dto, int user_id) throws ParseException;
 
-	Integer getCount(int user_id);
+	Integer getCount(TranSearchDto dto, int user_id) throws ParseException;
 
 	Transaction getOne(String tran_id);
 
