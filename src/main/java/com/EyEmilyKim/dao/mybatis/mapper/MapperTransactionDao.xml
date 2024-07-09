@@ -36,7 +36,7 @@
             and ITEM like CONCAT('%', #{ITEM}, '%') 
         </if>
     </where>
-    order by MY_SEQNO
+    order by TRAN_DATE, INEX desc, MY_SEQNO
   </select>
   <select id="getCount" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="Integer">
 	select count(TRAN_ID) from MAB_TRANSACTIONS 
