@@ -1,22 +1,8 @@
 @charset "UTF-8";
 
-tbody tr:nth-child(odd) {
-	background-color: white;
-}
-tbody tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
+/* ---------- 검색 블럭 ----------*/
 
-.noTran {
-	margin: 30px;
-}
-.noTran p {
-	margin-bottom: 20px;
-}
-.noTran a {
-	color: blue; 
-}
-
+/* 검색 form */
 #searchBlock {
 	margin-bottom: 15px;
 	display: flex;
@@ -30,6 +16,7 @@ tbody tr:nth-child(even) {
 	gap: 10px;
 }
 
+/* 검색 결과 표시 */
 #searchResult {
 	display: flex;
 	flex-direction: row;
@@ -38,24 +25,73 @@ tbody tr:nth-child(even) {
 #searchResult span {
 	font-weight: bold;
 }
-/* ---------- 페이지 목록 ----------*/
-.pagination {
+
+/* ---------- 실제 목록 ----------*/
+.listMain {
+	border: solid 1px gray;
+	border-radius: 10px;
+	width: 100%;
+	padding: 15px;
+}
+
+/* 거래내역 없음 */
+.noTran {
+	margin: 30px;
+}
+.noTran p {
+	margin-bottom: 20px;
+}
+.noTran a {
+	color: blue; 
+}
+
+/* 거래내역 테이블 */
+.tranTable {
+	width: 100%;
+	border-collapse: collapse; /* 셀 경계 병합 */
+}
+tbody tr:nth-child(odd) {
+	background-color: white;
+}
+tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.tran_cate, .tran_meth {
+	width: 18%;
+}
+
+/* ---------- 목록 컨트롤 ----------*/
+#controlViewBlock {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-size: medium;
+	margin-top: 20px;
+}
+
+/* 페이지 블럭 */
+#pageBlock {
 	display: flex;
 	justify-content: center;
-	padding: 10px 0;
 }
-.pagination > * {
+#pageBlock > * {
 	margin: 0 2px;
 	padding: 3px 6px;
 }
-.pagination a {
+#pageBlock a {
 	color: var(--header-text-color);
 }
-.pagination a:hover {
+#pageBlock a:hover {
     background-color: var(--main-selectedMenu-color);
 }
-.pagination .current {
+#pageBlock .current {
     background-color: var(--aside-background-color);
     color: var(--aside-text-color);
     font-weight: bold;
+}
+
+/* N줄보기 블럭 */
+#slct_rc {
+	font-size: medium;
 }
