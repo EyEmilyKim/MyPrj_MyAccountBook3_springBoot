@@ -1,18 +1,17 @@
 package com.EyEmilyKim.service;
 
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 
+import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
-import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Transaction;
 
 public interface TransactionService {
 
-	List<TransactionDto> getListAll(TranSearchDto dto, int user_id) throws ParseException;
+	TranPageDto getListAll(TranSearchDto searchDto, int user_id) throws ParseException;
 
-	Integer getCount(TranSearchDto dto, int user_id) throws ParseException;
+	Integer getCount(TranSearchDto searchDto, int user_id) throws ParseException;
 
 	Transaction getOne(String tran_id);
 

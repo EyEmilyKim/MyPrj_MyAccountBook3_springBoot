@@ -38,3 +38,20 @@ tbody tr:nth-child(even) {
 #searchResult span {
 	font-weight: bold;
 }
+/* ---------- 페이지 목록 ----------*/
+.pagination {
+	display: flex;
+	justify-content: center;
+	padding: 10px 0;
+}
+.pagination > * {
+	margin: 0 2px;
+	padding: 3px 6px;
+}
+.pagination a:hover {
+    background-color: var(--main-selectedMenu-color);
+}
+.pagination .current {
+    background-color: var(--aside-background-color);
+    color: var(--aside-text-color);
+}

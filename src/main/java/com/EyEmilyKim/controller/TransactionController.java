@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
-import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.service.CategoryService;
@@ -42,17 +42,15 @@ public class TransactionController {
 	/*-------- 거래내역 목록 --------*/
 	
 	@GetMapping("listAll")
-	public String listAll(@ModelAttribute TranSearchDto dto, HttpServletRequest req, Model model) {
+	public String listAll(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
 		System.out.println("TransactionController > listAll()@Get called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(dto);
+		DtoUtil.printDto(searchDto);
 		
 		try {
-			List<TransactionDto> list = transactionService.getListAll(dto, userId);
-			model.addAttribute("LIST", list);
-			int cnt = transactionService.getCount(dto, userId);
-			model.addAttribute("COUNT", cnt);
+			TranPageDto resultDto = transactionService.getListAll(searchDto, userId);
+			model.addAttribute("DTO", resultDto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", failMsg);

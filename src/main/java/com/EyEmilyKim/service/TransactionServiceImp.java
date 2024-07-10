@@ -3,7 +3,6 @@ package com.EyEmilyKim.service;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.dao.TransactionDao;
+import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Transaction;
@@ -23,20 +23,33 @@ public class TransactionServiceImp implements TransactionService {
 	private TransactionDao transactionDao;
 	
 	@Override
-	public List<TransactionDto> getListAll(TranSearchDto dto, int user_id) throws ParseException {
+	public TranPageDto getListAll(TranSearchDto searchDto, int user_id) throws ParseException {
 		System.out.println("TranService > getListAll() called");
 		
-		dto = this.setTranSearchDto(dto, user_id);
-		List<TransactionDto> list = transactionDao.getListAll(dto);
-		return list;
+		// 실제 데이터 가져오기
+		searchDto = this.setTranSearchDto(searchDto, user_id);
+		List<TransactionDto> list = transactionDao.getListAll(searchDto);
+		// 전체 데이터 수 가져오기
+		int totalCount = transactionDao.getCount(searchDto);
+		// 총 페이지 수 계산
+		int totalPages = (int) Math.ceil((double) totalCount / searchDto.getRC());
+		// 필요한 정보 DTO 에 설정해서 반환
+		TranPageDto resultDto = new TranPageDto();
+		resultDto.setList(list);
+		resultDto.setTotalCount(totalCount);
+		resultDto.setTotalPages(totalPages);
+		resultDto.setCurrentPage(searchDto.getPG());
+		resultDto.setRowCount(searchDto.getRC());
+		
+		return resultDto;
 	}
 
 	@Override
-	public Integer getCount(TranSearchDto dto, int user_id) throws ParseException {
+	public Integer getCount(TranSearchDto searchDto, int user_id) throws ParseException {
 		System.out.println("TranService > getCount() called");
 		
-		dto = this.setTranSearchDto(dto, user_id);
-		return transactionDao.getCount(dto);
+		searchDto = this.setTranSearchDto(searchDto, user_id);
+		return transactionDao.getCount(searchDto);
 	}
 
 	@Override

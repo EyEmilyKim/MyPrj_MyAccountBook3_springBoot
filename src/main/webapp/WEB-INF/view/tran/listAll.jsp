@@ -28,19 +28,19 @@
 		</div>	<!-- 검색 블럭 끝 -->
 	
 	<!-- 전체 건 수 -->
-		<div class="count ">총 <span class="cnt">${COUNT }</span> 건</div>
+		<div class="count ">총 <span class="cnt">${DTO.totalCount }</span> 건</div>
 	
 	<!-- 실제 목록 -->
 		<div class="listMain">
 		<!-- 거래내역 없음 -->
-			<c:if test="${COUNT == 0 }">
+			<c:if test="${DTO.totalCount == 0 }">
 			<div class="noTran">
 				<p>거래내역이 없습니다.</p>
 				<a href="/tran/add">가계부 쓰러 가기</a>
 			</div>
 			</c:if>
 			
-			<c:if test="${COUNT > 0 }">
+			<c:if test="${DTO.totalCount > 0 }">
 		<!-- 거래내역 테이블 -->
 			<table class="table " >
 			<thead class="">
@@ -56,7 +56,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${LIST }" var="t">
+				<c:forEach items="${DTO.list }" var="t">
 				  <c:set var = "urlUpd" value="del?TRAN_ID=${t.tran_id }" />
 				  <c:set var = "urlDel" value="del?TRAN_ID=${t.tran_id }" />
 					<tr>
@@ -84,12 +84,12 @@
 			</c:if>
 		</div> <!-- 실제 목록 끝 -->
 	
-	<!-- 목록 화면 컨트롤 -->
-		<div class="rowCountBlock">
-		<!-- N줄보기 form -->
-			<c:set var="selectedRC" value="${param.RC != null ? param.RC : 10 }" />
+	<!-- N줄보기 블럭 -->
+		<div id="rowCountBlock">
+			<c:set var="selectedRC" value="${DTO.rowCount }" />
 			<c:set var="optionString" value="5,10,15" />
 			<c:set var="optionList" value="${fn:split(optionString, ',')}" />
+		<!-- N줄보기 form -->
 			<form name="fmRC" id="fmRC">
 				<select name="RC" id="slct_rc">
 				<c:forEach var="option" items="${optionList }">
@@ -100,6 +100,51 @@
 				</select>
 			</form>
 		</div>
+	
+	<!-- 페이지 블럭 -->
+		<div id="pageBlock">
+		    <c:set var="totalPages" value="${DTO.totalPages}" />
+		    <c:set var="currentPage" value="${DTO.currentPage}" />
+		    <c:set var="recordsPerPage" value="5" />
+		    <c:set var="pagesPerSet" value="2" />
+		
+		    <c:set var="currentSet" value="${ ((currentPage - 1) / pagesPerSet) + 1 }" />
+		    <c:set var="startPage" value="${ (currentSet - 1) * pagesPerSet + 1 }" />
+		    <c:set var="endPage" value="${ startPage + pagesPerSet - 1 }" />
+		    <c:if test="${endPage > totalPages}">
+		        <c:set var="endPage" value="${totalPages}" />
+		    </c:if>
+		    <c:out value="currentSet : ${currentSet }, currentPage : ${currentPage }" />
+		    <c:out value="startPage : ${startPage }, endPage : ${endPage }" />
+		    <c:out value="totalPages : ${totalPages }, pagesPerSet : ${pagesPerSet }" />
+		
+		    <!-- 페이지 목록 -->
+		    <div class="pagination">
+		        <!-- 이전 페이지 세트로 이동 -->
+		        <c:if test="${currentSet > 1}">
+		            <fmt:formatNumber value="${startPage - pagesPerSet}" type="number" var="prevPage" />
+		            <a href="?RC=${selectedRC}&PG=${prevPage}">&laquo; 이전</a>
+		        </c:if>
+		        <!-- 페이지 번호 생성 -->	
+		        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+		            <c:choose>
+		                <c:when test="${i == currentPage}">
+		                    <span class="current">${i}</span>
+		                </c:when>
+		                <c:otherwise>
+		                    <a href="?RC=${selectedRC}&PG=${i}">${i}</a>
+		                </c:otherwise>
+		            </c:choose>
+		        </c:forEach>
+		        <!-- 다음 페이지 세트로 이동 -->
+		        <c:if test="${endPage < totalPages}">
+		            <fmt:formatNumber value="${endPage + 1}" type="number" var="nextPage" />
+		            <a href="?RC=${selectedRC}&PG=${nextPage}">다음 &raquo;</a>
+		        </c:if>
+		    </div>
+		</div>
+
+			
 	
 	
 	</div> <!-- contMain 끝 -->
