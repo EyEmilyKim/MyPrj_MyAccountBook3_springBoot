@@ -103,26 +103,17 @@
 	
 	<!-- 페이지 블럭 -->
 		<div id="pageBlock">
-		    <c:set var="totalPages" value="${DTO.totalPages}" />
-		    <c:set var="currentPage" value="${DTO.currentPage}" />
-		    <c:set var="recordsPerPage" value="5" />
-		    <c:set var="pagesPerSet" value="2" />
-		
-		    <c:set var="currentSet" value="${ ((currentPage - 1) / pagesPerSet) + 1 }" />
-		    <c:set var="startPage" value="${ (currentSet - 1) * pagesPerSet + 1 }" />
-		    <c:set var="endPage" value="${ startPage + pagesPerSet - 1 }" />
-		    <c:if test="${endPage > totalPages}">
-		        <c:set var="endPage" value="${totalPages}" />
-		    </c:if>
-		    <c:out value="currentSet : ${currentSet }, currentPage : ${currentPage }" />
-		    <c:out value="startPage : ${startPage }, endPage : ${endPage }" />
-		    <c:out value="totalPages : ${totalPages }, pagesPerSet : ${pagesPerSet }" />
+		    <c:set var="totalPages" value="${DTO.totalPages }" />
+		    <c:set var="currentPage" value="${DTO.currentPage }" />
+		    <c:set var="currentSet" value="${DTO.currentSet }" />
+		    <c:set var="startPage" value="${DTO.startPage }" />
+		    <c:set var="endPage" value="${DTO.endPage }" />
 		
 		    <!-- 페이지 목록 -->
 		    <div class="pagination">
 		        <!-- 이전 페이지 세트로 이동 -->
 		        <c:if test="${currentSet > 1}">
-		            <fmt:formatNumber value="${startPage - pagesPerSet}" type="number" var="prevPage" />
+		            <fmt:formatNumber value="${startPage - 1}" type="number" var="prevPage" />
 		            <a href="?RC=${selectedRC}&PG=${prevPage}">&laquo; 이전</a>
 		        </c:if>
 		        <!-- 페이지 번호 생성 -->	

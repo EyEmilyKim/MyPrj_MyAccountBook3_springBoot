@@ -21,4 +21,8 @@ public class TranPageDto {
 	private int currentPage;
 	private int rowCount;
 	
+	private int currentSet;
+	private int startPage;
+	private int endPage;
+	
 }

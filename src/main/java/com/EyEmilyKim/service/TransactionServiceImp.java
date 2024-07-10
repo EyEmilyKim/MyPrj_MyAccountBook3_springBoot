@@ -29,22 +29,29 @@ public class TransactionServiceImp implements TransactionService {
 	@Override
 	public TranPageDto getListAll(TranSearchDto searchDto, int user_id) throws ParseException {
 		System.out.println("TranService > getListAll() called");
-		System.out.println("clv.toString() : "+clv.toString());
 		
 		// 실제 데이터 가져오기
 		searchDto = this.setTranSearchDto(searchDto, user_id);
 		List<TransactionDto> list = transactionDao.getListAll(searchDto);
 		// 전체 데이터 수 가져오기
 		int totalCount = transactionDao.getCount(searchDto);
-		// 총 페이지 수 계산
+		// 페이징 관련 계산
 		int totalPages = (int) Math.ceil((double) totalCount / searchDto.getRC());
+		int currentPage = searchDto.getPG();
+		int pagesPerSet = clv.getFinal_pagesPerSet();
+		int currentSet = (currentPage - 1) / pagesPerSet + 1;
+		int startPage = (currentSet - 1) * pagesPerSet + 1;
+		int endPage = Math.min( (startPage + pagesPerSet - 1), totalPages);
 		// 필요한 정보 DTO 에 설정해서 반환
 		TranPageDto resultDto = new TranPageDto();
 		resultDto.setList(list);
 		resultDto.setTotalCount(totalCount);
 		resultDto.setTotalPages(totalPages);
-		resultDto.setCurrentPage(searchDto.getPG());
+		resultDto.setCurrentPage(currentPage);
 		resultDto.setRowCount(searchDto.getRC());
+		resultDto.setCurrentSet(currentSet);
+		resultDto.setStartPage(startPage);
+		resultDto.setEndPage(endPage);
 		
 		return resultDto;
 	}
@@ -115,26 +122,25 @@ public class TransactionServiceImp implements TransactionService {
 
 	/* ------------- 공통 함수 ------------- */
 	
-	private TranSearchDto setTranSearchDto(TranSearchDto dto, int user_id) throws ParseException {
+	private TranSearchDto setTranSearchDto(TranSearchDto searchDto, int user_id) throws ParseException {
 		// 검색 조건 설정
-		String d_from = dto.getD_FROM();
-		String d_to = dto.getD_TO();
-		if (d_from != null && d_from != "") dto.setTS_FROM(DateUtil.stringToTimestamp(d_from));
-		if (d_from == "") dto.setTS_FROM(null);
-		if (d_to != null && d_to != "") dto.setTS_TO(DateUtil.stringToTimestamp(d_to));
-		if (d_to == "") dto.setTS_TO(null);
-		dto.setUser_id(user_id);
+		String d_from = searchDto.getD_FROM();
+		String d_to = searchDto.getD_TO();
+		if (d_from != null && d_from != "") searchDto.setTS_FROM(DateUtil.stringToTimestamp(d_from));
+		if (d_from == "") searchDto.setTS_FROM(null);
+		if (d_to != null && d_to != "") searchDto.setTS_TO(DateUtil.stringToTimestamp(d_to));
+		if (d_to == "") searchDto.setTS_TO(null);
+		searchDto.setUser_id(user_id);
 		// 페이지 설정
-		if(dto.getPG() == null) dto.setPG(1);
-		int pg = dto.getPG();
+		if(searchDto.getPG() == null) searchDto.setPG(1);
+		int pg = searchDto.getPG();
 		// N줄 보기 설정
-		if(dto.getRC() == null) dto.setRC(10);
-		int rc = dto.getRC();
+		if(searchDto.getRC() == null) searchDto.setRC(clv.getDefault_rowCount());
+		int rc = searchDto.getRC();
 		// DB 조회할 덩어리(offset, limit) 설정
 		int start = (pg - 1) * rc;
-		dto.setStart(start);
-		System.out.println("setTranSearchDto() > pg, rc, start : "+pg+", "+rc+", "+start);
+		searchDto.setStart(start);
 		
-		return dto;
+		return searchDto;
 	}
 }
