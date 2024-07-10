@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.EyEmilyKim.config.ClientViewDefault;
 import com.EyEmilyKim.dao.TransactionDao;
 import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
@@ -22,9 +23,13 @@ public class TransactionServiceImp implements TransactionService {
 	@Autowired
 	private TransactionDao transactionDao;
 	
+	@Autowired
+	private ClientViewDefault clv;
+	
 	@Override
 	public TranPageDto getListAll(TranSearchDto searchDto, int user_id) throws ParseException {
 		System.out.println("TranService > getListAll() called");
+		System.out.println("clv.toString() : "+clv.toString());
 		
 		// 실제 데이터 가져오기
 		searchDto = this.setTranSearchDto(searchDto, user_id);
