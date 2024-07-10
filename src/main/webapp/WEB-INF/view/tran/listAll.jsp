@@ -18,7 +18,7 @@
 				<input type="submit" value="조회하기" id="search_submit" />
 			</form>
 		<!-- 검색 결과 표시 -->
-			<c:if test="${not empty param}">
+			<c:if test="${not empty param.D_FROM || not empty param.D_TO || not empty param.ITEM}">
 			<div id="searchResult">
 				<p>기간 : [<span> ${param.D_FROM } </span> ~ <span> ${param.D_TO } </span>] / 
 					내용 : [<span> ${param.ITEM } </span>] 검색 결과입니다.</p> 
