@@ -1,5 +1,6 @@
 package com.EyEmilyKim.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -11,7 +12,13 @@ import lombok.ToString;
 @ToString
 @Component
 public class ClientViewDefault {
-	private Integer default_userId = 1;
-	private Integer default_rowCount = 5;
-	private Integer final_pagesPerSet = 2;
+	
+	@Value("${client.view.default_userId}")
+	private Integer default_userId;
+	
+	@Value("${client.view.default_rowCount}")
+	private Integer default_rowCount;
+	
+	@Value("${client.view.final_pagesPerSet}")
+	private Integer final_pagesPerSet;
 }
