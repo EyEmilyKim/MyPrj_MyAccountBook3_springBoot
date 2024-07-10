@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	if(search_reset){
 		search_reset.addEventListener('click', () => {
-			alert('search_reset clicked');
 			window.location = "/tran/listAll";
 		});
 	}
