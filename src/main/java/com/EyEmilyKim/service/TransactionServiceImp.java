@@ -31,27 +31,12 @@ public class TransactionServiceImp implements TransactionService {
 		System.out.println("TranService > getListAll() called");
 		
 		// 실제 데이터 가져오기
-		searchDto = this.setTranSearchDto(searchDto, user_id);
+		searchDto = this.populateTranSearchDto(searchDto, user_id);
 		List<TransactionDto> list = transactionDao.getListAll(searchDto);
 		// 전체 데이터 수 가져오기
 		int totalCount = transactionDao.getCount(searchDto);
-		// 페이징 관련 계산
-		int totalPages = (int) Math.ceil((double) totalCount / searchDto.getRC());
-		int currentPage = searchDto.getPG();
-		int pagesPerSet = clv.getFinal_pagesPerSet();
-		int currentSet = (currentPage - 1) / pagesPerSet + 1;
-		int startPage = (currentSet - 1) * pagesPerSet + 1;
-		int endPage = Math.min( (startPage + pagesPerSet - 1), totalPages);
-		// 필요한 정보 DTO 에 설정해서 반환
-		TranPageDto resultDto = new TranPageDto();
-		resultDto.setList(list);
-		resultDto.setTotalCount(totalCount);
-		resultDto.setTotalPages(totalPages);
-		resultDto.setCurrentPage(currentPage);
-		resultDto.setRowCount(searchDto.getRC());
-		resultDto.setCurrentSet(currentSet);
-		resultDto.setStartPage(startPage);
-		resultDto.setEndPage(endPage);
+		// 데이터 전달해서 페이징 변수까지 모두 담아오기
+		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto);
 		
 		return resultDto;
 	}
@@ -60,7 +45,7 @@ public class TransactionServiceImp implements TransactionService {
 	public Integer getCount(TranSearchDto searchDto, int user_id) throws ParseException {
 		System.out.println("TranService > getCount() called");
 		
-		searchDto = this.setTranSearchDto(searchDto, user_id);
+		searchDto = this.populateTranSearchDto(searchDto, user_id);
 		return transactionDao.getCount(searchDto);
 	}
 
@@ -122,7 +107,7 @@ public class TransactionServiceImp implements TransactionService {
 
 	/* ------------- 공통 함수 ------------- */
 	
-	private TranSearchDto setTranSearchDto(TranSearchDto searchDto, int user_id) throws ParseException {
+	private TranSearchDto populateTranSearchDto(TranSearchDto searchDto, int user_id) throws ParseException {
 		// 검색 조건 설정
 		String d_from = searchDto.getD_FROM();
 		String d_to = searchDto.getD_TO();
@@ -142,5 +127,27 @@ public class TransactionServiceImp implements TransactionService {
 		searchDto.setStart(start);
 		
 		return searchDto;
+	}
+	
+	private TranPageDto populateTranPageDto(List<TransactionDto> list, int totalCount, TranSearchDto searchDto) {
+			// 페이징 변수 계산
+			int totalPages = (int) Math.ceil((double) totalCount / searchDto.getRC());
+			int currentPage = searchDto.getPG();
+			int pagesPerSet = clv.getFinal_pagesPerSet();
+			int currentSet = (currentPage - 1) / pagesPerSet + 1;
+			int startPage = (currentSet - 1) * pagesPerSet + 1;
+			int endPage = Math.min( (startPage + pagesPerSet - 1), totalPages);
+			// 필요한 정보 DTO 에 설정해서 반환
+			TranPageDto resultDto = new TranPageDto();
+			resultDto.setList(list);
+			resultDto.setTotalCount(totalCount);
+			resultDto.setTotalPages(totalPages);
+			resultDto.setCurrentPage(currentPage);
+			resultDto.setRowCount(searchDto.getRC());
+			resultDto.setCurrentSet(currentSet);
+			resultDto.setStartPage(startPage);
+			resultDto.setEndPage(endPage);
+			
+			return resultDto;
 	}
 }
