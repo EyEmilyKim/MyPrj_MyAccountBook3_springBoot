@@ -42,6 +42,21 @@ public class TransactionServiceImp implements TransactionService {
 	}
 
 	@Override
+	public TranPageDto getListIn(TranSearchDto searchDto, int user_id) throws ParseException {
+		System.out.println("TranService > getListIn() called");
+		
+		// 실제 데이터 가져오기
+		searchDto = this.populateTranSearchDto(searchDto, user_id);
+		List<TransactionDto> list = transactionDao.getListIn(searchDto);
+		// 전체 데이터 수 가져오기
+		int totalCount = transactionDao.getCountIn(searchDto);
+		// 데이터 전달해서 페이징 변수까지 모두 담아오기
+		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto);
+		
+		return resultDto;
+	}
+	
+	@Override
 	public Transaction getOne(String tran_id) {
 		// TODO Auto-generated method stub
 		return null;

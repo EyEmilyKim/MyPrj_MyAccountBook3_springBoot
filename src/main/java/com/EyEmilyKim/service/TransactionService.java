@@ -10,7 +10,7 @@ import com.EyEmilyKim.entity.Transaction;
 public interface TransactionService {
 
 	TranPageDto getListAll(TranSearchDto searchDto, int user_id) throws ParseException;
-
+	TranPageDto getListIn(TranSearchDto searchDto, int user_id) throws ParseException;
 
 	Transaction getOne(String tran_id);
 

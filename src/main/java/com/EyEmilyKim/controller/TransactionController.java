@@ -59,6 +59,24 @@ public class TransactionController {
 		return "tran.listAll";
 	}
 	
+	@GetMapping("listIn") // 수입 목록
+	public String listIn(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
+		System.out.println("TransactionController > listIn()@Get called");
+		Integer userId = (Integer) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
+		DtoUtil.printDto(searchDto);
+		try {
+			TranPageDto resultDto = transactionService.getListIn(searchDto, userId);
+			model.addAttribute("DTO", resultDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", "/tran/listIn");
+			return "redirect";
+		}
+		return "tran.listIn";
+	}
+	
 	/*-------- 거래내역 추가 --------*/
 	
 	@GetMapping("add")
