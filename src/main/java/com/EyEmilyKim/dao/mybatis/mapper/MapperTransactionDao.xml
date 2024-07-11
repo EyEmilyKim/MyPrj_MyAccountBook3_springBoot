@@ -22,15 +22,21 @@
   	 #{reg_date} )
   </insert>
 
-  <select id="getListAll" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="com.EyEmilyKim.dto.TransactionDto">
+  <select id="getList" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="com.EyEmilyKim.dto.TransactionDto">
 	select * from MAB_TRANSACTIONS_VIEW
     <where>
         USER_ID = #{user_id} 
-        <if test="TS_FROM != null">
-            AND TRAN_DATE >= #{TS_FROM} 
+        <if test="inex == 'IN'">
+        	AND INEX = 'IN' 
         </if>
-        <if test="TS_TO != null">
-            and TRAN_DATE &lt;= #{TS_TO} 
+        <if test="inex == 'EX'">
+        	AND INEX = 'EX' 
+        </if>
+        <if test="ts_from != null">
+            AND TRAN_DATE >= #{ts_from} 
+        </if>
+        <if test="ts_to != null">
+            and TRAN_DATE &lt;= #{ts_to} 
         </if>
         <if test="ITEM != null and ITEM != ''">
             and ITEM like CONCAT('%', #{ITEM}, '%') 
@@ -40,51 +46,21 @@
     LIMIT #{RC} OFFSET #{start}
   </select>
   
-  <select id="getListIn" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="com.EyEmilyKim.dto.TransactionDto">
-	select * from MAB_TRANSACTIONS_VIEW
-    <where>
-        USER_ID = #{user_id} 
-        AND INEX = 'IN' 
-        <if test="TS_FROM != null">
-            AND TRAN_DATE >= #{TS_FROM} 
-        </if>
-        <if test="TS_TO != null">
-            and TRAN_DATE &lt;= #{TS_TO} 
-        </if>
-        <if test="ITEM != null and ITEM != ''">
-            and ITEM like CONCAT('%', #{ITEM}, '%') 
-        </if>
-    </where>
-    order by TRAN_DATE, INEX desc, MY_SEQNO 
-    LIMIT #{RC} OFFSET #{start}
-  </select>
-  
-  <select id="getCountAll" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="Integer">
+  <select id="getCount" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="Integer">
 	select count(TRAN_ID) from MAB_TRANSACTIONS 
 	<where>
         USER_ID = #{user_id} 
-        <if test="TS_FROM != null">
-            AND TRAN_DATE >= #{TS_FROM} 
+        <if test="inex == 'IN'">
+        	AND INEX = 'IN' 
         </if>
-        <if test="TS_TO != null">
-            and TRAN_DATE &lt;= #{TS_TO} 
+        <if test="inex == 'EX'">
+        	AND INEX = 'EX' 
         </if>
-        <if test="ITEM != null and ITEM != ''">
-            and ITEM like CONCAT('%', #{ITEM}, '%') 
+        <if test="ts_from != null">
+            AND TRAN_DATE >= #{ts_from} 
         </if>
-    </where>
-  </select>
-  
-  <select id="getCountIn" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="Integer">
-	select count(TRAN_ID) from MAB_TRANSACTIONS 
-	<where>
-        USER_ID = #{user_id} 
-        AND INEX = 'IN' 
-        <if test="TS_FROM != null">
-            AND TRAN_DATE >= #{TS_FROM} 
-        </if>
-        <if test="TS_TO != null">
-            and TRAN_DATE &lt;= #{TS_TO} 
+        <if test="ts_to != null">
+            and TRAN_DATE &lt;= #{ts_to} 
         </if>
         <if test="ITEM != null and ITEM != ''">
             and ITEM like CONCAT('%', #{ITEM}, '%') 

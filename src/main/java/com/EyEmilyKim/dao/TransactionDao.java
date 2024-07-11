@@ -11,11 +11,9 @@ import com.EyEmilyKim.entity.Transaction;
 @Mapper
 public interface TransactionDao {
 
-	List<TransactionDto> getListAll(TranSearchDto dto);
-	List<TransactionDto> getListIn(TranSearchDto dto);
+	List<TransactionDto> getList(TranSearchDto dto);
 
-	Integer getCountAll(TranSearchDto dto);
-	Integer getCountIn(TranSearchDto dto);
+	Integer getCount(TranSearchDto dto);
 
 	Transaction getOne(String tran_id);
 

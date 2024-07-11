@@ -16,11 +16,11 @@ import lombok.ToString;
 public class TranSearchDto {
 	private String D_FROM;
 	private String D_TO;
-	private String INEX;
 	private String ITEM;
+	private String inex;
 	private Integer user_id;
-	private Timestamp TS_FROM;
-	private Timestamp TS_TO;
+	private Timestamp ts_from;
+	private Timestamp ts_to;
 	private Integer RC;
 	private Integer PG;
 	private Integer start;

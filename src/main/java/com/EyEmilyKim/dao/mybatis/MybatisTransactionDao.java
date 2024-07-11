@@ -20,23 +20,13 @@ public class MybatisTransactionDao implements TransactionDao {
 	}
 
 	@Override
-	public List<TransactionDto> getListAll(TranSearchDto dto) {
-		return mapper.getListAll(dto);
-	}
-	
-	@Override
-	public List<TransactionDto> getListIn(TranSearchDto dto) {
-		return mapper.getListIn(dto);
+	public List<TransactionDto> getList(TranSearchDto dto) {
+		return mapper.getList(dto);
 	}
 
 	@Override
-	public Integer getCountAll(TranSearchDto dto) {
-		return mapper.getCountAll(dto);
-	}
-	
-	@Override
-	public Integer getCountIn(TranSearchDto dto) {
-		return mapper.getCountIn(dto);
+	public Integer getCount(TranSearchDto dto) {
+		return mapper.getCount(dto);
 	}
 
 	@Override

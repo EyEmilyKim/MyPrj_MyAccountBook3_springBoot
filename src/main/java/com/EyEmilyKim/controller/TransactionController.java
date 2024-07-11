@@ -48,7 +48,7 @@ public class TransactionController {
 		System.out.println("userId : "+userId);
 		DtoUtil.printDto(searchDto);
 		try {
-			TranPageDto resultDto = transactionService.getListAll(searchDto, userId);
+			TranPageDto resultDto = transactionService.getList(searchDto, userId, "");
 			model.addAttribute("DTO", resultDto);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class TransactionController {
 		System.out.println("userId : "+userId);
 		DtoUtil.printDto(searchDto);
 		try {
-			TranPageDto resultDto = transactionService.getListIn(searchDto, userId);
+			TranPageDto resultDto = transactionService.getList(searchDto, userId, "IN");
 			model.addAttribute("DTO", resultDto);
 		} catch (Exception e) {
 			e.printStackTrace();

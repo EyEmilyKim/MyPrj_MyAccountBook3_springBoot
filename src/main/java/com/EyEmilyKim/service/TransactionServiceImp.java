@@ -27,29 +27,14 @@ public class TransactionServiceImp implements TransactionService {
 	private ClientViewDefault clv;
 	
 	@Override
-	public TranPageDto getListAll(TranSearchDto searchDto, int user_id) throws ParseException {
-		System.out.println("TranService > getListAll() called");
+	public TranPageDto getList(TranSearchDto searchDto, int user_id, String inex) throws ParseException {
+		System.out.println("TranService > getList() called");
 		
 		// 실제 데이터 가져오기
-		searchDto = this.populateTranSearchDto(searchDto, user_id);
-		List<TransactionDto> list = transactionDao.getListAll(searchDto);
+		searchDto = this.populateTranSearchDto(searchDto, user_id, inex);
+		List<TransactionDto> list = transactionDao.getList(searchDto);
 		// 전체 데이터 수 가져오기
-		int totalCount = transactionDao.getCountAll(searchDto);
-		// 데이터 전달해서 페이징 변수까지 모두 담아오기
-		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto);
-		
-		return resultDto;
-	}
-
-	@Override
-	public TranPageDto getListIn(TranSearchDto searchDto, int user_id) throws ParseException {
-		System.out.println("TranService > getListIn() called");
-		
-		// 실제 데이터 가져오기
-		searchDto = this.populateTranSearchDto(searchDto, user_id);
-		List<TransactionDto> list = transactionDao.getListIn(searchDto);
-		// 전체 데이터 수 가져오기
-		int totalCount = transactionDao.getCountIn(searchDto);
+		int totalCount = transactionDao.getCount(searchDto);
 		// 데이터 전달해서 페이징 변수까지 모두 담아오기
 		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto);
 		
@@ -114,14 +99,15 @@ public class TransactionServiceImp implements TransactionService {
 
 	/* ------------- 공통 함수 ------------- */
 	
-	private TranSearchDto populateTranSearchDto(TranSearchDto searchDto, int user_id) throws ParseException {
+	private TranSearchDto populateTranSearchDto(TranSearchDto searchDto, int user_id, String inex) throws ParseException {
 		// 검색 조건 설정
 		String d_from = searchDto.getD_FROM();
 		String d_to = searchDto.getD_TO();
-		if (d_from != null && d_from != "") searchDto.setTS_FROM(DateUtil.stringToTimestamp(d_from));
-		if (d_from == "") searchDto.setTS_FROM(null);
-		if (d_to != null && d_to != "") searchDto.setTS_TO(DateUtil.stringToTimestamp(d_to));
-		if (d_to == "") searchDto.setTS_TO(null);
+		if (d_from != null && d_from != "") searchDto.setTs_from(DateUtil.stringToTimestamp(d_from));
+		if (d_from == "") searchDto.setTs_from(null);
+		if (d_to != null && d_to != "") searchDto.setTs_to(DateUtil.stringToTimestamp(d_to));
+		if (d_to == "") searchDto.setTs_to(null);
+		if (inex != "") searchDto.setInex(inex);
 		searchDto.setUser_id(user_id);
 		// 페이지 설정
 		if(searchDto.getPG() == null) searchDto.setPG(1);
