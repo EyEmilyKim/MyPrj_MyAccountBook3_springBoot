@@ -44,6 +44,9 @@
         <if test="CATE_NAME != null and CATE_NAME != ''">
             and CATE_NAME = #{CATE_NAME}  
         </if>
+        <if test="METH_NAME != null and METH_NAME != ''">
+            and METH_NAME = #{METH_NAME}  
+        </if>
     </where>
     order by TRAN_DATE, INEX desc, MY_SEQNO 
     LIMIT #{RC} OFFSET #{start}
@@ -70,6 +73,9 @@
         </if>
         <if test="CATE_NAME != null and CATE_NAME != ''">
             and CATE_NAME = #{CATE_NAME}  
+        </if>
+        <if test="METH_NAME != null and METH_NAME != ''">
+            and METH_NAME = #{METH_NAME}  
         </if>
     </where>
   </select>

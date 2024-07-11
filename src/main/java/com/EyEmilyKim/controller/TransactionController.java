@@ -31,7 +31,7 @@ public class TransactionController {
 	CategoryService categoryService;
 	
 	@Autowired
-	MethodService methodeService;
+	MethodService methodService;
 	
 	@Autowired
 	TransactionService transactionService;
@@ -82,10 +82,25 @@ public class TransactionController {
 	}
 	
 	@GetMapping("listEx") // 지출 목록
-	public String listEx() {
+	public String listEx(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
 		System.out.println("TransactionController > listEx()@Get called");
-		
-		return "root.comingSoon";
+		Integer userId = (Integer) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
+		DtoUtil.printDto(searchDto);
+		try {
+			TranPageDto resultDto = transactionService.getList(searchDto, userId, "EX");
+			model.addAttribute("DTO", resultDto);
+			List<String> cname_list = categoryService.getNameList(userId, "EX");
+			model.addAttribute("CNAME_LIST", cname_list);
+			List<String> mname_list = methodService.getNameList(userId);
+			model.addAttribute("MNAME_LIST", mname_list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+			model.addAttribute("URL", "/tran/listIn");
+			return "redirect";
+		}
+		return "tran.listEx";
 	}
 	
 	/*-------- 거래내역 추가 --------*/
@@ -100,7 +115,7 @@ public class TransactionController {
 		model.addAttribute("MSN", maxMySqn);
 		List<Category> catelist = categoryService.getList(userId);
 		model.addAttribute("CATELIST", catelist);
-		List<Method> methlist = methodeService.getList(userId);
+		List<Method> methlist = methodService.getList(userId);
 		model.addAttribute("METHLIST", methlist);
 		
 		return "tranAdd.add";

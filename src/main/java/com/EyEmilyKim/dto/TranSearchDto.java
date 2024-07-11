@@ -18,6 +18,7 @@ public class TranSearchDto {
 	private String D_TO;
 	private String ITEM;
 	private String CATE_NAME;
+	private String METH_NAME;
 	private String inex;
 	private Integer user_id;
 	private Timestamp ts_from;

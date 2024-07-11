@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const fmSRCH = document.forms['fmSRCH'];
 	const search_reset_all = document.getElementById("search_reset_all");
 	const search_reset_in= document.getElementById("search_reset_in");
+	const search_reset_ex= document.getElementById("search_reset_ex");
 	// N줄보기 form
 	const fmRC = document.forms['fmRC'];
 	const slct_rc = document.getElementById("slct_rc");
@@ -22,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location = "/tran/listIn";
 		});
 	}
+	if(search_reset_ex){
+		search_reset_ex.addEventListener('click', () => {
+			window.location = "/tran/listEx";
+		});
+	}
 	
 	fmSRCH.addEventListener('submit', (event) => {
 		const fmV = {
@@ -29,9 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			D_TO : fmSRCH.D_TO.value,
 			ITEM : fmSRCH.ITEM.value,
 			CATE_NAME : fmSRCH.CATE_NAME.value,
+			METH_NAME : fmSRCH.METH_NAME.value,
 		}
 		console.log(fmV)		
-		if (fmV.D_FROM == "" && fmV.D_TO == "" && fmV.ITEM == "" && fmV.CATE_NAME == "") {
+		if (fmV.D_FROM == "" && fmV.D_TO == "" && fmV.ITEM == "" && fmV.CATE_NAME == "" && fmV.METH_NAME == "") {
 			event.preventDefault();
 			return false;			
 		}
