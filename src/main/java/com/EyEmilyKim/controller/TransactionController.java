@@ -41,13 +41,12 @@ public class TransactionController {
 	
 	/*-------- 거래내역 목록 --------*/
 	
-	@GetMapping("listAll")
+	@GetMapping("listAll") // 전체 목록
 	public String listAll(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
 		System.out.println("TransactionController > listAll()@Get called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		DtoUtil.printDto(searchDto);
-		
 		try {
 			TranPageDto resultDto = transactionService.getListAll(searchDto, userId);
 			model.addAttribute("DTO", resultDto);
@@ -57,7 +56,6 @@ public class TransactionController {
 			model.addAttribute("URL", "/tran/listAll");
 			return "redirect";
 		}
-		
 		return "tran.listAll";
 	}
 	

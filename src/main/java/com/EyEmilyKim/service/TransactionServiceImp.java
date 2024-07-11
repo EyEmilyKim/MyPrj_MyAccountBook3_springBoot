@@ -34,7 +34,7 @@ public class TransactionServiceImp implements TransactionService {
 		searchDto = this.populateTranSearchDto(searchDto, user_id);
 		List<TransactionDto> list = transactionDao.getListAll(searchDto);
 		// 전체 데이터 수 가져오기
-		int totalCount = transactionDao.getCount(searchDto);
+		int totalCount = transactionDao.getCountAll(searchDto);
 		// 데이터 전달해서 페이징 변수까지 모두 담아오기
 		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto);
 		

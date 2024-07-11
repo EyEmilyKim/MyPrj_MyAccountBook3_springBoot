@@ -6,7 +6,7 @@
 
 <main>
 	<div class="contMain">
-		<h2 class="title ">가계부 목록 화면입니다.</h2>
+		<h2 class="title ">가계부 목록 : 전체</h2>
 		
 	<!-- 검색 블럭 -->
 		<div id="searchBlock">
@@ -22,7 +22,7 @@
 				<div id="searchResult">
 					<p>기간 : [<span> ${param.D_FROM } </span> ~ <span> ${param.D_TO } </span>] / 
 						내용 : [<span> ${param.ITEM } </span>] 검색 결과입니다.</p> 
-					<input type="button" value="전체보기" id="search_reset" />		
+					<input type="button" value="전체보기" id="search_reset_all" />		
 				</div>
 			</c:if>
 			

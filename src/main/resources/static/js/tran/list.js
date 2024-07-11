@@ -4,15 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 검색 form
 	const fmSRCH = document.forms['fmSRCH'];
-	const search_reset = document.getElementById("search_reset");
+	const search_reset_all = document.getElementById("search_reset_all");
 	// N줄보기 form
 	const fmRC = document.forms['fmRC'];
 	const slct_rc = document.getElementById("slct_rc");
 	
 	/* ------------ 검색 form ------------ */
 	
-	if(search_reset){
-		search_reset.addEventListener('click', () => {
+	if(search_reset_all){
+		search_reset_all.addEventListener('click', () => {
 			window.location = "/tran/listAll";
 		});
 	}
