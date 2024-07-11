@@ -28,9 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			D_FROM : fmSRCH.D_FROM.value,
 			D_TO : fmSRCH.D_TO.value,
 			ITEM : fmSRCH.ITEM.value,
+			CATE_NAME : fmSRCH.CATE_NAME.value,
 		}
 		console.log(fmV)		
-		if (fmV.D_FROM == "" && fmV.D_TO == "" && fmV.ITEM == "") {
+		if (fmV.D_FROM == "" && fmV.D_TO == "" && fmV.ITEM == "" && fmV.CATE_NAME == "") {
 			event.preventDefault();
 			return false;			
 		}

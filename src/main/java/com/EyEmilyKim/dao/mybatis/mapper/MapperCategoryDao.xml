@@ -41,10 +41,10 @@
 	<where> 
 	USER_ID in (#{userId}, 0) 
 	<if test="inex == 'IN'">
-    	AND INEX = 'IN' 
+    	AND INEX in ('IN', 'caNN') 
     </if>
     <if test="inex == 'EX'">
-    	AND INEX = 'EX' 
+    	AND INEX in ('EX', 'caNN') 
     </if>
 	</where> 
 	order by CATE_CODE

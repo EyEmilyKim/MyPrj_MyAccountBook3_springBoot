@@ -15,14 +15,23 @@
 				<input type="date" name="D_FROM" value="${param.D_FROM}" id="search_d_from" />
 				 ~ <input type="date" name="D_TO" value="${param.D_TO}" id="search_d_to" /> 
 				<input type="text" name="ITEM" value="${param.ITEM}" placeholder="--내용--" id="search_item" />
+				<select name="CATE_NAME" id="slct_cname">
+						<option value="">--카테고리--</option>
+					<c:forEach var="option" items="${CNAME_LIST}">
+						<option value="${option}" <c:if test="${option == param.CATE_NAME}">selected</c:if>>
+				            ${option}
+				        </option>
+					</c:forEach>
+				</select>
 				<input type="submit" value="조회하기" id="search_submit" />
 			</form>
 		<!-- 검색 결과 표시 -->
-			<c:if test="${not empty param.D_FROM || not empty param.D_TO || not empty param.ITEM}">
+			<c:if test="${not empty param.D_FROM || not empty param.D_TO || not empty param.ITEM || not empty param.CATE_NAME}">
 				<div id="searchResult">
 					<p>기간 : [<span> ${param.D_FROM } </span> ~ <span> ${param.D_TO } </span>] / 
-						내용 : [<span> ${param.ITEM } </span>] 검색 결과입니다.</p> 
-					<input type="button" value="전체보기" id="search_reset_all" />		
+						내용 : [<span> ${param.ITEM } </span>] /
+						카테고리 : [<span> ${param.CATE_NAME} </span>] 검색 결과입니다.</p> 
+					<input type="button" value="전체보기" id="search_reset_in" />		
 				</div>
 			</c:if>
 			

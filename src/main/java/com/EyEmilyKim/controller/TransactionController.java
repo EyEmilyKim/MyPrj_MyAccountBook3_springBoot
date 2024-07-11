@@ -50,6 +50,8 @@ public class TransactionController {
 		try {
 			TranPageDto resultDto = transactionService.getList(searchDto, userId, "");
 			model.addAttribute("DTO", resultDto);
+			List<String> cname_list = categoryService.getNameList(userId, "");
+			model.addAttribute("CNAME_LIST", cname_list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", failMsg);
@@ -68,6 +70,8 @@ public class TransactionController {
 		try {
 			TranPageDto resultDto = transactionService.getList(searchDto, userId, "IN");
 			model.addAttribute("DTO", resultDto);
+			List<String> cname_list = categoryService.getNameList(userId, "IN");
+			model.addAttribute("CNAME_LIST", cname_list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", failMsg);
