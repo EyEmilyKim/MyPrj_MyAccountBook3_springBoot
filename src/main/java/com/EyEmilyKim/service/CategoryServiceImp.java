@@ -51,10 +51,10 @@ public class CategoryServiceImp implements CategoryService {
 	}
 	
 	@Override
-	public List<String> getNameList(int userId) {
+	public List<String> getNameList(int userId, String inex) {
 		System.out.println("CateService > getNameList() called");
 
-		return categoryDao.getNameList(userId);
+		return categoryDao.getNameList(userId, inex);
 	}
 
 	@Override

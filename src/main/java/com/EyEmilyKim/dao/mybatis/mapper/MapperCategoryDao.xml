@@ -36,10 +36,16 @@
   <select id="getMaxSqn" resultType="Integer">
   	select max(SEQNO) from MAB_CATEGORIES
   </select>
-  <select id="getNameList" resultType="String">
+  <select id="getNameList" parameterType="java.util.Map" resultType="String">
   	select CATE_NAME from MAB_CATEGORIES 
 	<where> 
-	USER_ID in (#{userId}, 0)  
+	USER_ID in (#{userId}, 0) 
+	<if test="inex == 'IN'">
+    	AND INEX = 'IN' 
+    </if>
+    <if test="inex == 'EX'">
+    	AND INEX = 'EX' 
+    </if>
 	</where> 
 	order by CATE_CODE
   </select>

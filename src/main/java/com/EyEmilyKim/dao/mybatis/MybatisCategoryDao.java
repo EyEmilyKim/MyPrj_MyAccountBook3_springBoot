@@ -43,8 +43,8 @@ public class MybatisCategoryDao implements CategoryDao {
 	}
 	
 	@Override
-	public List<String> getNameList(int userId) {
-		return mapper.getNameList(userId);
+	public List<String> getNameList(int userId, String inex) {
+		return mapper.getNameList(userId, inex);
 	}
 
 	@Override

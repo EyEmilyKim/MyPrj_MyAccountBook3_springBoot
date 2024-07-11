@@ -81,7 +81,7 @@ public class CategoryController {
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		
-		List<String> list = categoryService.getNameList(userId);
+		List<String> list = categoryService.getNameList(userId, "");
 		model.addAttribute("LIST", list);
 		int maxSqn = categoryService.getMaxSqn();
 		System.out.println("maxSqn : "+maxSqn);
@@ -122,7 +122,7 @@ public class CategoryController {
 		Category cate = categoryService.getOne(CCODE);
 		System.out.println(cate.getCate_code()+" - "+cate.getCate_name());
 		model.addAttribute("C", cate);
-		List<String> list = categoryService.getNameList(userId);
+		List<String> list = categoryService.getNameList(userId, "");
 		model.addAttribute("LIST", list);
 		return "set.category.upd";
 	}

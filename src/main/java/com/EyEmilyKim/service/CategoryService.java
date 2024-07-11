@@ -17,7 +17,7 @@ public interface CategoryService {
 
 	Integer getMaxSqn();
 	
-	List<String> getNameList(int user_id);
+	List<String> getNameList(int user_id, String inex);
 
 	int insert(Map<String,String> fm, int user_id);
 
