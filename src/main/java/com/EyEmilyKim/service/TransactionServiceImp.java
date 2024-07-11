@@ -42,14 +42,6 @@ public class TransactionServiceImp implements TransactionService {
 	}
 
 	@Override
-	public Integer getCount(TranSearchDto searchDto, int user_id) throws ParseException {
-		System.out.println("TranService > getCount() called");
-		
-		searchDto = this.populateTranSearchDto(searchDto, user_id);
-		return transactionDao.getCount(searchDto);
-	}
-
-	@Override
 	public Transaction getOne(String tran_id) {
 		// TODO Auto-generated method stub
 		return null;

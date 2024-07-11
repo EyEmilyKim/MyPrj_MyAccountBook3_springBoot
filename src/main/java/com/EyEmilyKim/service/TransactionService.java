@@ -11,7 +11,6 @@ public interface TransactionService {
 
 	TranPageDto getListAll(TranSearchDto searchDto, int user_id) throws ParseException;
 
-	Integer getCount(TranSearchDto searchDto, int user_id) throws ParseException;
 
 	Transaction getOne(String tran_id);
 
