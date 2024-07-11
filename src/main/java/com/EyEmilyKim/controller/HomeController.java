@@ -26,6 +26,15 @@ public class HomeController {
 		return "root.index";
 	}
 	
+	/*-------- 월별 계획 --------*/
+	
+	@GetMapping("/plan")
+	public String plan() {
+		System.out.println("HomeController > login()@Get called");
+		
+		return "root.comingSoon";
+	}
+	
 	/*-------- 로그인 --------*/
 	
 	@GetMapping("/login")

@@ -81,6 +81,13 @@ public class TransactionController {
 		return "tran.listIn";
 	}
 	
+	@GetMapping("listEx") // 지출 목록
+	public String listEx() {
+		System.out.println("TransactionController > listEx()@Get called");
+		
+		return "root.comingSoon";
+	}
+	
 	/*-------- 거래내역 추가 --------*/
 	
 	@GetMapping("add")

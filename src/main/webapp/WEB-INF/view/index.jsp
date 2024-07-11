@@ -4,11 +4,14 @@
 
 <main>
 	<section>
-		<h1 class="marginBot">스프링Boot로 만들어보는 My가계부3 ~♪</h1>
-	<c:if test="${! empty sessionScope.NICKNAME }">	
-		<h2 class="marginBot">반갑습니다 ${sessionScope.NICKNAME }님~~</h2>
+		<h1 id="mainTitle">스프링Boot로 만들어보는 My가계부3 ~♪</h1>
+		<div><img src="/images/ocean.jpg" width="300px" id="mainImage"/></div>
+	<c:if test="${! empty sessionScope.NICKNAME }">
+		<h2 id="guide_hello">반갑습니다 ${sessionScope.NICKNAME }님~~</h2>
+		<div><img src="/images/animals_hi.png" width="200px" /></div>
 	</c:if>
-		<div><img src="images/ocean.jpg" width="200px" /></div>
-		<div><img src="images/image.png" width="200px" /></div>
+	<c:if test="${ empty sessionScope.NICKNAME }">
+		<div><img src="/images/animals_bye.png" width="200px" /></div>
+	</c:if>
 	</section>
 </main>

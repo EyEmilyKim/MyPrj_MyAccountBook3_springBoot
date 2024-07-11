@@ -7,3 +7,31 @@
 		padding: 50px;
 		text-align: center;
 	}
+	
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		align-items: center;
+	}
+	
+	#mainTitle, #comingSoon { color: var(--main-hoverMenu-under); }
+	#guide_hello, #guide_back { color: var(--main-text-color); }
+	#mainImage { margin-top: 10px;}
+	/* 화면 중앙에 로딩 이미지를 표시하기 위한 스타일 */
+	.loader {
+	    border: 8px solid var(--aside-background-color);
+	    border-top: 8px solid var(--main-hoverMenu-color);
+	    border-radius: 50%;
+	    width: 25px;
+	    height: 25px;
+	    animation: spin 2s linear infinite;
+	    transform: translate(-50%, -50%);
+	}
+	
+	/* 로딩 애니메이션 */
+	@keyframes spin {
+	    0% { transform: rotate(0deg); }
+	    100% { transform: rotate(360deg); }
+	}
+	
