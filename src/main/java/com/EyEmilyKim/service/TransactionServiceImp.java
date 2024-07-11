@@ -103,11 +103,9 @@ public class TransactionServiceImp implements TransactionService {
 		// 검색 조건 설정
 		String d_from = searchDto.getD_FROM();
 		String d_to = searchDto.getD_TO();
-		if (d_from != null && d_from != "") searchDto.setTs_from(DateUtil.stringToTimestamp(d_from));
-		if (d_from == "") searchDto.setTs_from(null);
-		if (d_to != null && d_to != "") searchDto.setTs_to(DateUtil.stringToTimestamp(d_to));
-		if (d_to == "") searchDto.setTs_to(null);
-		if (inex != "") searchDto.setInex(inex);
+		searchDto.setTs_from( (d_from != null && d_from != "") ? DateUtil.stringToTimestamp(d_from) : null);
+		searchDto.setTs_to( (d_to != null && d_to != "") ? DateUtil.stringToTimestamp(d_to) : null);
+		searchDto.setInex( (inex != "") ? inex : null);
 		searchDto.setUser_id(user_id);
 		// 페이지 설정
 		if(searchDto.getPG() == null) searchDto.setPG(1);
