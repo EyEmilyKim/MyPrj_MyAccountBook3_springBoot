@@ -8,11 +8,30 @@
 	<div class="contMain">
 		<h2 class="title ">가계부 목록 : <span class="ex">지출</span></h2>
 		
-		<c:set var="rowCount" value="${DTO.rowCount }" />
+		<div id="c_values">
+			<c:set var="list" value="${DTO.list }" />
+			<c:set var="totalCount" value="${DTO.totalCount }" />
+		    <c:set var="totalPages" value="${DTO.totalPages }" />
+		    <c:set var="currentPage" value="${DTO.currentPage }" />
+		    <c:set var="currentSet" value="${DTO.currentSet }" />
+		    <c:set var="startPage" value="${DTO.startPage }" />
+		    <c:set var="endPage" value="${DTO.endPage }" />
+				<c:set var="startCount" value="${(currentPage - 1) * rowCount + 1}" />
+				<c:set var="endCount" value="${startCount + rowCount - 1}" />
+				<c:if test="${endCount > totalCount }">
+					<c:set var="endCount" value="${totalCount}" />
+				</c:if>
+			<c:set var="rowCount" value="${DTO.rowCount }" />
+			<c:set var="optionString" value="${DTO.rowCount_option }" />
+			<c:set var="optionList" value="${fn:split(optionString, ',')}" />
+			
+			<c:set var = "urlUpd" value="del?TRAN_ID=${t.tran_id }" />
+			<c:set var = "urlDel" value="del?TRAN_ID=${t.tran_id }" />
+		</div>
 		
-	<!-- 검색 블럭 -->
+	<!-- 1. 검색 블럭 -->
 		<div id="searchBlock">
-		<!-- 검색 form -->
+		<!-- 1-1. 검색 form -->
 			<form name="fmSRCH" id="fmSRCH">
 				<input type="date" name="D_FROM" value="${param.D_FROM}" id="search_d_from" />
 				 ~ <input type="date" name="D_TO" value="${param.D_TO}" id="search_d_to" /> 
@@ -36,7 +55,7 @@
 				<input type="text" name="RC" value="${rowCount }" id="search_rc" placeholder="RC 자동" />
 				<input type="submit" value="조회하기" id="search_submit" />
 			</form>
-		<!-- 검색 결과 표시 -->
+		<!-- 1-2. 검색 결과 표시 -->
 			<c:if test="${not empty param.D_FROM || not empty param.D_TO || not empty param.ITEM
 			 || not empty param.CATE_NAME || not empty param.METH_NAME}">
 				<div id="searchResult">
@@ -50,13 +69,12 @@
 			
 		</div>	<!-- 검색 블럭 끝 -->
 	
-	<!-- 전체 건 수 -->
-		<c:set var="totalCount" value="${DTO.totalCount }" />
+	<!-- 2. 전체 건 수 -->
 		<div class="count ">총 <span class="cnt">${totalCount }</span> 건</div>
 	
-	<!-- 실제 목록 -->
+	<!-- 3. 실제 목록 -->
 		<div class="listMain">
-		<!-- 거래내역 없음 -->
+		<!-- 3-1. 거래내역 없음 -->
 			<c:if test="${totalCount == 0 }">
 				<div class="noTran">
 					<p>거래내역이 없습니다.</p>
@@ -64,8 +82,8 @@
 				</div>
 			</c:if>
 			
+		<!-- 3-2. 거래내역 테이블 -->
 			<c:if test="${totalCount > 0 }">
-		<!-- 거래내역 테이블 -->
 				<table class="tranTable" >
 				
 				<thead class="">
@@ -81,9 +99,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${DTO.list }" var="t">
-					  <c:set var = "urlUpd" value="del?TRAN_ID=${t.tran_id }" />
-					  <c:set var = "urlDel" value="del?TRAN_ID=${t.tran_id }" />
+					<c:forEach items="${list }" var="t">
+
 						<tr>
 							<td class="tran_id">${t.tran_id }</td>
 							<td><fmt:formatDate value="${t.tran_date}" pattern="yyyy-MM-dd" /></td>
@@ -107,24 +124,14 @@
 				
 				</table>
 			</c:if>
+		
 		</div> <!-- 실제 목록 끝 -->
 	
 		<c:if test="${totalCount > 0 }">
-	<!-- 목록 컨트롤 -->
+	<!-- 4. 목록 컨트롤 -->
 			<div id="controlViewBlock" class="">
-			    <c:set var="totalPages" value="${DTO.totalPages }" />
-			    <c:set var="currentPage" value="${DTO.currentPage }" />
-			    <c:set var="currentSet" value="${DTO.currentSet }" />
-			    <c:set var="startPage" value="${DTO.startPage }" />
-			    <c:set var="endPage" value="${DTO.endPage }" />
-				
-				<c:set var="startCount" value="${(currentPage - 1) * rowCount + 1}" />
-				<c:set var="endCount" value="${startCount + rowCount - 1}" />
-				<c:if test="${endCount > totalCount }">
-					<c:set var="endCount" value="${totalCount}" />
-				</c:if>
 	
-			<!-- 페이지 블럭 -->
+			<!-- 4-1. 페이지 블럭 -->
 				<div id="pageBlock" class="">
 		        <!-- 이전 페이지 세트로 이동 -->
 			        <c:if test="${currentSet > 1}">
@@ -149,18 +156,15 @@
 			        </c:if>
 				</div> <!-- 페이지 블럭 끝 -->
 		
-			<!-- 서브카운트 블럭 -->
+			<!-- 4-2. 서브카운트 블럭 -->
 				<div class="subCountBlock ">
 					<span class="cnt">${startCount }</span>
 					 ~ <span class="cnt">${endCount }</span>
 					 / <span>${totalCount }</span> 
 				</div>
 			
-			<!-- N줄보기 블럭 -->
+			<!-- 4-3. N줄보기 블럭 -->
 				<div id="rowCountBlock" class="">
-					
-					<c:set var="optionString" value="${DTO.rowCount_option }" />
-					<c:set var="optionList" value="${fn:split(optionString, ',')}" />
 				<!-- N줄보기 form -->
 					<form name="fmRC" id="fmRC">
 						<select name="RC" id="slct_rc">
