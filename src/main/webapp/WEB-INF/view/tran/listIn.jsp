@@ -146,7 +146,7 @@
 			<!-- N줄보기 블럭 -->
 				<div id="rowCountBlock" class="">
 					
-					<c:set var="optionString" value="5,10,15" />
+					<c:set var="optionString" value="${DTO.rowCount_option }" />
 					<c:set var="optionList" value="${fn:split(optionString, ',')}" />
 				<!-- N줄보기 form -->
 					<form name="fmRC" id="fmRC">

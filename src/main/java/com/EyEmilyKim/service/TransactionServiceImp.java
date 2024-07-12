@@ -138,6 +138,7 @@ public class TransactionServiceImp implements TransactionService {
 			resultDto.setCurrentSet(currentSet);
 			resultDto.setStartPage(startPage);
 			resultDto.setEndPage(endPage);
+			resultDto.setRowCount_option(clv.getDefault_rowCount_optionString());
 			
 			return resultDto;
 	}

@@ -16,6 +16,9 @@ public class ClientViewDefault {
 	@Value("${client.view.default_userId}")
 	private Integer default_userId;
 	
+	@Value("${client.view.default_rowCount_optionString}")
+	private String default_rowCount_optionString;
+	
 	@Value("${client.view.default_rowCount}")
 	private Integer default_rowCount;
 	

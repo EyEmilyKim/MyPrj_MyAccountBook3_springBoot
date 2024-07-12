@@ -20,6 +20,7 @@ public class TranPageDto {
 	private int totalPages;
 	private int currentPage;
 	private int rowCount;
+	private String rowCount_option;
 	
 	private int currentSet;
 	private int startPage;
