@@ -8,6 +8,8 @@
 	<div class="contMain">
 		<h2 class="title ">가계부 목록 : <span class="ex">지출</span></h2>
 		
+		<c:set var="rowCount" value="${DTO.rowCount }" />
+		
 	<!-- 검색 블럭 -->
 		<div id="searchBlock">
 		<!-- 검색 form -->
@@ -31,6 +33,7 @@
 				        </option>
 					</c:forEach>
 				</select>
+				<input type="text" name="RC" value="${rowCount }" id="search_rc" placeholder="RC 자동" />
 				<input type="submit" value="조회하기" id="search_submit" />
 			</form>
 		<!-- 검색 결과 표시 -->
@@ -114,7 +117,7 @@
 			    <c:set var="currentSet" value="${DTO.currentSet }" />
 			    <c:set var="startPage" value="${DTO.startPage }" />
 			    <c:set var="endPage" value="${DTO.endPage }" />
-				<c:set var="rowCount" value="${DTO.rowCount }" />
+				
 				<c:set var="startCount" value="${(currentPage - 1) * rowCount + 1}" />
 				<c:set var="endCount" value="${startCount + rowCount - 1}" />
 				<c:if test="${endCount > totalCount }">
@@ -126,7 +129,7 @@
 		        <!-- 이전 페이지 세트로 이동 -->
 			        <c:if test="${currentSet > 1}">
 			            <fmt:formatNumber value="${startPage - 1}" type="number" var="prevPage" />
-			            <a href="?RC=${selectedRC}&PG=${prevPage}">&laquo; </a>
+			            <a href="?RC=${rowCount}&PG=${prevPage}">&laquo; </a>
 			        </c:if>
 		        <!-- 페이지 번호 생성 -->	
 			        <c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -135,14 +138,14 @@
 			                    <span class="current">${i}</span>
 			                </c:when>
 			                <c:otherwise>
-			                    <a href="?RC=${selectedRC}&PG=${i}">${i}</a>
+			                    <a href="?RC=${rowCount}&PG=${i}">${i}</a>
 			                </c:otherwise>
 			            </c:choose>
 			        </c:forEach>
 		        <!-- 다음 페이지 세트로 이동 -->
 			        <c:if test="${endPage < totalPages}">
 			            <fmt:formatNumber value="${endPage + 1}" type="number" var="nextPage" />
-			            <a href="?RC=${selectedRC}&PG=${nextPage}"> &raquo;</a>
+			            <a href="?RC=${rowCount}&PG=${nextPage}"> &raquo;</a>
 			        </c:if>
 				</div> <!-- 페이지 블럭 끝 -->
 		
