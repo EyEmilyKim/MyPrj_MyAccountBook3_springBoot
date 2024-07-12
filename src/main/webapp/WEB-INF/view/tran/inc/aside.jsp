@@ -4,9 +4,11 @@
 <aside>
 	<nav id="menu">
 		<ul>
-			<li><a href="/tran/listAll">가계부 전체</a></li>
-			<li><a href="/tran/listIn">수입 기록</a></li>
-			<li><a href="/tran/listEx">지출 기록</a></li>
+			<li><a href="/tran/listAll" id="tranListAll">모두 보기</a></li>
+			<li><a href="/tran/listIn" id="tranListIn">수입 보기</a></li>
+			<li><a href="/tran/listEx" id="tranListEx">지출 보기</a></li>
 		</ul>
 	</nav>
 </aside>
+
+<script src="/js/tran/inc/aside.js"></script>

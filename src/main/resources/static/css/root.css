@@ -14,8 +14,8 @@
 :root {
     --aside-background-color: #ffffa8;
     --aside-text-color: #ffb300; 
-    --aside-hoverMenu-color: #66bb6a;
-    --aside-hoverMenu-under: #2e7d32;
+    --aside-hoverMenu-color: #2e7d32;
+    --aside-hoverMenu-under: #66bb6a;
     --aside-selectedMenu-color: beige;
     --aside-selectedMenu-under: #2e7d32;
 }

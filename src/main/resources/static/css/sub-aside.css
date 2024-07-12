@@ -16,10 +16,14 @@
 	    color: var(--aside-text-color); 
 	}
 	aside a:active {
-	    border-bottom: 5px solid var(--aside-selectedMenu-under);
+	    border-bottom: 3px solid var(--aside-selectedMenu-under);
 	    color: var(--aside-selectedMenu-color);
 	}
 	aside a:hover {
-	    border-bottom: 5px solid var(--aside-hoverMenu-under);
+	    border-bottom: 3px solid var(--aside-hoverMenu-under);
+	    color: var(--aside-hoverMenu-color);
+	}
+	aside .selected {
+	    border-bottom: 3px solid var(--aside-hoverMenu-under);
 	    color: var(--aside-hoverMenu-color);
 	}
