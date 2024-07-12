@@ -6,37 +6,44 @@
 		width: 100%;
 		position: fixed; top: 0;	/* 스크롤시 헤더 고정 */
 		background-color: var(--header-background-color);
-		padding: 1.5em;
+		padding: 1.0em;
 		display: flex;
 		justify-content: space-between; /* 가로축 정렬: 요소들 사이 동일 간격 */
 	    align-items: center;	/* 세로축 정렬: 가운데 */
 	}
 	
-	header h1 {
+	#titleLogo {
 		color: var(--header-text-color);
 		font-size: 1.5rem;
 		font-weight: 800;
+		cursor: pointer;
+		padding: 10px;
+		border-radius: 10px;
+	}
+	#titleLogo:hover {
+		background-color: var(--header-hoverMenu-under);
 	}
 
 	header ul {
 	    display: flex;
+	    flex-direction: row;
+	    gap: 1.5rem;
 	}
-	header ul li {
-	    margin-left: 1.5rem;
+	header ul:last-child {
+	    margin-right: 1.0rem;
 	}
 
-	header ul li a {
+	header a {
 	    font-size: 1.2rem;
 	    font-weight: 800;
 	    padding-bottom: 5px;
 	    color: var(--header-text-color); 
 	}
-	header a:active {
-	    border-bottom: 5px solid var(--header-selectedMenu-under);
-	    color: var(--header-selectedMenu-color);
-	}
 	header a:hover {
 	    border-bottom: 5px solid var(--header-hoverMenu-under);
 	    color: var(--header-hoverMenu-color);
 	}
-	
+	header .selected {
+	    border-bottom: 5px solid var(--header-hoverMenu-under);
+	    color: var(--header-hoverMenu-color);
+	}
