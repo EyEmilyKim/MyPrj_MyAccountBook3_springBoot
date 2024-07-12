@@ -56,7 +56,8 @@
 /* ------- 개발 편의용 따로 관리 (to be hidden)------- */
 
 .user_id, .seqno, .cate_code, .meth_code, 
-.tran_id {
+.tran_id,
+#search_rc {
 	border: plum solid 1px;
 	width: 80px;
 	display: none;
