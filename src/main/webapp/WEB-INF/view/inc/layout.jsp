@@ -9,11 +9,9 @@
 	<meta charset="UTF-8">
 	<title><tiles:getAsString name="title"/></title>
 	<link href="/css/home/layout.css" rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/f747bc5595.js" crossorigin="anonymous"> </script>
 </head>
 
-<body onload="startClock()">
-<script src="/js/clock.js"></script>
+<body>
 	
 	<!----------- header 부분 ----------->
 	<tiles:insertAttribute name="header" />

@@ -193,3 +193,4 @@
 	</div> <!-- contMain 끝 -->
 </main>
 
+<script src="../../js/tran/list.js"></script>

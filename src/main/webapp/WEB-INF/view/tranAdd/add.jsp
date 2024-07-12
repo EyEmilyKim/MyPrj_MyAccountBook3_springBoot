@@ -140,3 +140,5 @@
 	</div>
 	<!-- contMain 끝 -->
 </main>
+
+<script src="../../js/tranAdd/tranAddadd.js"></script>
