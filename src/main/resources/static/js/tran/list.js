@@ -1,31 +1,26 @@
-/* for view/tran/listAll.jsp */
+/* for view/tran/list.jsp */
 
 document.addEventListener('DOMContentLoaded', () => {
 	
 	// 검색 form
 	const fmSRCH = document.forms['fmSRCH'];
-	const search_reset_all = document.getElementById("search_reset_all");
-	const search_reset_in= document.getElementById("search_reset_in");
-	const search_reset_ex= document.getElementById("search_reset_ex");
+	const search_reset = document.getElementById("search_reset");
 	// N줄보기 form
 	const fmRC = document.forms['fmRC'];
 	const slct_rc = document.getElementById("slct_rc");
 	
 	/* ------------ 검색 form ------------ */
 	
-	if(search_reset_all){
-		search_reset_all.addEventListener('click', () => {
-			window.location = "/tran/listAll";
-		});
-	}
-	if(search_reset_in){
-		search_reset_in.addEventListener('click', () => {
-			window.location = "/tran/listIn";
-		});
-	}
-	if(search_reset_ex){
-		search_reset_ex.addEventListener('click', () => {
-			window.location = "/tran/listEx";
+	if (search_reset) {
+		search_reset.addEventListener('click', () => {
+			const inex = fmSRCH.INEX.value;
+			let url = "/tran/list"
+			switch(inex) {
+				case "ALL" : url += "All"; break;
+				case "IN" : url += "In"; break;
+				case "EX" : url += "Ex"; break;
+			}
+			window.location = url;
 		});
 	}
 	

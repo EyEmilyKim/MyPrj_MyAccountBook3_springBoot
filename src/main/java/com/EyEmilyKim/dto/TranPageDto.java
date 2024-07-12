@@ -14,6 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class TranPageDto {
+	private String inex;
 	private List<TransactionDto> list;
 	private long totalCount;
 	

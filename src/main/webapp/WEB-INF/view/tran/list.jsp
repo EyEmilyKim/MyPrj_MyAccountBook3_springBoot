@@ -5,29 +5,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <main>
+	
+	<div id="c_values">
+		<c:set var="inex" value="${DTO.inex}" />
+		<c:set var="list" value="${DTO.list }" />
+		<c:set var="totalCount" value="${DTO.totalCount }" />
+	    <c:set var="totalPages" value="${DTO.totalPages }" />
+	    <c:set var="currentPage" value="${DTO.currentPage }" />
+	    <c:set var="currentSet" value="${DTO.currentSet }" />
+	    <c:set var="startPage" value="${DTO.startPage }" />
+	    <c:set var="endPage" value="${DTO.endPage }" />
+			<c:set var="startCount" value="${(currentPage - 1) * rowCount + 1}" />
+			<c:set var="endCount" value="${startCount + rowCount - 1}" />
+			<c:if test="${endCount > totalCount }">
+				<c:set var="endCount" value="${totalCount}" />
+			</c:if>
+		<c:set var="rowCount" value="${DTO.rowCount }" />
+		<c:set var="optionString" value="${DTO.rowCount_option }" />
+		<c:set var="optionList" value="${fn:split(optionString, ',')}" />
+	</div>
+	
 	<div class="contMain">
-		<h2 class="title ">가계부 목록 : <span class="ex">지출</span></h2>
-		
-		<div id="c_values">
-			<c:set var="list" value="${DTO.list }" />
-			<c:set var="totalCount" value="${DTO.totalCount }" />
-		    <c:set var="totalPages" value="${DTO.totalPages }" />
-		    <c:set var="currentPage" value="${DTO.currentPage }" />
-		    <c:set var="currentSet" value="${DTO.currentSet }" />
-		    <c:set var="startPage" value="${DTO.startPage }" />
-		    <c:set var="endPage" value="${DTO.endPage }" />
-				<c:set var="startCount" value="${(currentPage - 1) * rowCount + 1}" />
-				<c:set var="endCount" value="${startCount + rowCount - 1}" />
-				<c:if test="${endCount > totalCount }">
-					<c:set var="endCount" value="${totalCount}" />
-				</c:if>
-			<c:set var="rowCount" value="${DTO.rowCount }" />
-			<c:set var="optionString" value="${DTO.rowCount_option }" />
-			<c:set var="optionList" value="${fn:split(optionString, ',')}" />
-			
-			<c:set var = "urlUpd" value="del?TRAN_ID=${t.tran_id }" />
-			<c:set var = "urlDel" value="del?TRAN_ID=${t.tran_id }" />
-		</div>
+		<h2 class="title ">
+			<c:if test="${inex == 'ALL'}">가계부 목록 : <span class="">전체</span></c:if>
+			<c:if test="${inex == 'IN'}">가계부 목록 : <span class="in">수입</span></c:if>
+			<c:if test="${inex == 'EX'}">가계부 목록 : <span class="ex">지출</span></c:if>
+		</h2>
 		
 	<!-- 1. 검색 블럭 -->
 		<div id="searchBlock">
@@ -44,6 +47,7 @@
 				        </option>
 					</c:forEach>
 				</select>
+			<c:if test="${inex == 'EX' }">
 				<select name="METH_NAME" id="slct_mname">
 						<option value="">--결제수단--</option>
 					<c:forEach var="option" items="${MNAME_LIST}">
@@ -52,6 +56,8 @@
 				        </option>
 					</c:forEach>
 				</select>
+			</c:if>
+				<input type="text" name="INEX" value="${inex }" id="search_inex" placeholder="INEX 자동" />
 				<input type="text" name="RC" value="${rowCount }" id="search_rc" placeholder="RC 자동" />
 				<input type="submit" value="조회하기" id="search_submit" />
 			</form>
@@ -61,9 +67,12 @@
 				<div id="searchResult">
 					<p>기간 : [<span> ${param.D_FROM } </span> ~ <span> ${param.D_TO } </span>] / 
 						내용 : [<span> ${param.ITEM } </span>] / 
-						카테고리 : [<span> ${param.CATE_NAME} </span>] / 
-						결제수단 : [<span> ${param.METH_NAME} </span>] 검색 결과입니다.</p> 
-					<input type="button" value="전체보기" id="search_reset_ex" />		
+						카테고리 : [<span> ${param.CATE_NAME} </span>] 
+					<c:if test="${inex == 'EX' }">
+						 / 결제수단 : [<span> ${param.METH_NAME} </span>] 
+					</c:if>
+						검색 결과입니다.</p> 
+					<input type="button" value="전체보기" id="search_reset" />		
 				</div>
 			</c:if>
 			
@@ -100,7 +109,8 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list }" var="t">
-
+						<c:set var="urlUpd" value="upd?TRAN_ID=${t.tran_id }" />
+						<c:set var="urlDel" value="del?TRAN_ID=${t.tran_id }" />
 						<tr>
 							<td class="tran_id">${t.tran_id }</td>
 							<td><fmt:formatDate value="${t.tran_date}" pattern="yyyy-MM-dd" /></td>

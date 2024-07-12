@@ -48,9 +48,9 @@ public class TransactionController {
 		System.out.println("userId : "+userId);
 		DtoUtil.printDto(searchDto);
 		try {
-			TranPageDto resultDto = transactionService.getList(searchDto, userId, "");
+			TranPageDto resultDto = transactionService.getList(searchDto, userId, "ALL");
 			model.addAttribute("DTO", resultDto);
-			List<String> cname_list = categoryService.getNameList(userId, "");
+			List<String> cname_list = categoryService.getNameList(userId, "ALL");
 			model.addAttribute("CNAME_LIST", cname_list);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class TransactionController {
 			model.addAttribute("URL", "/tran/listAll");
 			return "redirect";
 		}
-		return "tran.listAll";
+		return "tran.list";
 	}
 	
 	@GetMapping("listIn") // 수입 목록
@@ -78,7 +78,7 @@ public class TransactionController {
 			model.addAttribute("URL", "/tran/listIn");
 			return "redirect";
 		}
-		return "tran.listIn";
+		return "tran.list";
 	}
 	
 	@GetMapping("listEx") // 지출 목록
@@ -100,7 +100,7 @@ public class TransactionController {
 			model.addAttribute("URL", "/tran/listIn");
 			return "redirect";
 		}
-		return "tran.listEx";
+		return "tran.list";
 	}
 	
 	/*-------- 거래내역 추가 --------*/

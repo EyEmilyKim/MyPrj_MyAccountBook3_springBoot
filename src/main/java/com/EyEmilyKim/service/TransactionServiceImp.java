@@ -36,7 +36,7 @@ public class TransactionServiceImp implements TransactionService {
 		// 전체 데이터 수 가져오기
 		int totalCount = transactionDao.getCount(searchDto);
 		// 데이터 전달해서 페이징 변수까지 모두 담아오기
-		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto);
+		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto, inex);
 		
 		return resultDto;
 	}
@@ -105,7 +105,7 @@ public class TransactionServiceImp implements TransactionService {
 		String d_to = searchDto.getD_TO();
 		searchDto.setTs_from( (d_from != null && d_from != "") ? DateUtil.stringToTimestamp(d_from) : null);
 		searchDto.setTs_to( (d_to != null && d_to != "") ? DateUtil.stringToTimestamp(d_to) : null);
-		searchDto.setInex( (inex != "") ? inex : null);
+		searchDto.setInex( (inex != "ALL") ? inex : null);
 		searchDto.setUser_id(user_id);
 		// 페이지 설정
 		if(searchDto.getPG() == null) searchDto.setPG(1);
@@ -120,7 +120,7 @@ public class TransactionServiceImp implements TransactionService {
 		return searchDto;
 	}
 	
-	private TranPageDto populateTranPageDto(List<TransactionDto> list, int totalCount, TranSearchDto searchDto) {
+	private TranPageDto populateTranPageDto(List<TransactionDto> list, int totalCount, TranSearchDto searchDto, String inex) {
 			// 페이징 변수 계산
 			int totalPages = (int) Math.ceil((double) totalCount / searchDto.getRC());
 			int currentPage = searchDto.getPG();
@@ -139,6 +139,7 @@ public class TransactionServiceImp implements TransactionService {
 			resultDto.setStartPage(startPage);
 			resultDto.setEndPage(endPage);
 			resultDto.setRowCount_option(clv.getDefault_rowCount_optionString());
+			resultDto.setInex((inex != "") ? inex : null);
 			
 			return resultDto;
 	}
