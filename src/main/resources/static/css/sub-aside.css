@@ -20,8 +20,8 @@
 	    color: var(--aside-selectedMenu-color);
 	}
 	aside a:hover {
-	    border-bottom: 3px solid var(--aside-hoverMenu-under);
-	    color: var(--aside-hoverMenu-color);
+	    border-bottom: 3px solid var(--aside-selectedMenu-under);
+	    color: var(--aside-selectedMenu-color);
 	}
 	aside .selected {
 	    border-bottom: 3px solid var(--aside-hoverMenu-under);

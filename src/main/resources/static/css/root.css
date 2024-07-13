@@ -6,8 +6,8 @@
     --header-text-color: #66bb6a; 
     --header-hoverMenu-color: #ffb300;
     --header-hoverMenu-under: #ffffa8;
-    --header-selectedMenu-color: beige;
-    --header-selectedMenu-under: #2e7d32;
+    --header-selectedMenu-color: #ffb300;
+    --header-selectedMenu-under: #66bb6a;
 }
 
 /* ---------- aside ---------- */
@@ -16,7 +16,7 @@
     --aside-text-color: #ffb300; 
     --aside-hoverMenu-color: #2e7d32;
     --aside-hoverMenu-under: #66bb6a;
-    --aside-selectedMenu-color: beige;
+    --aside-selectedMenu-color: #66bb6a;
     --aside-selectedMenu-under: #2e7d32;
 }
 
@@ -34,10 +34,10 @@
 :root {
     --footer-background-color: #c7f1de;
     --footer-text-color: #66bb6a; 
-    --header-hoverMenu-color: #ffb300;
-    --header-hoverMenu-under: #ffffa8;
-    --header-selectedMenu-color: beige;
-    --header-selectedMenu-under: #2e7d32;
+    --footer-hoverMenu-color: #ffb300;
+    --footer-hoverMenu-under: #ffffa8;
+    --footer-selectedMenu-color: beige;
+    --footer-selectedMenu-under: #2e7d32;
 }
 
 /* ---------- hidden ---------- */

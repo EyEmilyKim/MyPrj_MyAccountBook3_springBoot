@@ -44,6 +44,6 @@
 	    color: var(--header-hoverMenu-color);
 	}
 	header .selected {
-	    border-bottom: 5px solid var(--header-hoverMenu-under);
-	    color: var(--header-hoverMenu-color);
+	    border-bottom: 5px solid var(--header-selectedMenu-under);
+	    color: var(--header-selectedMenu-color);
 	}
