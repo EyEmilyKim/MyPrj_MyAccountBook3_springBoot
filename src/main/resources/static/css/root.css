@@ -34,10 +34,8 @@
 :root {
     --footer-background-color: #c7f1de;
     --footer-text-color: #66bb6a; 
-    --footer-hoverMenu-color: #ffb300;
-    --footer-hoverMenu-under: #ffffa8;
-    --footer-selectedMenu-color: beige;
-    --footer-selectedMenu-under: #2e7d32;
+    --footer-hoverMenu-color: #ffffa8;
+    --footer-selectedMenu-color: #ffb300;
 }
 
 /* ---------- hidden ---------- */

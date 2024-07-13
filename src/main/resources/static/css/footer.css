@@ -1,25 +1,39 @@
 @charset "UTF-8";
 
 	footer {
-		flex: 0 0 auto; /* 확장, 축소 없이 지정된 높이로 고정 */
-		min-height: 100px;
-		width: 100%;
 		background-color: var(--footer-background-color);
-		padding: 1.8rem;
-		text-align: center;
+		flex: 0 0 auto; /* 확장, 축소 없이 지정된 높이로 고정 */
+		width: 100%;
+		min-height: 80px;
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
 		color: var(--footer-text-color);
 	}
+
+
 	footer h1{
 		font-size: 1.5rem;
 	}
+	
 	footer .icons {
 		display: flex;
-		text-align: center;
-		justify-content: center;
+		flex-direction: row;
+		gap: 20px;
 	}
-	footer  .icons li {
-		margin: 0 5px 0;
+	footer .icons i {
+		color: var(--footer-text-color);
+		padding: 5px;
 	}
-	footer .icons li i {
-		color: var(--header-selectedMenu-under);
+	footer .icons i:hover {
+		cursor: pointer;
+		background-color: var(--footer-hoverMenu-color);
+		border-radius: 10px;
+	}
+	footer .icons i:active {
+		cursor: pointer;
+		background-color: var(--footer-selectedMenu-color);
+		border-radius: 10px;
 	}
