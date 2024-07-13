@@ -3,14 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
-<main>
 	
 	<div id="c_values">
 		<c:set var="inex" value="${DTO.inex}" />
 		<c:set var="list" value="${DTO.list }" />
 		<c:set var="totalCount" value="${DTO.totalCount }" />
 	    <c:set var="totalPages" value="${DTO.totalPages }" />
+		<c:set var="rowCount" value="${DTO.rowCount }" />
 	    <c:set var="currentPage" value="${DTO.currentPage }" />
 	    <c:set var="currentSet" value="${DTO.currentSet }" />
 	    <c:set var="startPage" value="${DTO.startPage }" />
@@ -20,10 +19,11 @@
 			<c:if test="${endCount > totalCount }">
 				<c:set var="endCount" value="${totalCount}" />
 			</c:if>
-		<c:set var="rowCount" value="${DTO.rowCount }" />
 		<c:set var="optionString" value="${DTO.rowCount_option }" />
 		<c:set var="optionList" value="${fn:split(optionString, ',')}" />
 	</div>
+
+<main>
 	
 	<div class="contMain">
 		<h2 class="title ">
@@ -59,6 +59,7 @@
 			</c:if>
 				<input type="text" name="INEX" value="${inex }" id="search_inex" placeholder="INEX 자동" />
 				<input type="text" name="RC" value="${rowCount }" id="search_rc" placeholder="RC 자동" />
+				<input type="text" name="PG" value="${currentPage }" id="search_page" placeholder="PG 자동" />
 				<input type="submit" value="조회하기" id="search_submit" />
 			</form>
 		<!-- 1-2. 검색 결과 표시 -->
@@ -137,8 +138,8 @@
 		
 		</div> <!-- 실제 목록 끝 -->
 	
-		<c:if test="${totalCount > 0 }">
 	<!-- 4. 목록 컨트롤 -->
+		<c:if test="${totalCount > 0 }">
 			<div id="controlViewBlock" class="">
 	
 			<!-- 4-1. 페이지 블럭 -->
@@ -146,23 +147,23 @@
 		        <!-- 이전 페이지 세트로 이동 -->
 			        <c:if test="${currentSet > 1}">
 			            <fmt:formatNumber value="${startPage - 1}" type="number" var="prevPage" />
-			            <a href="?RC=${rowCount}&PG=${prevPage}">&laquo; </a>
+			            <span class="paging" data-page="${prevPage}">&laquo; </span>
 			        </c:if>
 		        <!-- 페이지 번호 생성 -->	
 			        <c:forEach var="i" begin="${startPage}" end="${endPage}">
 			            <c:choose>
 			                <c:when test="${i == currentPage}">
-			                    <span class="current">${i}</span>
+			                    <span class="current" >${i}</span>
 			                </c:when>
 			                <c:otherwise>
-			                    <a href="?RC=${rowCount}&PG=${i}">${i}</a>
+			                    <span class="paging" data-page="${i}">${i}</span>
 			                </c:otherwise>
 			            </c:choose>
 			        </c:forEach>
 		        <!-- 다음 페이지 세트로 이동 -->
 			        <c:if test="${endPage < totalPages}">
 			            <fmt:formatNumber value="${endPage + 1}" type="number" var="nextPage" />
-			            <a href="?RC=${rowCount}&PG=${nextPage}"> &raquo;</a>
+			            <span class="paging" data-page="${nextPage}"> &raquo;</span>
 			        </c:if>
 				</div> <!-- 페이지 블럭 끝 -->
 		
@@ -176,15 +177,13 @@
 			<!-- 4-3. N줄보기 블럭 -->
 				<div id="rowCountBlock" class="">
 				<!-- N줄보기 form -->
-					<form name="fmRC" id="fmRC">
-						<select name="RC" id="slct_rc">
+					<select name="RC" id="slct_rc">
 						<c:forEach var="option" items="${optionList }">
 							<option value="${option }" <c:if test="${option == rowCount}">selected</c:if>>
 							${option }줄 보기
 							</option>
 						</c:forEach>
-						</select>
-					</form>
+					</select>
 				</div> <!-- N줄보기 블럭 끝 -->
 				
 			</div>	<!-- 목록 컨트롤 끝 -->	

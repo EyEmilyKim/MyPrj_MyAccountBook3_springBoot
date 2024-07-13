@@ -57,7 +57,7 @@
 
 .user_id, .seqno, .cate_code, .meth_code, 
 .tran_id, .url,
-#search_rc, #search_inex {
+#search_inex, #search_rc, #search_page {
 	border: plum solid 1px;
 	display: none;
 	width: 40px;

@@ -2,24 +2,25 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	
-	// 검색 form
 	const fmSRCH = document.forms['fmSRCH'];
 	const search_reset = document.getElementById("search_reset");
-	// N줄보기 form
-	const fmRC = document.forms['fmRC'];
-	const slct_rc = document.getElementById("slct_rc");
+	
+	const pagingSpans = document.querySelectorAll('span.paging');
+	const slct_rc = document.getElementById("slct_rc");	
 	
 	/* ------------ 검색 form ------------ */
 	
 	if (search_reset) {
 		search_reset.addEventListener('click', () => {
 			const inex = fmSRCH.INEX.value;
+			const rc = fmSRCH.RC.value;
 			let url = "/tran/list"
 			switch(inex) {
 				case "ALL" : url += "All"; break;
 				case "IN" : url += "In"; break;
 				case "EX" : url += "Ex"; break;
 			}
+			url += "?RC=" + rc;
 			window.location = url;
 		});
 	}
@@ -40,10 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
 		return true;
 	});
 	
-	/* ------------ N줄보기 form ------------ */
+	/* ------------ 페이지 번호 ------------ */
+	
+	pagingSpans.forEach(span => {
+		span.addEventListener('click', handlePage);
+	})
+	function handlePage(event) {
+		const page = event.target.getAttribute('data-page');
+		fmSRCH.PG.value = page;
+		fmSRCH.submit();
+	}
+	
+	/* ------------ N줄 보기 ------------ */
 	
 	slct_rc.addEventListener('change', () => {
-		fmRC.submit();
+		fmSRCH.PG.value = '';
+		fmSRCH.RC.value = slct_rc.value;
+		fmSRCH.submit();
 	})
 	
 });
