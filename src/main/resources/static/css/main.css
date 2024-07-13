@@ -15,8 +15,8 @@
 		align-items: center;
 	}
 	
-	#mainTitle, #comingSoon { color: var(--main-hoverMenu-under); }
-	#guide_hello, #guide_back { color: var(--main-text-color); }
+	#mainTitle, #comingSoon { color: var(--main-text-color); }
+	#guide_hello, #guide_back { color: var(--main-hoverMenu-under); }
 	#mainImage { margin-top: 10px;}
 	/* 화면 중앙에 로딩 이미지를 표시하기 위한 스타일 */
 	.loader {

@@ -23,11 +23,11 @@
 /* ---------- main ---------- */
 :root {
     --main-background-color: rgb(207, 248, 245);
-    --main-text-color: #ffb300;
+    --main-text-color: #2e7d32;
     --main-hoverMenu-color: #66bb6a;
-    --main-hoverMenu-under: #2e7d32;
-    --main-selectedMenu-color: beige;
-    --main-selectedMenu-under: #2e7d32;
+    --main-hoverMenu-under: #ffb300;
+    --main-selectedMenu-color: #ffffa8;
+    --main-selectedMenu-under: beige;
 }
 
 /* ---------- footer ---------- */

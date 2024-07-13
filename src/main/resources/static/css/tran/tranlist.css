@@ -78,18 +78,21 @@ tbody tr:nth-child(even) {
 #pageBlock > * {
 	margin: 0 2px;
 	padding: 3px 6px;
-}
-#pageBlock a {
-	color: var(--header-text-color);
-}
-#pageBlock a:hover {
-    background-color: var(--main-selectedMenu-color);
+    border-radius: 8px;
 }
 #pageBlock .current {
-    background-color: var(--aside-background-color);
-    color: var(--aside-text-color);
+    background-color: var(--main-selectedMenu-color);
+    color: var(--main-hoverMenu-under);
     font-weight: bold;
 }
+#pageBlock .paging {
+	color: var(--main-hoverMenu-color);
+}
+#pageBlock .paging:hover {
+	cursor: pointer;
+    background-color: var(--main-selectedMenu-under);
+}
+
 
 /* N줄보기 블럭 */
 #slct_rc {
