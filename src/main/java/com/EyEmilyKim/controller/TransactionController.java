@@ -146,10 +146,10 @@ public class TransactionController {
 	
 	@GetMapping("upd")
 	public String upd(HttpServletRequest req, String TRAN_ID, Model model) {
-		System.out.println("TransactionController > upd()@Post called");
+		System.out.println("TransactionController > upd()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		System.out.println(TRAN_ID);
+		System.out.println("TRAN_ID : "+TRAN_ID);
 		
 		Transaction tran = transactionService.getOne(TRAN_ID);
 		model.addAttribute("T", tran);

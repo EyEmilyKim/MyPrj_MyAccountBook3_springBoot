@@ -4,19 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/* ------------ form 요소 식별 변수 ------------ */
 	
+	const tran_id = document.getElementById("tran_id");
 	const btn_yesterday = document.getElementById("btn_yesterday");
 	const btn_today = document.getElementById("btn_today");
 	const date = document.getElementById("date");
+	const inex = document.getElementById("inex");
 	const btn_in = document.getElementById("btn_in");
 	const btn_ex = document.getElementById("btn_ex");
+	const ccode = document.getElementById("ccode");
 	const slct_nn_c = document.getElementById("slct_nn_c");
 	const slct_in = document.getElementById("slct_in");
 	const slct_ex = document.getElementById("slct_ex");
 	const item = document.getElementById("item");
 	const amount = document.getElementById("amount");
 	const methBlock = document.getElementById("methBlock");
+	const mncrd = document.getElementById("mncrd");
 	const btn_mn = document.getElementById("btn_mn");
 	const btn_crd = document.getElementById("btn_crd");
+	const mcode = document.getElementById("mcode");
 	const slct_nn_m = document.getElementById("slct_nn_m");
 	const slct_mn = document.getElementById("slct_mn");
 	const slct_crd = document.getElementById("slct_crd");
@@ -54,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		amount_type : () => { const flag = isNaN(fm.AMOUNT.value.replace(/,/g, '')) ? true : false; return flag; },
 		item_length : () => { const flag = calculateByteLength(fm.ITEM.value.trim()) > 60 ? true : false; return flag; },
 		opt_item : () => { const flag = fm.ITEM.value.trim() == "" ? true : false; return flag; },
-		opt_ccode : () => { const flag = fm.CCODE.value == "" ? true : false; return flag; },
-		opt_mcode : () => { const flag = fm.MCODE.value == "" ? true : false; return flag; },
+		opt_ccode : () => { const flag = (fm.CCODE.value == "" || fm.CCODE.value == "caNN0" ) ? true : false; return flag; },
+		opt_mcode : () => { const flag = (fm.MCODE.value == "" || fm.MCODE.value == "meNN0" ) ? true : false; return flag; },
 	};
 
 	const validate = {
@@ -98,7 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		validate.date();
 	})
 
-	// 2. 수입 or 지출 설정 => 3. 카테고리 드롭다운
+	// 2. INEX <=> 수입 or 지출 설정 => 3. 카테고리 드롭다운
+	inex.addEventListener('input', () => {
+        const val = inex.value;
+        if (val === "IN") btn_in.click();
+        else if (val === "EX") btn_ex.click();
+    })
 	btn_in.addEventListener('click', () => {
 		setINEX("IN");
 		colorBtn("IN");
@@ -144,7 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		validate.amount();
 	})
 
-	// 6-1. 현금 or 카드 설정 => 6-2. 결제수단 드롭다운
+	// 6-1. MNCRD <=> 현금 or 카드 설정 => 6-2. 결제수단 드롭다운
+	mncrd.addEventListener('input', () => {
+        const val = mncrd.value;
+        if (val === "MN") btn_mn.click();
+        else if (val === "CRD") btn_crd.click();
+    })
 	btn_mn.addEventListener('click', () => {
 		setMNCRD("MN");
 		colorBtn("MN");
@@ -161,8 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 	
 	// 6-2. 결제수단 드롭다운 선택 시 MCODE 설정
-	const forMCode = [slct_mn, slct_crd];
-	for (let i of forMCode) {
+	const forMCODE = [slct_mn, slct_crd];
+	for (let i of forMCODE) {
 		i.addEventListener('change', () => {
 			setMCODE(i.value);
 			validate.opt_mcode();
@@ -171,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 8. form 취소, 제출 동작 추가
 	fm.addEventListener('reset', () => {
-		backToHome();
+		backToList();
 	})
     fm.addEventListener('submit', (event) => {
         if (!checkSubmit()) {
@@ -329,15 +344,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	/* ------------ form 취소 ------------ */
 	
-	function backToHome() {
-		if (confirm("취소하고 홈으로 돌아가시겠습니까?"))
-			location.href = "/index";
+	function backToList() {
+		if (confirm("취소하고 목록으로 돌아가시겠습니까?"))
+			history.back();
 		else {
-			colorBtn("NN"); // 수입/지출, 현금/카드 버튼색 초기화
-			showSlct("NN"); // 카테고리, 결제수단 드롭다운 초기화
-			closeMethBlock(); // 결제수단 블럭 초기화
-			clearAllGuide(); // 모든 안내문 초기화
-			return false;
+			window.location.reload();
 		}
 	}
 	
@@ -416,11 +427,71 @@ document.addEventListener('DOMContentLoaded', () => {
 		return detail;
 	}
 
+
+	/* ------------ 기존 data 식별 변수 ------------ */
+	
+	const DATA = document.forms["DATA"];
+	const data = {
+		tran_id : DATA.tran_id.value,
+		tran_date : DATA.tran_date.value,
+		inex : DATA.inex.value,
+		cate_code : DATA.cate_code.value,
+		item : DATA.item.value,
+		amount : DATA.amount.value,
+		mncrd : DATA.mncrd.value,
+		meth_code : DATA.meth_code.value,
+	}
+	
+	/* ------------ 기존 data 주입 func ------------ */
+	
+	function presetData(){
+		// console.log('data', data);
+		
+		// tran_id
+		tran_id.value = data.tran_id;
+		// tran_date
+		date.value = data.tran_date.split(' ')[0];
+		date.dispatchEvent(new Event('change'));
+		// inex
+		setINEX(data.inex);
+		inex.dispatchEvent(new Event('input'));
+		// cate_code
+		setCCODE(data.cate_code);
+		selectOptionByValue(forCCODE, data.cate_code);
+		validate.opt_ccode();
+		// item
+		item.value = data.item;
+		item.dispatchEvent(new Event('input'));
+		// amount
+		amount.value = data.amount;
+		amount.dispatchEvent(new Event('input'));
+		// mncrd
+		setMNCRD(data.mncrd);
+		mncrd.dispatchEvent(new Event('input'));
+		// meth_code
+		setMCODE(data.meth_code);
+		selectOptionByValue(forMCODE, data.meth_code);		
+		validate.opt_mcode();
+	}
+	
+	presetData();
+
+	function selectOptionByValue(selectArr, v) {
+		selectArr.forEach(select => {
+			for (let option of select.options) {
+				if(option.value === v) {
+					select.value = v; 
+					break;
+				}
+			}
+		})
+	}
+	
 	/* ------------ 개발자 편의용 ------------ */
 	
 	// hidden input 표시하기
-	const forDeveloper = [my_seqno, inex, ccode, mncrd, mcode];
-	showForDeveloper(forDeveloper, true);
+	const forDeveloper = [tran_id, inex, ccode, mncrd, mcode];
+	showForDeveloper(forDeveloper, false);
 	function showForDeveloper(arr, boolean) {
 		if (boolean) {
 			for (let i of arr) {

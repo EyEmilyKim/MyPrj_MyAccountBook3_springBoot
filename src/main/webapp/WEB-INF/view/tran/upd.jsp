@@ -5,16 +5,25 @@
 
 <main>
 
-	<c:out value="${T }" />
+	<form name="DATA" class="hidden">
+		<input type="text" name="tran_id" value="${T.tran_id }" />
+		<input type="text" name="tran_date" value="${T.tran_date }" />
+		<input type="text" name="inex" value="${T.inex }" />
+		<input type="text" name="cate_code" value="${T.cate_code }" />
+		<input type="text" name="item" value="${T.item }" />
+		<input type="text" name="amount" value="${T.amount }" />
+		<input type="text" name="mncrd" value="${T.mncrd }" />
+		<input type="text" name="meth_code" value="${T.meth_code }" />
+	</form>
 
 	<div class="contMain">
 		<h3 class="title ">가계부 수정하기</h3>
 
-		<form action="add" method="post" name="fm">
+		<form action="upd" method="post" name="fm">
 		
-	<!-- 0.일련번호(hidden)-->
+	<!-- 0.TRAN_ID(hidden)-->
 		<div>
-			<input type="text" name="MY_SEQNO" value="${MSN +1 }" id="my_seqno" placeholder="MY_SEQNO 자동" class="hidden"/>
+			<input type="text" name="TRAN_ID" id="tran_id" placeholder="TRAN_ID 자동" class="hidden"/>
 		</div>
 			
 	<!-- 1.거래날짜 -->
