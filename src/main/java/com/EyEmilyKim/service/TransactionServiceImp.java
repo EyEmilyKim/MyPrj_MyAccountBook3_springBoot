@@ -43,8 +43,8 @@ public class TransactionServiceImp implements TransactionService {
 	
 	@Override
 	public Transaction getOne(String tran_id) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("TranService > getOne() called");
+		return transactionDao.getOne(tran_id);
 	}
 
 	@Override

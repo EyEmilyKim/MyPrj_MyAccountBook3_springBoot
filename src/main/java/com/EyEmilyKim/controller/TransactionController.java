@@ -18,6 +18,7 @@ import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
+import com.EyEmilyKim.entity.Transaction;
 import com.EyEmilyKim.service.CategoryService;
 import com.EyEmilyKim.service.MethodService;
 import com.EyEmilyKim.service.TransactionService;
@@ -141,4 +142,23 @@ public class TransactionController {
 		return "redirect";
 	}
 	
+	/*-------- 거래내역 수정 --------*/
+	
+	@GetMapping("upd")
+	public String upd(HttpServletRequest req, String TRAN_ID, Model model) {
+		System.out.println("TransactionController > upd()@Post called");
+		int userId = (int) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
+		System.out.println(TRAN_ID);
+		
+		Transaction tran = transactionService.getOne(TRAN_ID);
+		model.addAttribute("T", tran);
+		System.out.println("tran : "+tran);
+		
+		List<Category> catelist = categoryService.getList(userId);
+		model.addAttribute("CATELIST", catelist);
+		List<Method> methlist = methodService.getList(userId);
+		model.addAttribute("METHLIST", methlist);
+		return "tran.upd";
+	}
 }

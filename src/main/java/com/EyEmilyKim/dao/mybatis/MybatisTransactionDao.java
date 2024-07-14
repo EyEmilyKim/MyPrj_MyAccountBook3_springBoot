@@ -31,8 +31,7 @@ public class MybatisTransactionDao implements TransactionDao {
 
 	@Override
 	public Transaction getOne(String tran_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getOne(tran_id);
 	}
 
 	@Override

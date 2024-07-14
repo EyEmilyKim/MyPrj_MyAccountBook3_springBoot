@@ -80,4 +80,11 @@
     </where>
   </select>
   
+  <select id="getOne" resultType="com.EyEmilyKim.entity.Transaction">
+  	select * from MAB_TRANSACTIONS 
+	<where> 
+	TRAN_ID = #{tran_id} 
+	</where> 
+  </select>
+  
 </mapper>
