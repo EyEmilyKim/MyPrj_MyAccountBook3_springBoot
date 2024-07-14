@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		item_length : () => { const flag = calculateByteLength(fm.ITEM.value.trim()) > 60 ? true : false; return flag; },
 		opt_item : () => { const flag = fm.ITEM.value.trim() == "" ? true : false; return flag; },
 		opt_ccode : () => { const flag = (fm.CCODE.value == "" || fm.CCODE.value == "caNN0" ) ? true : false; return flag; },
-		opt_mcode : () => { const flag = (fm.MCODE.value == "" || fm.MCODE.value == "meNN0" ) ? true : false; return flag; },
+		opt_mcode : () => { const flag = (fm.INEX.value =="EX" && (fm.MCODE.value == "" || fm.MCODE.value == "meNN0") ) ? true : false; return flag; },
 	};
 
 	const validate = {
