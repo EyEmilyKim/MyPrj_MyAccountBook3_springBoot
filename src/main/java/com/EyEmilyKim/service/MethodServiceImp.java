@@ -17,7 +17,7 @@ public class MethodServiceImp implements MethodService {
 	
 	@Override
 	public List<Method> getList(int userId) {
-		System.out.println("MethodService > list() called");
+		System.out.println("MethodService > getList() called");
 		
 		return methodDao.getList(userId);
 	}
