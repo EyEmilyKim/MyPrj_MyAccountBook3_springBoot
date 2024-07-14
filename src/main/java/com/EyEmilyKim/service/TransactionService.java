@@ -19,6 +19,6 @@ public interface TransactionService {
 	
 	int insert(Map<String,String> fm, int user_id) throws Exception;
 
-	int update(Map<String,String> fm);
+	int update(Map<String,String> fm) throws ParseException;
 	
 }

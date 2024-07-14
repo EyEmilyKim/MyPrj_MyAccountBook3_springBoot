@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/* ------------ form 요소 식별 변수 ------------ */
 	
+	const prev_url = document.getElementById("prev_url");
 	const tran_id = document.getElementById("tran_id");
 	const btn_yesterday = document.getElementById("btn_yesterday");
 	const btn_today = document.getElementById("btn_today");
@@ -357,7 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	function checkSubmit(){ // 필수항목 확인, 미선택 no필수항목 안내, 최종 컨펌
 		//console.log('checkSubmit() called');
 		const fmV = { // 모든 입력사항 Object
-			my_seqno : fm.MY_SEQNO.value,
+			prev_url : fm.PREV_URL.value,
+			tran_id : fm.TRAN_ID.value,
 			date : fm.DATE.value,
 			inex : fm.INEX.value,
 			ccode : fm.CCODE.value,
@@ -374,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		printAllGuide(); // 모든 항목 안내문 출력
 		if (! checkEssential() ) return false; // 필수항목 미통과 시 return false
 		const detail = makeDetail(fmV);
-		if (! confirm("등록하시겠습니까?\n──────\n"+detail) ) return false; // 최종 컨펌
+		if (! confirm("저장하시겠습니까?\n──────\n"+detail) ) return false; // 최종 컨펌
 		fm.AMOUNT.value = Number(fmV.amount.replace(/,/g, ''));
 		return true;
 	}
@@ -430,6 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/* ------------ 기존 data 식별 변수 ------------ */
 	
+	const prevUrl = document.referrer;
 	const DATA = document.forms["DATA"];
 	const data = {
 		tran_id : DATA.tran_id.value,
@@ -445,8 +448,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	/* ------------ 기존 data 주입 func ------------ */
 	
 	function presetData(){
+		// console.log('prevUrl', prevUrl);
 		// console.log('data', data);
 		
+		// 이전 경로 (update 완료 후 돌아갈 목록) 
+		prev_url.value = prevUrl;
 		// tran_id
 		tran_id.value = data.tran_id;
 		// tran_date
@@ -490,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	/* ------------ 개발자 편의용 ------------ */
 	
 	// hidden input 표시하기
-	const forDeveloper = [tran_id, inex, ccode, mncrd, mcode];
+	const forDeveloper = [prev_url, tran_id, inex, ccode, mncrd, mcode];
 	showForDeveloper(forDeveloper, false);
 	function showForDeveloper(arr, boolean) {
 		if (boolean) {

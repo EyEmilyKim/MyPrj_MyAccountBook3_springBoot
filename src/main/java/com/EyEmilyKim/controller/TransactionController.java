@@ -161,4 +161,25 @@ public class TransactionController {
 		model.addAttribute("METHLIST", methlist);
 		return "tran.upd";
 	}
+	
+	@PostMapping("upd")
+	public String upd(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
+		System.out.println("TransactionController > upd()@Post called");
+		int userId = (int) req.getAttribute("userId");
+		System.out.println("userId : "+userId);
+		for(Map.Entry<String,String> entry : fm.entrySet()) {
+			System.out.println(entry.getKey()+" : "+entry.getValue());
+		}
+		
+		try {
+			transactionService.update(fm);
+			model.addAttribute("MSG", succMsg);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+		}
+		model.addAttribute("URL", fm.get("PREV_URL"));
+		return "redirect";
+	}
+	
 }

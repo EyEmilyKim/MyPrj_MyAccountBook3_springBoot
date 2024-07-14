@@ -86,5 +86,19 @@
 	TRAN_ID = #{tran_id} 
 	</where> 
   </select>
+
+  <update id="update" parameterType="com.EyEmilyKim.entity.Transaction">
+  	update MAB_TRANSACTIONS 
+  	set TRAN_DATE = #{tran_date}, 
+  		INEX = #{inex}, 
+  		CATE_CODE = #{cate_code}, 
+  		ITEM = #{item}, 
+  		AMOUNT = #{amount}, 
+  		MNCRD = #{mncrd}, 
+  		METH_CODE = #{meth_code} 
+  	<where> 
+	TRAN_ID = #{tran_id} 
+	</where> 
+  </update>
   
 </mapper>

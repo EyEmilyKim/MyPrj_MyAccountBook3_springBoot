@@ -21,8 +21,9 @@
 
 		<form action="upd" method="post" name="fm">
 		
-	<!-- 0.TRAN_ID(hidden)-->
+	<!-- 0.이전 경로, TRAN_ID (hidden)-->
 		<div>
+			<input type="text" name="PREV_URL" id="prev_url" placeholder="PREV_URL 자동" class="hidden"/>
 			<input type="text" name="TRAN_ID" id="tran_id" placeholder="TRAN_ID 자동" class="hidden"/>
 		</div>
 			

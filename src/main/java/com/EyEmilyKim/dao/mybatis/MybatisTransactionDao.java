@@ -52,8 +52,7 @@ public class MybatisTransactionDao implements TransactionDao {
 
 	@Override
 	public int update(Transaction tran) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.update(tran);
 	}
 
 }

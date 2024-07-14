@@ -66,38 +66,51 @@ public class TransactionServiceImp implements TransactionService {
 	public int insert(Map<String, String> fm, int user_id) throws Exception {
 		System.out.println("TranService > insert() called");
 
-		Timestamp tran_date = DateUtil.stringToTimestamp(fm.get("DATE"));
-		String inex = fm.get("INEX");
-		String ccode = fm.get("CCODE") == "" ? "caNN0" : fm.get("CCODE");
-		String item = fm.get("ITEM").trim() == "" ? null : fm.get("ITEM");
-		String mncrd = fm.get("MNCRD") == "" ? null : fm.get("MNCRD");
-		if(inex == "EX" && mncrd == null) mncrd = "meNN"; 
-		String mcode = fm.get("MCODE") == "" ? "meNN0" : fm.get("MCODE");
 		Timestamp reg_date = DateUtil.dateToTimestamp(new Date());
 		
-		Transaction tran = new Transaction();
+		Transaction tran = populateTransactionCommonField(fm);
 		tran.setUser_id(user_id);
 		tran.setMy_seqno(Integer.parseInt(fm.get("MY_SEQNO")));
 		tran.setTran_id(user_id + "_" + fm.get("MY_SEQNO"));
-		tran.setTran_date(tran_date);
-		tran.setInex(inex);
-		tran.setCate_code(ccode);
-		tran.setItem(item);
-		tran.setAmount(Integer.parseInt(fm.get("AMOUNT")));
-		tran.setMncrd(mncrd);
-		tran.setMeth_code(mcode);
 		tran.setReg_date(reg_date);
 		
 		return transactionDao.insert(tran);
 	}
 
 	@Override
-	public int update(Map<String, String> fm) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Map<String, String> fm) throws ParseException {
+		System.out.println("TranService > update() called");
+		
+		Transaction tran = populateTransactionCommonField(fm);
+		tran.setTran_id(fm.get("TRAN_ID"));
+		
+		return transactionDao.update(tran);
 	}
 
 	/* ------------- 공통 함수 ------------- */
+	
+	private Transaction populateTransactionCommonField(Map<String, String> fm) throws ParseException {
+		Timestamp tran_date = DateUtil.stringToTimestamp(fm.get("DATE"));
+		String inex = fm.get("INEX");
+		String ccode = fm.get("CCODE").isEmpty() ? "caNN0" : fm.get("CCODE");
+		String item = fm.get("ITEM").trim().isEmpty() ? null : fm.get("ITEM");
+		Integer amount = Integer.parseInt(fm.get("AMOUNT"));
+		String mncrd = fm.get("MNCRD").isEmpty() ? null : fm.get("MNCRD");
+		if(inex.equals("EX") && mncrd == null) mncrd = "meNN"; 
+		String mcode = fm.get("MCODE") == "" ? null : fm.get("MCODE");
+		if(inex.equals("EX") && mcode == null) mcode = "meNN0"; 
+		
+		Transaction tran = new Transaction();
+		tran.setTran_date(tran_date);
+		tran.setInex(inex);
+		tran.setCate_code(ccode);
+		tran.setItem(item);
+		tran.setAmount(amount);
+		tran.setMncrd(mncrd);
+		tran.setMeth_code(mcode);
+		
+		return tran;
+	}
 	
 	private TranSearchDto populateTranSearchDto(TranSearchDto searchDto, int user_id, String inex) throws ParseException {
 		// 검색 조건 설정
