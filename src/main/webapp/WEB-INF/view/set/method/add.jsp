@@ -63,7 +63,7 @@
 
 	function backToList() {
 		if (confirm("취소하고 목록으로 돌아가시겠습니까?")) {
-			location.href = "/set/method/list";
+			history.back();
 		} else {
 			document.fm.MNCRD.value = null;
 			btn_mn.classList.remove('selected_mn');

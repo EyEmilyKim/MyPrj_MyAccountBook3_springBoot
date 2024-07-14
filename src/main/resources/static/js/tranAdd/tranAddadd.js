@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 	
 	// 6-2. 결제수단 드롭다운 선택 시 MCODE 설정
-	const forMCode = [slct_mn, slct_crd];
-	for (let i of forMCode) {
+	const forMCODE = [slct_mn, slct_crd];
+	for (let i of forMCODE) {
 		i.addEventListener('change', () => {
 			setMCODE(i.value);
 			validate.opt_mcode();

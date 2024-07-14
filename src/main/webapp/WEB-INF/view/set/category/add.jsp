@@ -79,7 +79,7 @@ function check(){
 
 function backToList(){
 	if(confirm("취소하고 목록으로 돌아가시겠습니까?")){
-		location.href="/set/category/list";
+		history.back();
 	}else {
 		document.fm.INEX.value = null;
 		btn_in.classList.remove('selected_in');
