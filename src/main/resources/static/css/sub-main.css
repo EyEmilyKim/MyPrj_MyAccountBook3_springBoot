@@ -65,17 +65,16 @@
 	}
 	.btn {
 		display: float;
-	    border: 1px solid var(--main-selectedMenu-color);
-	    font-size: 0.8rem;
+	    font-size: 0.9rem;
 	    font-weight: 400; 
-	    padding: 0.1rem 0;
+	    padding: 0.1rem 0.2rem;
 	    margin: auto;
 	    width: 100px;
 	    border-radius: 5px;
 	    text-decoration: none;
 	    text-align: center;
-	    background-color: var(--aside-background-color);
-	    color: var(--main-text-color);
+	    background-color: var(--main-selectedMenu-under);
+	    color: var(--main-hoverMenu-under);
 	}
 	.add { 
 		display: block;
