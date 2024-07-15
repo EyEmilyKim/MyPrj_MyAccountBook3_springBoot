@@ -11,7 +11,7 @@
 	USER_ID in (#{userid}, 0)  
 	and METH_CODE != 'none' 
 	</where> 
-	order by seqno, METH_CODE desc 
+	order by user_id, meth_code
   </select>
   <select id="getCount" resultType="Integer">
 	select count(METH_CODE) from MAB_METHODS 
@@ -48,7 +48,7 @@
   
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Method">
   	insert into MAB_METHODS values(
-  	 #{user_id}, #{seqno}, #{mncrd}, #{meth_code}, #{meth_name} )
+  	 #{user_id}, #{seqno}, #{mncrd}, #{meth_code}, #{meth_name}, #{default_mncrd}, #{default_meth_code} )
   </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Method">
