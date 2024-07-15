@@ -23,7 +23,7 @@ public class CustomErrorController implements ErrorController {
 		if (status != null) {
 			Integer statusCode = Integer.valueOf(status.toString());
 			if (statusCode == 404) {
-				failMsg = "페이지를 찾을 수 없습니다.";
+				failMsg = "존재하지 않는 페이지입니다.";
 			} else if (statusCode == 500) {
 				failMsg = "서버 내부 오류가 발생했습니다.";
 			} else {

@@ -23,7 +23,7 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	private String failMsg = "해당 기능이 준비되지 않아 처리하지 못했습니다.";
+	private String failMsg = "에러가 발생했습니다.";
 	private String succMsg = "정상적으로 처리되었습니다.";
 	private String nextUrl = "/set/category/list";
 		
