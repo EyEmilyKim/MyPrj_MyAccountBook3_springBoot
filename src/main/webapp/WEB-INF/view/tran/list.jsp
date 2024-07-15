@@ -51,9 +51,11 @@
 				<select name="METH_NAME" id="slct_mname">
 						<option value="">--결제수단--</option>
 					<c:forEach var="option" items="${MNAME_LIST}">
+					<c:if test="${option != '해당없음' }">
 						<option value="${option}" <c:if test="${option == param.METH_NAME}">selected</c:if>>
 				            ${option}
 				        </option>
+					</c:if>
 					</c:forEach>
 				</select>
 			</c:if>

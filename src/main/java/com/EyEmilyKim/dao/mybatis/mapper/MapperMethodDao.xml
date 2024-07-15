@@ -9,6 +9,7 @@
   	select * from MAB_METHODS 
 	<where> 
 	USER_ID in (#{userid}, 0)  
+	and METH_CODE != 'none' 
 	</where> 
 	order by seqno, METH_CODE desc 
   </select>
@@ -16,6 +17,7 @@
 	select count(METH_CODE) from MAB_METHODS 
 	<where> 
 	USER_ID in (#{userid}, 0)  
+	and METH_CODE != 'none' 
 	</where> 
   </select>
 

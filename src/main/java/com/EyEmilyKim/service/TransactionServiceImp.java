@@ -95,10 +95,10 @@ public class TransactionServiceImp implements TransactionService {
 		String ccode = fm.get("CCODE").isEmpty() ? "caNN0" : fm.get("CCODE");
 		String item = fm.get("ITEM").trim().isEmpty() ? null : fm.get("ITEM");
 		Integer amount = Integer.parseInt(fm.get("AMOUNT"));
-		String mncrd = fm.get("MNCRD").isEmpty() ? null : fm.get("MNCRD");
-		if(inex.equals("EX") && mncrd == null) mncrd = "meNN"; 
-		String mcode = fm.get("MCODE") == "" ? null : fm.get("MCODE");
-		if(inex.equals("EX") && mcode == null) mcode = "meNN0"; 
+		String mncrd = inex.equals("IN") ? "none" : fm.get("MNCRD");
+		if(inex.equals("EX") && mncrd.isEmpty()) mncrd = "meNN"; 
+		String mcode = inex.equals("IN") ? "none" : fm.get("MCODE");
+		if(inex.equals("EX") && mcode.isEmpty()) mcode = "meNN0"; 
 		
 		Transaction tran = new Transaction();
 		tran.setTran_date(tran_date);

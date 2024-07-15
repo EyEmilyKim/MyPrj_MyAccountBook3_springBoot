@@ -26,7 +26,7 @@
 	  <!-- choose when: system용 '미지정'은 별도 tr로.   -->
 	  <!-- otherwise: 사용자용 '현금'/'카드'는 같은 tr 내 일부 td만 다르게 처리  -->
 	  <c:choose>
-		<c:when test="${m.mncrd == 'meNN' }">
+		<c:when test="${m.meth_code == 'meNN0' }">
 			<tr class="sys">
 				<td class="user_id">${m.user_id }</td>
 				<td class="seqno">${m.seqno }</td><td class="meth_code">${m.meth_code }</td>
