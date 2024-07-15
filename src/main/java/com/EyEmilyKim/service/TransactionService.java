@@ -5,13 +5,13 @@ import java.util.Map;
 
 import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
-import com.EyEmilyKim.entity.Transaction;
+import com.EyEmilyKim.dto.TransactionDto;
 
 public interface TransactionService {
 
 	TranPageDto getList(TranSearchDto searchDto, int user_id, String inex) throws ParseException;
 
-	Transaction getOne(String tran_id);
+	TransactionDto getOne(String tran_id);
 
 	int delete(String tran_id);
 

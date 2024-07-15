@@ -15,7 +15,7 @@ public interface TransactionDao {
 
 	Integer getCount(TranSearchDto dto);
 
-	Transaction getOne(String tran_id);
+	TransactionDto getOne(String tran_id);
 
 	int delete(String tran_id);
 

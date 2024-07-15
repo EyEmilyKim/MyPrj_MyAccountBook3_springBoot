@@ -42,7 +42,7 @@ public class TransactionServiceImp implements TransactionService {
 	}
 	
 	@Override
-	public Transaction getOne(String tran_id) {
+	public TransactionDto getOne(String tran_id) {
 		System.out.println("TranService > getOne() called");
 		return transactionDao.getOne(tran_id);
 	}

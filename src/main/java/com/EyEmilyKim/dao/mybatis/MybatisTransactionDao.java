@@ -30,7 +30,7 @@ public class MybatisTransactionDao implements TransactionDao {
 	}
 
 	@Override
-	public Transaction getOne(String tran_id) {
+	public TransactionDto getOne(String tran_id) {
 		return mapper.getOne(tran_id);
 	}
 

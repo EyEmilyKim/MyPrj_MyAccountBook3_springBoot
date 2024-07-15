@@ -80,8 +80,8 @@
     </where>
   </select>
   
-  <select id="getOne" resultType="com.EyEmilyKim.entity.Transaction">
-  	select * from MAB_TRANSACTIONS 
+  <select id="getOne" resultType="com.EyEmilyKim.dto.TransactionDto">
+  	select * from MAB_TRANSACTIONS_VIEW 
 	<where> 
 	TRAN_ID = #{tran_id} 
 	</where> 
