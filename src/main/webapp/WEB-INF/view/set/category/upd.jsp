@@ -5,7 +5,7 @@
 <main>
 	<section class="contMain">
 	
-	<h2 class="title">카테고리 수정 화면입니다.</h2>
+	<h2 class="title">카테고리 수정하기</h2>
 	
 	<!-- Form 영역 -->
 	<div class="form"> 

@@ -6,7 +6,7 @@
 <main>
 	<section class="contMain">
 	
-		<h2 class="title ">결제수단 삭제 화면입니다.</h2>
+		<h2 class="title ">결제수단 삭제하기</h2>
 		<div class="form ">
 		<form action="del" name="fm" onSubmit="return check(this)" method="post">
 				<input type="hidden" name="MCODE" value="${M.meth_code }">
