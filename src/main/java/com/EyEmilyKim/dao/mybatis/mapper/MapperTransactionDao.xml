@@ -86,6 +86,13 @@
 	TRAN_ID = #{tran_id} 
 	</where> 
   </select>
+  
+  <delete id="delete">
+  	delete from MAB_TRANSACTIONS 
+	<where> 
+	TRAN_ID = #{tran_id} 
+	</where> 
+  </delete>
 
   <update id="update" parameterType="com.EyEmilyKim.entity.Transaction">
   	update MAB_TRANSACTIONS 

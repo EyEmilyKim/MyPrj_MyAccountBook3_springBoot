@@ -49,8 +49,8 @@ public class TransactionServiceImp implements TransactionService {
 
 	@Override
 	public int delete(String tran_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("TranService > delete() called");
+		return transactionDao.delete(tran_id);
 	}
 
 	@Override

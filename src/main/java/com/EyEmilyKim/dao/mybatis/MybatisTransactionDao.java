@@ -36,8 +36,7 @@ public class MybatisTransactionDao implements TransactionDao {
 
 	@Override
 	public int delete(String tran_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.delete(tran_id);
 	}
 
 	@Override

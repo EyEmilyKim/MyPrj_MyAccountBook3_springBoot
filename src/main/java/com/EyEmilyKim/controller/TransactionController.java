@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
+import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.entity.Transaction;
@@ -104,6 +105,37 @@ public class TransactionController {
 		return "tran.list";
 	}
 	
+	/*-------- 거래내역 삭제 --------*/
+	
+	@GetMapping("del")
+	public String del(String TRAN_ID, Model model) {
+		System.out.println("TransactionController > del()@Get called");
+		System.out.println("TRAN_ID : "+TRAN_ID);
+		
+		TransactionDto tran = transactionService.getOne(TRAN_ID);
+		model.addAttribute("T", tran);
+		
+		return "tran.del";
+	}
+	
+	@PostMapping("del")
+	public String del(@RequestParam Map<String,String> fm, Model model) {
+		System.out.println("TransactionController > del()@Post called");		
+		String tran_id = fm.get("TRAN_ID");
+		String nextUrl = fm.get("PREV_URL");
+		System.out.println("TRAN_ID : "+tran_id);
+		
+		try {
+			transactionService.delete(tran_id);
+			model.addAttribute("MSG", succMsg);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", failMsg);
+		}
+		model.addAttribute("URL", nextUrl);
+		return "redirect";
+	}	
+
 	/*-------- 거래내역 추가 --------*/
 	
 	@GetMapping("add")
