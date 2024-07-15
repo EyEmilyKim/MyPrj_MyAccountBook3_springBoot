@@ -31,7 +31,7 @@
 		</div>
 
 		<!-- 중복확인용 기존 목록 -->
-		<div class="">
+		<div class="hidden">
 			<input type="text" value="${LIST.size() }" id="slct_name_cnt">
 			<select class="" id="slct_name">
 				<c:forEach items="${LIST }" var="c">
