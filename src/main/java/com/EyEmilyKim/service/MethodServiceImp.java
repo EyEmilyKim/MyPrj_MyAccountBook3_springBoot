@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.EyEmilyKim.config.MysqlColumnDefault;
 import com.EyEmilyKim.dao.MethodDao;
 import com.EyEmilyKim.entity.Method;
 
@@ -14,6 +15,9 @@ public class MethodServiceImp implements MethodService {
 
 	@Autowired
 	private MethodDao methodDao;
+	
+	@Autowired
+	private MysqlColumnDefault mcd;
 	
 	@Override
 	public List<Method> getList(int userId) {
@@ -64,6 +68,8 @@ System.out.println("MethodService > getMaxSqn() called");
 		meth.setMeth_code(fm.get("MNCRD")+fm.get("SEQNO")+"_"+userId);
 		meth.setMeth_name(fm.get("MNAME"));
 		meth.setUser_id(userId);
+		meth.setDefault_mncrd(mcd.getDefault_mncrd());
+		meth.setDefault_meth_code(mcd.getDefault_meth_code());
 		
 		return methodDao.insert(meth);
 	}

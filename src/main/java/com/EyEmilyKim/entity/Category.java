@@ -17,6 +17,6 @@ public class Category {
 	private String inex;
 	private String cate_code;
 	private String cate_name;
-	private String default_cate_code; // null -> DB default
+	private String default_cate_code;
 	
 }

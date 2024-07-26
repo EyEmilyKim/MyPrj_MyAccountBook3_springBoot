@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.EyEmilyKim.config.MysqlColumnDefault;
 import com.EyEmilyKim.dao.CategoryDao;
 import com.EyEmilyKim.entity.Category;
 
@@ -14,6 +15,9 @@ public class CategoryServiceImp implements CategoryService {
 
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@Autowired
+	private MysqlColumnDefault mcd;
 	
 	@Override
 	public List<Category> getList(int userId) {
@@ -67,6 +71,7 @@ public class CategoryServiceImp implements CategoryService {
 		cate.setCate_code(fm.get("INEX")+fm.get("SEQNO")+"_"+userId);
 		cate.setCate_name(fm.get("CNAME"));
 		cate.setUser_id(userId);
+		cate.setDefault_cate_code(mcd.getDefault_cate_code());
 		
 		return categoryDao.insert(cate);
 	}

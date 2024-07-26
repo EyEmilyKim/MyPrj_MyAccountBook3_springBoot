@@ -17,7 +17,7 @@ public class Method {
 	private String mncrd;
 	private String meth_code;
 	private String meth_name;
-	private String default_mncrd; // null -> DB default
-	private String default_meth_code; // null -> DB default
+	private String default_mncrd;
+	private String default_meth_code;
 	
 }
