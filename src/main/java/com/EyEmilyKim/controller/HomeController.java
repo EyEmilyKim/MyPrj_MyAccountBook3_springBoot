@@ -53,7 +53,10 @@ public class HomeController {
 			session.setAttribute("NICKNAME", userSess.getNickname());
 			String msg = "로그인에 성공했습니다. \\n환영합니다~ " + userSess.getNickname() + "님~!";
 			model.addAttribute("MSG", msg);
-			model.addAttribute("URL", "/index");
+			
+			String originalUrl = (String) session.getAttribute("OriginalUrl");
+			if (originalUrl == null) originalUrl = "/index";
+			model.addAttribute("URL", originalUrl);
 		} catch (Exception e) {
 			model.addAttribute("MSG", e.getMessage());
 			model.addAttribute("URL", "/login");
@@ -65,6 +68,7 @@ public class HomeController {
 	
 	@GetMapping("logout")
 	public String logout(HttpSession session, Model model) {
+		System.out.println("HomeController > logout()@Get called");
 		session.invalidate();
 		model.addAttribute("MSG", "정상적으로 로그아웃되었습니다.");
 		model.addAttribute("URL", "/index");
