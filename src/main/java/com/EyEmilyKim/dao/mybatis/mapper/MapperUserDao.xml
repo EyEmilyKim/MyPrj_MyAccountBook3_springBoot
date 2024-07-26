@@ -6,7 +6,7 @@
 <mapper namespace="com.EyEmilyKim.dao.UserDao">
 
 	<select id="findByLid" resultType="com.EyEmilyKim.entity.User">
-		select USER_ID, PWD, NICKNAME, BIRTHDAY from MAB_USERS
+		select USER_ID, PWD, NICKNAME, BIRTHDAY from mab_users
 		<where>
 			LOGIN_ID = #{login_id}
 		</where>

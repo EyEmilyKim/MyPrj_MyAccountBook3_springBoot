@@ -6,38 +6,38 @@
 <mapper namespace="com.EyEmilyKim.dao.CategoryDao">
 
   <select id="getList" resultType="com.EyEmilyKim.entity.Category">
-  	select * from MAB_CATEGORIES 
+  	select * from mab_categories 
 	<where> 
 	USER_ID in (#{userId}, 0)  
 	</where> 
 	order by CATE_CODE 
   </select>
   <select id="getCount" resultType="Integer">
-	select count(CATE_CODE) from MAB_CATEGORIES 
+	select count(CATE_CODE) from mab_categories 
 	<where> 
 	USER_ID in (#{userId}, 0)  
 	</where> 
   </select>
 
   <select id="getOne" resultType="com.EyEmilyKim.entity.Category">
-  	select * from MAB_CATEGORIES 
+  	select * from mab_categories 
 	<where> 
 	CATE_CODE = #{ccode} 
 	</where> 
   </select>
   
   <delete id="delete">
-  	delete from MAB_CATEGORIES 
+  	delete from mab_categories 
 	<where> 
 	CATE_CODE = #{ccode} 
 	</where> 
   </delete>
   
   <select id="getMaxSqn" resultType="Integer">
-  	select max(SEQNO) from MAB_CATEGORIES
+  	select max(SEQNO) from mab_categories
   </select>
   <select id="getNameList" parameterType="java.util.Map" resultType="String">
-  	select CATE_NAME from MAB_CATEGORIES 
+  	select CATE_NAME from mab_categories 
 	<where> 
 	USER_ID in (#{userId}, 0) 
 	<if test="inex == 'IN'">
@@ -51,12 +51,12 @@
   </select>
   
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Category">
-  	insert into MAB_CATEGORIES values(
+  	insert into mab_categories values(
   	 #{user_id}, #{seqno}, #{inex}, #{cate_code}, #{cate_name}, #{default_cate_code}  )
   </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Category">
-  	update MAB_CATEGORIES 
+  	update mab_categories 
   	set CATE_NAME = #{cate_name} 
   	<where> 
 	CATE_CODE = #{cate_code} 

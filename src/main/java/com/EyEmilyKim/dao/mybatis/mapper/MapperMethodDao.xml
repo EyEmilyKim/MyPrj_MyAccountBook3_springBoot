@@ -6,7 +6,7 @@
 <mapper namespace="com.EyEmilyKim.dao.MethodDao">
 
   <select id="getList" resultType="com.EyEmilyKim.entity.Method">
-  	select * from MAB_METHODS 
+  	select * from mab_methods 
 	<where> 
 	USER_ID in (#{userid}, 0)  
 	and METH_CODE != 'none' 
@@ -14,7 +14,7 @@
 	order by user_id, meth_code
   </select>
   <select id="getCount" resultType="Integer">
-	select count(METH_CODE) from MAB_METHODS 
+	select count(METH_CODE) from mab_methods 
 	<where> 
 	USER_ID in (#{userid}, 0)  
 	and METH_CODE != 'none' 
@@ -22,24 +22,24 @@
   </select>
 
   <select id="getOne" resultType="com.EyEmilyKim.entity.Method">
-	select * from MAB_METHODS 
+	select * from mab_methods 
 	<where>
 	METH_CODE = #{mcode}
 	</where>
   </select>
   
   <delete id="delete">
-  	delete from MAB_METHODS
+  	delete from mab_methods
 	<where> 
 	METH_CODE = #{mcode} 
 	</where> 
   </delete>
   
   <select id="getMaxSqn" resultType="Integer">
-  	select max(SEQNO) from MAB_METHODS
+  	select max(SEQNO) from mab_methods
   </select>
   <select id="getNameList" resultType="String">
-  	select METH_NAME from MAB_METHODS 
+  	select METH_NAME from mab_methods 
   	<where>
   	USER_ID in (#{userId}, 0) 
   	</where>
@@ -47,12 +47,12 @@
   </select>
   
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Method">
-  	insert into MAB_METHODS values(
+  	insert into mab_methods values(
   	 #{user_id}, #{seqno}, #{mncrd}, #{meth_code}, #{meth_name}, #{default_mncrd}, #{default_meth_code} )
   </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Method">
-  	update MAB_METHODS 
+  	update mab_methods 
   	set METH_NAME = #{meth_name} 
   	<where>
   	METH_CODE = #{meth_code} 

@@ -6,14 +6,14 @@
 <mapper namespace="com.EyEmilyKim.dao.TransactionDao">
 
   <select id="getMaxMySqn" resultType="Integer">
-	select max(MY_SEQNO) from MAB_TRANSACTIONS 
+	select max(MY_SEQNO) from mab_transactions 
 	<where> 
 	USER_ID = #{userId} 
 	</where> 
   </select>
 
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Transaction">
-  	insert into MAB_TRANSACTIONS values(
+  	insert into mab_transactions values(
   	 #{user_id}, #{my_seqno}, 
   	 #{tran_id}, #{tran_date}, 
   	 #{inex}, #{cate_code}, 
@@ -23,7 +23,7 @@
   </insert>
 
   <select id="getList" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="com.EyEmilyKim.dto.TransactionDto">
-	select * from MAB_TRANSACTIONS_VIEW
+	select * from mab_transactions_view
     <where>
         USER_ID = #{user_id} 
         <if test="inex == 'IN'">
@@ -53,7 +53,7 @@
   </select>
   
   <select id="getCount" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="Integer">
-	select count(TRAN_ID) from MAB_TRANSACTIONS_VIEW 
+	select count(TRAN_ID) from mab_transactions_view 
 	<where>
         USER_ID = #{user_id} 
         <if test="inex == 'IN'">
@@ -81,21 +81,21 @@
   </select>
   
   <select id="getOne" resultType="com.EyEmilyKim.dto.TransactionDto">
-  	select * from MAB_TRANSACTIONS_VIEW 
+  	select * from mab_transactions_view 
 	<where> 
 	TRAN_ID = #{tran_id} 
 	</where> 
   </select>
   
   <delete id="delete">
-  	delete from MAB_TRANSACTIONS 
+  	delete from mab_transactions 
 	<where> 
 	TRAN_ID = #{tran_id} 
 	</where> 
   </delete>
 
   <update id="update" parameterType="com.EyEmilyKim.entity.Transaction">
-  	update MAB_TRANSACTIONS 
+  	update mab_transactions 
   	set TRAN_DATE = #{tran_date}, 
   		INEX = #{inex}, 
   		CATE_CODE = #{cate_code}, 
