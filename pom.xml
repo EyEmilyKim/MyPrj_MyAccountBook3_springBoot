@@ -12,9 +12,9 @@
 	
 	<groupId>com.EyEmilyKim</groupId>
 	<artifactId>MyAccountBook3</artifactId>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<name>MyAccountBook3</name>
-	<description>MyAccountBook3_SprBootPractice_230514~</description>
+	<description>MyAccountBook3_SprBootPractice_240729</description>
 	
 	<properties>
 		<java.version>17</java.version>
