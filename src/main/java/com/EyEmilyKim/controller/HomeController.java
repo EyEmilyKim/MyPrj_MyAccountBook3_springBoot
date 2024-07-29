@@ -58,6 +58,7 @@ public class HomeController {
 			if (originalUrl == null) originalUrl = "/index";
 			model.addAttribute("URL", originalUrl);
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("MSG", e.getMessage());
 			model.addAttribute("URL", "/login");
 		}
