@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="false" scanPeriod="30 seconds">
-	<property name="LOG_LEVEL" value="DEBUG" />
+
+<!-- 변수값 설정 -->
+	<property name="LOG_LEVEL_LOCAL" value="INFO" />
+	<property name="LOG_LEVEL_PROD" value="DEBUG" />
 	<property name="LOG_DIR" value="${user.home}/logs/app" />
-	<property name="PRJ_ID" value="MAB3" />
+	<property name="PRJ_ID" value="mab3" />
 	<property name="LOGBACK" value="logback" />
 	<property name="STYLE" value="around_hub" />
 	
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
-	
+
+<!-- Console Appender -->	
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>INFO</level>
 		</filter>
 		<encoder>
-<!-- 			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger %msg%n</pattern> -->
 			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
 		</encoder>
 	</appender>
 	
+<!-- File Appender -->	
 	<appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>INFO</level>
@@ -108,14 +112,22 @@
 		</encoder>
 	</appender>
 	
-	<!-- TRACE > DEBUG > INFO > WARN > ERROR > OFF -->
-	<!-- Root Logger -->
-	<root level="${LOG_LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="INFO_FILE" />
-		<appender-ref ref="WARN_FILE" />
-		<appender-ref ref="ERROR_FILE" />
-		<appender-ref ref="DEBUG_FILE" />
-		<appender-ref ref="TRACE_FILE" />
+	
+<!-- (자세함. low) TRACE < DEBUG < INFO < WARN < ERROR (high) -->
+<!-- 출력 레벨 설정에 따라 설정 레벨 이상의 로그를 출력한다 -->
+<!-- 예: 로깅 레벨 INFO로 설정 -> TRACE, DEBUG 레벨의 로그는 무시됨 -->
+
+<!-- Root Logger 전역 설정 -->
+	<root level="${LOG_LEVEL_LOCAL}" >
+		<!-- <appender-ref ref="CONSOLE" /> -->
+		<appender-ref ref="${LOG_LEVEL_LOCAL}_FILE" />
 	</root>
+
+<!-- 배포 환경 (prod 프로파일)에서 특정 패키지의 로거 설정 -->
+    <springProfile name="prod">
+        <logger name="com.EyEmilyKim" level="${LOG_LEVEL_PROD}">
+            <appender-ref ref="${LOG_LEVEL_PROD}_FILE" />
+        </logger>
+    </springProfile>
+	
 </configuration>
