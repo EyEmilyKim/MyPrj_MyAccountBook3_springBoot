@@ -20,7 +20,7 @@ public class DateUtil {
 		return new Timestamp(date.getTime());
 	}
 	
-//String -> java.sql.Timestamp 직접 변환
+	// String -> java.sql.Timestamp 직접 변환
 	public static Timestamp stringToTimestamp(String dateString) throws ParseException {
 		Date utilDate = stringToDate(dateString);
 		return dateToTimestamp(utilDate);
