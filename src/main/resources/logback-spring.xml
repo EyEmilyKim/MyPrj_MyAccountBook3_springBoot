@@ -119,7 +119,7 @@
 
 <!-- Root Logger 전역 설정 -->
 	<root level="${LOG_LEVEL_LOCAL}" >
-		<!-- <appender-ref ref="CONSOLE" /> -->
+		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="${LOG_LEVEL_LOCAL}_FILE" />
 	</root>
 
