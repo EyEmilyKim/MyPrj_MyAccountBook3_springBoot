@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.service.MethodService;
+import com.EyEmilyKim.util.LogUtil;
 
 @RequestMapping("/set/method/")
 @Controller
@@ -32,7 +33,7 @@ public class MethodController {
 	
 	@GetMapping("list")
 	public String list(HttpServletRequest req, Model model) {
-		System.out.println("MethodController > list() called");
+		LogUtil.printWithTimestamp("MethodController > list() called");
 		int userId = (int) req.getAttribute("userId"); 
 		System.out.println("userId : "+userId);
 		
@@ -48,7 +49,7 @@ public class MethodController {
 	
 	@GetMapping("del")
 	public String del(String MCODE, Model model) {
-		System.out.println("MethodController > del()@Get called");
+		LogUtil.printWithTimestamp("MethodController > del()@Get called");
 		System.out.println(MCODE);
 		
 		Method meth= methodService.getOne(MCODE);
@@ -59,7 +60,7 @@ public class MethodController {
 	
 	@PostMapping("del")
 	public String del(String MCODE, Model model, String MNAME) {
-		System.out.println("MethodController > del()@Post called");
+		LogUtil.printWithTimestamp("MethodController > del()@Post called");
 		System.out.println(MCODE+" - "+MNAME);
 		
 		try {
@@ -78,7 +79,7 @@ public class MethodController {
 
 	@GetMapping("add")
 	public String add(HttpServletRequest req, Model model) {
-		System.out.println("MethodController > add()@Get called");
+		LogUtil.printWithTimestamp("MethodController > add()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		
@@ -92,7 +93,7 @@ public class MethodController {
 	
 	@PostMapping("add")
 	public String add(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
-		System.out.println("MethodController > add()@Post called");
+		LogUtil.printWithTimestamp("MethodController > add()@Post called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
@@ -115,7 +116,7 @@ public class MethodController {
 	
 	@GetMapping("upd")
 	public String upd(String MCODE, HttpServletRequest req, Model model) {
-		System.out.println("MethodController > upd()@Get called");
+		LogUtil.printWithTimestamp("MethodController > upd()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		System.out.println(MCODE);
@@ -130,7 +131,7 @@ public class MethodController {
 	
 	@PostMapping("upd")
 	public String upd(@RequestParam Map<String,String> fm, Model model) {
-		System.out.println("MethodController > upd()@Post called");
+		LogUtil.printWithTimestamp("MethodController > upd()@Post called");
 		for(Map.Entry<String, String> entry : fm.entrySet()) {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}

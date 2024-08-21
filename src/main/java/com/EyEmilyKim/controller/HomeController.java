@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.EyEmilyKim.dto.UserSessionDto;
 import com.EyEmilyKim.service.UserService;
+import com.EyEmilyKim.util.LogUtil;
 
 @Controller
 public class HomeController {
@@ -21,7 +22,7 @@ public class HomeController {
 	
 	@GetMapping("/index")
 	public String index() {
-		System.out.println("HomeController > index() called");
+		LogUtil.printWithTimestamp("HomeController > index() called");
 		
 		return "root.index";
 	}
@@ -30,7 +31,7 @@ public class HomeController {
 	
 	@GetMapping("/plan")
 	public String plan() {
-		System.out.println("HomeController > login()@Get called");
+		LogUtil.printWithTimestamp("HomeController > plan() called");
 		
 		return "root.comingSoon";
 	}
@@ -39,14 +40,14 @@ public class HomeController {
 	
 	@GetMapping("/login")
 	public String login() {
-		System.out.println("HomeController > login()@Get called");
+		LogUtil.printWithTimestamp("HomeController > login()@Get called");
 		
 		return "root.login";
 	}
 	
 	@PostMapping("/login")
 	public String login(String LID, String PWD, Model model, HttpSession session) {
-		System.out.println("HomeController > login()@Post called");
+		LogUtil.printWithTimestamp("HomeController > login()@Post called");
 		try {
 			UserSessionDto userSess = userService.login(LID, PWD);
 			session.setAttribute("USER_ID", userSess.getUser_id());
@@ -69,7 +70,7 @@ public class HomeController {
 	
 	@GetMapping("logout")
 	public String logout(HttpSession session, Model model) {
-		System.out.println("HomeController > logout()@Get called");
+		LogUtil.printWithTimestamp("HomeController > logout()@Get called");
 		session.invalidate();
 		model.addAttribute("MSG", "정상적으로 로그아웃되었습니다.");
 		model.addAttribute("URL", "/index");

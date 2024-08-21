@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.service.CategoryService;
+import com.EyEmilyKim.util.LogUtil;
 
 @RequestMapping("/set/category/")
 @Controller
@@ -31,7 +32,7 @@ public class CategoryController {
 	
 	@GetMapping("list")
 	public String list(HttpServletRequest req, Model model) {
-		System.out.println("CategoryController > list() called");
+		LogUtil.printWithTimestamp("CategoryController > list() called");
 		int userId = (int) req.getAttribute("userId"); 
 		System.out.println("userId : "+userId);
 		
@@ -47,7 +48,7 @@ public class CategoryController {
 	
 	@GetMapping("del")
 	public String del(String CCODE, Model model) {
-		System.out.println("CategoryController > del()@Get called");
+		LogUtil.printWithTimestamp("CategoryController > del()@Get called");
 		System.out.println(CCODE);
 		
 		Category cate = categoryService.getOne(CCODE);
@@ -58,7 +59,7 @@ public class CategoryController {
 	
 	@PostMapping("del")
 	public String del(String CCODE, Model model, String CNAME) {
-		System.out.println("CategoryController > del()@Post called");
+		LogUtil.printWithTimestamp("CategoryController > del()@Post called");
 		System.out.println(CCODE+" - "+CNAME);
 		
 		try {
@@ -77,7 +78,7 @@ public class CategoryController {
 	
 	@GetMapping("add")
 	public String add(HttpServletRequest req, Model model) {
-		System.out.println("CategoryController > add()@Get called");
+		LogUtil.printWithTimestamp("CategoryController > add()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		
@@ -91,7 +92,7 @@ public class CategoryController {
 	
 	@PostMapping("add")
 	public String add(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
-		System.out.println("CategoryController > add()@Post called");
+		LogUtil.printWithTimestamp("CategoryController > add()@Post called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
@@ -114,7 +115,7 @@ public class CategoryController {
 	
 	@GetMapping("upd")
 	public String upd(HttpServletRequest req, String CCODE, Model model) {
-		System.out.println("CategoryController > upd()@Get called");
+		LogUtil.printWithTimestamp("CategoryController > upd()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		System.out.println(CCODE);
@@ -129,7 +130,7 @@ public class CategoryController {
 	
 	@PostMapping("upd")
 	public String upd(@RequestParam Map<String,String> fm, Model model) {
-		System.out.println("CategoryController > upd()@Post called");
+		LogUtil.printWithTimestamp("CategoryController > upd()@Post called");
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}

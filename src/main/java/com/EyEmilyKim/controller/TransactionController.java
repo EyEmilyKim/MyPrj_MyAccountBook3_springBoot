@@ -24,6 +24,7 @@ import com.EyEmilyKim.service.CategoryService;
 import com.EyEmilyKim.service.MethodService;
 import com.EyEmilyKim.service.TransactionService;
 import com.EyEmilyKim.util.DtoUtil;
+import com.EyEmilyKim.util.LogUtil;
 
 @RequestMapping("/tran/")
 @Controller
@@ -45,7 +46,7 @@ public class TransactionController {
 	
 	@GetMapping("listAll") // 전체 목록
 	public String listAll(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
-		System.out.println("TransactionController > listAll()@Get called");
+		LogUtil.printWithTimestamp("TransactionController > listAll() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		DtoUtil.printDto(searchDto);
@@ -65,7 +66,7 @@ public class TransactionController {
 	
 	@GetMapping("listIn") // 수입 목록
 	public String listIn(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
-		System.out.println("TransactionController > listIn()@Get called");
+		LogUtil.printWithTimestamp("TransactionController > listIn() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		DtoUtil.printDto(searchDto);
@@ -85,7 +86,7 @@ public class TransactionController {
 	
 	@GetMapping("listEx") // 지출 목록
 	public String listEx(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
-		System.out.println("TransactionController > listEx()@Get called");
+		LogUtil.printWithTimestamp("TransactionController > listEx() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		DtoUtil.printDto(searchDto);
@@ -109,7 +110,7 @@ public class TransactionController {
 	
 	@GetMapping("del")
 	public String del(String TRAN_ID, Model model) {
-		System.out.println("TransactionController > del()@Get called");
+		LogUtil.printWithTimestamp("TransactionController > del()@Get called");
 		System.out.println("TRAN_ID : "+TRAN_ID);
 		
 		TransactionDto tran = transactionService.getOne(TRAN_ID);
@@ -120,7 +121,7 @@ public class TransactionController {
 	
 	@PostMapping("del")
 	public String del(@RequestParam Map<String,String> fm, Model model) {
-		System.out.println("TransactionController > del()@Post called");		
+		LogUtil.printWithTimestamp("TransactionController > del()@Post called");		
 		String tran_id = fm.get("TRAN_ID");
 		String nextUrl = fm.get("PREV_URL");
 		System.out.println("TRAN_ID : "+tran_id);
@@ -140,7 +141,7 @@ public class TransactionController {
 	
 	@GetMapping("add")
 	public String add(HttpServletRequest req, Model model) {
-		System.out.println("TransactionController > add()@Get called");
+		LogUtil.printWithTimestamp("TransactionController > add()@Get called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		
@@ -156,7 +157,7 @@ public class TransactionController {
 	
 	@PostMapping("add")
 	public String add(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
-		System.out.println("TransactionController > add()@Post called");
+		LogUtil.printWithTimestamp("TransactionController > add()@Post called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
@@ -178,7 +179,7 @@ public class TransactionController {
 	
 	@GetMapping("upd")
 	public String upd(HttpServletRequest req, String TRAN_ID, Model model) {
-		System.out.println("TransactionController > upd()@Get called");
+		LogUtil.printWithTimestamp("TransactionController > upd()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		System.out.println("TRAN_ID : "+TRAN_ID);
@@ -196,7 +197,7 @@ public class TransactionController {
 	
 	@PostMapping("upd")
 	public String upd(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
-		System.out.println("TransactionController > upd()@Post called");
+		LogUtil.printWithTimestamp("TransactionController > upd()@Post called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
