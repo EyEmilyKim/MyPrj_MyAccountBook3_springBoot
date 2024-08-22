@@ -3,7 +3,7 @@
 
 <!-- 변수값 설정 -->
 	<property name="LOG_LEVEL_LOCAL" value="INFO" />
-	<property name="LOG_LEVEL_PROD" value="DEBUG" />
+	<property name="LOG_LEVEL_PROD" value="INFO" />
 	<property name="LOG_DIR" value="${user.home}/logs/app" />
 	<property name="PRJ_ID" value="mab3" />
 	<property name="LOGBACK" value="logback" />
@@ -126,7 +126,7 @@
 <!-- 배포 환경 (prod 프로파일)에서 특정 패키지의 로거 설정 -->
     <springProfile name="prod">
         <logger name="com.EyEmilyKim" level="${LOG_LEVEL_PROD}">
-            <appender-ref ref="${LOG_LEVEL_PROD}_FILE" />
+            <appender-ref ref="CONSOLE" />
         </logger>
     </springProfile>
 	
