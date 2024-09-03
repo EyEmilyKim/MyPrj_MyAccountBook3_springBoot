@@ -23,15 +23,15 @@ public class OperatingHoursInterceptor implements HandlerInterceptor {
 		LocalTime currentTime = LocalTime.now(); // 현재 서버 시간
 		
 		String start = config.getOperatingHoursStart();
-    String end = config.getOperatingHoursEnd();
+		String end = config.getOperatingHoursEnd();
 
-    // 운영 시간 설정이 없으면 24시간 운영으로 간주
-    if (start == null || end == null || (start.equals("00:00") && end.equals("00:00"))) {
-        return true;
-    }
+		// 운영 시간 설정이 없으면 24시간 운영으로 간주
+		if (start == null || end == null || (start.equals("00:00") && end.equals("00:00"))) {
+			return true;
+		}
 
-    LocalTime startTime = LocalTime.parse(start);
-    LocalTime endTime = LocalTime.parse(end);
+		LocalTime startTime = LocalTime.parse(start);
+		LocalTime endTime = LocalTime.parse(end);
     
 		// 운영시간 외일 경우
 		if(currentTime.isBefore(startTime) || currentTime.isAfter(endTime)) {
