@@ -27,6 +27,15 @@ public class HomeController {
 		return "root.index";
 	}
 	
+	/*-------- 시간 외 홈 화면 --------*/
+	
+	@GetMapping("/outOfOpHours")
+	public String outOfOpHours() {
+		LogUtil.printWithTimestamp("HomeController > outOfOpHours() called");
+		
+		return "root.outOfOpHours";
+	}
+	
 	/*-------- 월별 계획 --------*/
 	
 	@GetMapping("/plan")
