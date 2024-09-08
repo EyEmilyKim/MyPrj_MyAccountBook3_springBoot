@@ -32,13 +32,37 @@ public class ApiTestController {
 	
 	@GetMapping("/log")
 	@Operation(summary = "서버 콘솔에 테스트 로그 출력")
-	public void log() {
-		LogUtil.printWithTimestamp(message+"/log");
-		logger.trace("Trace Log");
-		logger.debug("Debug Log");
-		logger.info("info Log");
-		logger.warn("warn Log");
-		logger.error("error Log");
+	public void log(
+			@Parameter(name = "level", 
+				description = "출력할 테스트 로그 레벨 - all / trace / debug / info / warn / error", 
+				example = "all")
+			@RequestParam String level) {
+		LogUtil.printWithTimestamp("ApiTestController > log() : "+level);
+		switch(level) {
+			case "all" : 
+				logger.trace("Trace Log");
+				logger.debug("Debug Log");
+				logger.info("Info Log");
+				logger.warn("Warn Log");
+				logger.error("Error Log");
+				break;
+			case "trace" : 
+				logger.trace("Trace Log");
+				break;
+			case "debug" : 
+				logger.debug("Debug Log");
+				break;
+			case "info" : 
+				logger.info("Info Log");
+				break;
+			case "warn" : 
+				logger.warn("Warn Log");
+				break;
+			case "error" : 
+				logger.error("Error Log");
+				break;
+		}
+	
 	}
 
 }
