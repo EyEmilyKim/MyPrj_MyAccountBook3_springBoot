@@ -4,27 +4,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.EyEmilyKim.util.LogUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@RequestMapping("/logbackTest/")
+@RequestMapping("/api/")
 @RestController
-@Tag(name = "LogbackTest", description = "서버 측 로깅 확인용")
-public class LogbackTestController {
+@Tag(name = "API Test", description = "자잘한 작동 확인용 엔드포인트")
+public class ApiTestController {
 	
-	private final Logger logger = LoggerFactory.getLogger(LogbackTestController.class);
+	private final Logger logger = LoggerFactory.getLogger(ApiTestController.class);
 	private final String message = "Hello logbackTest!";
 	
-	@GetMapping("/hello")
+	@GetMapping("/echo")
 	@Operation(summary = "check RestController", description = "RestController 작동 확인")
-	public String logbackTest() {
-		LogUtil.printWithTimestamp(message);
-		return message;
+	public String echo(
+			@Parameter(name = "msg", description = "클라이언트에서 전달하는 메시지", example = "아아 마잌쳌 마잌쳌", required = true)
+			@RequestParam String msg) {
+		LogUtil.printWithTimestamp("ApiTestController > echo() : "+msg);
+		return message+"\n"+msg;
 	}
 	
 	@GetMapping("/log")
