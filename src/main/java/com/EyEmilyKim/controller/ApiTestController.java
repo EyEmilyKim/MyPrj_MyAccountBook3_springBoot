@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@RequestMapping("/api/")
+@RequestMapping("/api/v1/")
 @RestController
 @Tag(name = "API Test", description = "자잘한 작동 확인용 엔드포인트")
 public class ApiTestController {
@@ -22,7 +22,7 @@ public class ApiTestController {
 	private final String message = "Hello logbackTest!";
 	
 	@GetMapping("/echo")
-	@Operation(summary = "check RestController", description = "RestController 작동 확인")
+	@Operation(summary = "RestController 작동 확인")
 	public String echo(
 			@Parameter(name = "msg", description = "클라이언트에서 전달하는 메시지", example = "아아 마잌쳌 마잌쳌", required = true)
 			@RequestParam String msg) {
@@ -31,7 +31,7 @@ public class ApiTestController {
 	}
 	
 	@GetMapping("/log")
-	@Operation(summary = "leave server side log in all level", description = "서버 콘솔에 레벨별 테스트 로그 남기기")
+	@Operation(summary = "서버 콘솔에 테스트 로그 출력")
 	public void log() {
 		LogUtil.printWithTimestamp(message+"/log");
 		logger.trace("Trace Log");
