@@ -107,4 +107,40 @@ class HomeControllerTest {
 			.andExpect(view().name("redirect"));
 	}
 	
+	@Test
+	@DisplayName("로그인 Post - 사용자 없음 > 알림창")
+	void testLoginPost_userNotFound() throws Exception {
+		String userId = "nonExistingUser";
+		String password = "wrongPassword";
+		
+		when(userService.login(userId, password))
+			.thenThrow(new Exception("사용자를 찾을 수 없습니다."));
+		
+		mockMvc.perform(post("/login")
+				.param("LID", userId)
+				.param("PWD", password))
+			.andExpect(model().attribute("MSG", "사용자를 찾을 수 없습니다."))
+			.andExpect(model().attribute("URL", "/login"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("redirect"));
+	}
+	
+	@Test
+	@DisplayName("로그인 Post - 비밀번호 불일치 > 알림창")
+	void testLoginPost_wrongPassword() throws Exception {
+		String userId = "existingUser";
+		String password = "wrongPassword";
+		
+		when(userService.login(userId, password))
+			.thenThrow(new Exception("비밀번호가 일치하지 않습니다."));
+		
+		mockMvc.perform(post("/login")
+				.param("LID", userId)
+				.param("PWD", password))
+			.andExpect(model().attribute("MSG", "비밀번호가 일치하지 않습니다."))
+			.andExpect(model().attribute("URL", "/login"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("redirect"));
+	}
+	
 }
