@@ -40,4 +40,14 @@ class HomeControllerTest {
 			.andExpect(view().name("root.index"));
 	}
 
+	/*-------- 시간 외 홈 화면 --------*/
+	
+	@Test
+	@DisplayName("시간외 홈 Get")
+	void testOutOfOpHoursGet() throws Exception {
+		mockMvc.perform(get("/outOfOpHours"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("root.outOfOpHours"));
+	}
+	
 }
