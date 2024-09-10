@@ -5,6 +5,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -19,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.EyEmilyKim.config.OperatingHoursConfig;
+import com.EyEmilyKim.dto.UserSessionDto;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
 import com.EyEmilyKim.service.UserService;
 
@@ -84,6 +87,24 @@ class HomeControllerTest {
 		mockMvc.perform(get("/login"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("root.login"));
+	}
+	
+	@Test
+	@DisplayName("로그인 Post - 성공 > 알림창")
+	void testLoginPost_success() throws Exception {
+		String userId = "testUserId";
+		String password = "password";
+		
+		when(userService.login(userId, password))
+			.thenReturn(new UserSessionDto(777, "test-user", null));
+		
+		mockMvc.perform(post("/login")
+				.param("LID", userId)
+				.param("PWD", password))
+			.andExpect(model().attribute("MSG", "로그인에 성공했습니다. \\n환영합니다~ test-user님~!"))
+			.andExpect(model().attribute("URL", "/index"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("redirect"));
 	}
 	
 }
