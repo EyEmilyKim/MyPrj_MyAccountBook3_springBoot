@@ -76,4 +76,14 @@ class HomeControllerTest {
     	.preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any());
 	}
 	
+	/*-------- 로그인 --------*/
+	
+	@Test
+	@DisplayName("로그인 Get")
+	void testLoginGet() throws Exception {
+		mockMvc.perform(get("/login"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("root.login"));
+	}
+	
 }
