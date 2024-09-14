@@ -11,19 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.EyEmilyKim.config.OperatingHoursDefault;
+import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 
 @Component
 public class OperatingHoursInterceptor implements HandlerInterceptor {
 
 	@Autowired
-	private OperatingHoursDefault config;
+	private OperatingHoursProperties config;
 	
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws IOException {
 		LocalTime currentTime = LocalTime.now(); // 현재 서버 시간
 		
-		String start = config.getOperatingHoursStart();
-		String end = config.getOperatingHoursEnd();
+		String start = config.getStart();
+		String end = config.getEnd();
 
 		// 운영 시간 설정이 없으면 24시간 운영으로 간주
 		if (start == null || end == null || (start.equals("00:00") && end.equals("00:00"))) {
