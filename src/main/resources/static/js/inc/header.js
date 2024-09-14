@@ -1,9 +1,13 @@
-/* for view/inc/header.js */
+/* for view/inc/header.jsp */
+
+import {showModal} from './modal.js';
+import {messages} from './randomMessage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	
 	const currentPath = window.location.pathname;
 	
+	const iconLogo_user = document.getElementById("iconLogo_user");
 	const titleLogo = document.getElementById("titleLogo");
 	const tranAdd = document.getElementById("tranAdd"); 
 	const tranList = document.getElementById("tranList"); 
@@ -11,6 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	const set = document.getElementById("set");
 	const login = document.getElementById("login"); 
 	const logout = document.getElementById("logout"); 
+	
+	// 로그인한 상태의 아이콘 로고
+	if(iconLogo_user){
+		iconLogo_user.addEventListener('click', ()=> {
+			const randomIdx = Math.floor(Math.random() * messages.length);
+			const message = messages[randomIdx];
+			showModal(message);
+		})
+	}
 	
 	// 타이틀 로고
 	titleLogo.addEventListener('click', () =>{

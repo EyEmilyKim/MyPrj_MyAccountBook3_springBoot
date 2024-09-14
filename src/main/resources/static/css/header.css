@@ -21,6 +21,9 @@
 		height: 45px;
 		margin-right: -5px;
 	}
+	.iconLogo:hover {
+		cursor: pointer;
+	}
 	
 	#titleLogo {
 		color: var(--header-text-color);

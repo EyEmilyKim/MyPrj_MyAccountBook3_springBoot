@@ -31,4 +31,4 @@
 	
 </header>
 
-<script src="/js/inc/header.js"></script>
+<script type="module" src="/js/inc/header.js"></script>
