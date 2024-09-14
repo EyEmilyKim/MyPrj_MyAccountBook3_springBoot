@@ -1,0 +1,49 @@
+{
+  "properties": [
+    {
+      "name": "client.view.default_userId",
+      "type": "java.lang.Integer",
+      "description": "Default user ID for client view."
+    },
+    {
+      "name": "client.view.default_rowCount_optionString",
+      "type": "java.lang.String",
+      "description": "Comma-separated string for row count options in the client view."
+    },
+    {
+      "name": "client.view.default_rowCount",
+      "type": "java.lang.Integer",
+      "description": "Default row count in the client view."
+    },
+    {
+      "name": "client.view.final_pagesPerSet",
+      "type": "java.lang.Integer",
+      "description": "Final pages per set in the client view."
+    },
+    {
+      "name": "mysql.column.default_cate_code",
+      "type": "java.lang.String",
+      "description": "Default category code in MySQL columns."
+    },
+    {
+      "name": "mysql.column.default_mncrd",
+      "type": "java.lang.String",
+      "description": "Default mnemonic code in MySQL columns."
+    },
+    {
+      "name": "mysql.column.default_meth_code",
+      "type": "java.lang.String",
+      "description": "Default method code in MySQL columns."
+    },
+    {
+      "name": "operating.hours.start",
+      "type": "java.lang.String",
+      "description": "Start time for operating hours in HH:mm format."
+    },
+    {
+      "name": "operating.hours.end",
+      "type": "java.lang.String",
+      "description": "End time for operating hours in HH:mm format."
+    }
+  ]
+}
