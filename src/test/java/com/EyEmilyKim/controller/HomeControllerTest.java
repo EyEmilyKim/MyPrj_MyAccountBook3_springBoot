@@ -20,7 +20,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.EyEmilyKim.config.OperatingHoursConfig;
+import com.EyEmilyKim.config.OperatingHoursDefault;
 import com.EyEmilyKim.dto.UserSessionDto;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
 import com.EyEmilyKim.service.UserService;
@@ -35,7 +35,7 @@ class HomeControllerTest {
 	private UserService userService;
 	
 	@MockBean
-	private OperatingHoursConfig operatingHoursConfig;
+	private OperatingHoursDefault operatingHoursConfig;
 	@MockBean
 	private LoginInterceptor loginInterceptor;
 	

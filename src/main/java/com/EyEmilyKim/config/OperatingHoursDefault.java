@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Component
-public class OperatingHoursConfig {
+public class OperatingHoursDefault {
 
 	@Value("${operating.hours.start}")
 	private String operatingHoursStart;

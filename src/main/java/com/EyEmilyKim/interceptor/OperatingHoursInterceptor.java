@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.EyEmilyKim.config.OperatingHoursConfig;
+import com.EyEmilyKim.config.OperatingHoursDefault;
 
 @Component
 public class OperatingHoursInterceptor implements HandlerInterceptor {
 
 	@Autowired
-	private OperatingHoursConfig config;
+	private OperatingHoursDefault config;
 	
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws IOException {
 		LocalTime currentTime = LocalTime.now(); // 현재 서버 시간
