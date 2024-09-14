@@ -12,6 +12,19 @@
 	    align-items: center;	/* 세로축 정렬: 가운데 */
 	}
 	
+	header > div {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.iconLogo {
+		height: 45px;
+		margin-right: -5px;
+	}
+	.iconLogo:hover {
+		cursor: pointer;
+	}
+	
 	#titleLogo {
 		color: var(--header-text-color);
 		font-size: 1.5rem;

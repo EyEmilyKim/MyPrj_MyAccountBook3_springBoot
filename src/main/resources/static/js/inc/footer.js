@@ -1,8 +1,8 @@
-/* for view/inc/footer.js */
+/* for view/inc/footer.jsp */
 
 document.addEventListener('DOMContentLoaded', () => {
 	
-	const homePath = "http://localhost:8069/index";
+	const homePath = "http://localhost:8080/index";
 
 	// share 버튼 클릭시 url 복사
 	const icon_share = document.getElementById("icon_share");

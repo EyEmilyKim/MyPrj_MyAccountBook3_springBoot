@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+/* ----- 모달 기본 스타일 (닫혔을 때) ----- */
+
+/* 모달 창 */
+#modalContainer {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+}
+
+/* 모달 내용 */
+#modalContent {
+	margin : 30px;
+}
+
+/* x 버튼 */
+#closeModalBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 5px;
+    /* background-color: pink; */
+    border-radius: 15px;
+}
+#closeModalBtn:hover {
+	cursor: pointer;
+	background-color: var(--header-text-color);
+}
+
+/* 모달 배경 */
+#modalOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* ----- 모달 열렸을 때 ----- */
+#modalContainer.show {
+    display: block;
+}
+#modalOverlay.show {
+    display: block;
+}
