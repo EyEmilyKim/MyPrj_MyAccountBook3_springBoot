@@ -9,7 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.EyEmilyKim.config.ClientViewDefault;
+import com.EyEmilyKim.config.properties.ClientViewProperties;
 import com.EyEmilyKim.dao.TransactionDao;
 import com.EyEmilyKim.dto.TranPageDto;
 import com.EyEmilyKim.dto.TranSearchDto;
@@ -24,7 +24,7 @@ public class TransactionServiceImp implements TransactionService {
 	private TransactionDao transactionDao;
 	
 	@Autowired
-	private ClientViewDefault clv;
+	private ClientViewProperties config;
 	
 	@Override
 	public TranPageDto getList(TranSearchDto searchDto, int user_id, String inex) throws ParseException {
@@ -124,7 +124,7 @@ public class TransactionServiceImp implements TransactionService {
 		if(searchDto.getPG() == null) searchDto.setPG(1);
 		int pg = searchDto.getPG();
 		// N줄 보기 설정
-		if(searchDto.getRC() == null) searchDto.setRC(clv.getDefault_rowCount());
+		if(searchDto.getRC() == null) searchDto.setRC(config.getDefault_rowCount());
 		int rc = searchDto.getRC();
 		// DB 조회할 덩어리(offset, limit) 설정
 		int start = (pg - 1) * rc;
@@ -137,7 +137,7 @@ public class TransactionServiceImp implements TransactionService {
 			// 페이징 변수 계산
 			int totalPages = (int) Math.ceil((double) totalCount / searchDto.getRC());
 			int currentPage = searchDto.getPG();
-			int pagesPerSet = clv.getFinal_pagesPerSet();
+			int pagesPerSet = config.getFinal_pagesPerSet();
 			int currentSet = (currentPage - 1) / pagesPerSet + 1;
 			int startPage = (currentSet - 1) * pagesPerSet + 1;
 			int endPage = Math.min( (startPage + pagesPerSet - 1), totalPages);
@@ -151,7 +151,7 @@ public class TransactionServiceImp implements TransactionService {
 			resultDto.setCurrentSet(currentSet);
 			resultDto.setStartPage(startPage);
 			resultDto.setEndPage(endPage);
-			resultDto.setRowCount_option(clv.getDefault_rowCount_optionString());
+			resultDto.setRowCount_option(config.getDefault_rowCount_optionString());
 			resultDto.setInex((inex != "") ? inex : null);
 			
 			return resultDto;
