@@ -11,7 +11,7 @@
 		<div><img src="/images/animals_hi.png" width="200px" /></div>
 	</c:if>
 	<c:if test="${ empty sessionScope.NICKNAME }">
-		<div><img src="/images/animals_bye.png" width="200px" /></div>
+		<div><img src="/images/animals_back.png" width="200px"  style="margin-top:-50px;"/></div>
 	</c:if>
 	</section>
 </main>
