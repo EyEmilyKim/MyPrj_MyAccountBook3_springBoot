@@ -35,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
 			"/set/**"
 		);
 		
-		if(!activeProfile.equals("dev")) {
+		if(!"dev".equals(activeProfile)) {
 			// DB 접근 필요한 경로에 OperatingHoursInterceptor 추가
 			registry.addInterceptor(operatingHoursInterceptor).addPathPatterns(
 				"/tran/**", 
