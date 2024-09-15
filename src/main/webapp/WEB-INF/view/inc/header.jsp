@@ -18,7 +18,7 @@
 		<ul>
 			<li><a href="/tran/add" id="tranAdd">가계부 쓰기</a></li>
 			<li><a href="/tran/listAll" id="tranList">가계부 보기</a></li>
-			<li><a href="/plan" id="plan">월별 계획</a></li>
+			<li><a href="/plan" id="plan">계획하기</a></li>
 			<li><a href="/set/category/list" id="set">설정</a></li>
 		<c:if test="${ empty sessionScope.USER_ID }">
 			<li><a href="/login" id="login">로그인</a></li>
