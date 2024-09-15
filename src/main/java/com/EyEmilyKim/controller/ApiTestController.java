@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,16 +20,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Profile("!prod") // 배포 환경에서는 비활성화
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/test/v1/")
 @RestController
 @Tag(name = "API Test", description = "자잘한 작동 확인용 엔드포인트")
 public class ApiTestController {
 	
 	private final Logger logger = LoggerFactory.getLogger(ApiTestController.class);
-	private final String message = "Hello logbackTest!";
+	private final String message = "Hello ApiTest!";
 	
-	@GetMapping("/echo")
-	@Operation(summary = "RestController 작동 확인")
+	@GetMapping("echo")
+	@Operation(summary = "클라이언트에서 전달한 메세지 응답하기")
 	public String echo(
 			@Parameter(name = "msg", description = "클라이언트에서 전달하는 메시지", example = "아아 마잌쳌 마잌쳌", required = true)
 			@RequestParam String msg) {
@@ -36,8 +37,8 @@ public class ApiTestController {
 		return message+"\n"+msg;
 	}
 	
-	@GetMapping("/log")
-	@Operation(summary = "서버 콘솔에 테스트 로그 출력")
+	@PostMapping("log")
+	@Operation(summary = "서버 콘솔에 테스트 로그 출력시키기")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "요청 성공. 반환 데이터 없음"),
 			@ApiResponse(responseCode = "400", description = "잘못된 요청"),
