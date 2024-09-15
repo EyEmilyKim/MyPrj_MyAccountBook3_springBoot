@@ -2,14 +2,13 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	
-	const homePath = "http://localhost:8080/index";
-
 	// share 버튼 클릭시 url 복사
 	const icon_share = document.getElementById("icon_share");
 	icon_share.addEventListener('click', ()=>{
-		navigator.clipboard.writeText(homePath).then(function() {
+		const homeUrl = window.location.origin+"/index";
+		navigator.clipboard.writeText(homeUrl).then(()=>{
                 alert('URL주소가 클립보드에 복사되었습니다.');
-            }).catch(function(error) {
+            }).catch((error)=> {
                	alert('클립보드 복사 중 오류 발생');
                 console.error('클립보드 복사 중 오류 발생:', error);
             });
