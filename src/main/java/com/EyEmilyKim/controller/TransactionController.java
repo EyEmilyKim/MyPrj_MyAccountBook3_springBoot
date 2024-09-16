@@ -26,8 +26,15 @@ import com.EyEmilyKim.service.TransactionService;
 import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RequestMapping("/tran/")
 @Controller
+@Tag(name="view - 거래기록", description = "거래기록 페이지 그룹")
 public class TransactionController {
 
 	@Autowired
@@ -42,10 +49,15 @@ public class TransactionController {
 	private String failMsg = "에러가 발생했습니다.";
 	private String succMsg = "정상적으로 처리되었습니다.";
 	
-	/*-------- 거래내역 목록 --------*/
+	/*-------- 거래기록 목록 --------*/
 	
-	@GetMapping("listAll") // 전체 목록
-	public String listAll(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
+	// 전체 목록	
+	@Operation(summary = "목록 페이지 : 전체", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
+	@GetMapping("listAll")
+	public String listAll(
+			@ModelAttribute TranSearchDto searchDto, 
+			HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > listAll() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
@@ -64,8 +76,13 @@ public class TransactionController {
 		return "tran.list";
 	}
 	
-	@GetMapping("listIn") // 수입 목록
-	public String listIn(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
+	// 수입 목록
+	@Operation(summary = "목록 페이지 : 수입", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
+	@GetMapping("listIn")
+	public String listIn(
+			@ModelAttribute TranSearchDto searchDto, 
+			HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > listIn() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
@@ -84,8 +101,13 @@ public class TransactionController {
 		return "tran.list";
 	}
 	
-	@GetMapping("listEx") // 지출 목록
-	public String listEx(@ModelAttribute TranSearchDto searchDto, HttpServletRequest req, Model model) {
+	//지출 목록
+	@Operation(summary = "목록 페이지 : 지출", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
+	@GetMapping("listEx") 
+	public String listEx(
+			@ModelAttribute TranSearchDto searchDto, 
+			HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > listEx() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
@@ -106,10 +128,15 @@ public class TransactionController {
 		return "tran.list";
 	}
 	
-	/*-------- 거래내역 삭제 --------*/
+	/*-------- 거래기록 삭제 --------*/
 	
+	@Operation(summary = "삭제 페이지", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("del")
-	public String del(String TRAN_ID, Model model) {
+	public String del(
+			@Parameter(name = "TRAN_ID", description = "거래기록 ID", example = "", required = true)
+			String TRAN_ID, 
+			Model model) {
 		LogUtil.printWithTimestamp("TransactionController > del()@Get called");
 		System.out.println("TRAN_ID : "+TRAN_ID);
 		
@@ -119,8 +146,15 @@ public class TransactionController {
 		return "tran.del";
 	}
 	
+	@Operation(summary = "삭제 페이지", description = "")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "삭제 성공 알림, \n\n리다이렉트: 목록 페이지"),
+			@ApiResponse(responseCode = "500", description = "삭제 실패 알림, \n\n리다이렉트: 목록 페이지")
+	})
 	@PostMapping("del")
-	public String del(@RequestParam Map<String,String> fm, Model model) {
+	public String del(
+			@RequestParam Map<String,String> fm, 
+			Model model) {
 		LogUtil.printWithTimestamp("TransactionController > del()@Post called");		
 		String tran_id = fm.get("TRAN_ID");
 		String nextUrl = fm.get("PREV_URL");
@@ -137,8 +171,10 @@ public class TransactionController {
 		return "redirect";
 	}	
 
-	/*-------- 거래내역 추가 --------*/
+	/*-------- 거래기록 추가 --------*/
 	
+	@Operation(summary = "추가 페이지", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("add")
 	public String add(HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > add()@Get called");
@@ -155,8 +191,15 @@ public class TransactionController {
 		return "tranAdd.add";
 	}
 	
+	@Operation(summary = "추가 페이지", description = "")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "추가 성공 알림, \n\n리다이렉트: 목록 페이지"),
+			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
+	})	
 	@PostMapping("add")
-	public String add(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
+	public String add(
+			@RequestParam Map<String,String> fm, 
+			HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > add()@Post called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
@@ -175,10 +218,15 @@ public class TransactionController {
 		return "redirect";
 	}
 	
-	/*-------- 거래내역 수정 --------*/
+	/*-------- 거래기록 수정 --------*/
 	
+	@Operation(summary = "수정 페이지", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("upd")
-	public String upd(HttpServletRequest req, String TRAN_ID, Model model) {
+	public String upd(
+			@Parameter(name = "TRAN_ID", description = "거래기록 ID", example = "", required = true)
+			String TRAN_ID, 
+			HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > upd()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
@@ -195,8 +243,15 @@ public class TransactionController {
 		return "tran.upd";
 	}
 	
+	@Operation(summary = "수정 페이지", description = "")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "수정 성공 알림, \n\n리다이렉트: 목록 페이지"),
+			@ApiResponse(responseCode = "500", description = "수정 실패 알림, \n\n리다이렉트: 목록 페이지")
+	})
 	@PostMapping("upd")
-	public String upd(@RequestParam Map<String,String> fm, HttpServletRequest req, Model model) {
+	public String upd(
+			@RequestParam Map<String,String> fm, 
+			HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > upd()@Post called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
