@@ -9,25 +9,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.EyEmilyKim.interceptor.LoginInterceptor;
 import com.EyEmilyKim.interceptor.OperatingHoursInterceptor;
-import com.EyEmilyKim.interceptor.UserInterceptor;
+import com.EyEmilyKim.interceptor.UserIdInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	OperatingHoursInterceptor operatingHoursInterceptor;
+	
 	@Autowired
-	UserInterceptor userInterceptor;
+	UserIdInterceptor userIdInterceptor;
+	
 	@Autowired
 	LoginInterceptor loginInterceptor;
+	
 	
 	@Value("${spring.profiles.active}")
 	private String activeProfile;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// 모든 경로에 UserInterceptor 추가
-		registry.addInterceptor(userInterceptor).addPathPatterns("/**");
+		// 모든 경로에 UserIdInterceptor 추가
+		registry.addInterceptor(userIdInterceptor).addPathPatterns("/**");
 		// 로그인 필요한 경로에 LoginInterceptor 추가
 		registry.addInterceptor(loginInterceptor).addPathPatterns(
 			"/tran/**", 
