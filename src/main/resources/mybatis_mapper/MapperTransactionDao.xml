@@ -22,7 +22,7 @@
   	 #{reg_date} )
   </insert>
 
-  <select id="getList" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="com.EyEmilyKim.dto.TransactionDto">
+  <select id="getList" parameterType="com.EyEmilyKim.dto.request.tran.TranListRequestDto" resultType="com.EyEmilyKim.dto.TransactionDto">
 	select * from mab_transactions_view
     <where>
         USER_ID = #{user_id} 
@@ -52,7 +52,7 @@
     LIMIT #{RC} OFFSET #{start}
   </select>
   
-  <select id="getCount" parameterType="com.EyEmilyKim.dto.TranSearchDto" resultType="Integer">
+  <select id="getCount" parameterType="com.EyEmilyKim.dto.request.tran.TranListRequestDto" resultType="Integer">
 	select count(TRAN_ID) from mab_transactions_view 
 	<where>
         USER_ID = #{user_id} 

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.EyEmilyKim.dto.TranPageDto;
-import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
+import com.EyEmilyKim.dto.response.tran.TranListResponseDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.entity.Transaction;
@@ -57,17 +57,17 @@ public class TransactionController {
 	@Operation(summary = "목록 페이지 : 전체", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_listAll(
-			@ModelAttribute TranSearchDto searchDto, 
+			@ModelAttribute TranListRequestDto tranListRequestDto, 
 			HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_listAll() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(searchDto);
+		DtoUtil.printDto(tranListRequestDto);
 		
 		try {
-			TranPageDto resultDto = transactionService.getList(searchDto, userId, "ALL");
-			model.addAttribute("DTO", resultDto);
+			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "ALL");
+			model.addAttribute("DTO", responseDto);
 			List<String> cname_list = categoryService.getNameList(userId, "ALL");
 			model.addAttribute("CNAME_LIST", cname_list);
 		} catch (Exception e) {
@@ -87,17 +87,17 @@ public class TransactionController {
 	@Operation(summary = "목록 페이지 : 수입", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_listIn(
-			@ModelAttribute TranSearchDto searchDto, 
+			@ModelAttribute TranListRequestDto tranListRequestDto, 
 			HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_listIn() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(searchDto);
+		DtoUtil.printDto(tranListRequestDto);
 		
 		try {
-			TranPageDto resultDto = transactionService.getList(searchDto, userId, "IN");
-			model.addAttribute("DTO", resultDto);
+			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "IN");
+			model.addAttribute("DTO", responseDto);
 			List<String> cname_list = categoryService.getNameList(userId, "IN");
 			model.addAttribute("CNAME_LIST", cname_list);
 		} catch (Exception e) {
@@ -117,17 +117,17 @@ public class TransactionController {
 	@Operation(summary = "목록 페이지 : 지출", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_listEx(
-			@ModelAttribute TranSearchDto searchDto, 
+			@ModelAttribute TranListRequestDto tranListRequestDto, 
 			HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_listEx() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(searchDto);
+		DtoUtil.printDto(tranListRequestDto);
 		
 		try {
-			TranPageDto resultDto = transactionService.getList(searchDto, userId, "EX");
-			model.addAttribute("DTO", resultDto);
+			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "EX");
+			model.addAttribute("DTO", responseDto);
 			List<String> cname_list = categoryService.getNameList(userId, "EX");
 			model.addAttribute("CNAME_LIST", cname_list);
 			List<String> mname_list = methodService.getNameList(userId);

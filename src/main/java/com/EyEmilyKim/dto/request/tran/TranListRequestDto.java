@@ -1,4 +1,4 @@
-package com.EyEmilyKim.dto;
+package com.EyEmilyKim.dto.request.tran;
 
 import java.sql.Timestamp;
 
@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class TranSearchDto {
+public class TranListRequestDto {
 	private String D_FROM;
 	private String D_TO;
 	private String ITEM;

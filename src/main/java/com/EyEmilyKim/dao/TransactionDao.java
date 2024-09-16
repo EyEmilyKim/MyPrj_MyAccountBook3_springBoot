@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
 import com.EyEmilyKim.entity.Transaction;
 
 @Mapper
 public interface TransactionDao {
 
-	List<TransactionDto> getList(TranSearchDto dto);
+	List<TransactionDto> getList(TranListRequestDto dto);
 
-	Integer getCount(TranSearchDto dto);
+	Integer getCount(TranListRequestDto dto);
 
 	TransactionDto getOne(String tran_id);
 
