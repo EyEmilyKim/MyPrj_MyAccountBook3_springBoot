@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranDeleteRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
 import com.EyEmilyKim.dto.response.tran.TranListResponseDto;
 import com.EyEmilyKim.entity.Category;
@@ -172,13 +173,14 @@ public class TransactionController {
 			@ApiResponse(responseCode = "500", description = "삭제 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})
 	public String post_del(
-			@RequestParam Map<String,String> fm, 
+			@ModelAttribute TranDeleteRequestDto tranDeleteRequestDto, 
 			Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > post_del() called");		
-		String tran_id = fm.get("TRAN_ID");
-		String nextUrl = fm.get("PREV_URL");
-		System.out.println("TRAN_ID : "+tran_id);
+		DtoUtil.printDto(tranDeleteRequestDto);
+		
+		String tran_id = tranDeleteRequestDto.getTRAN_ID();
+		String nextUrl = tranDeleteRequestDto.getPREV_URL();
 		
 		try {
 			transactionService.delete(tran_id);
