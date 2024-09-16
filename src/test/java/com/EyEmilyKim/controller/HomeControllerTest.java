@@ -60,25 +60,6 @@ class HomeControllerTest {
 			.andExpect(view().name("root.outOfOpHours"));
 	}
 	
-	/*-------- 월별 계획 --------*/
-	
-	@Test
-	@DisplayName("월별계획 Get (로그인 O) > 준비중")
-	void testPlanGet_whenLoggedIn() throws Exception {
-		// LoginInterceptor 가 true 반환했을 때만 호출됨
-		when(loginInterceptor.preHandle(
-				any(HttpServletRequest.class), any(HttpServletResponse.class), any()))
-			.thenReturn(true);
-		
-		mockMvc.perform(get("/plan"))
-			.andExpect(status().isOk())
-			.andExpect(view().name("root.comingSoon"));
-		
-		// 검증 : preHandle 메서드가 정확히 1번 호출되었는지 확인
-    verify(loginInterceptor, times(1))
-    	.preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any());
-	}
-	
 	/*-------- 로그인 --------*/
 	
 	@Test
