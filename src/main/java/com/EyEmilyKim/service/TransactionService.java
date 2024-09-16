@@ -1,10 +1,11 @@
 package com.EyEmilyKim.service;
 
 import java.text.ParseException;
-import java.util.Map;
 
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranUpdateRequestDto;
 import com.EyEmilyKim.dto.response.tran.TranListResponseDto;
 
 public interface TransactionService {
@@ -17,8 +18,8 @@ public interface TransactionService {
 
 	Integer getMaxMySqn(int user_id);
 	
-	int insert(Map<String,String> fm, int user_id) throws Exception;
+	int insert(TranCreateRequestDto requestDto, int user_id) throws Exception;
 
-	int update(Map<String,String> fm) throws ParseException;
+	int update(TranUpdateRequestDto requestDto) throws ParseException;
 	
 }

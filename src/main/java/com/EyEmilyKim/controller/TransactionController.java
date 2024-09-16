@@ -1,7 +1,6 @@
 package com.EyEmilyKim.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,11 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranDeleteRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranUpdateRequestDto;
 import com.EyEmilyKim.dto.response.tran.TranListResponseDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
@@ -226,18 +226,16 @@ public class TransactionController {
 			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})	
 	public String post_crt(
-			@RequestParam Map<String,String> fm, 
+			@ModelAttribute TranCreateRequestDto tranCreateRequestDto, 
 			HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		for(Map.Entry<String,String> entry : fm.entrySet()) {
-			System.out.println(entry.getKey()+" : "+entry.getValue());
-		}
+		DtoUtil.printDto(tranCreateRequestDto);
 		
 		try {
-			transactionService.insert(fm, userId);
+			transactionService.insert(tranCreateRequestDto, userId);
 			model.addAttribute("MSG", succMsg);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -285,24 +283,22 @@ public class TransactionController {
 			@ApiResponse(responseCode = "500", description = "수정 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})
 	public String post_upd(
-			@RequestParam Map<String,String> fm, 
+			@ModelAttribute TranUpdateRequestDto tranUpdateRequestDto, 
 			HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > post_upd() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		for(Map.Entry<String,String> entry : fm.entrySet()) {
-			System.out.println(entry.getKey()+" : "+entry.getValue());
-		}
+		DtoUtil.printDto(tranUpdateRequestDto);
 		
 		try {
-			transactionService.update(fm);
+			transactionService.update(tranUpdateRequestDto);
 			model.addAttribute("MSG", succMsg);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", failMsg);
 		}
-		model.addAttribute("URL", fm.get("PREV_URL"));
+		model.addAttribute("URL", tranUpdateRequestDto.getPREV_URL());
 		
 		return "redirect";
 		

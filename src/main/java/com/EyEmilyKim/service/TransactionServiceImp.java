@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.EyEmilyKim.config.properties.ClientViewProperties;
 import com.EyEmilyKim.dao.TransactionDao;
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranPostRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranUpdateRequestDto;
 import com.EyEmilyKim.dto.response.tran.TranListResponseDto;
 import com.EyEmilyKim.entity.Transaction;
 import com.EyEmilyKim.util.DateUtil;
@@ -63,41 +65,41 @@ public class TransactionServiceImp implements TransactionService {
 	}
 
 	@Override
-	public int insert(Map<String, String> fm, int user_id) throws Exception {
+	public int insert(TranCreateRequestDto requestDto, int user_id) throws Exception {
 		System.out.println("TranService > insert() called");
 
 		Timestamp reg_date = DateUtil.dateToTimestamp(new Date());
 		
-		Transaction tran = this.populateTransactionCommonField(fm);
+		Transaction tran = this.populateTransactionCommonFields(requestDto);
 		tran.setUser_id(user_id);
-		tran.setMy_seqno(Integer.parseInt(fm.get("MY_SEQNO")));
-		tran.setTran_id(user_id + "_" + fm.get("MY_SEQNO"));
+		tran.setMy_seqno(requestDto.getMY_SEQNO());
+		tran.setTran_id(user_id + "_" + requestDto.getMY_SEQNO());
 		tran.setReg_date(reg_date);
 		
 		return transactionDao.insert(tran);
 	}
 
 	@Override
-	public int update(Map<String, String> fm) throws ParseException {
+	public int update(TranUpdateRequestDto requestDto) throws ParseException {
 		System.out.println("TranService > update() called");
 		
-		Transaction tran = this.populateTransactionCommonField(fm);
-		tran.setTran_id(fm.get("TRAN_ID"));
+		Transaction tran = this.populateTransactionCommonFields(requestDto);
+		tran.setTran_id(requestDto.getTRAN_ID());
 		
 		return transactionDao.update(tran);
 	}
 
 	/* ------------- 공통 함수 ------------- */
 	
-	private Transaction populateTransactionCommonField(Map<String, String> fm) throws ParseException {
-		Timestamp tran_date = DateUtil.stringToTimestamp(fm.get("DATE"));
-		String inex = fm.get("INEX");
-		String ccode = fm.get("CCODE").isEmpty() ? "caNN0" : fm.get("CCODE");
-		String item = fm.get("ITEM").trim().isEmpty() ? null : fm.get("ITEM");
-		Integer amount = Integer.parseInt(fm.get("AMOUNT"));
-		String mncrd = inex.equals("IN") ? "none" : fm.get("MNCRD");
+	private Transaction populateTransactionCommonFields(TranPostRequestDto requestDto) throws ParseException {
+		Timestamp tran_date = DateUtil.stringToTimestamp(requestDto.getDATE());
+		String inex = requestDto.getINEX();
+		String ccode = requestDto.getCCODE().isEmpty() ? "caNN0" : requestDto.getCCODE();
+		String item = requestDto.getITEM().trim().isEmpty() ? null : requestDto.getITEM();
+		Integer amount = requestDto.getAMOUNT();
+		String mncrd = inex.equals("IN") ? "none" : requestDto.getMNCRD();
 		if(inex.equals("EX") && mncrd.isEmpty()) mncrd = "meNN"; 
-		String mcode = inex.equals("IN") ? "none" : fm.get("MCODE");
+		String mcode = inex.equals("IN") ? "none" : requestDto.getMCODE();
 		if(inex.equals("EX") && mcode.isEmpty()) mcode = "meNN0"; 
 		
 		Transaction tran = new Transaction();
