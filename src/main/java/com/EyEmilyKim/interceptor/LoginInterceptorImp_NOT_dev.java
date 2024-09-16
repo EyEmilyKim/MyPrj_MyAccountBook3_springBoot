@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("prod_local")
-public class LoginInterceptor_prod_local implements LoginInterceptor {
+@Profile("!dev")
+public class LoginInterceptorImp_NOT_dev implements LoginInterceptor {
 	
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
 		HttpSession session = req.getSession();

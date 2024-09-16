@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("dev")
-public class LoginInterceptor_dev implements LoginInterceptor {
+public class LoginInterceptorImp_dev implements LoginInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
