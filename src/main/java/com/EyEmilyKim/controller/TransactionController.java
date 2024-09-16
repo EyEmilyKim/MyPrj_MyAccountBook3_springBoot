@@ -175,8 +175,8 @@ public class TransactionController {
 	
 	@Operation(summary = "추가 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	@GetMapping("add")
-	public String add(HttpServletRequest req, Model model) {
+	@GetMapping("crt")
+	public String crt(HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > add()@Get called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
@@ -188,7 +188,7 @@ public class TransactionController {
 		List<Method> methlist = methodService.getList(userId);
 		model.addAttribute("METHLIST", methlist);
 		
-		return "tranAdd.add";
+		return "tranCrt.crt";
 	}
 	
 	@Operation(summary = "추가 페이지", description = "")
@@ -196,8 +196,8 @@ public class TransactionController {
 			@ApiResponse(responseCode = "200", description = "추가 성공 알림, \n\n리다이렉트: 목록 페이지"),
 			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})	
-	@PostMapping("add")
-	public String add(
+	@PostMapping("crt")
+	public String crt(
 			@RequestParam Map<String,String> fm, 
 			HttpServletRequest req, Model model) {
 		LogUtil.printWithTimestamp("TransactionController > add()@Post called");
@@ -214,7 +214,7 @@ public class TransactionController {
 			e.printStackTrace();
 			model.addAttribute("MSG", failMsg);
 		}
-		model.addAttribute("URL", "/tran/add");
+		model.addAttribute("URL", "/tran/crt");
 		return "redirect";
 	}
 	

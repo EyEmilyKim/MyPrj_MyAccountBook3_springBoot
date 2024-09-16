@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	const iconLogo_user = document.getElementById("iconLogo_user");
 	const titleLogo = document.getElementById("titleLogo");
-	const tranAdd = document.getElementById("tranAdd"); 
+	const tranCrt = document.getElementById("tranCrt"); 
 	const tranList = document.getElementById("tranList"); 
 	const plan = document.getElementById("plan"); 
 	const set = document.getElementById("set");
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 	
 	// 현재 메뉴 표시
-	const menu_elements = [tranAdd, tranList, plan, set];
-	const menu_paths = ['/tran/add', '/tran/list', '/plan', '/set'];
+	const menu_elements = [tranCrt, tranList, plan, set];
+	const menu_paths = ['/tran/crt', '/tran/list', '/plan', '/set'];
 	if (login) {
 		menu_elements.push(login);
 		menu_paths.push('/login');

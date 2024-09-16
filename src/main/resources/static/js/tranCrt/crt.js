@@ -1,4 +1,4 @@
-/* for view/tranAdd/add.jsp */
+/* for view/tranCrt/crt.jsp */
 
 document.addEventListener('DOMContentLoaded', () => {
 
