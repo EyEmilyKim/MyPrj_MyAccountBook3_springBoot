@@ -21,7 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
-import com.EyEmilyKim.dto.UserSessionDto;
+import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
 import com.EyEmilyKim.service.UserService;
 
@@ -77,7 +77,7 @@ class HomeControllerTest {
 		String password = "password";
 		
 		when(userService.login(userId, password))
-			.thenReturn(new UserSessionDto(777, "test-user", null));
+			.thenReturn(new LoginResponseDto(777, "test-user", null));
 		
 		mockMvc.perform(post("/login")
 				.param("LID", userId)
