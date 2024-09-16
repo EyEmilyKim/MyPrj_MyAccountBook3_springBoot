@@ -26,10 +26,10 @@
 	select * from mab_transactions_view
     <where>
         USER_ID = #{user_id} 
-        <if test="inex == 'IN'">
+        <if test="INEX == 'IN'">
         	AND INEX = 'IN' 
         </if>
-        <if test="inex == 'EX'">
+        <if test="INEX == 'EX'">
         	AND INEX = 'EX' 
         </if>
         <if test="ts_from != null">
@@ -56,10 +56,10 @@
 	select count(TRAN_ID) from mab_transactions_view 
 	<where>
         USER_ID = #{user_id} 
-        <if test="inex == 'IN'">
+        <if test="INEX == 'IN'">
         	AND INEX = 'IN' 
         </if>
-        <if test="inex == 'EX'">
+        <if test="INEX == 'EX'">
         	AND INEX = 'EX' 
         </if>
         <if test="ts_from != null">
