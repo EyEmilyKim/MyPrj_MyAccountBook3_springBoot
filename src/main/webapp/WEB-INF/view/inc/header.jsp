@@ -16,7 +16,7 @@
 	
 	<nav id="menu">
 		<ul>
-			<li><a href="/tran/add" id="tranAdd">가계부 쓰기</a></li>
+			<li><a href="/tran/crt" id="tranCrt">가계부 쓰기</a></li>
 			<li><a href="/tran/listAll" id="tranList">가계부 보기</a></li>
 			<li><a href="/plan" id="plan">계획하기</a></li>
 			<li><a href="/set/category/list" id="set">설정</a></li>

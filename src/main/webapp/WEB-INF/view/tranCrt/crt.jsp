@@ -7,7 +7,7 @@
 	<div class="contMain">
 		<h3 class="title ">가계부 쓰기</h3>
 
-		<form action="add" method="post" name="fm">
+		<form action="crt" method="post" name="fm">
 		
 	<!-- 0.일련번호(hidden)-->
 		<div>
@@ -141,4 +141,4 @@
 	<!-- contMain 끝 -->
 </main>
 
-<script src="../../js/tranAdd/tranAddadd.js"></script>
+<script src="../../js/tranCrt/crt.js"></script>

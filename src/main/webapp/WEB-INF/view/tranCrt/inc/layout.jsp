@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><tiles:getAsString name="title"/></title>
-	<link href="../../css/tranAdd/layout.css" rel="stylesheet" /> 
+	<link href="../../css/tranCrt/layout.css" rel="stylesheet" /> 
 </head>
 
 <body>
