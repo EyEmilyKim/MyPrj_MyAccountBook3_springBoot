@@ -38,11 +38,12 @@ public class MethodController {
 	
 	/*-------- 결제수단 목록 --------*/ 
 	
+	@GetMapping("list")
 	@Operation(summary = "목록 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	@GetMapping("list")
-	public String list(HttpServletRequest req, Model model) {
-		LogUtil.printWithTimestamp("MethodController > list() called");
+	public String get_list(HttpServletRequest req, Model model) {
+		
+		LogUtil.printWithTimestamp("MethodController > get_list() called");
 		int userId = (int) req.getAttribute("userId"); 
 		System.out.println("userId : "+userId);
 		
@@ -52,40 +53,47 @@ public class MethodController {
 		model.addAttribute("COUNT", cnt);
 		
 		return "set.method.list";
+		
 	}
+	
 
 	/*-------- 결제수단 삭제 --------*/
 	
+	@GetMapping("del")
 	@Operation(summary = "삭제 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	@GetMapping("del")
-	public String del(
+	public String get_del(
 			@Parameter(name = "MCODE", description = "결제수단 코드", example = "", required = true)
 			String MCODE, 
 			Model model) {
-		LogUtil.printWithTimestamp("MethodController > del()@Get called");
+		
+		LogUtil.printWithTimestamp("MethodController > get_del() called");
 		System.out.println(MCODE);
 		
 		Method meth= methodService.getOne(MCODE);
 		System.out.println(meth.getMeth_code()+" - "+meth.getMeth_name());
 		model.addAttribute("M", meth);
+		
 		return "set.method.del";
+		
 	}
 	
+	
+	@PostMapping("del")
 	@Operation(summary = "삭제 페이지", description = "")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "삭제 성공 알림, \n\n리다이렉트: 목록 페이지"),
 			@ApiResponse(responseCode = "500", description = "삭제 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})
-	@PostMapping("del")
-	public String del(
+	public String post_del(
 			@Parameter(name = "MCODE", description = "결제수단 코드", example = "", required = true)
 			String MCODE,
 			@Parameter(name = "MNAME", description = "결제수단 이름 ** to_be_refactored **", example = "", required = true)
 			String MNAME,
 			Model model
 			) {
-		LogUtil.printWithTimestamp("MethodController > del()@Post called");
+		
+		LogUtil.printWithTimestamp("MethodController > post_del() called");
 		System.out.println(MCODE+" - "+MNAME);
 		
 		try {
@@ -97,16 +105,20 @@ public class MethodController {
 			model.addAttribute("MSG", failMsg);
 			model.addAttribute("URL", nextUrl);
 		}
+		
 		return "redirect";
+		
 	}
+	
 	
 	/*-------- 결제수단 추가 --------*/
 
+	@GetMapping("crt")
 	@Operation(summary = "추가 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	@GetMapping("crt")
-	public String crt(HttpServletRequest req, Model model) {
-		LogUtil.printWithTimestamp("MethodController > crt()@Get called");
+	public String get_crt(HttpServletRequest req, Model model) {
+		
+		LogUtil.printWithTimestamp("MethodController > get_crt() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		
@@ -115,19 +127,23 @@ public class MethodController {
 		int maxSqn = methodService.getMaxSqn();
 		System.out.println("maxSqn : "+maxSqn);
 		model.addAttribute("MSN", maxSqn);
+		
 		return "set.method.crt";
+		
 	}
 	
+	
+	@PostMapping("crt")
 	@Operation(summary = "추가 페이지", description = "")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "추가 성공 알림, \n\n리다이렉트: 목록 페이지"),
 			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})	
-	@PostMapping("crt")
-	public String crt(
+	public String post_crt(
 			@RequestParam Map<String,String> fm, 
 			HttpServletRequest req, Model model) {
-		LogUtil.printWithTimestamp("MethodController > crt()@Post called");
+		
+		LogUtil.printWithTimestamp("MethodController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
@@ -143,19 +159,23 @@ public class MethodController {
 			model.addAttribute("MSG", failMsg);
 			model.addAttribute("URL", nextUrl);
 		}
+		
 		return "redirect";
+		
 	}
+	
 	
 	/*-------- 결제수단 수정 --------*/ 
 	
+	@GetMapping("upd")
 	@Operation(summary = "수정 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	@GetMapping("upd")
-	public String upd(
+	public String get_upd(
 			@Parameter(name = "MCODE", description = "결제수단 코드", example = "", required = true)
 			String MCODE, 
 			HttpServletRequest req, Model model) {
-		LogUtil.printWithTimestamp("MethodController > upd()@Get called");
+		
+		LogUtil.printWithTimestamp("MethodController > get_upd() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		System.out.println(MCODE);
@@ -165,19 +185,23 @@ public class MethodController {
 		model.addAttribute("M", meth);
 		List<String> list = methodService.getNameList(userId);
 		model.addAttribute("LIST", list);
+		
 		return "set.method.upd";
+		
 	}
 	
+	
+	@PostMapping("upd")
 	@Operation(summary = "수정 페이지", description = "")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "수정 성공 알림, \n\n리다이렉트: 목록 페이지"),
 			@ApiResponse(responseCode = "500", description = "수정 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})
-	@PostMapping("upd")
-	public String upd(
+	public String post_upd(
 			@RequestParam Map<String,String> fm, 
 			Model model) {
-		LogUtil.printWithTimestamp("MethodController > upd()@Post called");
+		
+		LogUtil.printWithTimestamp("MethodController > post_upd() called");
 		for(Map.Entry<String, String> entry : fm.entrySet()) {
 			System.out.println(entry.getKey()+" : "+entry.getValue());
 		}
@@ -191,6 +215,9 @@ public class MethodController {
 			 model.addAttribute("MSG", failMsg);
 			 model.addAttribute("URL", nextUrl);
 		}
+		
 		return "redirect";
+		
 	}
+	
 }
