@@ -104,9 +104,9 @@ public class MethodController {
 
 	@Operation(summary = "추가 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	@GetMapping("add")
-	public String add(HttpServletRequest req, Model model) {
-		LogUtil.printWithTimestamp("MethodController > add()@Get called");
+	@GetMapping("crt")
+	public String crt(HttpServletRequest req, Model model) {
+		LogUtil.printWithTimestamp("MethodController > crt()@Get called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		
@@ -115,7 +115,7 @@ public class MethodController {
 		int maxSqn = methodService.getMaxSqn();
 		System.out.println("maxSqn : "+maxSqn);
 		model.addAttribute("MSN", maxSqn);
-		return "set.method.add";
+		return "set.method.crt";
 	}
 	
 	@Operation(summary = "추가 페이지", description = "")
@@ -123,11 +123,11 @@ public class MethodController {
 			@ApiResponse(responseCode = "200", description = "추가 성공 알림, \n\n리다이렉트: 목록 페이지"),
 			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})	
-	@PostMapping("add")
-	public String add(
+	@PostMapping("crt")
+	public String crt(
 			@RequestParam Map<String,String> fm, 
 			HttpServletRequest req, Model model) {
-		LogUtil.printWithTimestamp("MethodController > add()@Post called");
+		LogUtil.printWithTimestamp("MethodController > crt()@Post called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		for(Map.Entry<String,String> entry : fm.entrySet()) {
