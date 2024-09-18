@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	const fm = document.forms['fm'];
 	
+	// 이전 경로 설정 
+	const prevUrl = document.referrer;
+	fm.PREV_URL.value = prevUrl;	
+	
 	/* ------------ form 유효성 검사 관련 ------------ */
 	
 	const msg = {
@@ -171,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 8. form 취소, 제출 동작 추가
 	fm.addEventListener('reset', () => {
-		backToHome();
+		backToPrev();
 	})
     fm.addEventListener('submit', (event) => {
         if (!checkSubmit()) {
@@ -329,9 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	/* ------------ form 취소 ------------ */
 	
-	function backToHome() {
-		if (confirm("취소하고 홈으로 돌아가시겠습니까?"))
-			location.href = "/index";
+	function backToPrev() {
+		if (confirm("취소하고 이전 화면으로 돌아가시겠습니까?"))
+			location.href = prevUrl;
 		else {
 			colorBtn("NN"); // 수입/지출, 현금/카드 버튼색 초기화
 			showSlct("NN"); // 카테고리, 결제수단 드롭다운 초기화

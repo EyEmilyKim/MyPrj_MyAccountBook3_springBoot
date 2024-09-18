@@ -130,6 +130,10 @@
 		</div>
 
 	<!-- 8.form 등록/취소 -->
+		<div class="hidden">
+			<input type="text" name="PREV_URL" value="" placeholder="PREV_URL 자동" />
+		</div>
+		
 		<div class="depth1">
 			<input type="submit" value="등록" /> 
 			<input type="reset" value="취소" />
