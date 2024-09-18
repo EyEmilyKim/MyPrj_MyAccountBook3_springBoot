@@ -12,6 +12,7 @@ import com.EyEmilyKim.config.properties.ClientViewProperties;
 import com.EyEmilyKim.dao.TransactionDao;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranListPopulatedRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranPostRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranUpdateRequestDto;
@@ -31,14 +32,15 @@ public class TransactionServiceImp implements TransactionService {
 	@Override
 	public TranListResponseDto getList(TranListRequestDto requestDto, int user_id, String inex) throws ParseException {
 		System.out.println("TranService > getList() called");
-		
+
+		// RequestDto 변수 처리
+		TranListPopulatedRequestDto populatedRequestDto = this.populateTranListRequestDto(requestDto, user_id, inex);
 		// 실제 데이터 가져오기
-		requestDto = this.populateTranListRequestDto(requestDto, user_id, inex);
-		List<TransactionDto> list = transactionDao.getList(requestDto);
+		List<TransactionDto> list = transactionDao.getList(populatedRequestDto);
 		// 전체 데이터 수 가져오기
-		int totalCount = transactionDao.getCount(requestDto);
-		// 데이터 전달해서 페이징 변수까지 모두 담아오기
-		TranListResponseDto responseDto = this.populateTranListResponseDto(list, totalCount, requestDto, inex);
+		int totalCount = transactionDao.getCount(populatedRequestDto);
+		// 데이터, 페이징 변수 포함한 ResponseDto 준비
+		TranListResponseDto responseDto = this.populateTranListResponseDto(list, totalCount, populatedRequestDto, inex);
 		
 		return responseDto;
 	}
@@ -114,25 +116,28 @@ public class TransactionServiceImp implements TransactionService {
 		return tran;
 	}
 	
-	private TranListRequestDto populateTranListRequestDto(TranListRequestDto requestDto, int user_id, String inex) throws ParseException {
+	private TranListPopulatedRequestDto populateTranListRequestDto(TranListRequestDto requestDto, int user_id, String inex) throws ParseException {
+
+		TranListPopulatedRequestDto resultDto = new TranListPopulatedRequestDto();
+		
 		// 검색 조건 설정
+		resultDto.setUser_id(user_id);
 		String d_from = requestDto.getD_FROM();
 		String d_to = requestDto.getD_TO();
-		requestDto.setTs_from( (d_from != null && d_from != "") ? DateUtil.stringToTimestamp(d_from) : null);
-		requestDto.setTs_to( (d_to != null && d_to != "") ? DateUtil.stringToTimestamp(d_to) : null);
-		requestDto.setINEX( (inex != "ALL") ? inex : null);
-		requestDto.setUser_id(user_id);
+		resultDto.setTs_from( (d_from != null && d_from != "") ? DateUtil.stringToTimestamp(d_from) : null);
+		resultDto.setTs_to( (d_to != null && d_to != "") ? DateUtil.stringToTimestamp(d_to) : null);
+		resultDto.setINEX( (inex != "ALL") ? inex : null);
 		// 페이지 설정
-		if(requestDto.getPG() == null) requestDto.setPG(1);
-		int pg = requestDto.getPG();
+		int pg = requestDto.getPG() == null ? 1 : requestDto.getPG();
+		resultDto.setPG(pg);
 		// N줄 보기 설정
-		if(requestDto.getRC() == null) requestDto.setRC(config.getDefault_rowCount());
-		int rc = requestDto.getRC();
+		int rc = requestDto.getRC() == null ? config.getDefault_rowCount() : requestDto.getRC();
+		resultDto.setRC(rc);
 		// DB 조회할 덩어리(offset, limit) 설정
 		int start = (pg - 1) * rc;
-		requestDto.setStart(start);
+		resultDto.setStart(start);
 		
-		return requestDto;
+		return resultDto;
 	}
 	
 	private TranListResponseDto populateTranListResponseDto(List<TransactionDto> list, int totalCount, TranListRequestDto requestDto, String inex) {
