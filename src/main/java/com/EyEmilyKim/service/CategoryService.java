@@ -3,6 +3,8 @@ package com.EyEmilyKim.service;
 import java.util.List;
 import java.util.Map;
 
+import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
+import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
 import com.EyEmilyKim.entity.Category;
 
 public interface CategoryService {
@@ -19,8 +21,8 @@ public interface CategoryService {
 	
 	List<String> getNameList(int user_id, String inex);
 
-	int insert(Map<String,String> fm, int user_id);
+	int insert(CategoryCreateRequestDto requestDto, int user_id);
 
-	int update(Map<String,String> fm);
+	int update(CategoryUpdateRequestDto requestDto);
 	
 }
