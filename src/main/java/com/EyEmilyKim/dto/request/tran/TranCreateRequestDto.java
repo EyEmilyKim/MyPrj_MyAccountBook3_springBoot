@@ -1,5 +1,7 @@
 package com.EyEmilyKim.dto.request.tran;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class TranCreateRequestDto extends TranPostRequestDto {
 	
+	@JsonProperty("MY_SEQNO")
 	private Integer MY_SEQNO;
 
 }
