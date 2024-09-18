@@ -236,12 +236,16 @@ public class TransactionController {
 		
 		try {
 			transactionService.insert(tranCreateRequestDto, userId);
+			model.addAttribute("OK", true);
 			model.addAttribute("MSG", succMsg);
 		} catch (Exception e) {
 			e.printStackTrace();
+			model.addAttribute("OK", false);
 			model.addAttribute("MSG", failMsg);
 		}
-		model.addAttribute("URL", "/tran/crt");
+		model.addAttribute("TRAN_CRT", true);
+		model.addAttribute("URL_AGAIN", "/tran/crt");
+		model.addAttribute("URL_NEXT", "/tran/listAll");
 		
 		return "redirect";
 		
