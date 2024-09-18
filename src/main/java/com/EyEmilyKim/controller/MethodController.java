@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.EyEmilyKim.dto.request.method.MethodCreateRequestDto;
+import com.EyEmilyKim.dto.request.method.MethodUpdateRequestDto;
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.service.MethodService;
+import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -140,18 +143,16 @@ public class MethodController {
 			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})	
 	public String post_crt(
-			@RequestParam Map<String,String> fm, 
+			@ModelAttribute MethodCreateRequestDto methodCreateRequestDto, 
 			HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		for(Map.Entry<String,String> entry : fm.entrySet()) {
-			System.out.println(entry.getKey()+" : "+entry.getValue());
-		}
+		DtoUtil.printDto(methodCreateRequestDto);
 		
 		try {
-			methodService.insert(fm, userId);
+			methodService.insert(methodCreateRequestDto, userId);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
@@ -198,16 +199,14 @@ public class MethodController {
 			@ApiResponse(responseCode = "500", description = "수정 실패 알림, \n\n리다이렉트: 목록 페이지")
 	})
 	public String post_upd(
-			@RequestParam Map<String,String> fm, 
+			@ModelAttribute MethodUpdateRequestDto methodUpdateRequestDto, 
 			Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > post_upd() called");
-		for(Map.Entry<String, String> entry : fm.entrySet()) {
-			System.out.println(entry.getKey()+" : "+entry.getValue());
-		}
+		DtoUtil.printDto(methodUpdateRequestDto);
 		
 		try {
-			methodService.update(fm);
+			methodService.update(methodUpdateRequestDto);
 			model.addAttribute("MSG", succMsg);
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {

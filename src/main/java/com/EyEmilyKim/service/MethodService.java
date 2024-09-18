@@ -1,8 +1,9 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
-import java.util.Map;
 
+import com.EyEmilyKim.dto.request.method.MethodCreateRequestDto;
+import com.EyEmilyKim.dto.request.method.MethodUpdateRequestDto;
 import com.EyEmilyKim.entity.Method;
 
 public interface MethodService {
@@ -19,7 +20,7 @@ public interface MethodService {
 
 	List<String> getNameList(int userId);
 
-	int insert(Map<String, String> fm, int userId);
+	int insert(MethodCreateRequestDto requestDto, int userId);
 
-	int update(Map<String,String> fm);
+	int update(MethodUpdateRequestDto requestDto);
 }
