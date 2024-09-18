@@ -64,7 +64,7 @@ public class TransactionController {
 		LogUtil.printWithTimestamp("TransactionController > get_listAll() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(tranListRequestDto);
+		DtoUtil.printFieldValues(tranListRequestDto);
 		
 		try {
 			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "ALL");
@@ -94,7 +94,7 @@ public class TransactionController {
 		LogUtil.printWithTimestamp("TransactionController > get_listIn() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(tranListRequestDto);
+		DtoUtil.printFieldValues(tranListRequestDto);
 		
 		try {
 			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "IN");
@@ -124,7 +124,7 @@ public class TransactionController {
 		LogUtil.printWithTimestamp("TransactionController > get_listEx() called");
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(tranListRequestDto);
+		DtoUtil.printFieldValues(tranListRequestDto);
 		
 		try {
 			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "EX");
@@ -177,7 +177,7 @@ public class TransactionController {
 			Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > post_del() called");		
-		DtoUtil.printDto(tranDeleteRequestDto);
+		DtoUtil.printFieldValues(tranDeleteRequestDto);
 		
 		String tran_id = tranDeleteRequestDto.getTRAN_ID();
 		String nextUrl = tranDeleteRequestDto.getPREV_URL();
@@ -232,7 +232,7 @@ public class TransactionController {
 		LogUtil.printWithTimestamp("TransactionController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(tranCreateRequestDto);
+		DtoUtil.printFieldValues(tranCreateRequestDto);
 		
 		try {
 			transactionService.insert(tranCreateRequestDto, userId);
@@ -293,7 +293,7 @@ public class TransactionController {
 		LogUtil.printWithTimestamp("TransactionController > post_upd() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(tranUpdateRequestDto);
+		DtoUtil.printFieldValues(tranUpdateRequestDto);
 		
 		try {
 			transactionService.update(tranUpdateRequestDto);

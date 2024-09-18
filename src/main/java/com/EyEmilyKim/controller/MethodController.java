@@ -149,7 +149,7 @@ public class MethodController {
 		LogUtil.printWithTimestamp("MethodController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(methodCreateRequestDto);
+		DtoUtil.printFieldValues(methodCreateRequestDto);
 		
 		try {
 			methodService.insert(methodCreateRequestDto, userId);
@@ -203,7 +203,7 @@ public class MethodController {
 			Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > post_upd() called");
-		DtoUtil.printDto(methodUpdateRequestDto);
+		DtoUtil.printFieldValues(methodUpdateRequestDto);
 		
 		try {
 			methodService.update(methodUpdateRequestDto);

@@ -149,7 +149,7 @@ public class CategoryController {
 		LogUtil.printWithTimestamp("CategoryController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
-		DtoUtil.printDto(categoryCreateRequestDto);
+		DtoUtil.printFieldValues(categoryCreateRequestDto);
 		
 		try {
 			categoryService.insert(categoryCreateRequestDto, userId);
@@ -204,7 +204,7 @@ public class CategoryController {
 			Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > post_upd() called");
-		DtoUtil.printDto(categoryUpdateRequestDto);
+		DtoUtil.printFieldValues(categoryUpdateRequestDto);
 
 		try {
 			categoryService.update(categoryUpdateRequestDto);
