@@ -1,13 +1,14 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.config.properties.DBDefaultProperties;
 import com.EyEmilyKim.dao.MethodDao;
+import com.EyEmilyKim.dto.request.method.MethodCreateRequestDto;
+import com.EyEmilyKim.dto.request.method.MethodUpdateRequestDto;
 import com.EyEmilyKim.entity.Method;
 
 @Service
@@ -59,14 +60,14 @@ System.out.println("MethodService > getMaxSqn() called");
 	}
 
 	@Override
-	public int insert(Map<String, String> fm, int userId) {
+	public int insert(MethodCreateRequestDto requestDto, int userId) {
 		System.out.println("MethodService > insert() called");
 				
 		Method meth = new Method();
-		meth.setSeqno(Integer.parseInt(fm.get("SEQNO")));
-		meth.setMncrd(fm.get("MNCRD"));
-		meth.setMeth_code(fm.get("MNCRD")+fm.get("SEQNO")+"_"+userId);
-		meth.setMeth_name(fm.get("MNAME"));
+		meth.setSeqno(requestDto.getSEQNO());
+		meth.setMncrd(requestDto.getMNCRD());
+		meth.setMeth_code(requestDto.getMNCRD()+requestDto.getSEQNO()+"_"+userId);
+		meth.setMeth_name(requestDto.getMNAME());
 		meth.setUser_id(userId);
 		meth.setDefault_mncrd(config.getMncrd());
 		meth.setDefault_meth_code(config.getMeth_code());
@@ -75,12 +76,12 @@ System.out.println("MethodService > getMaxSqn() called");
 	}
 
 	@Override
-	public int update(Map<String,String> fm) {
+	public int update(MethodUpdateRequestDto requestDto) {
 		System.out.println("MethodService > update() called");
 
 		Method meth = new Method();
-		meth.setMeth_code(fm.get("MCODE"));
-		meth.setMeth_name(fm.get("N_MNAME"));
+		meth.setMeth_code(requestDto.getMCODE());
+		meth.setMeth_name(requestDto.getN_MNAME());
 		
 		return methodDao.update(meth);
 	}

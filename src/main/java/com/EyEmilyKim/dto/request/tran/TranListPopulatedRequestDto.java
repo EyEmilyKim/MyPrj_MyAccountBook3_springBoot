@@ -1,29 +1,28 @@
-package com.EyEmilyKim.dto;
+package com.EyEmilyKim.dto.request.tran;
 
 import java.sql.Timestamp;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class TranSearchDto {
-	private String D_FROM;
-	private String D_TO;
-	private String ITEM;
-	private String CATE_NAME;
-	private String METH_NAME;
-	private String inex;
+@ToString(callSuper = true)
+@SuperBuilder
+public class TranListPopulatedRequestDto extends TranListRequestDto {
+	
+	// 백엔드에서 처리
 	private Integer user_id;
 	private Timestamp ts_from;
 	private Timestamp ts_to;
-	private Integer RC;
-	private Integer PG;
 	private Integer start;
+
 }

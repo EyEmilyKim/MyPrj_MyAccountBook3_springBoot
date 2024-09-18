@@ -1,4 +1,4 @@
-package com.EyEmilyKim.dto;
+package com.EyEmilyKim.dto.response;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserSessionDto {
+public class LoginResponseDto {
 	private Integer user_id;
 	private String nickname;
 	private Date birthday;

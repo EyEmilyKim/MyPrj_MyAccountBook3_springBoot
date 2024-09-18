@@ -4,16 +4,19 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.config.properties.ClientViewProperties;
 import com.EyEmilyKim.dao.TransactionDao;
-import com.EyEmilyKim.dto.TranPageDto;
-import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranListPopulatedRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranPostRequestDto;
+import com.EyEmilyKim.dto.request.tran.TranUpdateRequestDto;
+import com.EyEmilyKim.dto.response.tran.TranListResponseDto;
 import com.EyEmilyKim.entity.Transaction;
 import com.EyEmilyKim.util.DateUtil;
 
@@ -27,18 +30,19 @@ public class TransactionServiceImp implements TransactionService {
 	private ClientViewProperties config;
 	
 	@Override
-	public TranPageDto getList(TranSearchDto searchDto, int user_id, String inex) throws ParseException {
+	public TranListResponseDto getList(TranListRequestDto requestDto, int user_id, String inex) throws ParseException {
 		System.out.println("TranService > getList() called");
-		
+
+		// RequestDto 변수 처리
+		TranListPopulatedRequestDto populatedRequestDto = this.populateTranListRequestDto(requestDto, user_id, inex);
 		// 실제 데이터 가져오기
-		searchDto = this.populateTranSearchDto(searchDto, user_id, inex);
-		List<TransactionDto> list = transactionDao.getList(searchDto);
+		List<TransactionDto> list = transactionDao.getList(populatedRequestDto);
 		// 전체 데이터 수 가져오기
-		int totalCount = transactionDao.getCount(searchDto);
-		// 데이터 전달해서 페이징 변수까지 모두 담아오기
-		TranPageDto resultDto = this.populateTranPageDto(list, totalCount, searchDto, inex);
+		int totalCount = transactionDao.getCount(populatedRequestDto);
+		// 데이터, 페이징 변수 포함한 ResponseDto 준비
+		TranListResponseDto responseDto = this.populateTranListResponseDto(list, totalCount, populatedRequestDto, inex);
 		
-		return resultDto;
+		return responseDto;
 	}
 	
 	@Override
@@ -63,41 +67,41 @@ public class TransactionServiceImp implements TransactionService {
 	}
 
 	@Override
-	public int insert(Map<String, String> fm, int user_id) throws Exception {
+	public int insert(TranCreateRequestDto requestDto, int user_id) throws Exception {
 		System.out.println("TranService > insert() called");
 
 		Timestamp reg_date = DateUtil.dateToTimestamp(new Date());
 		
-		Transaction tran = populateTransactionCommonField(fm);
+		Transaction tran = this.populateTransactionCommonFields(requestDto);
 		tran.setUser_id(user_id);
-		tran.setMy_seqno(Integer.parseInt(fm.get("MY_SEQNO")));
-		tran.setTran_id(user_id + "_" + fm.get("MY_SEQNO"));
+		tran.setMy_seqno(requestDto.getMY_SEQNO());
+		tran.setTran_id(user_id + "_" + requestDto.getMY_SEQNO());
 		tran.setReg_date(reg_date);
 		
 		return transactionDao.insert(tran);
 	}
 
 	@Override
-	public int update(Map<String, String> fm) throws ParseException {
+	public int update(TranUpdateRequestDto requestDto) throws ParseException {
 		System.out.println("TranService > update() called");
 		
-		Transaction tran = populateTransactionCommonField(fm);
-		tran.setTran_id(fm.get("TRAN_ID"));
+		Transaction tran = this.populateTransactionCommonFields(requestDto);
+		tran.setTran_id(requestDto.getTRAN_ID());
 		
 		return transactionDao.update(tran);
 	}
 
 	/* ------------- 공통 함수 ------------- */
 	
-	private Transaction populateTransactionCommonField(Map<String, String> fm) throws ParseException {
-		Timestamp tran_date = DateUtil.stringToTimestamp(fm.get("DATE"));
-		String inex = fm.get("INEX");
-		String ccode = fm.get("CCODE").isEmpty() ? "caNN0" : fm.get("CCODE");
-		String item = fm.get("ITEM").trim().isEmpty() ? null : fm.get("ITEM");
-		Integer amount = Integer.parseInt(fm.get("AMOUNT"));
-		String mncrd = inex.equals("IN") ? "none" : fm.get("MNCRD");
+	private Transaction populateTransactionCommonFields(TranPostRequestDto requestDto) throws ParseException {
+		Timestamp tran_date = DateUtil.stringToTimestamp(requestDto.getDATE());
+		String inex = requestDto.getINEX();
+		String ccode = requestDto.getCCODE().isEmpty() ? "caNN0" : requestDto.getCCODE();
+		String item = requestDto.getITEM().trim().isEmpty() ? null : requestDto.getITEM();
+		Integer amount = requestDto.getAMOUNT();
+		String mncrd = inex.equals("IN") ? "none" : requestDto.getMNCRD();
 		if(inex.equals("EX") && mncrd.isEmpty()) mncrd = "meNN"; 
-		String mcode = inex.equals("IN") ? "none" : fm.get("MCODE");
+		String mcode = inex.equals("IN") ? "none" : requestDto.getMCODE();
 		if(inex.equals("EX") && mcode.isEmpty()) mcode = "meNN0"; 
 		
 		Transaction tran = new Transaction();
@@ -112,48 +116,51 @@ public class TransactionServiceImp implements TransactionService {
 		return tran;
 	}
 	
-	private TranSearchDto populateTranSearchDto(TranSearchDto searchDto, int user_id, String inex) throws ParseException {
+	private TranListPopulatedRequestDto populateTranListRequestDto(TranListRequestDto requestDto, int user_id, String inex) throws ParseException {
+
+		TranListPopulatedRequestDto resultDto = new TranListPopulatedRequestDto();
+		
 		// 검색 조건 설정
-		String d_from = searchDto.getD_FROM();
-		String d_to = searchDto.getD_TO();
-		searchDto.setTs_from( (d_from != null && d_from != "") ? DateUtil.stringToTimestamp(d_from) : null);
-		searchDto.setTs_to( (d_to != null && d_to != "") ? DateUtil.stringToTimestamp(d_to) : null);
-		searchDto.setInex( (inex != "ALL") ? inex : null);
-		searchDto.setUser_id(user_id);
+		resultDto.setUser_id(user_id);
+		String d_from = requestDto.getD_FROM();
+		String d_to = requestDto.getD_TO();
+		resultDto.setTs_from( (d_from != null && d_from != "") ? DateUtil.stringToTimestamp(d_from) : null);
+		resultDto.setTs_to( (d_to != null && d_to != "") ? DateUtil.stringToTimestamp(d_to) : null);
+		resultDto.setINEX( (inex != "ALL") ? inex : null);
 		// 페이지 설정
-		if(searchDto.getPG() == null) searchDto.setPG(1);
-		int pg = searchDto.getPG();
+		int pg = requestDto.getPG() == null ? 1 : requestDto.getPG();
+		resultDto.setPG(pg);
 		// N줄 보기 설정
-		if(searchDto.getRC() == null) searchDto.setRC(config.getDefault_rowCount());
-		int rc = searchDto.getRC();
+		int rc = requestDto.getRC() == null ? config.getDefault_rowCount() : requestDto.getRC();
+		resultDto.setRC(rc);
 		// DB 조회할 덩어리(offset, limit) 설정
 		int start = (pg - 1) * rc;
-		searchDto.setStart(start);
+		resultDto.setStart(start);
 		
-		return searchDto;
+		return resultDto;
 	}
 	
-	private TranPageDto populateTranPageDto(List<TransactionDto> list, int totalCount, TranSearchDto searchDto, String inex) {
+	private TranListResponseDto populateTranListResponseDto(List<TransactionDto> list, int totalCount, TranListRequestDto requestDto, String inex) {
 			// 페이징 변수 계산
-			int totalPages = (int) Math.ceil((double) totalCount / searchDto.getRC());
-			int currentPage = searchDto.getPG();
+			int totalPages = (int) Math.ceil((double) totalCount / requestDto.getRC());
+			int currentPage = requestDto.getPG();
 			int pagesPerSet = config.getFinal_pagesPerSet();
 			int currentSet = (currentPage - 1) / pagesPerSet + 1;
 			int startPage = (currentSet - 1) * pagesPerSet + 1;
 			int endPage = Math.min( (startPage + pagesPerSet - 1), totalPages);
 			// 필요한 정보 DTO 에 설정해서 반환
-			TranPageDto resultDto = new TranPageDto();
-			resultDto.setList(list);
-			resultDto.setTotalCount(totalCount);
-			resultDto.setTotalPages(totalPages);
-			resultDto.setCurrentPage(currentPage);
-			resultDto.setRowCount(searchDto.getRC());
-			resultDto.setCurrentSet(currentSet);
-			resultDto.setStartPage(startPage);
-			resultDto.setEndPage(endPage);
-			resultDto.setRowCount_option(config.getDefault_rowCount_optionString());
-			resultDto.setInex((inex != "") ? inex : null);
+			TranListResponseDto responseDto = new TranListResponseDto();
+			responseDto.setList(list);
+			responseDto.setTotalCount(totalCount);
+			responseDto.setTotalPages(totalPages);
+			responseDto.setCurrentPage(currentPage);
+			responseDto.setRowCount(requestDto.getRC());
+			responseDto.setCurrentSet(currentSet);
+			responseDto.setStartPage(startPage);
+			responseDto.setEndPage(endPage);
+			responseDto.setRowCount_option(config.getDefault_rowCount_optionString());
+			responseDto.setInex((inex != "") ? inex : null);
 			
-			return resultDto;
+			return responseDto;
 	}
 }

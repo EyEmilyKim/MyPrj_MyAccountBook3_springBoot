@@ -1,9 +1,9 @@
 package com.EyEmilyKim.service;
 
-import com.EyEmilyKim.dto.UserSessionDto;
+import com.EyEmilyKim.dto.response.LoginResponseDto;
 
 public interface UserService {
 
-	UserSessionDto login(String lid, String pwd) throws Exception;
+	LoginResponseDto login(String lid, String pwd) throws Exception;
 
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.config.properties.DBDefaultProperties;
 import com.EyEmilyKim.dao.CategoryDao;
+import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
+import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
 import com.EyEmilyKim.entity.Category;
 
 @Service
@@ -62,14 +64,14 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public int insert(Map<String,String> fm, int userId) {
+	public int insert(CategoryCreateRequestDto requestDto, int userId) {
 		System.out.println("CateService > insert() called");
 		
 		Category cate = new Category();
-		cate.setSeqno(Integer.parseInt(fm.get("SEQNO")));
-		cate.setInex(fm.get("INEX"));
-		cate.setCate_code(fm.get("INEX")+fm.get("SEQNO")+"_"+userId);
-		cate.setCate_name(fm.get("CNAME"));
+		cate.setSeqno(requestDto.getSEQNO());
+		cate.setInex(requestDto.getINEX());
+		cate.setCate_code(requestDto.getINEX()+requestDto.getSEQNO()+"_"+userId);
+		cate.setCate_name(requestDto.getCNAME());
 		cate.setUser_id(userId);
 		cate.setDefault_cate_code(config.getCate_code());
 		
@@ -77,12 +79,12 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public int update(Map<String,String> fm) {
+	public int update(CategoryUpdateRequestDto requestDto) {
 		System.out.println("CateService > update() called");
 
 		Category cate = new Category();
-		cate.setCate_code(fm.get("CCODE"));
-		cate.setCate_name(fm.get("N_CNAME"));
+		cate.setCate_code(requestDto.getCCODE());
+		cate.setCate_name(requestDto.getN_CNAME());
 		
 		return categoryDao.update(cate);
 	}

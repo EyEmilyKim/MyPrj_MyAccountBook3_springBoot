@@ -1,6 +1,8 @@
-package com.EyEmilyKim.dto;
+package com.EyEmilyKim.dto.response.tran;
 
 import java.util.List;
+
+import com.EyEmilyKim.dto.TransactionDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class TranPageDto {
+public class TranListResponseDto {
 	private String inex;
 	private List<TransactionDto> list;
 	private long totalCount;

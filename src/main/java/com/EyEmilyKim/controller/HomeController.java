@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.EyEmilyKim.dto.UserSessionDto;
+import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.service.UserService;
 import com.EyEmilyKim.util.LogUtil;
 
@@ -72,10 +72,10 @@ public class HomeController {
 			Model model, HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > login()@Post called");
 		try {
-			UserSessionDto userSess = userService.login(LID, PWD);
-			session.setAttribute("USER_ID", userSess.getUser_id());
-			session.setAttribute("NICKNAME", userSess.getNickname());
-			String msg = "로그인에 성공했습니다. \\n환영합니다~ " + userSess.getNickname() + "님~!";
+			LoginResponseDto loginResponseDto = userService.login(LID, PWD);
+			session.setAttribute("USER_ID", loginResponseDto.getUser_id());
+			session.setAttribute("NICKNAME", loginResponseDto.getNickname());
+			String msg = "로그인에 성공했습니다. \\n환영합니다~ " + loginResponseDto.getNickname() + "님~!";
 			model.addAttribute("MSG", msg);
 			
 			String originalUrl = (String) session.getAttribute("OriginalUrl");

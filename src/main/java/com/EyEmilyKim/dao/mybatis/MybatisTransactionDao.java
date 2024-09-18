@@ -6,8 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.EyEmilyKim.dao.TransactionDao;
-import com.EyEmilyKim.dto.TranSearchDto;
 import com.EyEmilyKim.dto.TransactionDto;
+import com.EyEmilyKim.dto.request.tran.TranListRequestDto;
 import com.EyEmilyKim.entity.Transaction;
 
 @Repository
@@ -20,12 +20,12 @@ public class MybatisTransactionDao implements TransactionDao {
 	}
 
 	@Override
-	public List<TransactionDto> getList(TranSearchDto dto) {
+	public List<TransactionDto> getList(TranListRequestDto dto) {
 		return mapper.getList(dto);
 	}
 
 	@Override
-	public Integer getCount(TranSearchDto dto) {
+	public Integer getCount(TranListRequestDto dto) {
 		return mapper.getCount(dto);
 	}
 

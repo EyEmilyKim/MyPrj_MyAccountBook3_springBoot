@@ -9,7 +9,7 @@
 		
 		<!-- Form 영역 -->
 		<div class="form "> 
-		<form action="add" name="fm" onSubmit="return check(this)" method="post">
+		<form action="crt" name="fm" onSubmit="return check(this)" method="post">
 			<input type="hidden" name="SEQNO" value="${MSN +1 }">
 			<div class="content">
 				<div class="inex">

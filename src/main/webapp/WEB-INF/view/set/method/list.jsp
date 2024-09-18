@@ -56,7 +56,7 @@
 	</table>
 	<br>
 	<div class="buttons">
-	<a  class="btn add" href="add">추가하기</a>
+	<a  class="btn crt" href="crt">추가하기</a>
 	</div>
 	
 	</section>
