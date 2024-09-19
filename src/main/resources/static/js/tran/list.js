@@ -31,15 +31,27 @@ document.addEventListener('DOMContentLoaded', () => {
 			D_TO : fmSRCH.D_TO.value,
 			ITEM : fmSRCH.ITEM.value,
 			CATE_NAME : fmSRCH.CATE_NAME.value,
-			METH_NAME : fmSRCH.METH_NAME.value,
-		}
-		console.log(fmV)		
-		if (fmV.D_FROM == "" && fmV.D_TO == "" && fmV.ITEM == "" && fmV.CATE_NAME == "" && fmV.METH_NAME == "") {
+		};
+		if(fmSRCH.INEX.value === "EX") 
+			fmV["METH_NAME"] = fmSRCH.METH_NAME.value; 
+		// console.log(fmV)
+		
+		if (isAllBlank(fmV)) {
+			alert('검색 조건이 설정되지 않았습니다.');
 			event.preventDefault();
-			return false;			
 		}
-		return true;
 	});
+	
+	function isAllBlank(object) {
+		let flag = true;
+		for (let key in object) {
+			if (object[key] !== "") { 
+				flag = false; 
+				break;
+			}
+		}
+		return flag;
+	}
 	
 	/* ------------ 페이지 번호 ------------ */
 	
