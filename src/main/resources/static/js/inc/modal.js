@@ -22,6 +22,8 @@ function closeModal() {
 
 // 이벤트 리스너 추가 (모달 닫기)
 document.addEventListener('DOMContentLoaded', () => {
-    closeModalBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', closeModal);
+	if (modalOverlay) {
+	    closeModalBtn.addEventListener('click', closeModal);
+	    modalOverlay.addEventListener('click', closeModal);
+    }
 });
