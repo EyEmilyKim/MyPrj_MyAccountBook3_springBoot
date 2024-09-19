@@ -126,6 +126,9 @@ public class TransactionServiceImp implements TransactionService {
 		String d_to = requestDto.getD_TO();
 		resultDto.setTs_from( (d_from != null && d_from != "") ? DateUtil.stringToTimestamp(d_from) : null);
 		resultDto.setTs_to( (d_to != null && d_to != "") ? DateUtil.stringToTimestamp(d_to) : null);
+		resultDto.setITEM(requestDto.getITEM());
+		resultDto.setCATE_NAME(requestDto.getCATE_NAME());
+		resultDto.setMETH_NAME(requestDto.getMETH_NAME());
 		resultDto.setINEX( (inex != "ALL") ? inex : null);
 		// 페이지 설정
 		int pg = requestDto.getPG() == null ? 1 : requestDto.getPG();
