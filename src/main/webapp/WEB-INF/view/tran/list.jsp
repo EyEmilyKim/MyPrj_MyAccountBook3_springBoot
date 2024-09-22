@@ -98,7 +98,7 @@
 			<c:if test="${totalCount > 0 }">
 				<table class="tranTable" >
 				
-				<thead class="">
+				<thead class="label">
 					<tr>
 						<td class="tran_id">tran_id</td>
 						<td>날짜</td>

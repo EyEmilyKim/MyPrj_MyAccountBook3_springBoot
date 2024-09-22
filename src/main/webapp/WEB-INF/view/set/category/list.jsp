@@ -9,14 +9,14 @@
 		<div class="count ">총 <span class="cnt">${COUNT }</span> 건</div>
 	
 	<table class="table " >
-	<thead class="">
+	<thead class="label">
 	<tr class="">
 		<td class="user_id">user_id</td>
 		<td class="seqno">seqno</td>
 		<td class="cate_code">cate_code</td>
-		<td>inex</td>
-		<td>cate_name</td>
-		<td>btn</td>
+		<td><span class="hidden">inex</span><span>구분</span></td>
+		<td><span class="hidden">cate_name</span><span>카테고리</span></td>
+		<td><span class="hidden">btn</span><span>편집</span></td>
 	</tr>
 	</thead>
 	<tbody>
