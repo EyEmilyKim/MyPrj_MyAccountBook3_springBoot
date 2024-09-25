@@ -1,7 +1,6 @@
 package com.EyEmilyKim.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
 import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.service.CategoryService;
+import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
 
@@ -35,8 +34,9 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	private String failMsg = "에러가 발생했습니다.";
-	private String succMsg = "정상적으로 처리되었습니다.";
+	@Autowired
+	private MessageService messageService;
+	
 	private String nextUrl = "/set/category/list";
 	
 	
@@ -101,11 +101,11 @@ public class CategoryController {
 		
 		try {
 			categoryService.delete(CCODE);
-			model.addAttribute("MSG", succMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", failMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", nextUrl);
 		}
 		
@@ -153,11 +153,11 @@ public class CategoryController {
 		
 		try {
 			categoryService.insert(categoryCreateRequestDto, userId);
-			model.addAttribute("MSG", succMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", failMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", nextUrl);
 		}
 		
@@ -208,11 +208,11 @@ public class CategoryController {
 
 		try {
 			categoryService.update(categoryUpdateRequestDto);
-			model.addAttribute("MSG", succMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", failMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", nextUrl);
 		}
 		

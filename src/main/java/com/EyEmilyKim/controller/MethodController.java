@@ -1,7 +1,6 @@
 package com.EyEmilyKim.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.EyEmilyKim.dto.request.method.MethodCreateRequestDto;
 import com.EyEmilyKim.dto.request.method.MethodUpdateRequestDto;
 import com.EyEmilyKim.entity.Method;
+import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.MethodService;
 import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
@@ -34,8 +34,9 @@ public class MethodController {
 	@Autowired
 	private MethodService methodService;
 	
-	private String failMsg = "에러가 발생했습니다.";
-	private String succMsg = "정상적으로 처리되었습니다.";
+	@Autowired
+	private MessageService messageService;	
+
 	private String nextUrl = "/set/method/list";
 	
 	
@@ -101,11 +102,11 @@ public class MethodController {
 		
 		try {
 			methodService.delete(MCODE);
-			model.addAttribute("MSG", succMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", failMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", nextUrl);
 		}
 		
@@ -153,11 +154,11 @@ public class MethodController {
 		
 		try {
 			methodService.insert(methodCreateRequestDto, userId);
-			model.addAttribute("MSG", succMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", failMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", nextUrl);
 		}
 		
@@ -207,11 +208,11 @@ public class MethodController {
 		
 		try {
 			methodService.update(methodUpdateRequestDto);
-			model.addAttribute("MSG", succMsg);
+			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", nextUrl);
 		} catch (Exception e) {
 			 e.printStackTrace();
-			 model.addAttribute("MSG", failMsg);
+			 model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
 			 model.addAttribute("URL", nextUrl);
 		}
 		
