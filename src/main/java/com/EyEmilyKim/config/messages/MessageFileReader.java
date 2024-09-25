@@ -12,30 +12,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageFileReader {
 	
-	private final String path = "src/main/resources/message-error.txt";
+	private final String path = "src/main/resources/";
+	private final String suffix = ".txt";
 
-	private Map<String, String> messages = new HashMap<>();
-	
-	public MessageFileReader() throws IOException {
-		loadMessages();
-	}
-	
-	private void loadMessages() {
-		try {
-			Stream<String> lines = Files.lines(Paths.get(path));
+	public Map<String, String> loadMessages(String fileName) throws IOException {
+		Map<String, String> messages = new HashMap<>();
+		String target = path + fileName + suffix;
+		
+		try(Stream<String> lines = Files.lines(Paths.get(target))){
 			lines.forEach(line -> {
 				String [] keyValue = line.split("=", 2);
 				if(keyValue.length == 2) {
 					messages.put(keyValue[0].trim(), keyValue[1].trim());
 				}
 			});
-			
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		return messages;
 	}
 	
-	public String getMessage(String key) {
-		return messages.getOrDefault(key, "Message not found");
-	}
 }
