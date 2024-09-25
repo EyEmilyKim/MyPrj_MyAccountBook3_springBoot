@@ -1,0 +1,10 @@
+msg.res.success = 정상적으로 처리되었습니다.
+msg.res.failure = 에러가 발생했습니다.
+
+msg.login.success = 로그인에 성공했습니다. 
+msg.login.welcome_pre = 반가워요, 
+msg.login.welcome_suf = 님~!
+
+msg.logout.success = 정상적으로 로그아웃되었습니다.
+msg.logout.farewell_pre = 또 만나요, 
+msg.logout.farewell_suf = 님~!

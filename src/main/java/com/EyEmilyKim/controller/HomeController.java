@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.EyEmilyKim.dto.response.LoginResponseDto;
+import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.UserService;
 import com.EyEmilyKim.util.LogUtil;
 
@@ -24,6 +25,9 @@ public class HomeController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	/*-------- 홈 화면 --------*/
 	
@@ -75,7 +79,10 @@ public class HomeController {
 			LoginResponseDto loginResponseDto = userService.login(LID, PWD);
 			session.setAttribute("USER_ID", loginResponseDto.getUser_id());
 			session.setAttribute("NICKNAME", loginResponseDto.getNickname());
-			String msg = "로그인에 성공했습니다. \\n환영합니다~ " + loginResponseDto.getNickname() + "님~!";
+			String msg = messageService.getMessage("message-response", "msg.login.success")
+								+ "\\n" + messageService.getMessage("message-response", "msg.login.welcome_pre")
+								+ " " + loginResponseDto.getNickname()
+								+ " " + messageService.getMessage("message-response", "msg.login.welcome_suf");
 			model.addAttribute("MSG", msg);
 			
 			String originalUrl = (String) session.getAttribute("OriginalUrl");
@@ -96,9 +103,14 @@ public class HomeController {
 	@GetMapping("logout")
 	public String logout(HttpSession session, Model model) {
 		LogUtil.printWithTimestamp("HomeController > logout()@Get called");
-		session.invalidate();
-		model.addAttribute("MSG", "정상적으로 로그아웃되었습니다.");
+		String user_id = (String) session.getAttribute("NICKNAME");
+		String msg = messageService.getMessage("message-response", "msg.logout.success")
+				+ "\\n" + messageService.getMessage("message-response", "msg.logout.farewell_pre")
+				+ " " + user_id
+				+ " " + messageService.getMessage("message-response", "msg.logout.farewell_suf");
+		model.addAttribute("MSG", msg);
 		model.addAttribute("URL", "/index");
+		session.invalidate();
 		return "redirect";
 	} 
 }
