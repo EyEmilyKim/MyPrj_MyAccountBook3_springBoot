@@ -48,7 +48,7 @@
   
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Method">
   	insert into mab_methods values(
-  	 #{user_id}, #{seqno}, #{mncrd}, #{meth_code}, #{meth_name}, #{default_mncrd}, #{default_meth_code} )
+  	 #{user_id}, #{seqno}, #{mncrd}, #{meth_code}, #{meth_name} )
   </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Method">
