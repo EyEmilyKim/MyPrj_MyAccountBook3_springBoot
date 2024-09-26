@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EyEmilyKim.config.properties.ClientViewProperties;
+import com.EyEmilyKim.config.properties.DBDefaultProperties;
 import com.EyEmilyKim.dao.TransactionDao;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
@@ -28,6 +29,9 @@ public class TransactionServiceImp implements TransactionService {
 	
 	@Autowired
 	private ClientViewProperties config;
+	
+	@Autowired
+	private DBDefaultProperties dbDefault;
 	
 	@Override
 	public TranListResponseDto getList(TranListRequestDto requestDto, int user_id, String inex) throws ParseException {
@@ -91,18 +95,18 @@ public class TransactionServiceImp implements TransactionService {
 		return transactionDao.update(tran);
 	}
 
-	/* ------------- 공통 함수 ------------- */
+	/* ------------- DTO 변수 설정 함수 ------------- */
 	
 	private Transaction populateTransactionCommonFields(TranPostRequestDto requestDto) throws ParseException {
 		Timestamp tran_date = DateUtil.stringToTimestamp(requestDto.getDATE());
 		String inex = requestDto.getINEX();
-		String ccode = requestDto.getCCODE().isEmpty() ? "caNN0" : requestDto.getCCODE();
+		String ccode = requestDto.getCCODE().isEmpty() ? dbDefault.getCate_code() : requestDto.getCCODE();
 		String item = requestDto.getITEM().trim().isEmpty() ? null : requestDto.getITEM();
 		Integer amount = requestDto.getAMOUNT();
-		String mncrd = inex.equals("IN") ? "none" : requestDto.getMNCRD();
-		if(inex.equals("EX") && mncrd.isEmpty()) mncrd = "meNN"; 
-		String mcode = inex.equals("IN") ? "none" : requestDto.getMCODE();
-		if(inex.equals("EX") && mcode.isEmpty()) mcode = "meNN0"; 
+		String mncrd = inex.equals("IN") ? dbDefault.getIn_meth() : requestDto.getMNCRD();
+		if(inex.equals("EX") && mncrd.isEmpty()) mncrd = dbDefault.getMncrd(); 
+		String mcode = inex.equals("IN") ? dbDefault.getIn_meth() : requestDto.getMCODE();
+		if(inex.equals("EX") && mcode.isEmpty()) mcode = dbDefault.getMeth_code(); 
 		
 		Transaction tran = new Transaction();
 		tran.setTran_date(tran_date);
