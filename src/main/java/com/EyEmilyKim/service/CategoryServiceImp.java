@@ -1,12 +1,10 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.EyEmilyKim.config.properties.DBDefaultProperties;
 import com.EyEmilyKim.dao.CategoryDao;
 import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
 import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
@@ -17,9 +15,6 @@ public class CategoryServiceImp implements CategoryService {
 
 	@Autowired
 	private CategoryDao categoryDao;
-	
-	@Autowired
-	private DBDefaultProperties config;
 	
 	@Override
 	public List<Category> getList(int userId) {
@@ -73,7 +68,6 @@ public class CategoryServiceImp implements CategoryService {
 		cate.setCate_code(requestDto.getINEX()+requestDto.getSEQNO()+"_"+userId);
 		cate.setCate_name(requestDto.getCNAME());
 		cate.setUser_id(userId);
-		cate.setDefault_cate_code(config.getCate_code());
 		
 		return categoryDao.insert(cate);
 	}
