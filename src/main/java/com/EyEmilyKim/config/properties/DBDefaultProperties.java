@@ -16,6 +16,7 @@ import lombok.ToString;
 public class DBDefaultProperties {
 	
 	private String cate_code;
+	private String in_meth;
 	private String mncrd;
 	private String meth_code;
 	

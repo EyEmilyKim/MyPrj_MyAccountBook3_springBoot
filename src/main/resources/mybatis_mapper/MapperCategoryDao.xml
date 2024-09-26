@@ -52,7 +52,7 @@
   
   <insert id="insert" parameterType="com.EyEmilyKim.entity.Category">
   	insert into mab_categories values(
-  	 #{user_id}, #{seqno}, #{inex}, #{cate_code}, #{cate_name}, #{default_cate_code}  )
+  	 #{user_id}, #{seqno}, #{inex}, #{cate_code}, #{cate_name} )
   </insert>
   
   <update id="update" parameterType="com.EyEmilyKim.entity.Category">
