@@ -2,17 +2,48 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	
+	// 클립보드에 텍스트 복사
+	function copyToClipboard(text, msg){
+		navigator.clipboard.writeText(text)
+			.then(()=>{
+				alert(msg);
+			}).catch((err) => {
+				alert('클립보드 복사 중 오류 발생');
+	            console.error('클립보드 복사 중 오류 발생:', err);
+			});
+	}
+	
 	// share 버튼 클릭시 url 복사
 	const icon_share = document.getElementById("icon_share");
 	icon_share.addEventListener('click', ()=>{
 		const homeUrl = window.location.origin+"/index";
-		navigator.clipboard.writeText(homeUrl).then(()=>{
-                alert('URL주소가 클립보드에 복사되었습니다.');
-            }).catch((error)=> {
-               	alert('클립보드 복사 중 오류 발생');
-                console.error('클립보드 복사 중 오류 발생:', error);
-            });
+		copyToClipboard(homeUrl, 'URL주소가 클립보드에 복사되었습니다.');
 	})
+	
+	// email 버튼 클릭시 문의 템플릿 획득 후 기본 이메일 앱 열기
+	const icon_email = document.getElementById("icon_email");
+	icon_email.addEventListener('click', ()=>{
+		axios.get('/api/v1/email-to-developer')
+			.then((res) => {
+				console.log(res);
+				const address = res.data.address;
+				const subject = res.data.subject;
+                
+                // 기본 이메일 앱으로 문의 템플릿 열기
+                const mailtoLink = `mailto:${address}?subject=${encodeURIComponent(subject)}`;
+                window.location.href = mailtoLink;
+                
+                // 이메일 수신자 클립보드에 복사, 안내 메시지
+                const msg = '개발자의 이메일 주소가 클립보드에 복사되었습니다.\n'
+                	+ '만약 당신의 이메일 앱이 기다려도 열리지 않는다면, '
+                	+ '복사된 주소 앞으로 직접 이메일을 작성하여 보내주시기 바랍니다.';
+				copyToClipboard(address, msg);               
+			})
+			.catch((err) => {
+				alert('문의 템플릿 조회 중 오류 발생');
+				console.error('문의 템플릿 조회 중 오류 발생:', err);
+			});
+	});
 	
 	// 실시간 시간 출력
 	const clock = document.getElementById("clock");

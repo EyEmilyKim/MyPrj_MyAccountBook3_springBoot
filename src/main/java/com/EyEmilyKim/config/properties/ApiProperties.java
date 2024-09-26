@@ -15,5 +15,7 @@ import lombok.ToString;
 public class ApiProperties {
 	
 	private String server_path;
+	private String email_to;
+	private String email_subject;
 	
 }
