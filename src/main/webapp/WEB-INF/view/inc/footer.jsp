@@ -14,6 +14,7 @@
         <li><a href="${url_blog }"><i id="icon_blog" class="fa-solid fa-blog icon"></i></a></li>
         <li><a href="${url_github }"><i id="icon_github" class="fa-brands fa-github icon"></i></a></li>
         <li><i id="icon_share"class="fa-solid fa-share-nodes"></i></li>
+        <li><i id="icon_email"class="fa-solid fa-envelope"></i></li>
     </ul>
 	<div id="clock">지금은... <span id="clock"></span></div>
 	
@@ -21,3 +22,4 @@
 
 <script src="/js/inc/footer.js" ></script>
 <script src="https://kit.fontawesome.com/f747bc5595.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

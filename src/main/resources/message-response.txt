@@ -1,5 +1,5 @@
 msg.res.success = 정상적으로 처리되었습니다.
-msg.res.failure = 에러가 발생했습니다.
+msg.res.failure = 에러가 발생했습니다. 관리자에게 문의해 주세요.
 
 msg.login.success = 로그인에 성공했습니다. 
 msg.login.welcome_pre = 반가워요, 
