@@ -1,17 +1,11 @@
 package com.EyEmilyKim.controller;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
+import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.UserService;
 
 @WebMvcTest(HomeController.class)
@@ -35,7 +30,11 @@ class HomeControllerTest {
 	private UserService userService;
 	
 	@MockBean
+	private MessageService messageService;
+	
+	@MockBean
 	private OperatingHoursProperties operatingHoursProperties;
+	
 	@MockBean
 	private LoginInterceptor loginInterceptor;
 	
@@ -43,8 +42,16 @@ class HomeControllerTest {
 	/*-------- 홈 화면 --------*/
 	
 	@Test
+	@DisplayName("루트 Get")
+	void testGetRoot() throws Exception {
+		mockMvc.perform(get("/"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("root.index"));
+	}
+	
+	@Test
 	@DisplayName("홈 Get")
-	void testIndexGet() throws Exception {
+	void testGetIndex() throws Exception {
 		mockMvc.perform(get("/index"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("root.index"));
@@ -54,7 +61,7 @@ class HomeControllerTest {
 	
 	@Test
 	@DisplayName("시간외 홈 Get")
-	void testOutOfOpHoursGet() throws Exception {
+	void testGetOutOfOpHours() throws Exception {
 		mockMvc.perform(get("/outOfOpHours"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("root.outOfOpHours"));
@@ -64,7 +71,7 @@ class HomeControllerTest {
 	
 	@Test
 	@DisplayName("로그인 Get")
-	void testLoginGet() throws Exception {
+	void testGetLogin() throws Exception {
 		mockMvc.perform(get("/login"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("root.login"));
@@ -72,31 +79,36 @@ class HomeControllerTest {
 	
 	@Test
 	@DisplayName("로그인 Post - 성공 > 알림창")
-	void testLoginPost_success() throws Exception {
-		String userId = "testUserId";
-		String password = "password";
+	void testPostLogin_success() throws Exception {
+		// given
+		String userId = "test1";
+		String password = "1test1";
+		LoginResponseDto loginResponseDto = new LoginResponseDto(1, "테스트 유저 1", null);
 		
-		when(userService.login(userId, password))
-			.thenReturn(new LoginResponseDto(777, "test-user", null));
+		when(userService.login(userId, password)).thenReturn(loginResponseDto);
+		when(messageService.getMessage("message-response", "msg.login.success")).thenReturn("로그인에 성공했습니다.");
+		when(messageService.getMessage("message-response", "msg.login.welcome_pre")).thenReturn("반가워요,");
+		when(messageService.getMessage("message-response", "msg.login.welcome_suf")).thenReturn("님~!");
 		
+		// when & then
 		mockMvc.perform(post("/login")
 				.param("LID", userId)
 				.param("PWD", password))
-			.andExpect(model().attribute("MSG", "로그인에 성공했습니다. \\n환영합니다~ test-user님~!"))
-			.andExpect(model().attribute("URL", "/index"))
+			.andExpect(model().attribute("MSG", "로그인에 성공했습니다.\\n반가워요, 테스트 유저 1 님~!"))
+			.andExpect(model().attribute("URL", "/"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("redirect"));
 	}
 	
 	@Test
 	@DisplayName("로그인 Post - 사용자 없음 > 알림창")
-	void testLoginPost_userNotFound() throws Exception {
+	void testPostLogin_userNotFound() throws Exception {
 		String userId = "nonExistingUser";
 		String password = "wrongPassword";
 		
 		when(userService.login(userId, password))
 			.thenThrow(new Exception("사용자를 찾을 수 없습니다."));
-		
+
 		mockMvc.perform(post("/login")
 				.param("LID", userId)
 				.param("PWD", password))
@@ -108,7 +120,7 @@ class HomeControllerTest {
 	
 	@Test
 	@DisplayName("로그인 Post - 비밀번호 불일치 > 알림창")
-	void testLoginPost_wrongPassword() throws Exception {
+	void testPostLogin_wrongPassword() throws Exception {
 		String userId = "existingUser";
 		String password = "wrongPassword";
 		
