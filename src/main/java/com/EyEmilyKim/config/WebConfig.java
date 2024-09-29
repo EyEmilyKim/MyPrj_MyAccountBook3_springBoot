@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
 import com.EyEmilyKim.interceptor.OperatingHoursInterceptor;
 import com.EyEmilyKim.interceptor.UserIdInterceptor;
+import com.EyEmilyKim.interceptor.WantedUrlInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -21,6 +22,8 @@ public class WebConfig implements WebMvcConfigurer {
 	UserIdInterceptor userIdInterceptor;
 	
 	@Autowired
+	WantedUrlInterceptor wantedUrlInterceptor;
+	@Autowired
 	LoginInterceptor loginInterceptor;
 	
 	
@@ -31,6 +34,12 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		// 모든 경로에 UserIdInterceptor 추가
 		registry.addInterceptor(userIdInterceptor).addPathPatterns("/**");
+		// 로그인 필요한 경로에 wantedUrlInterceptor 추가
+		registry.addInterceptor(wantedUrlInterceptor).addPathPatterns(
+				"/tran/**", 
+				"/plan/**", 
+				"/set/**"
+				);
 		// 로그인 필요한 경로에 LoginInterceptor 추가
 		registry.addInterceptor(loginInterceptor).addPathPatterns(
 			"/tran/**", 
