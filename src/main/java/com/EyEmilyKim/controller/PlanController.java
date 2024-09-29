@@ -18,8 +18,8 @@ public class PlanController {
 	@Operation(summary = "계획하기→[준비중] 페이지", description = "현재 버전에서는 [준비중] 페이지 demo를 위한 dummy 역할")
 	@ApiResponse(responseCode = "200", description = "정상적으로 [준비중] 페이지 반환됨. \n\n5초 후 이전 경로로 자동 이동.")
 	@GetMapping("/plan")
-	public String plan() {
-		LogUtil.printWithTimestamp("HomeController > plan() called");
+	public String get_plan() {
+		LogUtil.printWithTimestamp("HomeController > get_plan() called");
 		
 		return "root.comingSoon";
 	}
