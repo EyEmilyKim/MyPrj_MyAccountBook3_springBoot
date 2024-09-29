@@ -31,11 +31,20 @@ public class HomeController {
 	
 	/*-------- 홈 화면 --------*/
 	
+	@Operation(summary = "루트 URL → 메인 페이지", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 메인 페이지가 반환됨")
+	@GetMapping("/")
+	public String get_home() {
+		LogUtil.printWithTimestamp("HomeController > get_home() called");
+		
+		return "root.index";
+	}
+	
 	@Operation(summary = "메인 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/index")
-	public String index() {
-		LogUtil.printWithTimestamp("HomeController > index() called");
+	public String get_index() {
+		LogUtil.printWithTimestamp("HomeController > get_index() called");
 		
 		return "root.index";
 	}
@@ -45,8 +54,8 @@ public class HomeController {
 	@Operation(summary = "시간외 메인 페이지", description = "서비스 운영시간 외에 로그인이 필요한 메뉴 접근 시 표시")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/outOfOpHours")
-	public String outOfOpHours() {
-		LogUtil.printWithTimestamp("HomeController > outOfOpHours() called");
+	public String get_outOfOpHours() {
+		LogUtil.printWithTimestamp("HomeController > get_outOfOpHours() called");
 		
 		return "root.outOfOpHours";
 	}
@@ -56,8 +65,8 @@ public class HomeController {
 	@Operation(summary = "로그인 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/login")
-	public String login() {
-		LogUtil.printWithTimestamp("HomeController > login()@Get called");
+	public String get_login() {
+		LogUtil.printWithTimestamp("HomeController > get_login() called");
 		
 		return "root.login";
 	}
@@ -68,13 +77,13 @@ public class HomeController {
 			@ApiResponse(responseCode = "401", description = "로그인 실패 알림, \n\n리다이렉트: 로그인 GET 페이지")
 	})
 	@PostMapping("/login")
-	public String login(
+	public String post_login(
 			@Parameter(name = "LID", description = "로그인 ID", example = "test1", required = true)
 			String LID, 
 			@Parameter(name = "PWD", description = "비밀번호", example = "1test1", required = true)
 			String PWD, 
 			Model model, HttpSession session) {
-		LogUtil.printWithTimestamp("HomeController > login()@Post called");
+		LogUtil.printWithTimestamp("HomeController > post_login() called");
 		try {
 			LoginResponseDto loginResponseDto = userService.login(LID, PWD);
 			session.setAttribute("USER_ID", loginResponseDto.getUser_id());
@@ -86,7 +95,7 @@ public class HomeController {
 			model.addAttribute("MSG", msg);
 			
 			String originalUrl = (String) session.getAttribute("OriginalUrl");
-			if (originalUrl == null) originalUrl = "/index";
+			if (originalUrl == null) originalUrl = "/";
 			model.addAttribute("URL", originalUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,15 +110,15 @@ public class HomeController {
 	@Operation(summary = "로그아웃 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "로그아웃 성공 알림, \n\n리다이렉트: 메인 페이지")
 	@GetMapping("logout")
-	public String logout(HttpSession session, Model model) {
-		LogUtil.printWithTimestamp("HomeController > logout()@Get called");
+	public String get_logout(HttpSession session, Model model) {
+		LogUtil.printWithTimestamp("HomeController > get_logout() called");
 		String user_id = (String) session.getAttribute("NICKNAME");
 		String msg = messageService.getMessage("message-response", "msg.logout.success")
 				+ "\\n" + messageService.getMessage("message-response", "msg.logout.farewell_pre")
 				+ " " + user_id
 				+ " " + messageService.getMessage("message-response", "msg.logout.farewell_suf");
 		model.addAttribute("MSG", msg);
-		model.addAttribute("URL", "/index");
+		model.addAttribute("URL", "/");
 		session.invalidate();
 		return "redirect";
 	} 

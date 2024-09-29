@@ -37,7 +37,7 @@ class PlanControllerTest {
   
   @Test
   @DisplayName("계획하기 Get (로그인 O) > 준비중")
-  void testPlanGet_whenLoggedIn() throws Exception {
+  void testGetPlan_whenLoggedIn() throws Exception {
       // LoginInterceptor 가 true 반환했을 때만 호출됨
       when(loginInterceptor.preHandle(
               any(HttpServletRequest.class), any(HttpServletResponse.class), any()))
