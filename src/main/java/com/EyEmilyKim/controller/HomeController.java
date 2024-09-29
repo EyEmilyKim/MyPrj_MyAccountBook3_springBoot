@@ -31,6 +31,15 @@ public class HomeController {
 	
 	/*-------- 홈 화면 --------*/
 	
+	@Operation(summary = "루트 URL → 메인 페이지", description = "")
+	@ApiResponse(responseCode = "200", description = "정상적으로 메인 페이지가 반환됨")
+	@GetMapping("/")
+	public String get_home() {
+		LogUtil.printWithTimestamp("HomeController > get_home() called");
+		
+		return "root.index";
+	}
+	
 	@Operation(summary = "메인 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/index")
@@ -86,7 +95,7 @@ public class HomeController {
 			model.addAttribute("MSG", msg);
 			
 			String originalUrl = (String) session.getAttribute("OriginalUrl");
-			if (originalUrl == null) originalUrl = "/index";
+			if (originalUrl == null) originalUrl = "/";
 			model.addAttribute("URL", originalUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,7 +118,7 @@ public class HomeController {
 				+ " " + user_id
 				+ " " + messageService.getMessage("message-response", "msg.logout.farewell_suf");
 		model.addAttribute("MSG", msg);
-		model.addAttribute("URL", "/index");
+		model.addAttribute("URL", "/");
 		session.invalidate();
 		return "redirect";
 	} 

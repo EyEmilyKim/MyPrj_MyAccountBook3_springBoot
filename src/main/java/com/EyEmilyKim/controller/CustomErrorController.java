@@ -23,7 +23,7 @@ public class CustomErrorController implements ErrorController {
 	public String handleError(HttpServletRequest req, Model model) {
 		Object status = req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		String referer = req.getHeader("Referer");
-		String nextUrl = (referer != null) ? referer : "/index";
+		String nextUrl = (referer != null) ? referer : "/";
 		String errorMessage;
 		
 		if (status != null) {
