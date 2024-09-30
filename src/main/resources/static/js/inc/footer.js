@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 클립보드에 텍스트 복사
 	function copyToClipboard(text, msg){
+	    if (!navigator.clipboard) {
+	        alert('클립보드 기능을 지원하지 않는 브라우저입니다.');
+	        return;
+	    }	
 		navigator.clipboard.writeText(text)
 			.then(()=>{
 				alert(msg);
