@@ -16,7 +16,7 @@ class ApiPropertiesTest {
 	@Test
 	@DisplayName("api.server_path 값 일치")
 	void testPropertyValue1() {
-		assertThat(props.getServer_path()).isEqualTo("3.39.39.244/index");
+		assertThat(props.getServer_path()).isEqualTo("3.39.39.244/");
 	}
 	
 	@Test
