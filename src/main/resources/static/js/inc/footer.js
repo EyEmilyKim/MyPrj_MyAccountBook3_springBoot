@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 클립보드에 텍스트 복사
 	function copyToClipboard(text, msg){
+	    if (!navigator.clipboard) {
+	        alert('클립보드 기능을 지원하지 않는 브라우저입니다.');
+	        return;
+	    }	
 		navigator.clipboard.writeText(text)
 			.then(()=>{
 				alert(msg);
@@ -16,8 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	// share 버튼 클릭시 url 복사
 	const icon_share = document.getElementById("icon_share");
 	icon_share.addEventListener('click', ()=>{
-		const homeUrl = window.location.origin+"/index";
-		copyToClipboard(homeUrl, 'URL주소가 클립보드에 복사되었습니다.');
+		axios.get('/api/v1/server-path')
+			.then((res) => {
+				console.log(res);
+				const homeUrl = res.data;
+				
+				// 클립보드로 받아온 homeUrl 복사
+				copyToClipboard(homeUrl, `URL주소가 클립보드에 복사되었습니다.\n${homeUrl}`);
+			})
+			.catch((err) => {
+				alert('API 조회 중 오류 발생');
+				console.error('API 조회 중 오류 발생', err);
+			});
 	})
 	
 	// email 버튼 클릭시 문의 템플릿 획득 후 기본 이메일 앱 열기
