@@ -1,7 +1,7 @@
 /* for view/inc/header.jsp */
 
-import {showModal} from './modal.js';
-import {messages} from './randomMessage.js';
+import {showModal} from '../util/modal.js';
+import {messages} from '../data/randomMessage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 타이틀 로고
 	titleLogo.addEventListener('click', () =>{
-		window.location = "/";
+		window.location = contextPath + "/";
 	})
 	
 	// 현재 메뉴 표시

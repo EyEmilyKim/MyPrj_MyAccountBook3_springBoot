@@ -22,6 +22,8 @@
 /* 모달 내용 */
 #modalContent {
 	margin : 30px;
+    white-space: pre-wrap; /* 줄바꿈과 공백을 유지 */
+    word-wrap: break-word; /* 단어가 너무 길 경우 자동 줄바꿈 */
 }
 
 /* x 버튼 */

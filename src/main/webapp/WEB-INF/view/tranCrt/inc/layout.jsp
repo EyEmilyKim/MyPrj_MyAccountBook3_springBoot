@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><tiles:getAsString name="title"/></title>
-	<link href="../../css/tranCrt/layout.css" rel="stylesheet" /> 
+	<link href="${pageContext.request.contextPath}/css/tranCrt/layout.css" rel="stylesheet" /> 
 </head>
 
 <body>
@@ -31,5 +31,9 @@
 	<tiles:insertAttribute name="footer" />
 
 </body>
+
+<script type="text/javascript">
+    const contextPath = '${pageContext.request.contextPath}';
+</script>
 
 </html>

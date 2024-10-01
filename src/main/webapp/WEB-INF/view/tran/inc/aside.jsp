@@ -4,11 +4,11 @@
 <aside>
 	<nav id="menu">
 		<ul>
-			<li><a href="/tran/listAll" id="tranListAll">모두 보기</a></li>
-			<li><a href="/tran/listIn" id="tranListIn">수입 보기</a></li>
-			<li><a href="/tran/listEx" id="tranListEx">지출 보기</a></li>
+			<li><a href="${pageContext.request.contextPath}/tran/listAll" id="tranListAll">모두 보기</a></li>
+			<li><a href="${pageContext.request.contextPath}/tran/listIn" id="tranListIn">수입 보기</a></li>
+			<li><a href="${pageContext.request.contextPath}/tran/listEx" id="tranListEx">지출 보기</a></li>
 		</ul>
 	</nav>
 </aside>
 
-<script src="/js/tran/inc/aside.js"></script>
+<script src="${pageContext.request.contextPath}/js/tran/inc/aside.js"></script>

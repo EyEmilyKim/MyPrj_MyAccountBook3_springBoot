@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
@@ -37,6 +38,9 @@ class HomeControllerTest {
 	
 	@MockBean
 	private LoginInterceptor loginInterceptor;
+	
+	@MockBean
+	private ApiProperties apiProps;
 	
 	
 	/*-------- 홈 화면 --------*/
@@ -86,6 +90,7 @@ class HomeControllerTest {
 		LoginResponseDto loginResponseDto = new LoginResponseDto(1, "테스트 유저 1", null);
 		
 		when(userService.login(userId, password)).thenReturn(loginResponseDto);
+		when(apiProps.getContext_path()).thenReturn("/mab3");
 		when(messageService.getMessage("message-response", "msg.login.success")).thenReturn("로그인에 성공했습니다.");
 		when(messageService.getMessage("message-response", "msg.login.welcome_pre")).thenReturn("반가워요,");
 		when(messageService.getMessage("message-response", "msg.login.welcome_suf")).thenReturn("님~!");
@@ -95,7 +100,7 @@ class HomeControllerTest {
 				.param("LID", userId)
 				.param("PWD", password))
 			.andExpect(model().attribute("MSG", "로그인에 성공했습니다.\\n반가워요, 테스트 유저 1 님~!"))
-			.andExpect(model().attribute("URL", "/"))
+			.andExpect(model().attribute("URL", "/mab3/"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("redirect"));
 	}
@@ -106,6 +111,7 @@ class HomeControllerTest {
 		String userId = "nonExistingUser";
 		String password = "wrongPassword";
 		
+		when(apiProps.getContext_path()).thenReturn("/mab3");
 		when(userService.login(userId, password))
 			.thenThrow(new Exception("사용자를 찾을 수 없습니다."));
 
@@ -113,7 +119,7 @@ class HomeControllerTest {
 				.param("LID", userId)
 				.param("PWD", password))
 			.andExpect(model().attribute("MSG", "사용자를 찾을 수 없습니다."))
-			.andExpect(model().attribute("URL", "/login"))
+			.andExpect(model().attribute("URL", "/mab3/login"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("redirect"));
 	}
@@ -124,6 +130,7 @@ class HomeControllerTest {
 		String userId = "existingUser";
 		String password = "wrongPassword";
 		
+		when(apiProps.getContext_path()).thenReturn("/mab3");
 		when(userService.login(userId, password))
 			.thenThrow(new Exception("비밀번호가 일치하지 않습니다."));
 		
@@ -131,7 +138,7 @@ class HomeControllerTest {
 				.param("LID", userId)
 				.param("PWD", password))
 			.andExpect(model().attribute("MSG", "비밀번호가 일치하지 않습니다."))
-			.andExpect(model().attribute("URL", "/login"))
+			.andExpect(model().attribute("URL", "/mab3/login"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("redirect"));
 	}

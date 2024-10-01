@@ -9,4 +9,4 @@
 	</div>
 </div>
 
-<script type="module" script src="/js/inc/modal.js"></script>
+<script type="module" script src="${pageContext.request.contextPath}/js/util/modal.js"></script>

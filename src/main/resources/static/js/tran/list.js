@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		search_reset.addEventListener('click', () => {
 			const inex = fmSRCH.INEX.value;
 			const rc = fmSRCH.RC.value;
-			let url = "/tran/list"
+			let url = `${contextPath}/tran/list`;
 			switch(inex) {
 				case "ALL" : url += "All"; break;
 				case "IN" : url += "In"; break;

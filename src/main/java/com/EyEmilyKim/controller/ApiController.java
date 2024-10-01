@@ -21,10 +21,17 @@ public class ApiController {
 	private ApiProperties config; 
 	
 	@GetMapping("server-path")
-	@Operation(summary = "서버 URL")
+	@Operation(summary = "서버 호스트 URL")
 	public String getServerPath() {
 		LogUtil.printWithTimestamp("ApiController > getServerPath()");
 		return config.getServer_path();
+	}
+	
+	@GetMapping("context-path")
+	@Operation(summary = "어플리케이션 Context Path")
+	public String getContextPath() {
+		LogUtil.printWithTimestamp("ApiController > getContextPath()");
+		return config.getContext_path();
 	}
 	
 	@GetMapping("email-to-developer")
