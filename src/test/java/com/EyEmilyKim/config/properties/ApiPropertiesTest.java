@@ -14,10 +14,22 @@ class ApiPropertiesTest {
 	private ApiProperties props;
 	
 	@Test
-	@DisplayName("api.server_path 값 일치")
+	@DisplayName("api.server-path 일치 : 3.39.39.244")
 	void testPropertyValue1() {
-		assertThat(props.getServer_path()).isEqualTo("3.39.39.244/");
+		assertThat(props.getServer_path()).isEqualTo("3.39.39.244");
 	}
+	
+	@Test
+	@DisplayName("api.context-path 공백 아님")
+	void testPropertyValue4_notBlank() {
+		assertThat(props.getContext_path()).isNotBlank();
+	}	
+	
+	@Test
+	@DisplayName("api.context-path 일치 : /")
+	void testPropertyValue4_equals() {
+		assertThat(props.getContext_path()).isEqualTo("/");
+	}	
 	
 	@Test
 	@DisplayName("api.email_to 공백 아님")
