@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	
-	const currentPath = window.location.pathname;
+	const currentPath = window.location.pathname.replace(contextPath, '');
 	
 	const tranListAll = document.getElementById("tranListAll");
 	const tranListIn = document.getElementById("tranListIn"); 

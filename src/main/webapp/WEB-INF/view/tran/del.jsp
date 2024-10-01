@@ -57,4 +57,4 @@
 	</div> <!-- contMain 끝 -->
 </main>
 
-<script src="../../js/tran/del.js"></script>
+<script src="${pageContext.request.contextPath}/js/tran/del.js"></script>
