@@ -1,6 +1,7 @@
 package com.EyEmilyKim.interceptor;
 
 import java.io.IOException;
+import java.time.Clock;
 import java.time.LocalTime;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 
 @Component
@@ -19,8 +21,20 @@ public class OperatingHoursInterceptor implements HandlerInterceptor {
 	@Autowired
 	private OperatingHoursProperties config;
 	
+	@Autowired
+	private ApiProperties apiProps;
+	
+	@Autowired
+	private Clock clock;
+	
+	// Test 시 Clock을 주입할 수 있도록 setter 추가
+	public void setClock(Clock clock) {
+	    this.clock = clock;
+	}
+  
+  
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws IOException {
-		LocalTime currentTime = LocalTime.now(); // 현재 서버 시간
+		LocalTime currentTime = LocalTime.now(clock); // 현재 서버 시간
 		
 		String start = config.getStart();
 		String end = config.getEnd();
@@ -41,7 +55,7 @@ public class OperatingHoursInterceptor implements HandlerInterceptor {
 			}
 			
 			// 리다이렉트 및 운영시간 안내
-			res.sendRedirect("/outOfOpHours");
+			res.sendRedirect(apiProps.getContext_path() + "/outOfOpHours");
 			return false; // 요청 처리 중단
 		}
 		
