@@ -8,7 +8,7 @@ const modalContent = document.getElementById('modalContent');
 
 // 모달 표시 함수
 export function showModal(message) {
-    modalContent.textContent = message; // 전달받은 메시지 출력
+    modalContent.innerHTML = message.replace(/\n/g, '<br>'); // 전달받은 메시지 출력
     modalContainer.classList.add('show');
     modalOverlay.classList.add('show');
 }

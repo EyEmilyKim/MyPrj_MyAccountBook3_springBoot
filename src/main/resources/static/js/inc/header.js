@@ -1,7 +1,7 @@
 /* for view/inc/header.jsp */
 
-import {showModal} from './modal.js';
-import {messages} from './randomMessage.js';
+import {showModal} from '../util/modal.js';
+import {messages} from '../data/randomMessage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	
