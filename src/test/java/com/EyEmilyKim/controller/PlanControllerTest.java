@@ -18,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
 
@@ -31,6 +32,8 @@ class PlanControllerTest {
 	private OperatingHoursProperties operatingHoursProperties;
 	@MockBean
 	private LoginInterceptor loginInterceptor;
+	@MockBean
+	private ApiProperties apiProperties;
 	
 	
   /*-------- 계획하기 --------*/
@@ -42,6 +45,7 @@ class PlanControllerTest {
       when(loginInterceptor.preHandle(
               any(HttpServletRequest.class), any(HttpServletResponse.class), any()))
           .thenReturn(true);
+      when(apiProperties.getContext_path()).thenReturn("/mab3");
       
       mockMvc.perform(get("/plan"))
           .andExpect(status().isOk())
