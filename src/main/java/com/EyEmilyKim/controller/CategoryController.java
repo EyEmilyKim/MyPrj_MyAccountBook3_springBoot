@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
 import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
 import com.EyEmilyKim.entity.Category;
@@ -36,6 +37,9 @@ public class CategoryController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private ApiProperties apiProps;
 	
 	private String nextUrl = "/set/category/list";
 	
@@ -102,11 +106,11 @@ public class CategoryController {
 		try {
 			categoryService.delete(CCODE);
 			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", nextUrl);
+			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", nextUrl);
+			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		
 		return "redirect";
@@ -154,11 +158,11 @@ public class CategoryController {
 		try {
 			categoryService.insert(categoryCreateRequestDto, userId);
 			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", nextUrl);
+			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", nextUrl);
+			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		
 		return "redirect";
@@ -209,11 +213,11 @@ public class CategoryController {
 		try {
 			categoryService.update(categoryUpdateRequestDto);
 			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", nextUrl);
+			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", nextUrl);
+			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		
 		return "redirect";
