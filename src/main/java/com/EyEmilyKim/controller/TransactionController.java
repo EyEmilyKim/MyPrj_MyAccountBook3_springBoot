@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranDeleteRequestDto;
@@ -40,16 +41,19 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class TransactionController {
 
 	@Autowired
-	CategoryService categoryService;
+	private CategoryService categoryService;
 	
 	@Autowired
-	MethodService methodService;
+	private MethodService methodService;
 	
 	@Autowired
-	TransactionService transactionService;
+	private TransactionService transactionService;
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private ApiProperties apiProps;
 	
 	
 	/*-------- 거래기록 목록 --------*/
@@ -244,9 +248,10 @@ public class TransactionController {
 			model.addAttribute("OK", false);
 			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
 		}
+		String contextPath = apiProps.getContext_path();
 		model.addAttribute("TRAN_CRT", true);
-		model.addAttribute("URL_AGAIN", "/tran/crt");
-		model.addAttribute("URL_NEXT", "/tran/listAll");
+		model.addAttribute("URL_AGAIN", contextPath + "/tran/crt");
+		model.addAttribute("URL_NEXT", contextPath + "/tran/listAll");
 		
 		return "redirect";
 		

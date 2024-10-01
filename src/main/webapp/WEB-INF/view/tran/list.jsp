@@ -90,7 +90,7 @@
 			<c:if test="${totalCount == 0 }">
 				<div class="noTran">
 					<p>거래내역이 없습니다.</p>
-					<a href="/tran/crt">가계부 쓰러 가기</a>
+					<a href="${pageContext.request.contextPath}/tran/crt">가계부 쓰러 가기</a>
 				</div>
 			</c:if>
 			
@@ -194,4 +194,4 @@
 	</div> <!-- contMain 끝 -->
 </main>
 
-<script src="../../js/tran/list.js"></script>
+<script src="${pageContext.request.contextPath}/js/tran/list.js"></script>

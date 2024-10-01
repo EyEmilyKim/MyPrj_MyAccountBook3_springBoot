@@ -154,4 +154,4 @@
 	<!-- contMain 끝 -->
 </main>
 
-<script src="../../js/tran/upd.js"></script>
+<script src="${pageContext.request.contextPath}/js/tran/upd.js"></script>

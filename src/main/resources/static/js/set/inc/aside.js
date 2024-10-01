@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	
-	const currentPath = window.location.pathname;
+	const currentPath = window.location.pathname.replace(contextPath, '');
 	
 	const setCate = document.getElementById("setCate");
 	const setMeth = document.getElementById("setMeth"); 

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.UserService;
@@ -28,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private ApiProperties apiProps;
 	
 	/*-------- 홈 화면 --------*/
 	
@@ -95,12 +99,12 @@ public class HomeController {
 			model.addAttribute("MSG", msg);
 			
 			String originalUrl = (String) session.getAttribute("OriginalUrl");
-			if (originalUrl == null) originalUrl = "/";
+			if (originalUrl == null) originalUrl = apiProps.getContext_path() + "/";
 			model.addAttribute("URL", originalUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", e.getMessage());
-			model.addAttribute("URL", "/login");
+			model.addAttribute("URL", apiProps.getContext_path() + "/login");
 		}
 		return "redirect";
 	}
@@ -118,7 +122,7 @@ public class HomeController {
 				+ " " + user_id
 				+ " " + messageService.getMessage("message-response", "msg.logout.farewell_suf");
 		model.addAttribute("MSG", msg);
-		model.addAttribute("URL", "/");
+		model.addAttribute("URL", apiProps.getContext_path() + "/");
 		session.invalidate();
 		return "redirect";
 	} 

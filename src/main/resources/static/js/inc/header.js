@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	// 타이틀 로고
 	titleLogo.addEventListener('click', () =>{
-		window.location = "/";
+		window.location = contextPath + "/";
 	})
 	
 	// 현재 메뉴 표시

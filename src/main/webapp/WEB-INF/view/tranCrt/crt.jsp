@@ -145,4 +145,4 @@
 	<!-- contMain 끝 -->
 </main>
 
-<script src="../../js/tranCrt/crt.js"></script>
+<script src="${pageContext.request.contextPath}/js/tranCrt/crt.js"></script>
