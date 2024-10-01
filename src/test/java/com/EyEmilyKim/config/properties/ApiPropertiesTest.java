@@ -26,9 +26,9 @@ class ApiPropertiesTest {
 	}	
 	
 	@Test
-	@DisplayName("api.context-path 일치 : /")
+	@DisplayName("api.context-path 일치 : /mab3")
 	void testPropertyValue4_equals() {
-		assertThat(props.getContext_path()).isEqualTo("/");
+		assertThat(props.getContext_path()).isEqualTo("/mab3");
 	}	
 	
 	@Test
