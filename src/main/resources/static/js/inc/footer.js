@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	const icon_share = document.getElementById("icon_share");
 	icon_share.addEventListener('click', ()=>{
 		Promise.all([
-			axios.get('/api/v1/server-path'),
-			axios.get('/api/v1/context-path')
+			axios.get(contextPath + '/api/v1/server-path'),
+			axios.get(contextPath + '/api/v1/context-path')
 		])
 		.then(([res1, res2]) => {
-			console.log('res1',res1,'res2',res2);
+			console.log('res1', res1, 'res2', res2);
 			const serverPath = res1.data;
 			const contextPath = res2.data;
 			const homeUrl = `${serverPath}${contextPath}`;
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// email 버튼 클릭시 문의 템플릿 획득 후 기본 이메일 앱 열기
 	const icon_email = document.getElementById("icon_email");
 	icon_email.addEventListener('click', ()=>{
-		axios.get('/api/v1/email-to-developer')
+		axios.get(contextPath + '/api/v1/email-to-developer')
 			.then((res) => {
 				console.log(res);
 				const address = res.data.address;

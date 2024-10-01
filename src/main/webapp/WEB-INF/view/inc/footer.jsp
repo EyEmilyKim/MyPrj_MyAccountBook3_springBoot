@@ -24,6 +24,6 @@
 	
 </footer>
 
-<script type="module" src="/js/inc/footer.js" ></script>
+<script type="module" src="${pageContext.request.contextPath}/js/inc/footer.js" ></script>
 <script src="https://kit.fontawesome.com/f747bc5595.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

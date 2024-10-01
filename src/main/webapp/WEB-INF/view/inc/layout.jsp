@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><tiles:getAsString name="title"/></title>
-	<link href="/css/home/layout.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/css/home/layout.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -34,5 +34,9 @@
 
 
 </body>
+
+<script type="text/javascript">
+    const contextPath = '${pageContext.request.contextPath}';
+</script>
 
 </html>
