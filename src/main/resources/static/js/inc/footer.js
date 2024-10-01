@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			.then((res) => {
 				console.log(res);
 				const homeUrl = res.data;
-				
-				// 클립보드로 받아온 homeUrl 복사
-				copyToClipboard(homeUrl, `URL주소가 클립보드에 복사되었습니다.\n${homeUrl}`);
+				// 클립보드로 homeUrl 복사
+				const msg_ok = `URL주소가 클립보드에 복사되었습니다.\n\n${homeUrl}`;
+				const msg_fail = `다음 URL을 복사하여 공유해주세요 :\n\n${homeUrl}`;
+				copyToClipboard(homeUrl, msg_ok, msg_fail);
 			})
 			.catch((err) => {
 				alert('API 조회 중 오류 발생');
@@ -35,10 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = mailtoLink;
                 
                 // 이메일 수신자 클립보드에 복사, 안내 메시지
-                const msg = '개발자의 이메일 주소가 클립보드에 복사되었습니다.\n'
-                	+ '만약 당신의 이메일 앱이 기다려도 열리지 않는다면, '
+                const msg_ok = '개발자의 이메일 주소가 클립보드에 복사되었습니다.\n\n'
+                	+ '만약 잠시 후 당신의 이메일 앱이 자동으로 열리지 않는다면, '
                 	+ '복사된 주소 앞으로 직접 이메일을 작성하여 보내주시기 바랍니다.';
-				copyToClipboard(address, msg);               
+            	const msg_fail = '만약 잠시 후 당신의 이메일 앱이 자동으로 열리지 않는다면, '
+            		+ '아래의 주소 앞으로 직접 이메일을 작성하여 보내주시기 바랍니다 :\n\n' + address;
+				copyToClipboard(address, msg_ok, msg_fail);               
 			})
 			.catch((err) => {
 				alert('문의 템플릿 조회 중 오류 발생');
