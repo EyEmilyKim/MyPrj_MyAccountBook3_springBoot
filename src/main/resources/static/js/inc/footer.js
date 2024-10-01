@@ -4,22 +4,28 @@ import {copyToClipboard} from '../util/clipboard.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	
-	// share 버튼 클릭시 url 복사
+	// share 버튼 클릭시 homeUrl 복사
 	const icon_share = document.getElementById("icon_share");
 	icon_share.addEventListener('click', ()=>{
-		axios.get('/api/v1/server-path')
-			.then((res) => {
-				console.log(res);
-				const homeUrl = res.data;
-				// 클립보드로 homeUrl 복사
-				const msg_ok = `URL주소가 클립보드에 복사되었습니다.\n\n${homeUrl}`;
-				const msg_fail = `다음 URL을 복사하여 공유해주세요 :\n\n${homeUrl}`;
-				copyToClipboard(homeUrl, msg_ok, msg_fail);
-			})
-			.catch((err) => {
-				alert('API 조회 중 오류 발생');
-				console.error('API 조회 중 오류 발생', err);
-			});
+		Promise.all([
+			axios.get('/api/v1/server-path'),
+			axios.get('/api/v1/context-path')
+		])
+		.then(([res1, res2]) => {
+			console.log('res1',res1,'res2',res2);
+			const serverPath = res1.data;
+			const contextPath = res2.data;
+			const homeUrl = `${serverPath}${contextPath}`;
+			
+			// 클립보드로 homeUrl 복사
+			const msg_ok = `URL주소가 클립보드에 복사되었습니다.\n\n${homeUrl}`;
+			const msg_fail = `다음 URL을 복사하여 공유해주세요 :\n\n${homeUrl}`;
+			copyToClipboard(homeUrl, msg_ok, msg_fail);
+		})
+		.catch((err) => {
+			alert('API 조회 중 오류 발생');
+			console.error('API 조회 중 오류 발생', err);
+		});
 	})
 	
 	// email 버튼 클릭시 문의 템플릿 획득 후 기본 이메일 앱 열기
