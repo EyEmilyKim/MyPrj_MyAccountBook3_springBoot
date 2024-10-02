@@ -7,6 +7,7 @@
 
 <head>
 	<meta charset="UTF-8">
+	<tiles:insertAttribute name="meta" />
 	<title><tiles:getAsString name="title"/></title>
 	<link href="${pageContext.request.contextPath}/css/home/layout.css" rel="stylesheet" />
 </head>

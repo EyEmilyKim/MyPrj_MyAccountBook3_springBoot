@@ -25,6 +25,7 @@
   </definition>
   
   <definition name="common-layout" template="/WEB-INF/view/inc/layout.jsp">
+    <put-attribute name="meta" value="/WEB-INF/view/inc/meta.jsp" />
     <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
     <put-attribute name="modal" value="/WEB-INF/view/inc/modal.jsp" />
