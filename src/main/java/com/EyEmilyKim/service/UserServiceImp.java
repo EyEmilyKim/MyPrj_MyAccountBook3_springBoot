@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.EyEmilyKim.dao.UserDao;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.entity.User;
+import com.EyEmilyKim.util.MessageUtil;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -14,15 +15,15 @@ public class UserServiceImp implements UserService {
 	private UserDao userDao;
 	
 	@Autowired
-	private MessageService messageService;
+	private MessageUtil messageUtil;
 	
 	@Override
 	public LoginResponseDto login(String lid, String pwd) throws Exception {
 		User user = userDao.findByLid(lid);
 		if (user == null)
-			throw new Exception(messageService.getMessage("message-error", "msg.error.login.userNotFound"));
+			throw new Exception(messageUtil.getMessage("message-error", "msg.error.login.userNotFound"));
 		if (!user.getPwd().equals(pwd)) {
-			throw new Exception(messageService.getMessage("message-error", "msg.error.login.wrongPassword"));
+			throw new Exception(messageUtil.getMessage("message-error", "msg.error.login.wrongPassword"));
 		}
 		return new LoginResponseDto(user.getUser_id(), user.getNickname(), user.getBirthday());
 	}

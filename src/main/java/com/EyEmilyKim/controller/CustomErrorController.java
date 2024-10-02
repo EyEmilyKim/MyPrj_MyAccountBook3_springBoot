@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.EyEmilyKim.service.MessageService;
+import com.EyEmilyKim.util.MessageUtil;
 
 @Controller
 public class CustomErrorController implements ErrorController {
@@ -17,7 +17,7 @@ public class CustomErrorController implements ErrorController {
 	private static final String ERROR_PATH = "/error";
 	
 	@Autowired
-	private MessageService messageService;
+	private MessageUtil messageUtil;
 	
 	@GetMapping(ERROR_PATH)
 	public String handleError(HttpServletRequest req, Model model) {
@@ -29,11 +29,11 @@ public class CustomErrorController implements ErrorController {
 		if (status != null) {
 			Integer statusCode = Integer.valueOf(status.toString());
 			if (statusCode == 404) {
-				errorMessage = messageService.getMessage("message-error", "msg.error.404");
+				errorMessage = messageUtil.getMessage("message-error", "msg.error.404");
 			} else if (statusCode == 500) {
-				errorMessage = messageService.getMessage("message-error", "msg.error.500");
+				errorMessage = messageUtil.getMessage("message-error", "msg.error.500");
 			} else {
-				errorMessage = messageService.getMessage("message-error", "msg.error.else");
+				errorMessage = messageUtil.getMessage("message-error", "msg.error.else");
 			}
 			model.addAttribute("MSG", errorMessage);
 			model.addAttribute("URL", nextUrl);

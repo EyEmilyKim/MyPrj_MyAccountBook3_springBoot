@@ -1,4 +1,4 @@
-package com.EyEmilyKim.service;
+package com.EyEmilyKim.util;
 
 import java.io.IOException;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.EyEmilyKim.config.messages.MessageFileReader;
 
 @Service
-public class MessageService {
+public class MessageUtil {
 	
 	@Autowired
 	private MessageFileReader messageFileReader;
