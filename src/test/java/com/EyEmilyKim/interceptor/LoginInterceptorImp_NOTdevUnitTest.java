@@ -20,7 +20,7 @@ import org.mockito.MockitoAnnotations;
 
 import com.EyEmilyKim.config.AppConfig;
 
-public class LoginInterceptorImp_NOTdevTest {
+public class LoginInterceptorImp_NOTdevUnitTest {
 
 	@InjectMocks
 	private LoginInterceptorImp_NOTdev loginInterceptor;
@@ -37,6 +37,7 @@ public class LoginInterceptorImp_NOTdevTest {
 	@Mock
 	private HttpSession session;
 
+	
 	@BeforeEach
 	public void setUp() {
 		// given common
@@ -45,6 +46,7 @@ public class LoginInterceptorImp_NOTdevTest {
 		when(appConfig.getContextPath()).thenReturn("/mab3");
 	}
 
+	
 	@Test
 	@DisplayName("로그인 안했을 때 - false 반환 > 로그인 창")
 	public void testPreHandle_UserNotLoggedIn() throws Exception {

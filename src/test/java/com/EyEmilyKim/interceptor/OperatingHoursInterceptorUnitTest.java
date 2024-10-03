@@ -25,7 +25,7 @@ import org.mockito.MockitoAnnotations;
 import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 
-public class OperatingHoursInterceptorTest {
+public class OperatingHoursInterceptorUnitTest {
 
 	@InjectMocks
 	private OperatingHoursInterceptor operatingHoursInterceptor;
