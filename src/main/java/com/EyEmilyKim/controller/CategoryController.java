@@ -17,9 +17,9 @@ import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
 import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
 import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.service.CategoryService;
-import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
+import com.EyEmilyKim.util.MessageUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -36,7 +36,7 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@Autowired
-	private MessageService messageService;
+	private MessageUtil messageUtil;
 	
 	@Autowired
 	private ApiProperties apiProps;
@@ -105,11 +105,11 @@ public class CategoryController {
 		
 		try {
 			categoryService.delete(CCODE);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		
@@ -157,11 +157,11 @@ public class CategoryController {
 		
 		try {
 			categoryService.insert(categoryCreateRequestDto, userId);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		
@@ -212,11 +212,11 @@ public class CategoryController {
 
 		try {
 			categoryService.update(categoryUpdateRequestDto);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		

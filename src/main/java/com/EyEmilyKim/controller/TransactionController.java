@@ -23,11 +23,11 @@ import com.EyEmilyKim.entity.Category;
 import com.EyEmilyKim.entity.Method;
 import com.EyEmilyKim.entity.Transaction;
 import com.EyEmilyKim.service.CategoryService;
-import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.MethodService;
 import com.EyEmilyKim.service.TransactionService;
 import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
+import com.EyEmilyKim.util.MessageUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -50,7 +50,7 @@ public class TransactionController {
 	private TransactionService transactionService;
 	
 	@Autowired
-	private MessageService messageService;
+	private MessageUtil messageUtil;
 	
 	@Autowired
 	private ApiProperties apiProps;
@@ -78,7 +78,7 @@ public class TransactionController {
 			model.addAttribute("CNAME_LIST", cname_list);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listAll");
 			return "redirect";
 		}
@@ -108,7 +108,7 @@ public class TransactionController {
 			model.addAttribute("CNAME_LIST", cname_list);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listIn");
 			return "redirect";
 		}
@@ -140,7 +140,7 @@ public class TransactionController {
 			model.addAttribute("MNAME_LIST", mname_list);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listIn");
 			return "redirect";
 		}
@@ -189,10 +189,10 @@ public class TransactionController {
 		
 		try {
 			transactionService.delete(tran_id);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 		}
 		model.addAttribute("URL", nextUrl);
 		
@@ -242,11 +242,11 @@ public class TransactionController {
 		try {
 			transactionService.insert(tranCreateRequestDto, userId);
 			model.addAttribute("OK", true);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("OK", false);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 		}
 		String contextPath = apiProps.getContext_path();
 		model.addAttribute("TRAN_CRT", true);
@@ -303,10 +303,10 @@ public class TransactionController {
 		
 		try {
 			transactionService.update(tranUpdateRequestDto);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 		}
 		model.addAttribute("URL", tranUpdateRequestDto.getPREV_URL());
 		

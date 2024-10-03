@@ -16,10 +16,10 @@ import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.dto.request.method.MethodCreateRequestDto;
 import com.EyEmilyKim.dto.request.method.MethodUpdateRequestDto;
 import com.EyEmilyKim.entity.Method;
-import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.MethodService;
 import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
+import com.EyEmilyKim.util.MessageUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -36,7 +36,7 @@ public class MethodController {
 	private MethodService methodService;
 	
 	@Autowired
-	private MessageService messageService;	
+	private MessageUtil messageUtil;	
 	
 	@Autowired
 	private ApiProperties apiProps;
@@ -106,11 +106,11 @@ public class MethodController {
 		
 		try {
 			methodService.delete(MCODE);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		
@@ -158,11 +158,11 @@ public class MethodController {
 		
 		try {
 			methodService.insert(methodCreateRequestDto, userId);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		
@@ -212,11 +212,11 @@ public class MethodController {
 		
 		try {
 			methodService.update(methodUpdateRequestDto);
-			model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.success"));
+			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
 			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		} catch (Exception e) {
 			 e.printStackTrace();
-			 model.addAttribute("MSG", messageService.getMessage("message-response", "msg.res.failure"));
+			 model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			 model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
 		}
 		

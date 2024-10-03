@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
-import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.UserService;
 import com.EyEmilyKim.util.LogUtil;
+import com.EyEmilyKim.util.MessageUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,7 +28,7 @@ public class HomeController {
 	private UserService userService;
 	
 	@Autowired
-	private MessageService messageService;
+	private MessageUtil messageUtil;
 	
 	@Autowired
 	private ApiProperties apiProps;
@@ -92,10 +92,10 @@ public class HomeController {
 			LoginResponseDto loginResponseDto = userService.login(LID, PWD);
 			session.setAttribute("USER_ID", loginResponseDto.getUser_id());
 			session.setAttribute("NICKNAME", loginResponseDto.getNickname());
-			String msg = messageService.getMessage("message-response", "msg.login.success")
-								+ "\\n" + messageService.getMessage("message-response", "msg.login.welcome_pre")
+			String msg = messageUtil.getMessage("message-response", "msg.login.success")
+								+ "\\n" + messageUtil.getMessage("message-response", "msg.login.welcome_pre")
 								+ " " + loginResponseDto.getNickname()
-								+ " " + messageService.getMessage("message-response", "msg.login.welcome_suf");
+								+ " " + messageUtil.getMessage("message-response", "msg.login.welcome_suf");
 			model.addAttribute("MSG", msg);
 			
 			String originalUrl = (String) session.getAttribute("OriginalUrl");
@@ -117,10 +117,10 @@ public class HomeController {
 	public String get_logout(HttpSession session, Model model) {
 		LogUtil.printWithTimestamp("HomeController > get_logout() called");
 		String user_id = (String) session.getAttribute("NICKNAME");
-		String msg = messageService.getMessage("message-response", "msg.logout.success")
-				+ "\\n" + messageService.getMessage("message-response", "msg.logout.farewell_pre")
+		String msg = messageUtil.getMessage("message-response", "msg.logout.success")
+				+ "\\n" + messageUtil.getMessage("message-response", "msg.logout.farewell_pre")
 				+ " " + user_id
-				+ " " + messageService.getMessage("message-response", "msg.logout.farewell_suf");
+				+ " " + messageUtil.getMessage("message-response", "msg.logout.farewell_suf");
 		model.addAttribute("MSG", msg);
 		model.addAttribute("URL", apiProps.getContext_path() + "/");
 		session.invalidate();

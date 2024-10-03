@@ -19,8 +19,8 @@ import com.EyEmilyKim.config.properties.ApiProperties;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
-import com.EyEmilyKim.service.MessageService;
 import com.EyEmilyKim.service.UserService;
+import com.EyEmilyKim.util.MessageUtil;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -33,7 +33,7 @@ class HomeControllerTest {
 	private UserService userService;
 	
 	@MockBean
-	private MessageService messageService;
+	private MessageUtil messageUtil;
 	
 	@MockBean
 	private OperatingHoursProperties operatingHoursProperties;
@@ -93,9 +93,9 @@ class HomeControllerTest {
 		
 		when(userService.login(userId, password)).thenReturn(loginResponseDto);
 		when(apiProps.getContext_path()).thenReturn("/mab3");
-		when(messageService.getMessage("message-response", "msg.login.success")).thenReturn("로그인에 성공했습니다.");
-		when(messageService.getMessage("message-response", "msg.login.welcome_pre")).thenReturn("반가워요,");
-		when(messageService.getMessage("message-response", "msg.login.welcome_suf")).thenReturn("님~!");
+		when(messageUtil.getMessage("message-response", "msg.login.success")).thenReturn("로그인에 성공했습니다.");
+		when(messageUtil.getMessage("message-response", "msg.login.welcome_pre")).thenReturn("반가워요,");
+		when(messageUtil.getMessage("message-response", "msg.login.welcome_suf")).thenReturn("님~!");
 		
 		// when & then
 		mockMvc.perform(post("/login")
