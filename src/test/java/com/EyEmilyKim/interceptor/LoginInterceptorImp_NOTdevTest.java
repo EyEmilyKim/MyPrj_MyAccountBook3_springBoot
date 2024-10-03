@@ -1,7 +1,11 @@
 package com.EyEmilyKim.interceptor;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,52 +18,55 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 
 public class LoginInterceptorImp_NOTdevTest {
 
-    @InjectMocks
-    private LoginInterceptorImp_NOTdev loginInterceptor;
+	@InjectMocks
+	private LoginInterceptorImp_NOTdev loginInterceptor;
 
-    @Mock
-    private ApiProperties apiProps;
+	@Mock
+	private AppConfig appConfig;
 
-    @Mock
-    private HttpServletRequest request;
+	@Mock
+	private HttpServletRequest request;
 
-    @Mock
-    private HttpServletResponse response;
+	@Mock
+	private HttpServletResponse response;
 
-    @Mock
-    private HttpSession session;
+	@Mock
+	private HttpSession session;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-        when(request.getSession()).thenReturn(session);
-    }
+	@BeforeEach
+	public void setUp() {
+		// given common
+		MockitoAnnotations.openMocks(this);
+		when(request.getSession()).thenReturn(session);
+		when(appConfig.getContextPath()).thenReturn("/mab3");
+	}
 
-    @Test
-    @DisplayName("로그인 안했을 때 - false 반환 > 로그인 창")
-  	public void testPreHandle_UserNotLoggedIn() throws Exception {
-        when(session.getAttribute("USER_ID")).thenReturn(null);
-        when(apiProps.getContext_path()).thenReturn("/mab3");
+	@Test
+	@DisplayName("로그인 안했을 때 - false 반환 > 로그인 창")
+	public void testPreHandle_UserNotLoggedIn() throws Exception {
+		// given
+		when(session.getAttribute("USER_ID")).thenReturn(null);
+		// when
+		boolean result = loginInterceptor.preHandle(request, response, new Object());
+		// then
+		assertFalse(result);
+		verify(response).sendRedirect("/mab3/login");
+  }
 
-        boolean result = loginInterceptor.preHandle(request, response, new Object());
-
-        assertFalse(result);
-        verify(response).sendRedirect("/mab3/login");
-    }
-
-    @Test
-    @DisplayName("로그인 했을 때 - true 반환")
-  	public void testPreHandle_UserLoggedIn() throws Exception {
-        when(session.getAttribute("USER_ID")).thenReturn(1);
-        when(apiProps.getContext_path()).thenReturn("/mab3");
-
-        boolean result = loginInterceptor.preHandle(request, response, new Object());
-
-        assertTrue(result);
-        verify(response, never()).sendRedirect(anyString());
-    }
+	@Test
+	@DisplayName("로그인 했을 때 - true 반환")
+	public void testPreHandle_UserLoggedIn() throws Exception {
+		// given
+		when(session.getAttribute("USER_ID")).thenReturn(1);
+		// when
+		boolean result = loginInterceptor.preHandle(request, response, new Object());
+		// then
+		assertTrue(result);
+		verify(response, never()).sendRedirect(anyString());
+	}
+    
 }

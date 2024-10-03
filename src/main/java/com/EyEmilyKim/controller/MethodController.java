@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.dto.request.method.MethodCreateRequestDto;
 import com.EyEmilyKim.dto.request.method.MethodUpdateRequestDto;
 import com.EyEmilyKim.entity.Method;
@@ -39,7 +39,7 @@ public class MethodController {
 	private MessageUtil messageUtil;	
 	
 	@Autowired
-	private ApiProperties apiProps;
+	private AppConfig appConfig;
 	
 	private String nextUrl = "/set/method/list";
 	
@@ -107,11 +107,11 @@ public class MethodController {
 		try {
 			methodService.delete(MCODE);
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
 		return "redirect";
@@ -159,11 +159,11 @@ public class MethodController {
 		try {
 			methodService.insert(methodCreateRequestDto, userId);
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
 		return "redirect";
@@ -213,11 +213,11 @@ public class MethodController {
 		try {
 			methodService.update(methodUpdateRequestDto);
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		} catch (Exception e) {
 			 e.printStackTrace();
 			 model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			 model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			 model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
 		return "redirect";

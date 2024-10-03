@@ -14,9 +14,6 @@ import lombok.ToString;
 @ConfigurationProperties(prefix = "api")
 public class ApiProperties {
 	
-	private String server_path;
-	private String context_path;
-	
 	private String email_to;
 	private String email_subject;
 	

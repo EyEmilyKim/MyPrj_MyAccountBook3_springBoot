@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranDeleteRequestDto;
@@ -53,7 +53,7 @@ public class TransactionController {
 	private MessageUtil messageUtil;
 	
 	@Autowired
-	private ApiProperties apiProps;
+	private AppConfig appConfig;
 	
 	
 	/*-------- 거래기록 목록 --------*/
@@ -248,7 +248,7 @@ public class TransactionController {
 			model.addAttribute("OK", false);
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 		}
-		String contextPath = apiProps.getContext_path();
+		String contextPath = appConfig.getContextPath();
 		model.addAttribute("TRAN_CRT", true);
 		model.addAttribute("URL_AGAIN", contextPath + "/tran/crt");
 		model.addAttribute("URL_NEXT", contextPath + "/tran/listAll");
