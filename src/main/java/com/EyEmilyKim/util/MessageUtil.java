@@ -12,7 +12,7 @@ public class MessageUtil {
 	@Autowired
 	private TextFileReader textFileReader;
 	
-	private static final String path = "/"; 
+	private static final String path = "/custom_messages/"; 
 	
 	public String getMessage(String fileName, String key) {
 		try {
