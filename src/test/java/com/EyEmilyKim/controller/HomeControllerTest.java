@@ -37,12 +37,6 @@ class HomeControllerTest {
 	private MessageUtil messageUtil;
 	
 	@MockBean
-	private OperatingHoursProperties operatingHoursProperties;
-	
-	@MockBean
-	private LoginInterceptor loginInterceptor;
-	
-	@MockBean
 	private AppConfig appConfig;
 	
 	@BeforeEach
@@ -58,8 +52,8 @@ class HomeControllerTest {
 	@DisplayName("루트 Get")
 	void testGetRoot() throws Exception {
 		mockMvc.perform(get("/"))
-		.andExpect(status().isOk())
-		.andExpect(view().name("root.index"));
+			.andExpect(status().isOk())
+			.andExpect(view().name("root.index"));
 	}
 	
 	@Test
