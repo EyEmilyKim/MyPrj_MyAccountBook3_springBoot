@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.util.MessageUtil;
 
 @Controller
@@ -18,12 +19,16 @@ public class CustomErrorController implements ErrorController {
 	
 	@Autowired
 	private MessageUtil messageUtil;
+
+	@Autowired
+	private AppConfig appConfig;
+	
 	
 	@GetMapping(ERROR_PATH)
 	public String handleError(HttpServletRequest req, Model model) {
 		Object status = req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		String referer = req.getHeader("Referer");
-		String nextUrl = (referer != null) ? referer : "/";
+		String nextUrl = (referer != null) ? referer : appConfig.getContextPath();
 		String errorMessage;
 		
 		if (status != null) {
