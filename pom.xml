@@ -12,9 +12,9 @@
 	
 	<groupId>com.EyEmilyKim</groupId>
 	<artifactId>MyAccountBook3</artifactId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<name>MyAccountBook3</name>
-	<description>MyAccountBook3_SprBootPractice_241002</description>
+	<description>MyAccountBook3_SprBootPractice_241003</description>
 	<packaging>war</packaging>
 	
 	<properties>
