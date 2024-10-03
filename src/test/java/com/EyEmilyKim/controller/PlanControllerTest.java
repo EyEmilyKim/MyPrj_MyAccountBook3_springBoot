@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,31 +34,39 @@ class PlanControllerTest {
 	
 	@MockBean
 	private OperatingHoursProperties operatingHoursProperties;
+	
 	@MockBean
 	private LoginInterceptor loginInterceptor;
+	
 	@MockBean
 	private AppConfig appConfig;
 	
 	
-  /*-------- 계획하기 --------*/
+	@BeforeEach
+	void setup() throws Exception {
+		// LoginInterceptor 가 true 반환했을 때만 호출됨
+		when(loginInterceptor.preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any()))
+			.thenReturn(true);
+		// context-path 사전 설정
+		when(appConfig.getContextPath()).thenReturn("/mab3"); 
+	}
+
+	@AfterEach
+	void verifyLoginInterceptor() throws Exception {
+		// 검증 : LoginInterceptor 가 정확히 1번 호출되었는지
+		verify(loginInterceptor, times(1))
+			.preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any());
+	}
+	
+	/*-------- 계획하기 --------*/
   
-  @Test
-  @DisplayName("계획하기 Get (로그인 O) > 준비중")
-  void testGetPlan_whenLoggedIn() throws Exception {
-      // LoginInterceptor 가 true 반환했을 때만 호출됨
-      when(loginInterceptor.preHandle(
-              any(HttpServletRequest.class), any(HttpServletResponse.class), any()))
-          .thenReturn(true);
-      when(appConfig.getContextPath()).thenReturn("/mab3");
-      
-      mockMvc.perform(get("/plan"))
-          .andExpect(status().isOk())
-          .andExpect(view().name("root.comingSoon"));
-      
-      // 검증 : preHandle 메서드가 정확히 1번 호출되었는지 확인
-  verify(loginInterceptor, times(1))
-      .preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any());
-  }
-  
+	@Test
+	@DisplayName("계획하기 Get > 준비중")
+	void testGetPlan_whenLoggedIn() throws Exception {
+		// when & then
+		mockMvc.perform(get("/plan"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("root.comingSoon"));
+	}
 	
 }

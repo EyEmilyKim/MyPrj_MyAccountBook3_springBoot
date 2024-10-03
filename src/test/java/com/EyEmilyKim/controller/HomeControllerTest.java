@@ -97,8 +97,8 @@ class HomeControllerTest {
 		String userId = "test1";
 		String password = "1test1";
 		LoginResponseDto loginResponseDto = new LoginResponseDto(1, "테스트 유저 1", null);
-		
 		when(userService.login(userId, password)).thenReturn(loginResponseDto);
+		
 		when(messageUtil.getMessage("message-response", "msg.login.success")).thenReturn("로그인에 성공했습니다.");
 		when(messageUtil.getMessage("message-response", "msg.login.welcome_pre")).thenReturn("반가워요,");
 		when(messageUtil.getMessage("message-response", "msg.login.welcome_suf")).thenReturn("님~!");
@@ -116,12 +116,13 @@ class HomeControllerTest {
 	@Test
 	@DisplayName("로그인 Post - 사용자 없음 > 알림창")
 	void testPostLogin_userNotFound() throws Exception {
+		// given
 		String userId = "nonExistingUser";
 		String password = "wrongPassword";
-		
 		when(userService.login(userId, password))
 			.thenThrow(new Exception("사용자를 찾을 수 없습니다."));
 
+		// when & then
 		mockMvc.perform(post("/login")
 				.param("LID", userId)
 				.param("PWD", password))
@@ -134,12 +135,13 @@ class HomeControllerTest {
 	@Test
 	@DisplayName("로그인 Post - 비밀번호 불일치 > 알림창")
 	void testPostLogin_wrongPassword() throws Exception {
+		// given
 		String userId = "existingUser";
 		String password = "wrongPassword";
-		
 		when(userService.login(userId, password))
 			.thenThrow(new Exception("비밀번호가 일치하지 않습니다."));
 		
+		// when & then
 		mockMvc.perform(post("/login")
 				.param("LID", userId)
 				.param("PWD", password))
