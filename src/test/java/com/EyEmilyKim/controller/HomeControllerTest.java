@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
@@ -42,7 +43,13 @@ class HomeControllerTest {
 	private LoginInterceptor loginInterceptor;
 	
 	@MockBean
-	private ApiProperties apiProps;
+	private AppConfig appConfig;
+	
+	@BeforeEach
+	void setup() {
+		// context-path 사전 설정
+		when(appConfig.getContextPath()).thenReturn("/mab3");
+	}
 	
 	
 	/*-------- 홈 화면 --------*/
@@ -92,7 +99,6 @@ class HomeControllerTest {
 		LoginResponseDto loginResponseDto = new LoginResponseDto(1, "테스트 유저 1", null);
 		
 		when(userService.login(userId, password)).thenReturn(loginResponseDto);
-		when(apiProps.getContext_path()).thenReturn("/mab3");
 		when(messageUtil.getMessage("message-response", "msg.login.success")).thenReturn("로그인에 성공했습니다.");
 		when(messageUtil.getMessage("message-response", "msg.login.welcome_pre")).thenReturn("반가워요,");
 		when(messageUtil.getMessage("message-response", "msg.login.welcome_suf")).thenReturn("님~!");
@@ -113,7 +119,6 @@ class HomeControllerTest {
 		String userId = "nonExistingUser";
 		String password = "wrongPassword";
 		
-		when(apiProps.getContext_path()).thenReturn("/mab3");
 		when(userService.login(userId, password))
 			.thenThrow(new Exception("사용자를 찾을 수 없습니다."));
 
@@ -132,7 +137,6 @@ class HomeControllerTest {
 		String userId = "existingUser";
 		String password = "wrongPassword";
 		
-		when(apiProps.getContext_path()).thenReturn("/mab3");
 		when(userService.login(userId, password))
 			.thenThrow(new Exception("비밀번호가 일치하지 않습니다."));
 		

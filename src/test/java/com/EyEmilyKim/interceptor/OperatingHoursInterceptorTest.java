@@ -22,7 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 
 public class OperatingHoursInterceptorTest {
@@ -34,7 +34,7 @@ public class OperatingHoursInterceptorTest {
     private OperatingHoursProperties operatingHoursProps;
 
     @Mock
-    private ApiProperties apiProps;
+    private AppConfig appConfig;
 
     @Mock
     private HttpServletRequest request;
@@ -60,7 +60,7 @@ public class OperatingHoursInterceptorTest {
     public void testPreHandle_OutsideOperatingHours_AM0700() throws Exception {
         when(operatingHoursProps.getStart()).thenReturn("08:00");
         when(operatingHoursProps.getEnd()).thenReturn("20:00");
-        when(apiProps.getContext_path()).thenReturn("/mab3");
+        when(appConfig.getContextPath()).thenReturn("/mab3");
 
         // AM 7시를 Mock 시간으로 설정 (KST 기준)
         fixedClock = Clock.fixed(Instant.parse("2023-10-02T07:00:00+09:00"), ZoneId.of("Asia/Seoul"));
@@ -78,7 +78,7 @@ public class OperatingHoursInterceptorTest {
     public void testPreHandle_InsideOperatingHours__PM0300() throws Exception {
         when(operatingHoursProps.getStart()).thenReturn("08:00");
         when(operatingHoursProps.getEnd()).thenReturn("20:00");
-        when(apiProps.getContext_path()).thenReturn("/mab3");
+        when(appConfig.getContextPath()).thenReturn("/mab3");
 
         // PM 3시를 Mock 시간으로 설정 (KST 기준)
         fixedClock = Clock.fixed(Instant.parse("2023-10-02T15:00:00+09:00"), ZoneId.of("Asia/Seoul"));
@@ -96,7 +96,7 @@ public class OperatingHoursInterceptorTest {
     public void testPreHandle_InsideOperatingHours_PM0759() throws Exception {
     	when(operatingHoursProps.getStart()).thenReturn("08:00");
     	when(operatingHoursProps.getEnd()).thenReturn("20:00");
-    	when(apiProps.getContext_path()).thenReturn("/mab3");
+    	when(appConfig.getContextPath()).thenReturn("/mab3");
     	
     	// PM 07:59를 Mock 시간으로 설정 (KST 기준)
     	fixedClock = Clock.fixed(Instant.parse("2023-10-02T19:59:00+09:00"), ZoneId.of("Asia/Seoul"));
@@ -114,7 +114,7 @@ public class OperatingHoursInterceptorTest {
     public void testPreHandle_OutsideOperatingHours_PM0900() throws Exception {
       when(operatingHoursProps.getStart()).thenReturn("08:00");
       when(operatingHoursProps.getEnd()).thenReturn("20:00");
-      when(apiProps.getContext_path()).thenReturn("/mab3");
+      when(appConfig.getContextPath()).thenReturn("/mab3");
 
       // PM 08:01를 Mock 시간으로 설정 (KST 기준)
       fixedClock = Clock.fixed(Instant.parse("2023-10-02T20:01:00+09:00"), ZoneId.of("Asia/Seoul"));

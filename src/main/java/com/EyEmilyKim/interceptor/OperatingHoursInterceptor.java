@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 
 @Component
@@ -22,7 +22,7 @@ public class OperatingHoursInterceptor implements HandlerInterceptor {
 	private OperatingHoursProperties config;
 	
 	@Autowired
-	private ApiProperties apiProps;
+	private AppConfig appConfig;
 	
 	@Autowired
 	private Clock clock;
@@ -55,7 +55,7 @@ public class OperatingHoursInterceptor implements HandlerInterceptor {
 			}
 			
 			// 리다이렉트 및 운영시간 안내
-			res.sendRedirect(apiProps.getContext_path() + "/outOfOpHours");
+			res.sendRedirect(appConfig.getContextPath() + "/outOfOpHours");
 			return false; // 요청 처리 중단
 		}
 		

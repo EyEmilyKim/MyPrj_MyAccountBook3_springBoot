@@ -1,7 +1,11 @@
 package com.EyEmilyKim.interceptor;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 
 public class LoginInterceptorImp_NOTdevTest {
 
@@ -22,7 +26,7 @@ public class LoginInterceptorImp_NOTdevTest {
     private LoginInterceptorImp_NOTdev loginInterceptor;
 
     @Mock
-    private ApiProperties apiProps;
+    private AppConfig appConfig;
 
     @Mock
     private HttpServletRequest request;
@@ -43,7 +47,7 @@ public class LoginInterceptorImp_NOTdevTest {
     @DisplayName("로그인 안했을 때 - false 반환 > 로그인 창")
   	public void testPreHandle_UserNotLoggedIn() throws Exception {
         when(session.getAttribute("USER_ID")).thenReturn(null);
-        when(apiProps.getContext_path()).thenReturn("/mab3");
+        when(appConfig.getContextPath()).thenReturn("/mab3");
 
         boolean result = loginInterceptor.preHandle(request, response, new Object());
 
@@ -55,7 +59,7 @@ public class LoginInterceptorImp_NOTdevTest {
     @DisplayName("로그인 했을 때 - true 반환")
   	public void testPreHandle_UserLoggedIn() throws Exception {
         when(session.getAttribute("USER_ID")).thenReturn(1);
-        when(apiProps.getContext_path()).thenReturn("/mab3");
+        when(appConfig.getContextPath()).thenReturn("/mab3");
 
         boolean result = loginInterceptor.preHandle(request, response, new Object());
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
 import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
 import com.EyEmilyKim.entity.Category;
@@ -39,7 +39,7 @@ public class CategoryController {
 	private MessageUtil messageUtil;
 	
 	@Autowired
-	private ApiProperties apiProps;
+	private AppConfig appConfig;
 	
 	private String nextUrl = "/set/category/list";
 	
@@ -106,11 +106,11 @@ public class CategoryController {
 		try {
 			categoryService.delete(CCODE);
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
 		return "redirect";
@@ -158,11 +158,11 @@ public class CategoryController {
 		try {
 			categoryService.insert(categoryCreateRequestDto, userId);
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
 		return "redirect";
@@ -213,11 +213,11 @@ public class CategoryController {
 		try {
 			categoryService.update(categoryUpdateRequestDto);
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.success"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", apiProps.getContext_path() + nextUrl);
+			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
 		return "redirect";

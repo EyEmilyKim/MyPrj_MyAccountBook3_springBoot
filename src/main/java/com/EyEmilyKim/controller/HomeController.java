@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.EyEmilyKim.config.properties.ApiProperties;
+import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
 import com.EyEmilyKim.service.UserService;
 import com.EyEmilyKim.util.LogUtil;
@@ -31,7 +31,7 @@ public class HomeController {
 	private MessageUtil messageUtil;
 	
 	@Autowired
-	private ApiProperties apiProps;
+	private AppConfig appConfig;
 	
 	/*-------- 홈 화면 --------*/
 	
@@ -99,12 +99,12 @@ public class HomeController {
 			model.addAttribute("MSG", msg);
 			
 			String originalUrl = (String) session.getAttribute("OriginalUrl");
-			if (originalUrl == null) originalUrl = apiProps.getContext_path() + "/";
+			if (originalUrl == null) originalUrl = appConfig.getContextPath() + "/";
 			model.addAttribute("URL", originalUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", e.getMessage());
-			model.addAttribute("URL", apiProps.getContext_path() + "/login");
+			model.addAttribute("URL", appConfig.getContextPath() + "/login");
 		}
 		return "redirect";
 	}
@@ -122,7 +122,7 @@ public class HomeController {
 				+ " " + user_id
 				+ " " + messageUtil.getMessage("message-response", "msg.logout.farewell_suf");
 		model.addAttribute("MSG", msg);
-		model.addAttribute("URL", apiProps.getContext_path() + "/");
+		model.addAttribute("URL", appConfig.getContextPath() + "/");
 		session.invalidate();
 		return "redirect";
 	} 
