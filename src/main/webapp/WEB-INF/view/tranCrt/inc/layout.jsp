@@ -28,6 +28,10 @@
 		<tiles:insertAttribute name="main" />
 	
 	</div>
+	
+	<!----------- modal 부분 ----------->
+	<tiles:insertAttribute name="modal" />
+
 	<!----------- footer 부분 ----------->
 	<tiles:insertAttribute name="footer" />
 
