@@ -14,12 +14,14 @@
 	</div>
 
 	<h3>All Right Reserved.2024 EyEmilyKim</h3>
+	
 	<ul class="icons">
         <li><a href="${url_blog }" title="${tooltip_blog }"><i id="icon_blog" class="fa-solid fa-blog icon"></i></a></li>
         <li><a href="${url_github }" title="${tooltip_github }"><i id="icon_github" class="fa-brands fa-github icon"></i></a></li>
         <li><i id="icon_share"class="fa-solid fa-share-nodes" title="${tooltip_share }"></i></li>
         <li><i id="icon_email"class="fa-solid fa-envelope" title="${tooltip_email }"></i></li>
     </ul>
+    
 	<div id="clock">지금은... <span id="clock"></span></div>
 	
 </footer>

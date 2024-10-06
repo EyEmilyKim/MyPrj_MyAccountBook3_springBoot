@@ -4,7 +4,7 @@
 
 <header>
 
-	<div>
+	<div id="logos">
 		<c:if test="${ empty sessionScope.USER_ID }">
 			<img src="${pageContext.request.contextPath}/images/pig_money.png" class="iconLogo" id="iconLogo_guest">
 		</c:if>

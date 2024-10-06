@@ -1,25 +1,29 @@
 @charset "UTF-8";
 
 	header {
-		flex: 0 0 auto; /* 확장, 축소 없이 지정된 높이로 고정 */
-		min-height: 80px;
+		min-height: 8%;
 		width: 100%;
-		position: fixed; top: 0;	/* 스크롤시 헤더 고정 */
 		background-color: var(--header-background-color);
-		padding: 1.0em;
+		padding-left: 0.5rem;
+		padding-right: 1.0rem;
 		display: flex;
 		justify-content: space-between; /* 가로축 정렬: 요소들 사이 동일 간격 */
 	    align-items: center;	/* 세로축 정렬: 가운데 */
 	}
 	
-	header > div {
+	header > * {
+		border: 1px;
+		/* border: 1px solid plum; */
+	}
+	
+	#logos {
 		display: flex;
 		flex-direction: row;
 	}
 	
 	.iconLogo {
-		height: 45px;
-		margin-right: -5px;
+		height: 3rem;
+		margin-right: -0.3rem;
 	}
 	.iconLogo:hover {
 		cursor: pointer;
@@ -30,8 +34,8 @@
 		font-size: 1.5rem;
 		font-weight: 800;
 		cursor: pointer;
-		padding: 10px;
-		border-radius: 10px;
+		padding: 0.4rem;
+		border-radius: 1rem;
 	}
 	#titleLogo:hover {
 		background-color: var(--header-hoverMenu-under);
@@ -42,14 +46,10 @@
 	    flex-direction: row;
 	    gap: 1.5rem;
 	}
-	header ul:last-child {
-	    margin-right: 1.0rem;
-	}
-
 	header a {
 	    font-size: 1.2rem;
 	    font-weight: 800;
-	    padding-bottom: 5px;
+	    padding-bottom: 0.1rem;
 	    color: var(--header-text-color); 
 	}
 	header a:hover {

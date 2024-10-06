@@ -5,7 +5,6 @@
 		flex: 1; /* #middle 남은 너비 차지 */
 		background-color: var(--main-background-color);
 		padding: 2em;
-		float: right;
 		overflow-y: auto; /* 이 영역만 스크롤 */
 	}
 	
