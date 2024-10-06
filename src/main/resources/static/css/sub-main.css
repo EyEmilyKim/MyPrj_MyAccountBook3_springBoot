@@ -6,7 +6,7 @@
 		background-color: var(--main-background-color);
 		padding: 2em;
 		float: right;
-		overflow: hidden;
+		overflow-y: auto; /* 이 영역만 스크롤 */
 	}
 	
 	.contMain { 
