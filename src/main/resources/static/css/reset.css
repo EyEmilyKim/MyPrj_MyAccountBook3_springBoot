@@ -24,3 +24,11 @@ a:hover {
 li {
 	list-style: none;
 }
+
+/* ----- 좁은 화면일 때 ----- */
+
+@media screen and (max-width: 1080px) {
+	html {
+		font-size: 20px;
+	}
+}
