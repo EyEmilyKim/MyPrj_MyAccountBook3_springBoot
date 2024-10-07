@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.login_form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.login_form .input {
+	padding: 0.5rem;
+}
+
+#btn_login {
+	margin: 0.7rem;
+	padding: 0.3rem;
+}
