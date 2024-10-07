@@ -31,4 +31,4 @@
 	
 </header>
 
-<script type="module" src="${pageContext.request.contextPath}/js/inc/header.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/home/inc/header.js"></script>
