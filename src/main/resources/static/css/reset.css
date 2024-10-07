@@ -1,26 +1,26 @@
 @charset "UTF-8";
 
-	*{
-		margin: 0; 
-		padding: 0;
-		box-sizing: border-box; /* 길이 계산 편하도록 */
-	}
-	html, body {
-		height: 100%;
-		overflow: hidden; /* 전체 body 대한 스크롤 없앰 */
-	}
-	body {
-		display: flex;
-		flex-direction: column;
-		font-family: sans-serif;
-		background-color: darkgray;
-	}
-	a {
-		text-decoration: none;	/* 기본 밑줄 제거 */
-	}
-	a:hover {
-		text-decoration: none;	/* 마우스 올릴시 밑줄 제거 */
-	}
-	li {
-		list-style: none;
-	}
+*{
+	margin: 0; 
+	padding: 0;
+	box-sizing: border-box; /* 길이 계산 편하도록 */
+}
+html, body {
+	height: 100%;
+	overflow: hidden; /* 전체 body 대한 스크롤 없앰 */
+}
+body {
+	display: flex;
+	flex-direction: column;
+	font-family: sans-serif;
+	background-color: darkgray;
+}
+a {
+	text-decoration: none;	/* 기본 밑줄 제거 */
+}
+a:hover {
+	text-decoration: none;	/* 마우스 올릴시 밑줄 제거 */
+}
+li {
+	list-style: none;
+}

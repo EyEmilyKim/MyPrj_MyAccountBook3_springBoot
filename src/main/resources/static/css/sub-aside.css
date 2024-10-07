@@ -1,36 +1,36 @@
 @charset "UTF-8";
 
-	aside {
-		height: 100%;
-		width: 20%; /* #middle 안에서 너비 설정 */
-		background-color: var(--aside-background-color);
-		padding: 2em;
-		display: flex;
-		flex-direction: column;
-	}
-	
-	aside ul {
-		display: flex;
-		flex-direction: column;
-	}
-	
-	aside li {
-		margin-bottom: 2rem;
-	}
-	aside li a {
-		font-weight: 600;
-	    padding-bottom: 0.3rem;
-	    color: var(--aside-text-color); 
-	}
-	aside a:active {
-	    border-bottom: 3px solid var(--aside-selectedMenu-under);
-	    color: var(--aside-selectedMenu-color);
-	}
-	aside a:hover {
-	    border-bottom: 3px solid var(--aside-selectedMenu-under);
-	    color: var(--aside-selectedMenu-color);
-	}
-	aside .selected {
-	    border-bottom: 3px solid var(--aside-hoverMenu-under);
-	    color: var(--aside-hoverMenu-color);
-	}
+aside {
+	height: 100%;
+	width: 20%; /* #middle 안에서 너비 설정 */
+	background-color: var(--aside-background-color);
+	padding: 2em;
+	display: flex;
+	flex-direction: column;
+}
+
+aside ul {
+	display: flex;
+	flex-direction: column;
+}
+
+aside li {
+	margin-bottom: 2rem;
+}
+aside li a {
+	font-weight: 600;
+    padding-bottom: 0.3rem;
+    color: var(--aside-text-color); 
+}
+aside a:active {
+    border-bottom: 3px solid var(--aside-selectedMenu-under);
+    color: var(--aside-selectedMenu-color);
+}
+aside a:hover {
+    border-bottom: 3px solid var(--aside-selectedMenu-under);
+    color: var(--aside-selectedMenu-color);
+}
+aside .selected {
+    border-bottom: 3px solid var(--aside-hoverMenu-under);
+    color: var(--aside-hoverMenu-color);
+}
