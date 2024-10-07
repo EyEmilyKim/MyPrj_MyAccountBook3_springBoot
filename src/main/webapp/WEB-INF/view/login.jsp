@@ -6,23 +6,14 @@
 		<h1 class="marginBot">로그인해주세요~♪</h1>
 	
 		<div>
-			<form action="login" method="post" name="fm" onSubmit="return check()">
-				<div><input type="text" size="30" name="LID" placeholder="아이디"></div>
-				<div><input type="password" size="30" name="PWD" placeholder="비밀번호"></div>
-				<div><input type="submit" value="로그인"></div>
+			<form action="login" method="post" name="fm" class="login_form">
+				<div><input type="text" size="30" name="LID" placeholder="아이디" class="input"></div>
+				<div><input type="password" size="30" name="PWD" placeholder="비밀번호" class="input"></div>
+				<div><button id="btn_login">로그인</button></div>
 			</form>
 		</div>
 
 	</section>
 </main>
 
-<script type="text/javascript">
-function check(){
-	if(document.fm.ID.value ==''){
-		alert("아이디를 입력하세요."); return false;
-	}
-	if(document.fm.PWD.value ==''){
-		alert("암호를 입력하세요."); return false;
-	}
-}
-</script>
+<script type="module" src="${pageContext.request.contextPath}/js/home/login.js"></script>
