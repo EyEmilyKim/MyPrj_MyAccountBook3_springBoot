@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 aside {
-	height: 100%;
-	width: 20%; /* #middle 안에서 너비 설정 */
+	min-width: 15%; /* #middle 안에서 너비 설정 */
 	background-color: var(--aside-background-color);
-	padding: 2em;
+	padding: 1.2rem;
 	display: flex;
 	flex-direction: column;
 }
@@ -12,11 +11,9 @@ aside {
 aside ul {
 	display: flex;
 	flex-direction: column;
+	gap: 2rem;
 }
 
-aside li {
-	margin-bottom: 2rem;
-}
 aside li a {
 	font-weight: 600;
     padding-bottom: 0.3rem;

@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 main {
-	height: 100%; /* #middle 높이 모두 차지 */
 	flex: 1; /* #middle 남은 너비 차지 */
 	background-color: var(--main-background-color);
 	padding: 2em;
