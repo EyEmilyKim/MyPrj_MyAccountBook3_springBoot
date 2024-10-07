@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.EyEmilyKim.config.AppConfig;
 import com.EyEmilyKim.interceptor.LoginInterceptor;
+import com.EyEmilyKim.interceptor.OperatingHoursInterceptor;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -35,20 +36,29 @@ class PlanControllerTest {
 	private LoginInterceptor loginInterceptor;
 	
 	@MockBean
+	private OperatingHoursInterceptor operatingHoursInterceptor;
+	
+	@MockBean
 	private AppConfig appConfig;
 	
 	
 	@BeforeEach
-	void setup() throws Exception {
+	public void setup() throws Exception {
 		// LoginInterceptor 가 true 반환했을 때만 호출됨
 		when(loginInterceptor.preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any()))
 			.thenReturn(true);
+		// 운영 시간 검증 무조건 true 반환 설정
+		when(operatingHoursInterceptor.preHandle(
+				any(HttpServletRequest.class),
+				any(HttpServletResponse.class),
+				any(Object.class))
+			).thenReturn(true);
 		// context-path 사전 설정
 		when(appConfig.getContextPath()).thenReturn("/mab3"); 
 	}
 
 	@AfterEach
-	void verifyLoginInterceptor() throws Exception {
+	public void verifyLoginInterceptor() throws Exception {
 		// 검증 : LoginInterceptor 가 정확히 1번 호출되었는지
 		verify(loginInterceptor, times(1))
 			.preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any());

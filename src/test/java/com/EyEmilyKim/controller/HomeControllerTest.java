@@ -1,11 +1,17 @@
 package com.EyEmilyKim.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,9 +23,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.EyEmilyKim.config.AppConfig;
-import com.EyEmilyKim.config.properties.OperatingHoursProperties;
 import com.EyEmilyKim.dto.response.LoginResponseDto;
-import com.EyEmilyKim.interceptor.LoginInterceptor;
+import com.EyEmilyKim.interceptor.OperatingHoursInterceptor;
 import com.EyEmilyKim.service.UserService;
 import com.EyEmilyKim.util.MessageUtil;
 
@@ -39,8 +44,18 @@ class HomeControllerTest {
 	@MockBean
 	private AppConfig appConfig;
 	
+	@MockBean
+	private OperatingHoursInterceptor operatingHoursInterceptor;
+	
+	
 	@BeforeEach
-	void setup() {
+	public void setup() throws IOException {
+		// 운영 시간 검증 무조건 true 반환 설정
+		when(operatingHoursInterceptor.preHandle(
+				any(HttpServletRequest.class),
+				any(HttpServletResponse.class),
+				any(Object.class))
+			).thenReturn(true);
 		// context-path 사전 설정
 		when(appConfig.getContextPath()).thenReturn("/mab3");
 	}
