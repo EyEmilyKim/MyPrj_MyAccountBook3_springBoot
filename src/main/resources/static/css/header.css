@@ -14,7 +14,12 @@ header {
 header > * {
 	border: 1px;
 	/* border: 1px solid plum; */
+	display: flex;
+	justify-content: space-between;
+	align-items: center; /* 세로축 정렬: 가운데 */
 }
+
+/* ----- 로고 영역 ----- */
 
 #logos {
 	display: flex;
@@ -41,6 +46,8 @@ header > * {
 	background-color: var(--header-hoverMenu-under);
 }
 
+/* ----- 메뉴 영역 ----- */
+
 header ul {
     display: flex;
     flex-direction: row;
@@ -59,4 +66,45 @@ header a:hover {
 header .selected {
     border-bottom: 5px solid var(--header-selectedMenu-under);
     color: var(--header-selectedMenu-color);
+}
+
+/* ----- 토글 메뉴 ----- */
+
+#toggle_menu {
+	display: none; /* 기본 상태 : 비표시 */
+	color: var(--header-text-color);
+	font-size: 2rem;
+	padding: 0.1rem 0.5rem;
+	border-radius: 0.5rem;
+}
+#toggle_menu:hover {
+	cursor: pointer;
+	background-color: var(--header-hoverMenu-under);	
+}
+#toggle_menu.active {
+	background-color: var(--header-hoverMenu-under);	
+}
+
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 900px) {
+	header {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+	
+	#toggle_menu {
+		display: block; /* 기본 상태 : 표시 */
+	}
+	
+	#menu {
+		display: none;  /* 기본 상태 : 비표시 */
+	}
+
+	/* 토글 메뉴 클릭하면 메뉴 표시 */
+	.toggle_menu.active + #menu {
+        display: block;
+    }
+	
 }
