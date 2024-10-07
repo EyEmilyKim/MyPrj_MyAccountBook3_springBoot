@@ -49,16 +49,17 @@
 .tranTable {
 	width: 100%;
 	border-collapse: collapse; /* 셀 경계 병합 */
+	table-layout: fixed; /* 테이블 레이아웃 고정, 일정 너비 유지*/
 }
+.tranTable .amount, .btn {
+	white-space: nowrap; /* 줄바꿈 방지 */
+}
+
 tbody tr:nth-child(odd) {
 	background-color: white;
 }
 tbody tr:nth-child(even) {
 	background-color: #f2f2f2;
-}
-
-.tran_cate, .tran_meth {
-	width: 18%;
 }
 
 /* ---------- 목록 컨트롤 ----------*/
