@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 브라우저 창 너비에 따른 메뉴 표시 제어
 	window.addEventListener('resize', () => {
 		// 화면 다시 넓어지면 menu 정상 표시
-		if (window.innerWidth > 900) {
+		if (window.innerWidth > 1080) {
 			menu.style.display = 'block';
 			toggle_menu.classList.remove('active');
 		} 
