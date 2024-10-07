@@ -83,3 +83,13 @@ td {
     font-weight: 400; 
     text-align: center;
 }
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 900px) {
+	main {
+		width: 100%;
+		flex: 1;
+		order: 2; /* aside 아래에 배치 */
+	}
+	
+}

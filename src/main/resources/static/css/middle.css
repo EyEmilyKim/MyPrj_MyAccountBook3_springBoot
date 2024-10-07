@@ -7,3 +7,10 @@
 	display: flex;
 	flex-direction: row;
 }
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 900px) {
+	#middle {
+		flex-direction: column;
+	}
+}

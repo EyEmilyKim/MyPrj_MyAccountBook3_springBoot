@@ -31,3 +31,21 @@ aside .selected {
     border-bottom: 3px solid var(--aside-hoverMenu-under);
     color: var(--aside-hoverMenu-color);
 }
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 900px) {
+	aside {
+		width: 100%;
+		min-height: 8%;
+		order: 1; /* aside를 main 위로 배치 */
+		
+		align-content: center;
+		justify-content: space-around;
+	}
+	
+	aside ul {
+		display: flex;
+		flex-direction: row;
+		/* justify-content: space-around; li 간격을 균등하게 분배 */
+	}
+}
