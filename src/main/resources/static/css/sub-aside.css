@@ -36,7 +36,7 @@ aside .selected {
 @media screen and (max-width: 1080px) {
 	aside {
 		width: 100%;
-		min-height: 8%;
+		min-height: 5%;
 		order: 1; /* aside를 main 위로 배치 */
 		
 		align-content: center;

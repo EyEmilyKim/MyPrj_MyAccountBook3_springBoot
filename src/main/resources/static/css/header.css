@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 header {
-	min-height: 10%;
+	min-height: 5%;
 	width: 100%;
 	background-color: var(--header-background-color);
 	padding: 0.8rem;
@@ -98,8 +98,8 @@ header .selected {
 	
 	#menu {
 		display: none;  /* 기본 상태 : 비표시 */
-		margin-top: 0.5rem;
-		margin-left: 0.2rem;
+		border-top: 2px solid white;
+		padding: 0.8rem 1.0rem 0; 
 	}
 
 	/* 토글 메뉴 클릭하면 메뉴 표시 */

@@ -3,7 +3,7 @@
 footer {
 	background-color: var(--footer-background-color);
 	width: 100%;
-	min-height: 12%; /* 확장, 축소 없이 지정된 높이로 고정 */
+	min-height: 10%; /* 확장, 축소 없이 지정된 높이로 고정 */
 	padding: 0.5rem;
 	display: flex;
 	flex-direction: column;
