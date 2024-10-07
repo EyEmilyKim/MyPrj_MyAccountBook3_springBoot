@@ -1,6 +1,6 @@
 /* for view/inc/footer.jsp */
 
-import {copyToClipboard} from '../util/clipboard.js';
+import {copyToClipboard} from '../../util/clipboard.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	
