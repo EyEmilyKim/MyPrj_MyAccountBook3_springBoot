@@ -48,7 +48,7 @@
             and METH_NAME = #{METH_NAME}  
         </if>
     </where>
-    order by TRAN_DATE, INEX desc, MY_SEQNO 
+    order by TRAN_DATE desc, INEX desc, MY_SEQNO desc  
     LIMIT #{RC} OFFSET #{start}
   </select>
   
