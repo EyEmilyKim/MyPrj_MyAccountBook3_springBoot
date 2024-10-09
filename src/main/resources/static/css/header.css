@@ -1,62 +1,110 @@
 @charset "UTF-8";
 
+header {
+	min-height: 5%;
+	width: 100%;
+	background-color: var(--header-background-color);
+	padding: 0.8rem;
+	display: flex;
+	justify-content: space-between; /* 가로축 정렬: 요소들 사이 동일 간격 */
+    align-items: center;	/* 세로축 정렬: 가운데 */
+}
+
+header > * {
+	border: 1px;
+	/* border: 1px solid plum; */
+	display: flex;
+	justify-content: space-between;
+	align-items: center; /* 세로축 정렬: 가운데 */
+}
+
+/* ----- 로고 영역 ----- */
+
+#logos {
+	display: flex;
+	flex-direction: row;
+}
+
+.iconLogo {
+	height: 2.5rem;
+}
+.iconLogo:hover {
+	cursor: pointer;
+}
+
+#titleLogo {
+	color: var(--header-text-color);
+	font-size: 1.4rem;
+	font-weight: 800;
+	cursor: pointer;
+	padding: 0.4rem;
+	border-radius: 0.5rem;
+}
+#titleLogo:hover {
+	background-color: var(--header-hoverMenu-under);
+}
+
+/* ----- 메뉴 영역 ----- */
+
+header ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+header a {
+    font-size: 1.3rem;
+    font-weight: 800;
+    padding-bottom: 0.1rem;
+    color: var(--header-text-color); 
+}
+header a:hover {
+    border-bottom: 0.3rem solid var(--header-hoverMenu-under);
+    color: var(--header-hoverMenu-color);
+}
+header .selected {
+    border-bottom: 0.3rem solid var(--header-selectedMenu-under);
+    color: var(--header-selectedMenu-color);
+}
+
+/* ----- 토글 메뉴 ----- */
+
+#toggle_menu {
+	display: none; /* 기본 상태 : 비표시 */
+	color: var(--header-text-color);
+	font-size: 2rem;
+	padding: 0.1rem 0.5rem;
+	border-radius: 0.5rem;
+}
+#toggle_menu:hover {
+	cursor: pointer;
+	background-color: var(--header-hoverMenu-under);	
+}
+#toggle_menu.active {
+	background-color: var(--header-hoverMenu-under);	
+}
+
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 768px) {
 	header {
-		min-height: 8%;
-		width: 100%;
-		background-color: var(--header-background-color);
-		padding-left: 0.5rem;
-		padding-right: 1.0rem;
 		display: flex;
-		justify-content: space-between; /* 가로축 정렬: 요소들 사이 동일 간격 */
-	    align-items: center;	/* 세로축 정렬: 가운데 */
+		flex-direction: column;
+		justify-content: flex-start;
 	}
 	
-	header > * {
-		border: 1px;
-		/* border: 1px solid plum; */
+	#toggle_menu {
+		display: block; /* 기본 상태 : 표시 */
 	}
 	
-	#logos {
-		display: flex;
-		flex-direction: row;
-	}
-	
-	.iconLogo {
-		height: 3rem;
-		margin-right: -0.3rem;
-	}
-	.iconLogo:hover {
-		cursor: pointer;
-	}
-	
-	#titleLogo {
-		color: var(--header-text-color);
-		font-size: 1.5rem;
-		font-weight: 800;
-		cursor: pointer;
-		padding: 0.4rem;
-		border-radius: 1rem;
-	}
-	#titleLogo:hover {
-		background-color: var(--header-hoverMenu-under);
+	#menu {
+		display: none;  /* 기본 상태 : 비표시 */
+		border-top: 2px solid white;
+		padding: 0.8rem 1.0rem 0; 
 	}
 
-	header ul {
-	    display: flex;
-	    flex-direction: row;
-	    gap: 1.5rem;
-	}
-	header a {
-	    font-size: 1.2rem;
-	    font-weight: 800;
-	    padding-bottom: 0.1rem;
-	    color: var(--header-text-color); 
-	}
-	header a:hover {
-	    border-bottom: 5px solid var(--header-hoverMenu-under);
-	    color: var(--header-hoverMenu-color);
-	}
-	header .selected {
-	    border-bottom: 5px solid var(--header-selectedMenu-under);
-	    color: var(--header-selectedMenu-color);
-	}
+	/* 토글 메뉴 클릭하면 메뉴 표시 */
+	.toggle_menu.active + #menu {
+        display: block;
+    }
+	
+}

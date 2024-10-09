@@ -4,6 +4,7 @@
 
 <header>
 
+<div>
 	<div id="logos">
 		<c:if test="${ empty sessionScope.USER_ID }">
 			<img src="${pageContext.request.contextPath}/images/pig_money.png" class="iconLogo" id="iconLogo_guest">
@@ -14,6 +15,10 @@
 		<h1 id="titleLogo">My 가계부 Ver3.</h1>
 	</div>
 	
+	<i id="toggle_menu" class="fa-solid fa-caret-down"></i>
+</div>
+
+<div>
 	<nav id="menu">
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/tran/crt" id="tranCrt">가계부 쓰기</a></li>
@@ -28,7 +33,9 @@
 		</c:if>
 		</ul>
 	</nav>
+</div>
 	
 </header>
 
 <script type="module" src="${pageContext.request.contextPath}/js/home/inc/header.js"></script>
+<script src="https://kit.fontawesome.com/f747bc5595.js" ></script>

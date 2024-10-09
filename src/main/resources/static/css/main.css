@@ -1,52 +1,51 @@
 @charset "UTF-8";
 
-	main {
-		height:100%;
-		width: 100%;
-		background-color: var(--main-background-color);
-		padding: 50px;
-		text-align: center;
-	}
-	
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		align-items: center;
-	}
-	
-	#mainTitle { color: var(--main-text-color); }
-	#guide_main_1 { color: var(--main-hoverMenu-under); }
-	#mainImage { margin-top: 10px;}
-	
-	/* 로딩 마크 */
-	.loader {
-	    border: 8px solid var(--aside-background-color);
-	    border-top: 8px solid var(--main-hoverMenu-color);
-	    border-radius: 50%;
-	    width: 25px;
-	    height: 25px;
-	    animation: spin 2s linear infinite;
-	    transform: translate(-50%, -50%);
-	}
-	.loader_breathe {
-		margin: 4px 0 -4px;
-	    border: 7px solid var(--aside-background-color);
-	    border-top: 7px solid var(--aside-background-color);
-	    border-radius: 50%;
-	    width: 25px;
-	    height: 25px;
-	    animation: breathe 2s ease-in-out infinite;
-	    transform: translate(-50%, -50%);
-	}
-	
-	/* 로딩 애니메이션 */
-	@keyframes spin {
-	    0% { transform: rotate(0deg); }
-	    100% { transform: rotate(360deg); }
-	}
-	@keyframes breathe {
-	    0%, 100% { transform: scale(0.8); }
-	    50% { transform: scale(1.3); }
-	}
-	
+main {
+	height:100%;
+	width: 100%;
+	background-color: var(--main-background-color);
+	padding: 3rem;
+	text-align: center;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+#mainTitle { color: var(--main-text-color); }
+#guide_main_1 { color: var(--main-hoverMenu-under); }
+#mainImage { margin-top: 10px;}
+
+/* 로딩 마크 */
+.loader {
+    border: 8px solid var(--aside-background-color);
+    border-top: 8px solid var(--main-hoverMenu-color);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+    transform: translate(-50%, -50%);
+}
+.loader_breathe {
+	margin: 4px 0 -4px;
+    border: 7px solid var(--aside-background-color);
+    border-top: 7px solid var(--aside-background-color);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: breathe 2s ease-in-out infinite;
+    transform: translate(-50%, -50%);
+}
+
+/* 로딩 애니메이션 */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes breathe {
+    0%, 100% { transform: scale(0.8); }
+    50% { transform: scale(1.3); }
+}

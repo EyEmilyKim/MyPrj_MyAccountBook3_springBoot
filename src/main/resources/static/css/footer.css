@@ -1,48 +1,48 @@
 @charset "UTF-8";
 
-	footer {
-		background-color: var(--footer-background-color);
-		width: 100%;
-		min-height: 13%; /* 확장, 축소 없이 지정된 높이로 고정 */
-		padding: 0.5rem;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.5rem;
-		color: var(--footer-text-color);
-	}
+footer {
+	background-color: var(--footer-background-color);
+	width: 100%;
+	min-height: 5%;
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.2rem;
+	color: var(--footer-text-color);
+}
 
-	footer > * {
-		border: 1px;
-		/* border: 1px solid plum; */
-	}
+footer > * {
+	border: 1px;
+	/* border: 1px solid plum; */
+}
 
-	footer h1{
-		font-size: 1.5rem;
-	}
-	
-	footer .icons {
-		display: flex;
-		flex-direction: row;
-		gap: 2rem;
-	}
-	footer .icons i {
-		color: var(--footer-text-color);
-		padding: 0.5rem;
-		font-size: 1.1rem;
-	}
-	footer .icons i:hover {
-		cursor: pointer;
-		background-color: var(--footer-hoverMenu-color);
-		border-radius: 1rem;
-	}
-	footer .icons i:active {
-		cursor: pointer;
-		background-color: var(--footer-selectedMenu-color);
-		border-radius: 1rem;
-	}
-	
-	footer clock {
-		margin: 0rem;
-		font-size: 1rem;
-	}
+footer h3 {
+	font-size: 1.2rem;
+}
+
+footer .icons {
+	display: flex;
+	flex-direction: row;
+	gap: 0.8rem;
+}
+footer .icons i {
+	color: var(--footer-text-color);
+	padding: 0.3rem;
+	font-size: 1.2rem;
+}
+footer .icons i:hover {
+	cursor: pointer;
+	background-color: var(--footer-hoverMenu-color);
+	border-radius: 1rem;
+}
+footer .icons i:active {
+	cursor: pointer;
+	background-color: var(--footer-selectedMenu-color);
+	border-radius: 1rem;
+}
+
+footer clock {
+	margin: 0rem;
+	font-size: 1rem;
+}
