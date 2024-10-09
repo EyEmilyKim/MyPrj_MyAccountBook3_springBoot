@@ -115,13 +115,13 @@
 				<thead class="label">
 					<tr>
 						<td class="tran_id">tran_id</td>
-						<td>날짜</td>
-						<td>구분</td>
+						<td class="tran_date">날짜</td>
+						<td class="tran_inex">구분</td>
 						<td class="tran_cate">카테고리</td>
-						<td class="tran_amount">내용</td>
-						<td class="tran_item">금액</td>
+						<td class="tran_item">내용</td>
+						<td class="tran_amount">금액</td>
 						<td class="tran_meth">결제수단</td>
-						<td>편집</td>
+						<td class="tran_edit">편집</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -143,8 +143,12 @@
 							<td class="amount"><fmt:formatNumber value="${t.amount}" type="number" pattern="#,##0" /> 원</td>
 							<c:if test="${t.inex == 'EX' }"><td>${t.meth_name }</td></c:if>
 							<c:if test="${t.inex == 'IN' }"><td> - </td></c:if>
-							<td><a class="btn" href="${urlUpd }" >수정</a>
-								<a class="btn" href="${urlDel }" >삭제</a></td>
+							<td>
+								<div class="btns">
+									<a class="btn" href="${urlUpd }" >수정</a> 
+									<a class="btn" href="${urlDel }" >삭제</a>
+								</div>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

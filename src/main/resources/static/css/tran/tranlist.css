@@ -77,6 +77,10 @@
 .tranTable .amount, .btn {
 	white-space: nowrap; /* 줄바꿈 방지 */
 }
+.btns {
+	display: flex;
+	gap: 0.3rem;
+}
 
 tbody tr:nth-child(odd) {
 	background-color: white;
@@ -85,6 +89,15 @@ tbody tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 
+.tran_item {
+	min-width: 25%;
+}
+.tran_cate, .tran_meth {
+	width: 12%;
+}
+.tran_inex {
+	width: 8%;
+}
 
 /* ---------- 목록 컨트롤 ----------*/
 #controlViewBlock {
@@ -141,3 +154,7 @@ tbody tr:nth-child(even) {
 		justify-content: center;
 	}
 
+	.btns {
+		flex-direction: column;
+	}
+}
