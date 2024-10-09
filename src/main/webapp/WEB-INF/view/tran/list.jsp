@@ -107,7 +107,7 @@
 						<td class="tran_amount">내용</td>
 						<td class="tran_item">금액</td>
 						<td class="tran_meth">결제수단</td>
-						<td>btn</td>
+						<td>편집</td>
 					</tr>
 				</thead>
 				<tbody>
