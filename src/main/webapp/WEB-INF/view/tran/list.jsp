@@ -36,46 +36,60 @@
 		<div id="searchBlock">
 		<!-- 1-1. 검색 form -->
 			<form name="fmSRCH" id="fmSRCH">
-				<input type="date" name="D_FROM" value="${param.D_FROM}" id="search_d_from" />
-				 ~ <input type="date" name="D_TO" value="${param.D_TO}" id="search_d_to" /> 
-				<input type="text" name="ITEM" value="${param.ITEM}" placeholder="--내용--" id="search_item" />
-				<select name="CATE_NAME" id="slct_cname">
-						<option value="">--카테고리--</option>
-					<c:forEach var="option" items="${CNAME_LIST}">
-						<option value="${option}" <c:if test="${option == param.CATE_NAME}">selected</c:if>>
-				            ${option}
-				        </option>
-					</c:forEach>
-				</select>
-			<c:if test="${inex == 'EX' }">
-				<select name="METH_NAME" id="slct_mname">
-						<option value="">--결제수단--</option>
-					<c:forEach var="option" items="${MNAME_LIST}">
-					<c:if test="${option != '해당없음' }">
-						<option value="${option}" <c:if test="${option == param.METH_NAME}">selected</c:if>>
-				            ${option}
-				        </option>
-					</c:if>
-					</c:forEach>
-				</select>
-			</c:if>
+				<div class="fmSRCH_depth1">
+					<input type="date" name="D_FROM" value="${param.D_FROM}" id="search_d_from" />
+					~
+					<input type="date" name="D_TO" value="${param.D_TO}" id="search_d_to" /> 
+				</div>
+				
+				<div class="fmSRCH_depth1">
+					<input type="text" name="ITEM" value="${param.ITEM}" placeholder="--내용--" id="search_item" />
+					<select name="CATE_NAME" id="slct_cname">
+							<option value="">--카테고리--</option>
+						<c:forEach var="option" items="${CNAME_LIST}">
+							<option value="${option}" <c:if test="${option == param.CATE_NAME}">selected</c:if>>
+					            ${option}
+					        </option>
+						</c:forEach>
+					</select>
+				
+				<c:if test="${inex == 'EX' }">
+					<select name="METH_NAME" id="slct_mname">
+							<option value="">--결제수단--</option>
+						<c:forEach var="option" items="${MNAME_LIST}">
+						<c:if test="${option != '해당없음' }">
+							<option value="${option}" <c:if test="${option == param.METH_NAME}">selected</c:if>>
+					            ${option}
+					        </option>
+						</c:if>
+						</c:forEach>
+					</select>
+				</c:if>
+				
 				<input type="text" name="INEX" value="${inex }" id="search_inex" placeholder="INEX 자동" />
 				<input type="text" name="RC" value="${rowCount }" id="search_rc" placeholder="RC 자동" />
 				<input type="text" name="PG" value="${currentPage }" id="search_page" placeholder="PG 자동" />
+				
 				<input type="submit" value="조회하기" id="search_submit" />
+				</div>
 			</form>
 		<!-- 1-2. 검색 결과 표시 -->
 			<c:if test="${not empty param.D_FROM || not empty param.D_TO || not empty param.ITEM
 			 || not empty param.CATE_NAME || not empty param.METH_NAME}">
 				<div id="searchResult">
-					<p>기간 : [<span> ${param.D_FROM } </span> ~ <span> ${param.D_TO } </span>] / 
-						내용 : [<span> ${param.ITEM } </span>] / 
-						카테고리 : [<span> ${param.CATE_NAME} </span>] 
-					<c:if test="${inex == 'EX' }">
-						 / 결제수단 : [<span> ${param.METH_NAME} </span>] 
-					</c:if>
-						검색 결과입니다.</p> 
-					<input type="button" value="전체보기" id="search_reset" />		
+					<div class="srchResult_depth1">
+						<p>기간 : [<span> ${param.D_FROM } </span> ~ <span> ${param.D_TO } </span>] / 
+							내용 : [<span> ${param.ITEM } </span>] / 
+							카테고리 : [<span> ${param.CATE_NAME} </span>] 
+						<c:if test="${inex == 'EX' }">
+							 / 결제수단 : [<span> ${param.METH_NAME} </span>] 
+						</c:if>
+						</p> 
+					</div>
+					<div class="srchResult_depth1">
+							<p>조건으로 검색한 결과입니다.</p>
+							<input type="button" value="전체보기" id="search_reset" />
+					</div>		
 				</div>
 			</c:if>
 			

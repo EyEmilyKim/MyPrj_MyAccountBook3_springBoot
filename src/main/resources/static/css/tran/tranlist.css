@@ -4,26 +4,49 @@
 
 /* 검색 form */
 #searchBlock {
-	margin-bottom: 15px;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 0.5rem;
 	align-items: center;
 }
 #fmSRCH {
 	display: flex;
 	flex-direction: row;
-	gap: 10px;
+	justify-content: center;
+	gap: 0.5rem;
+}
+.fmSRCH_depth1 {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem;
+}
+.fmSRCH_depth1 > * {
+	min-width: 8rem;
+	max-width: 10rem;
 }
 
 /* 검색 결과 표시 */
 #searchResult {
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.4rem;
+}
+.srchResult_depth1 {
+	display: flex;
 	flex-direction: row;
-	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+#searchResult p {
+	font-size: 1.1rem;
 }
 #searchResult span {
 	font-weight: bold;
+}
+#search_reset {
+	width: 8rem;
 }
 
 /* ---------- 실제 목록 ----------*/
@@ -31,15 +54,15 @@
 	border: solid 1px gray;
 	border-radius: 10px;
 	width: 100%;
-	padding: 15px;
+	padding: 0.5rem;
 }
 
 /* 거래내역 없음 */
 .noTran {
-	margin: 30px;
+	margin: 2rem;
 }
 .noTran p {
-	margin-bottom: 20px;
+	margin-bottom: 1rem;
 }
 .noTran a {
 	color: blue; 
@@ -62,13 +85,15 @@ tbody tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 
+
 /* ---------- 목록 컨트롤 ----------*/
 #controlViewBlock {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	font-size: medium;
-	margin-top: 20px;
+	font-size: 1.0rem;
+	margin-top: 0.5rem;
+	padding: 0.5rem;
 }
 
 /* 페이지 블럭 */
@@ -77,9 +102,8 @@ tbody tr:nth-child(even) {
 	justify-content: center;
 }
 #pageBlock > * {
-	margin: 0 2px;
-	padding: 3px 6px;
-    border-radius: 8px;
+	padding: 0.2rem 0.4rem;
+    border-radius: 1.0rem;
 }
 #pageBlock .current {
     background-color: var(--main-selectedMenu-color);
@@ -97,5 +121,23 @@ tbody tr:nth-child(even) {
 
 /* N줄보기 블럭 */
 #slct_rc {
-	font-size: medium;
+	font-size: 1.0rem;
 }
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 1080px) {
+
+	#fmSRCH {
+		width: 80%;
+		align-self:center;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.fmSRCH_depth1 {
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
