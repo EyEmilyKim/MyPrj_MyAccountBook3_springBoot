@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <aside>
-	<nav id="menu">
+	<nav id="sub_menu">
 		<ul>
 			<li>이번달 목표</li>
 			<li>이번달 예산</li>

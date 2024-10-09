@@ -1,28 +1,56 @@
 @charset "UTF-8";
 
+aside {
+	min-width: 15%; /* #middle 안에서 너비 설정 */
+	background-color: var(--aside-background-color);
+	padding: 1.2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+aside ul {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+aside li a {
+	font-size: 1.0rem;
+	font-weight: 600;
+    padding-bottom: 0.3rem;
+    color: var(--aside-text-color); 
+}
+aside a:active {
+    border-bottom: 0.2rem solid var(--aside-selectedMenu-under);
+    color: var(--aside-selectedMenu-color);
+}
+aside a:hover {
+    border-bottom: 0.2rem solid var(--aside-selectedMenu-under);
+    color: var(--aside-selectedMenu-color);
+}
+aside .selected {
+    border-bottom: 0.2rem solid var(--aside-hoverMenu-under);
+    color: var(--aside-hoverMenu-color);
+}
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 768px) {
 	aside {
-		height: 100%;
-		width: 20%; /* #middle 안에서 너비 설정 */
-		background-color: var(--aside-background-color);
-		padding: 2em;
+		width: 100%;
+		min-height: 5%;
+		order: 1; /* aside를 main 위로 배치 */
+		
+		align-content: center;
+		justify-content: space-around;
 	}
-	aside li {
-		margin-bottom: 2rem;
+	
+	aside ul {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around; /* li 간격을 균등하게 분배 */
 	}
+	
 	aside li a {
-		font-weight: 600;
-	    padding-bottom: 5px;
-	    color: var(--aside-text-color); 
+		font-size: 1.2rem;
 	}
-	aside a:active {
-	    border-bottom: 3px solid var(--aside-selectedMenu-under);
-	    color: var(--aside-selectedMenu-color);
-	}
-	aside a:hover {
-	    border-bottom: 3px solid var(--aside-selectedMenu-under);
-	    color: var(--aside-selectedMenu-color);
-	}
-	aside .selected {
-	    border-bottom: 3px solid var(--aside-hoverMenu-under);
-	    color: var(--aside-hoverMenu-color);
-	}
+}

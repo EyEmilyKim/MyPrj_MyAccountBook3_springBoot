@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	const iconLogo_user = document.getElementById("iconLogo_user");
 	const titleLogo = document.getElementById("titleLogo");
+	
+	const toggle_menu = document.getElementById("toggle_menu");
+	const menu = document.getElementById("menu");
+	
 	const tranCrt = document.getElementById("tranCrt"); 
 	const tranList = document.getElementById("tranList"); 
 	const plan = document.getElementById("plan"); 
@@ -30,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		window.location = contextPath + "/";
 	})
 	
-	// 현재 메뉴 표시
+	// 현재 메뉴 하이라이트
 	const menu_elements = [tranCrt, tranList, plan, set];
 	const menu_paths = ['/tran/crt', '/tran/list', '/plan', '/set'];
 	if (login) {
@@ -41,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		menu_paths.push('/logout');
 	}
 	menu_elements.forEach((i, idx) => {
-		if(currentPath.startsWith(menu_paths[idx]))
+		if(currentPath.startsWith(contextPath + menu_paths[idx]))
 			i.classList.add('selected');
 	})
 	
@@ -52,5 +56,24 @@ document.addEventListener('DOMContentLoaded', () => {
 				event.preventDefault();
 		})
 	}
+	
+	// 토글 메뉴 
+	toggle_menu.addEventListener('click', () => {
+		toggle_menu.classList.toggle('active');
+		menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+	})
+	
+	// 브라우저 창 너비에 따른 메뉴 표시 제어
+	window.addEventListener('resize', () => {
+		// 화면 다시 넓어지면 menu 정상 표시
+		if (window.innerWidth > 768) {
+			menu.style.display = 'block';
+			toggle_menu.classList.remove('active');
+		} 
+		// 좁은 화면에서는 menu 비표시
+		else {
+			menu.style.display = 'none';
+		}
+	});
 	
 });

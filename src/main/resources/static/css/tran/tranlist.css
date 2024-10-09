@@ -4,26 +4,49 @@
 
 /* 검색 form */
 #searchBlock {
-	margin-bottom: 15px;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 0.5rem;
 	align-items: center;
 }
 #fmSRCH {
 	display: flex;
 	flex-direction: row;
-	gap: 10px;
+	justify-content: center;
+	gap: 0.5rem;
+}
+.fmSRCH_depth1 {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem;
+}
+.fmSRCH_depth1 > * {
+	min-width: 8rem;
+	max-width: 10rem;
 }
 
 /* 검색 결과 표시 */
 #searchResult {
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.4rem;
+}
+.srchResult_depth1 {
+	display: flex;
 	flex-direction: row;
-	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+#searchResult p {
+	font-size: 1.1rem;
 }
 #searchResult span {
 	font-weight: bold;
+}
+#search_reset {
+	width: 8rem;
 }
 
 /* ---------- 실제 목록 ----------*/
@@ -31,15 +54,15 @@
 	border: solid 1px gray;
 	border-radius: 10px;
 	width: 100%;
-	padding: 15px;
+	padding: 0.5rem;
 }
 
 /* 거래내역 없음 */
 .noTran {
-	margin: 30px;
+	margin: 2rem;
 }
 .noTran p {
-	margin-bottom: 20px;
+	margin-bottom: 1rem;
 }
 .noTran a {
 	color: blue; 
@@ -49,7 +72,16 @@
 .tranTable {
 	width: 100%;
 	border-collapse: collapse; /* 셀 경계 병합 */
+	table-layout: fixed; /* 테이블 레이아웃 고정, 일정 너비 유지*/
 }
+.tranTable .amount, .btn {
+	white-space: nowrap; /* 줄바꿈 방지 */
+}
+.btns {
+	display: flex;
+	gap: 0.3rem;
+}
+
 tbody tr:nth-child(odd) {
 	background-color: white;
 }
@@ -57,8 +89,14 @@ tbody tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 
+.tran_item {
+	min-width: 25%;
+}
 .tran_cate, .tran_meth {
-	width: 18%;
+	width: 12%;
+}
+.tran_inex {
+	width: 8%;
 }
 
 /* ---------- 목록 컨트롤 ----------*/
@@ -66,8 +104,9 @@ tbody tr:nth-child(even) {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	font-size: medium;
-	margin-top: 20px;
+	font-size: 1.0rem;
+	margin-top: 0.5rem;
+	padding: 0.5rem;
 }
 
 /* 페이지 블럭 */
@@ -76,9 +115,8 @@ tbody tr:nth-child(even) {
 	justify-content: center;
 }
 #pageBlock > * {
-	margin: 0 2px;
-	padding: 3px 6px;
-    border-radius: 8px;
+	padding: 0.2rem 0.4rem;
+    border-radius: 1.0rem;
 }
 #pageBlock .current {
     background-color: var(--main-selectedMenu-color);
@@ -96,5 +134,27 @@ tbody tr:nth-child(even) {
 
 /* N줄보기 블럭 */
 #slct_rc {
-	font-size: medium;
+	font-size: 1.0rem;
+}
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 1080px) {
+
+	#fmSRCH {
+		width: 80%;
+		align-self:center;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.fmSRCH_depth1 {
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	.btns {
+		flex-direction: column;
+	}
 }
