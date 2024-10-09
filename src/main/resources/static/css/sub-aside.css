@@ -33,7 +33,7 @@ aside .selected {
 }
 
 /* ----- 좁은 화면일 때 ----- */
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 768px) {
 	aside {
 		width: 100%;
 		min-height: 5%;
