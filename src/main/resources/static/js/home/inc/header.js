@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		menu_paths.push('/logout');
 	}
 	menu_elements.forEach((i, idx) => {
-		if(currentPath.startsWith(menu_paths[idx]))
+		if(currentPath.startsWith(contextPath + menu_paths[idx]))
 			i.classList.add('selected');
 	})
 	
