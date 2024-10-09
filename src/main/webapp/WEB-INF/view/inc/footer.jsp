@@ -13,7 +13,7 @@
 		<c:set var="tooltip_email" value="개발자에게 문의하기" />
 	</div>
 
-	<h3>All Right Reserved.2024 EyEmilyKim</h3>
+	<h3>All Right Reserved.2024 EyEmilyKim / Ver.3_${appVersion }</h3>
 	
 	<ul class="icons">
         <li><a href="${url_blog }" title="${tooltip_blog }"><i id="icon_blog" class="fa-solid fa-blog icon"></i></a></li>
