@@ -34,7 +34,7 @@ header > * {
 
 #titleLogo {
 	color: var(--header-text-color);
-	font-size: 1.5rem;
+	font-size: 1.4rem;
 	font-weight: 800;
 	cursor: pointer;
 	padding: 0.4rem;
@@ -58,11 +58,11 @@ header a {
     color: var(--header-text-color); 
 }
 header a:hover {
-    border-bottom: 5px solid var(--header-hoverMenu-under);
+    border-bottom: 0.3rem solid var(--header-hoverMenu-under);
     color: var(--header-hoverMenu-color);
 }
 header .selected {
-    border-bottom: 5px solid var(--header-selectedMenu-under);
+    border-bottom: 0.3rem solid var(--header-selectedMenu-under);
     color: var(--header-selectedMenu-color);
 }
 

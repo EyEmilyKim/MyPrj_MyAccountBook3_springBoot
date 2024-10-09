@@ -3,58 +3,40 @@
 main {
 	flex: 1; /* #middle 남은 너비 차지 */
 	background-color: var(--main-background-color);
-	padding: 2em;
+	padding: 1.5rem;
 	overflow-y: auto; /* 이 영역만 스크롤 */
 }
 
 .contMain { 
-	min-width:500px; 
-	min-height:300px; 
 	background-color: white; 
 	text-align:center; 
-	padding: 30px 30px 50px; 
+	padding: 1.5rem; 
 	border-radius: 15px;
 } 
 .title {
-	font-size: 20px;
+	font-size: 1.4rem;
 	font-weight: bold;
-	margin: 0 0 20px; 
+	margin: 0 0 1.5rem; 
 	color:var(--header-hoverMenu-color); 
 }
 .count {
-	margin: 10px 0 20px; 
+	margin: 1.2rem; 
 }
 .cnt {
 	color: var(--aside-hoverMenu-color);
+	font-size: 1.2rem;
 	font-weight: bold;
 }
 
 table {
 	margin: auto;
-	padding: 10px;
-	min-width: 400px;
+	min-width: 25rem;
 }
 thead {
 	background-color: var(--aside-background-color);
 }
 td {
-	padding: 2px 5px 2px;
-}
-
-.form {
-	margin: auto;
-	padding: 30px;
-	min-width: 200px;
-} 
-.content {
-	display: float;
-	justify-content: center;
-	/* border: solid 1px blue; */
-	margin: 0 0 10px;
-}
-.content div {
-	margin: 5px 10px 5px;
-	/* border: solid 1px green; */
+	padding: 0.2rem;
 }
 
 .buttons {
@@ -65,7 +47,7 @@ td {
 	display: float;
     font-size: 0.9rem;
     font-weight: 400; 
-    padding: 0.1rem 0.2rem;
+    padding: 0.2rem 0.3rem;
     margin: auto;
     width: 100px;
     border: none;

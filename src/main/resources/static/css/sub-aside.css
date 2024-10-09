@@ -15,20 +15,21 @@ aside ul {
 }
 
 aside li a {
+	font-size: 1.0rem;
 	font-weight: 600;
     padding-bottom: 0.3rem;
     color: var(--aside-text-color); 
 }
 aside a:active {
-    border-bottom: 3px solid var(--aside-selectedMenu-under);
+    border-bottom: 0.2rem solid var(--aside-selectedMenu-under);
     color: var(--aside-selectedMenu-color);
 }
 aside a:hover {
-    border-bottom: 3px solid var(--aside-selectedMenu-under);
+    border-bottom: 0.2rem solid var(--aside-selectedMenu-under);
     color: var(--aside-selectedMenu-color);
 }
 aside .selected {
-    border-bottom: 3px solid var(--aside-hoverMenu-under);
+    border-bottom: 0.2rem solid var(--aside-hoverMenu-under);
     color: var(--aside-hoverMenu-color);
 }
 
@@ -47,5 +48,9 @@ aside .selected {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around; /* li 간격을 균등하게 분배 */
+	}
+	
+	aside li a {
+		font-size: 1.2rem;
 	}
 }

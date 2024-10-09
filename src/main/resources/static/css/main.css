@@ -4,14 +4,14 @@ main {
 	height:100%;
 	width: 100%;
 	background-color: var(--main-background-color);
-	padding: 50px;
+	padding: 3rem;
 	text-align: center;
 }
 
 section {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 0.5rem;
 	align-items: center;
 }
 

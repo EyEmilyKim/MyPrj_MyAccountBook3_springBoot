@@ -3,12 +3,12 @@
 footer {
 	background-color: var(--footer-background-color);
 	width: 100%;
-	min-height: 10%; /* 확장, 축소 없이 지정된 높이로 고정 */
+	min-height: 5%;
 	padding: 0.5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 0.5rem;
+	gap: 0.2rem;
 	color: var(--footer-text-color);
 }
 
@@ -17,18 +17,18 @@ footer > * {
 	/* border: 1px solid plum; */
 }
 
-footer h1{
-	font-size: 1.5rem;
+footer h3 {
+	font-size: 1.2rem;
 }
 
 footer .icons {
 	display: flex;
 	flex-direction: row;
-	gap: 1.2rem;
+	gap: 0.8rem;
 }
 footer .icons i {
 	color: var(--footer-text-color);
-	padding: 0.5rem;
+	padding: 0.3rem;
 	font-size: 1.2rem;
 }
 footer .icons i:hover {
