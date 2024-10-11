@@ -1,10 +1,12 @@
 package com.EyEmilyKim.controller;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -20,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.EyEmilyKim.config.AppConfig;
@@ -46,6 +49,8 @@ class HomeControllerTest {
 	
 	@MockBean
 	private OperatingHoursInterceptor operatingHoursInterceptor;
+	
+	private MockHttpSession mockHttpSession;
 	
 	
 	@BeforeEach
@@ -82,21 +87,65 @@ class HomeControllerTest {
 	/*-------- 시간 외 홈 화면 --------*/
 	
 	@Test
-	@DisplayName("시간외 홈 Get")
-	void testGetOutOfOpHours() throws Exception {
-		mockMvc.perform(get("/outOfOpHours"))
+	@DisplayName("시간외 홈 Get - 서버 리다이렉션")
+	void testGetOutOfOpHours_byServer() throws Exception {
+		// given
+		// session 에 attribute 설정 => 서버에 의한 리다이렉션
+		mockHttpSession = new MockHttpSession();
+		mockHttpSession.setAttribute("redirectedFromInterceptor", true);
+		
+		// when & then
+		mockMvc.perform(get("/outOfOpHours").session(mockHttpSession))
 			.andExpect(status().isOk())
 			.andExpect(view().name("root.outOfOpHours"));
+		
+		// session.invalidate() 확인
+		assertThrows(IllegalStateException.class, () -> {
+			mockHttpSession.getAttribute("USER_ID");
+		});
+		assertThrows(IllegalStateException.class, () -> {
+			mockHttpSession.getAttribute("redirectedFromInterceptor");
+		});
+	}
+	
+	@Test
+	@DisplayName("시간외 홈 Get - 사용자 직접 요청 > 홈")
+	void testGetOutOfOpHours_byUser() throws Exception {
+		// given
+		// session 에 attribute 설정 없음 => 사용자가 직접 요청
+		
+		// when & then
+		mockMvc.perform(get("/outOfOpHours"))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(redirectedUrl("/"));
 	}
 	
 	/*-------- 로그인 --------*/
 	
 	@Test
-	@DisplayName("로그인 Get")
-	void testGetLogin() throws Exception {
+	@DisplayName("로그인 Get - 로그인 전")
+	void testGetLogin_notLoggedIn() throws Exception {
+		// given
+		// 생성된 session 없음 => 로그아웃 상태
+		
+		// when & then
 		mockMvc.perform(get("/login"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("root.login"));
+	}
+	
+	@Test
+	@DisplayName("로그인 Get - 로그인 후 > 홈")
+	void testGetLogin_alreadyLoggedIn() throws Exception {
+		// given
+		// session 에 user 정보 있음 => 로그인 상태
+		mockHttpSession = new MockHttpSession();
+		mockHttpSession.setAttribute("USER_ID", 1);
+		
+		// when & then
+		mockMvc.perform(get("/login").session(mockHttpSession))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(redirectedUrl("/"));
 	}
 	
 	@Test
