@@ -49,10 +49,6 @@ public class OperatingHoursInterceptor implements HandlerInterceptor {
     
 		// 운영시간 외일 경우
 		if(currentTime.isBefore(startTime) || currentTime.isAfter(endTime)) {
-			HttpSession session = req.getSession(false);
-			if(session != null) {
-				session.invalidate(); // 세션 종료
-			}
 			
 			// 리다이렉트 및 운영시간 안내
 			res.sendRedirect(appConfig.getContextPath() + "/outOfOpHours");

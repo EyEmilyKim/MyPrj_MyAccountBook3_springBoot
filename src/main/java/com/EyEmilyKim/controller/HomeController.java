@@ -58,8 +58,13 @@ public class HomeController {
 	@Operation(summary = "시간외 메인 페이지", description = "서비스 운영시간 외에 로그인이 필요한 메뉴 접근 시 표시")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/outOfOpHours")
-	public String get_outOfOpHours() {
+	public String get_outOfOpHours(HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > get_outOfOpHours() called");
+		
+		// 세션 종료
+		if (session != null) {
+			session.invalidate();
+		}
 		
 		return "root.outOfOpHours";
 	}
