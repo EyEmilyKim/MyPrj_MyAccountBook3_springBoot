@@ -13,7 +13,14 @@
 
 <script>
 	console.log("Hi ComingSoon");
+	let href;
+	if (document.referrer) {
+		href = document.referrer;
+	} else {
+		href = "/";
+	}
+	console.log('href', href);
 	setTimeout(() => {
-	    history.back();
+	    location.href = href;
 	}, 5000);
 </script>

@@ -69,9 +69,14 @@ public class HomeController {
 	@Operation(summary = "로그인 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/login")
-	public String get_login() {
+	public String get_login(HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > get_login() called");
 		
+		// 이미 로그인한 상태로 요청 시 홈으로 이동
+		Integer userId = (Integer) session.getAttribute("USER_ID");
+		System.out.println("HomeCont.get_login() userId : " + userId);
+		if(userId != null) return "redirect:/"; 
+			
 		return "root.login";
 	}
 	
