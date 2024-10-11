@@ -104,19 +104,23 @@ tbody tr:nth-child(even) {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	font-size: 1.0rem;
+	align-items: center;
 	margin-top: 0.5rem;
-	padding: 0.5rem;
 }
 
 /* 페이지 블럭 */
 #pageBlock {
+	width: 40%;
 	display: flex;
-	justify-content: center;
+	flex-direction: row;
+	gap: 0.3rem;
+	justify-content: flex-start;
+	align-content: center;
 }
 #pageBlock > * {
 	padding: 0.2rem 0.4rem;
     border-radius: 1.0rem;
+    font-size: 1.2rem;
 }
 #pageBlock .current {
     background-color: var(--main-selectedMenu-color);
@@ -131,13 +135,25 @@ tbody tr:nth-child(even) {
     background-color: var(--main-selectedMenu-under);
 }
 
-
-/* N줄보기 블럭 */
-#slct_rc {
-	font-size: 1.0rem;
+/* 서브카운트 블럭  */
+#subCountBlock {
+	width: 20%;
+	display: flex;
+	justify-content: center;
 }
 
-/* ----- 좁은 화면일 때 ----- */
+/* N줄보기 블럭 */
+#rowCountBlock {
+	width: 40%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#slct_rc {
+	font-size: 1.2rem;
+}
+
+/* ----- tranList 기준 좁은 화면일 때 ----- */
 @media screen and (max-width: 1080px) {
 
 	#fmSRCH {
@@ -157,4 +173,14 @@ tbody tr:nth-child(even) {
 	.btns {
 		flex-direction: column;
 	}
+	
+}
+
+/* ----- 좁은 화면일 때 ----- */
+@media screen and (max-width: 768px) {
+	
+	td {
+		font-size: 1.2rem;
+	}
+	
 }

@@ -55,11 +55,22 @@ public class HomeController {
 	
 	/*-------- 시간 외 홈 화면 --------*/
 	
-	@Operation(summary = "시간외 메인 페이지", description = "서비스 운영시간 외에 로그인이 필요한 메뉴 접근 시 표시")
+	@Operation(summary = "시간외 메인 페이지", description = "서비스 운영시간 외에 로그인이 필요한 메뉴 접근 시 표시\n\n사용자의 직접적인 url 접근은 차단")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/outOfOpHours")
-	public String get_outOfOpHours() {
+	public String get_outOfOpHours(HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > get_outOfOpHours() called");
+		
+		// 사용자 직접 요청 방지
+		Boolean redirectedFromInterceptor = (Boolean) session.getAttribute("redirectedFromInterceptor");
+		if (redirectedFromInterceptor == null || !redirectedFromInterceptor) {
+			return "redirect:/";
+		}
+		
+		// 세션 종료
+		if (session != null) {
+			session.invalidate();
+		}
 		
 		return "root.outOfOpHours";
 	}
@@ -69,9 +80,14 @@ public class HomeController {
 	@Operation(summary = "로그인 페이지", description = "")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/login")
-	public String get_login() {
+	public String get_login(HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > get_login() called");
 		
+		// 이미 로그인한 상태로 요청 시 홈으로 이동
+		Integer userId = (Integer) session.getAttribute("USER_ID");
+		System.out.println("HomeCont.get_login() userId : " + userId);
+		if(userId != null) return "redirect:/"; 
+			
 		return "root.login";
 	}
 	
@@ -116,6 +132,12 @@ public class HomeController {
 	@GetMapping("logout")
 	public String get_logout(HttpSession session, Model model) {
 		LogUtil.printWithTimestamp("HomeController > get_logout() called");
+		
+		// 이미 로그아웃한 상태로 요청 시 홈으로 이동
+		Integer userId = (Integer) session.getAttribute("USER_ID");
+		System.out.println("HomeCont.get_logout() userId : " + userId);
+		if(userId == null) return "redirect:/"; 
+		
 		String user_id = (String) session.getAttribute("NICKNAME");
 		String msg = messageUtil.getMessage("message-response", "msg.logout.success")
 				+ "\\n" + messageUtil.getMessage("message-response", "msg.logout.farewell_pre")
