@@ -52,7 +52,7 @@ public class OperatingHoursInterceptorUnitTest {
 	public void setUp() {
   	// given common
   	MockitoAnnotations.openMocks(this);
-  	when(request.getSession(false)).thenReturn(session);
+  	when(request.getSession(true)).thenReturn(session);
   	when(appConfig.getContextPath()).thenReturn("/mab3");
   	when(operatingHoursProps.getStart()).thenReturn("08:00");
   	when(operatingHoursProps.getEnd()).thenReturn("20:00");
@@ -71,7 +71,8 @@ public class OperatingHoursInterceptorUnitTest {
 
   	// then
   	assertFalse(result);
-  	verify(session).invalidate();
+  	verify(request).getSession(true); // 세션 새로 생성
+  	verify(session).setAttribute("redirectedFromInterceptor", true);
   	verify(response).sendRedirect("/mab3/outOfOpHours");
 	}
 
@@ -87,7 +88,6 @@ public class OperatingHoursInterceptorUnitTest {
 
   	// then
   	assertTrue(result);
-  	verify(session, never()).invalidate();
   	verify(response, never()).sendRedirect(anyString());
 	}
   
@@ -103,7 +103,6 @@ public class OperatingHoursInterceptorUnitTest {
   	
   	// then
   	assertTrue(result);
-  	verify(session, never()).invalidate();
   	verify(response, never()).sendRedirect(anyString());
 	}
   
@@ -119,7 +118,8 @@ public class OperatingHoursInterceptorUnitTest {
 
   	// then
   	assertFalse(result);
-  	verify(session).invalidate();
+  	verify(request).getSession(true); // 세션 새로 생성
+  	verify(session).setAttribute("redirectedFromInterceptor", true);
   	verify(response).sendRedirect("/mab3/outOfOpHours");
 	}
 
