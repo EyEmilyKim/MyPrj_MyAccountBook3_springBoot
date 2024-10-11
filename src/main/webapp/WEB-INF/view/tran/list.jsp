@@ -96,7 +96,7 @@
 		</div>	<!-- 검색 블럭 끝 -->
 	
 	<!-- 2. 전체 건 수 -->
-		<div class="count ">총 <span class="cnt">${totalCount }</span> 건</div>
+		<div class="count">총 <span class="cnt">${totalCount }</span> 건</div>
 	
 	<!-- 3. 실제 목록 -->
 		<div class="listMain">
@@ -187,11 +187,13 @@
 			        </c:if>
 				</div> <!-- 페이지 블럭 끝 -->
 		
-			<!-- 4-2. 서브카운트 블럭 -->
-				<div class="subCountBlock ">
-					<span class="cnt">${startCount }</span>
-					 ~ <span class="cnt">${endCount }</span>
-					 / <span>${totalCount }</span> 
+			<!-- 4-2. -->
+				<div id="subCountBlock" class="count">
+					<p>
+						<span class="cnt">${startCount }</span>
+						 ~ <span class="cnt">${endCount }</span>
+						 / <span>${totalCount }</span> 
+					 </p>
 				</div>
 			
 			<!-- 4-3. N줄보기 블럭 -->

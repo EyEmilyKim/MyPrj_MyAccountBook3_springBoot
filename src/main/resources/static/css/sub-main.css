@@ -21,6 +21,7 @@ main {
 }
 .count {
 	margin: 1.2rem; 
+	font-size: 1.2rem;
 }
 .cnt {
 	color: var(--aside-hoverMenu-color);
