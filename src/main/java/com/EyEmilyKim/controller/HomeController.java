@@ -55,11 +55,17 @@ public class HomeController {
 	
 	/*-------- 시간 외 홈 화면 --------*/
 	
-	@Operation(summary = "시간외 메인 페이지", description = "서비스 운영시간 외에 로그인이 필요한 메뉴 접근 시 표시")
+	@Operation(summary = "시간외 메인 페이지", description = "서비스 운영시간 외에 로그인이 필요한 메뉴 접근 시 표시\n\n사용자의 직접적인 url 접근은 차단")
 	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	@GetMapping("/outOfOpHours")
 	public String get_outOfOpHours(HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > get_outOfOpHours() called");
+		
+		// 사용자 직접 요청 방지
+		Boolean redirectedFromInterceptor = (Boolean) session.getAttribute("redirectedFromInterceptor");
+		if (redirectedFromInterceptor == null || !redirectedFromInterceptor) {
+			return "redirect:/";
+		}
 		
 		// 세션 종료
 		if (session != null) {
