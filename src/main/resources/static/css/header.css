@@ -92,20 +92,27 @@ header > * {
 		flex-direction: column;
 		justify-content: flex-start;
 	}
-	
 	#toggle_menu {
 		display: block; /* 기본 상태 : 표시 */
 	}
-	
 	#menu {
 		display: none;  /* 기본 상태 : 비표시 */
 		border-top: 2px solid white;
-		padding: 0.8rem 1.0rem 0; 
+		padding: 1.0rem 1.0rem 0.5rem; 
 	}
-
 	/* 토글 메뉴 클릭하면 메뉴 표시 */
 	.toggle_menu.active + #menu {
         display: block;
     }
+	
+	#logos {
+		margin: 0.5rem;
+	}
+	#titleLogo {
+		font-size: 1.6rem;
+	}
+	#menu a {
+		font-size: 1.4rem;
+	}
 	
 }
