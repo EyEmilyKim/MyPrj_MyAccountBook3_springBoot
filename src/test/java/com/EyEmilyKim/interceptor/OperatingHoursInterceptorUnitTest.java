@@ -52,17 +52,16 @@ public class OperatingHoursInterceptorUnitTest {
 	public void setUp() {
   	// given common
   	MockitoAnnotations.openMocks(this);
-  	when(request.getSession(false)).thenReturn(session);
+  	when(request.getSession(true)).thenReturn(session);
   	when(appConfig.getContextPath()).thenReturn("/mab3");
+  	when(operatingHoursProps.getStart()).thenReturn("08:00");
+  	when(operatingHoursProps.getEnd()).thenReturn("20:00");
 	}
 
   
 	@Test
 	@DisplayName("0800~2000/AM 07:00 - false 반환 > 시간외 홈")
 	public void testPreHandle_OutsideOperatingHours_AM0700() throws Exception {
-  	// given
-  	when(operatingHoursProps.getStart()).thenReturn("08:00");
-  	when(operatingHoursProps.getEnd()).thenReturn("20:00");
   	// given : AM 7시를 Mock 시간으로 설정 (KST 기준)
   	fixedClock = Clock.fixed(Instant.parse("2023-10-02T07:00:00+09:00"), ZoneId.of("Asia/Seoul"));
   	operatingHoursInterceptor.setClock(fixedClock);
@@ -72,16 +71,14 @@ public class OperatingHoursInterceptorUnitTest {
 
   	// then
   	assertFalse(result);
-  	verify(session).invalidate();
+  	verify(request).getSession(true); // 세션 새로 생성
+  	verify(session).setAttribute("redirectedFromInterceptor", true);
   	verify(response).sendRedirect("/mab3/outOfOpHours");
 	}
 
 	@Test
 	@DisplayName("0800~2000/PM 03:00 - true 반환")
 	public void testPreHandle_InsideOperatingHours__PM0300() throws Exception {
-  	// given
-  	when(operatingHoursProps.getStart()).thenReturn("08:00");
-  	when(operatingHoursProps.getEnd()).thenReturn("20:00");
   	// given : PM 3시를 Mock 시간으로 설정 (KST 기준)
   	fixedClock = Clock.fixed(Instant.parse("2023-10-02T15:00:00+09:00"), ZoneId.of("Asia/Seoul"));
   	operatingHoursInterceptor.setClock(fixedClock);
@@ -91,17 +88,12 @@ public class OperatingHoursInterceptorUnitTest {
 
   	// then
   	assertTrue(result);
-  	verify(session, never()).invalidate();
   	verify(response, never()).sendRedirect(anyString());
 	}
   
 	@Test
 	@DisplayName("0800~2000/PM 07:59 - true 반환")
 	public void testPreHandle_InsideOperatingHours_PM0759() throws Exception {
-  	// given
-  	when(operatingHoursProps.getStart()).thenReturn("08:00");
-  	when(operatingHoursProps.getEnd()).thenReturn("20:00");
-  	when(appConfig.getContextPath()).thenReturn("/mab3");
   	// given : PM 07:59를 Mock 시간으로 설정 (KST 기준)
   	fixedClock = Clock.fixed(Instant.parse("2023-10-02T19:59:00+09:00"), ZoneId.of("Asia/Seoul"));
   	operatingHoursInterceptor.setClock(fixedClock);
@@ -111,16 +103,12 @@ public class OperatingHoursInterceptorUnitTest {
   	
   	// then
   	assertTrue(result);
-  	verify(session, never()).invalidate();
   	verify(response, never()).sendRedirect(anyString());
 	}
   
 	@Test
 	@DisplayName("0800~2000/PM 08:01 - false 반환 > 시간외 홈")
 	public void testPreHandle_OutsideOperatingHours_PM0900() throws Exception {
-  	// given
-  	when(operatingHoursProps.getStart()).thenReturn("08:00");
-  	when(operatingHoursProps.getEnd()).thenReturn("20:00");
   	// given : PM 08:01를 Mock 시간으로 설정 (KST 기준)
   	fixedClock = Clock.fixed(Instant.parse("2023-10-02T20:01:00+09:00"), ZoneId.of("Asia/Seoul"));
   	operatingHoursInterceptor.setClock(fixedClock);
@@ -130,7 +118,8 @@ public class OperatingHoursInterceptorUnitTest {
 
   	// then
   	assertFalse(result);
-  	verify(session).invalidate();
+  	verify(request).getSession(true); // 세션 새로 생성
+  	verify(session).setAttribute("redirectedFromInterceptor", true);
   	verify(response).sendRedirect("/mab3/outOfOpHours");
 	}
 
