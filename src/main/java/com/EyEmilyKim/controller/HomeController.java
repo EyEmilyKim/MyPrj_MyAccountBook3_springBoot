@@ -121,6 +121,12 @@ public class HomeController {
 	@GetMapping("logout")
 	public String get_logout(HttpSession session, Model model) {
 		LogUtil.printWithTimestamp("HomeController > get_logout() called");
+		
+		// 이미 로그아웃한 상태로 요청 시 홈으로 이동
+		Integer userId = (Integer) session.getAttribute("USER_ID");
+		System.out.println("HomeCont.get_logout() userId : " + userId);
+		if(userId == null) return "redirect:/"; 
+		
 		String user_id = (String) session.getAttribute("NICKNAME");
 		String msg = messageUtil.getMessage("message-response", "msg.logout.success")
 				+ "\\n" + messageUtil.getMessage("message-response", "msg.logout.farewell_pre")
