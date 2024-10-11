@@ -208,5 +208,39 @@ class HomeControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(view().name("redirect"));
 	}
+
+	/*-------- 로그아웃 --------*/
+	
+	@Test
+	@DisplayName("로그아웃 Get - 로그아웃 전")
+	void testGetLogout_notLoggedOut() throws Exception {
+		// given
+		// session 에 user 정보 있음 => 로그인 상태
+		mockHttpSession = new MockHttpSession();
+		mockHttpSession.setAttribute("USER_ID", 1);
+		
+		// when & then
+		mockMvc.perform(get("/logout")
+				.session(mockHttpSession))
+			.andExpect(status().isOk())
+			.andExpect(view().name("redirect"));
+		
+		// session.invalidate() 확인
+		assertThrows(IllegalStateException.class, () -> {
+			mockHttpSession.getAttribute("USER_ID");
+		});
+	}
+	
+	@Test
+	@DisplayName("로그아웃 Get - 로그아웃 후 > 홈 ")
+	void testGetLogout_alreadyLoggedOut() throws Exception {
+		// given
+		// 생성된 session 없음 => 로그아웃 상태
+		
+		// when & then
+		mockMvc.perform(get("/logout"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrl("/"));
+	}
 	
 }
