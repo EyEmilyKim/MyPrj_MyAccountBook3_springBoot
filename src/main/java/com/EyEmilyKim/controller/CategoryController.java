@@ -73,10 +73,10 @@ public class CategoryController implements CategoryControllerSpecification {
 	
 	
 	@PostMapping("del")
-	public String post_del(String CCODE, String CNAME, Model model) {
+	public String post_del(String CCODE, Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > post_del() called");
-		System.out.println(CCODE+" - "+CNAME);
+		System.out.println(CCODE);
 		
 		try {
 			categoryService.delete(CCODE);

@@ -40,8 +40,6 @@ public interface MethodControllerSpecification {
 	String post_del(
 			@Parameter(name = "MCODE", description = "결제수단 코드", example = "", required = true)
 			String MCODE, 
-			@Parameter(name = "MNAME", description = "결제수단 이름 ** to_be_refactored **", example = "", required = true)
-			String MNAME, 
 			Model model
 		);
 

@@ -40,8 +40,6 @@ public interface CategoryControllerSpecification {
 	String post_del(
 			@Parameter(name = "CCODE", description = "카테고리 코드", example = "", required = true)
 			String CCODE, 
-			@Parameter(name = "CNAME", description = "카테고리 이름 ** to_be_refactored **", example = "", required = true)
-			String CNAME, 
 			Model model
 		);
 

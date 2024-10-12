@@ -73,10 +73,10 @@ public class MethodController implements MethodControllerSpecification {
 	
 	
 	@PostMapping("del")
-	public String post_del(String MCODE, String MNAME, Model model) {
+	public String post_del(String MCODE, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > post_del() called");
-		System.out.println(MCODE+" - "+MNAME);
+		System.out.println(MCODE);
 		
 		try {
 			methodService.delete(MCODE);
