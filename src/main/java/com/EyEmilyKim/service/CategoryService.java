@@ -1,7 +1,6 @@
 package com.EyEmilyKim.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
 import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
