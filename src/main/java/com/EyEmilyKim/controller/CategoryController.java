@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.EyEmilyKim.config.AppConfig;
+import com.EyEmilyKim.controller.specification.CategoryControllerSpecification;
 import com.EyEmilyKim.dto.request.category.CategoryCreateRequestDto;
 import com.EyEmilyKim.dto.request.category.CategoryUpdateRequestDto;
 import com.EyEmilyKim.entity.Category;
@@ -21,16 +22,9 @@ import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
 import com.EyEmilyKim.util.MessageUtil;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-
 @RequestMapping("/set/category/")
 @Controller
-@Tag(name="view - 카테고리", description = "카테고리 페이지 그룹")
-public class CategoryController {
+public class CategoryController implements CategoryControllerSpecification {
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -46,11 +40,10 @@ public class CategoryController {
 	
 	/*-------- 카테고리 목록 --------*/
 	
+	@Override
 	@GetMapping("list")
-	@Operation(summary = "목록 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_list(HttpServletRequest req, Model model) {
-		
+
 		LogUtil.printWithTimestamp("CategoryController > get_list() called");
 		int userId = (int) req.getAttribute("userId"); 
 		System.out.println("userId : "+userId);
@@ -61,19 +54,14 @@ public class CategoryController {
 		model.addAttribute("COUNT", cnt);
 		
 		return "set.category.list";
-		
 	}
 	
 	
 	/*-------- 카테고리 삭제 --------*/
 	
+	@Override
 	@GetMapping("del")
-	@Operation(summary = "삭제 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_del(
-			@Parameter(name = "CCODE", description = "카테고리 코드", example = "", required = true)
-			String CCODE, 
-			Model model) {
+	public String get_del(String CCODE, Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > get_del() called");
 		System.out.println(CCODE);
@@ -83,25 +71,15 @@ public class CategoryController {
 		model.addAttribute("C", cate);
 		
 		return "set.category.del";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("del")
-	@Operation(summary = "삭제 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "삭제 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "삭제 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})
-	public String post_del(
-			@Parameter(name = "CCODE", description = "카테고리 코드", example = "", required = true)
-			String CCODE, 
-			@Parameter(name = "CNAME", description = "카테고리 이름 ** to_be_refactored **", example = "", required = true)
-			String CNAME,
-			Model model) {
+	public String post_del(String CCODE, Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > post_del() called");
-		System.out.println(CCODE+" - "+CNAME);
+		System.out.println(CCODE);
 		
 		try {
 			categoryService.delete(CCODE);
@@ -114,15 +92,13 @@ public class CategoryController {
 		}
 		
 		return "redirect";
-		
 	}
 	
 	
 	/*-------- 카테고리 추가 --------*/
 	
+	@Override
 	@GetMapping("crt")
-	@Operation(summary = "추가 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_crt(HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > get_crt() called");
@@ -136,19 +112,12 @@ public class CategoryController {
 		model.addAttribute("MSN", maxSqn);
 		
 		return "set.category.crt";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("crt")
-	@Operation(summary = "추가 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "추가 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})	
-	public String post_crt(
-			@ModelAttribute CategoryCreateRequestDto categoryCreateRequestDto, 
-			HttpServletRequest req, Model model) {
+	public String post_crt(@ModelAttribute CategoryCreateRequestDto categoryCreateRequestDto, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
@@ -166,20 +135,14 @@ public class CategoryController {
 		}
 		
 		return "redirect";
-		
 	}
 	
 	
 	/*-------- 카테고리 수정 --------*/ 
 	
+	@Override
 	@GetMapping("upd")
-	@Operation(summary = "수정 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_upd(
-			@Parameter(name = "CCODE", description = "카테고리 코드", example = "", required = true)
-			String CCODE, 
-			HttpServletRequest req, 
-			Model model) {
+	public String get_upd(String CCODE, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > get_upd() called");
 		int userId = (int) req.getAttribute("userId");
@@ -193,19 +156,12 @@ public class CategoryController {
 		model.addAttribute("LIST", list);
 		
 		return "set.category.upd";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("upd")
-	@Operation(summary = "수정 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "수정 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "수정 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})
-	public String post_upd(
-			@ModelAttribute CategoryUpdateRequestDto categoryUpdateRequestDto, 
-			Model model) {
+	public String post_upd(@ModelAttribute CategoryUpdateRequestDto categoryUpdateRequestDto, Model model) {
 		
 		LogUtil.printWithTimestamp("CategoryController > post_upd() called");
 		DtoUtil.printFieldValues(categoryUpdateRequestDto);
@@ -221,7 +177,6 @@ public class CategoryController {
 		}
 		
 		return "redirect";
-		
 	}
 	
 }

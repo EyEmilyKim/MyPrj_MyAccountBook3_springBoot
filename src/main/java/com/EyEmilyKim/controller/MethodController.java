@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.EyEmilyKim.config.AppConfig;
+import com.EyEmilyKim.controller.specification.MethodControllerSpecification;
 import com.EyEmilyKim.dto.request.method.MethodCreateRequestDto;
 import com.EyEmilyKim.dto.request.method.MethodUpdateRequestDto;
 import com.EyEmilyKim.entity.Method;
@@ -21,16 +22,9 @@ import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
 import com.EyEmilyKim.util.MessageUtil;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-
 @RequestMapping("/set/method/")
 @Controller
-@Tag(name="view - 결제수단", description = "결제수단 페이지 그룹")
-public class MethodController {
+public class MethodController implements MethodControllerSpecification {
 
 	@Autowired
 	private MethodService methodService;
@@ -46,9 +40,8 @@ public class MethodController {
 	
 	/*-------- 결제수단 목록 --------*/ 
 	
+	@Override
 	@GetMapping("list")
-	@Operation(summary = "목록 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_list(HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > get_list() called");
@@ -61,19 +54,14 @@ public class MethodController {
 		model.addAttribute("COUNT", cnt);
 		
 		return "set.method.list";
-		
 	}
 	
 
 	/*-------- 결제수단 삭제 --------*/
 	
+	@Override
 	@GetMapping("del")
-	@Operation(summary = "삭제 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_del(
-			@Parameter(name = "MCODE", description = "결제수단 코드", example = "", required = true)
-			String MCODE, 
-			Model model) {
+	public String get_del(String MCODE, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > get_del() called");
 		System.out.println(MCODE);
@@ -83,26 +71,15 @@ public class MethodController {
 		model.addAttribute("M", meth);
 		
 		return "set.method.del";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("del")
-	@Operation(summary = "삭제 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "삭제 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "삭제 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})
-	public String post_del(
-			@Parameter(name = "MCODE", description = "결제수단 코드", example = "", required = true)
-			String MCODE,
-			@Parameter(name = "MNAME", description = "결제수단 이름 ** to_be_refactored **", example = "", required = true)
-			String MNAME,
-			Model model
-			) {
+	public String post_del(String MCODE, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > post_del() called");
-		System.out.println(MCODE+" - "+MNAME);
+		System.out.println(MCODE);
 		
 		try {
 			methodService.delete(MCODE);
@@ -115,15 +92,13 @@ public class MethodController {
 		}
 		
 		return "redirect";
-		
 	}
 	
 	
 	/*-------- 결제수단 추가 --------*/
 
+	@Override
 	@GetMapping("crt")
-	@Operation(summary = "추가 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_crt(HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > get_crt() called");
@@ -137,19 +112,12 @@ public class MethodController {
 		model.addAttribute("MSN", maxSqn);
 		
 		return "set.method.crt";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("crt")
-	@Operation(summary = "추가 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "추가 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})	
-	public String post_crt(
-			@ModelAttribute MethodCreateRequestDto methodCreateRequestDto, 
-			HttpServletRequest req, Model model) {
+	public String post_crt(@ModelAttribute MethodCreateRequestDto methodCreateRequestDto, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
@@ -167,19 +135,14 @@ public class MethodController {
 		}
 		
 		return "redirect";
-		
 	}
 	
 	
 	/*-------- 결제수단 수정 --------*/ 
 	
+	@Override
 	@GetMapping("upd")
-	@Operation(summary = "수정 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_upd(
-			@Parameter(name = "MCODE", description = "결제수단 코드", example = "", required = true)
-			String MCODE, 
-			HttpServletRequest req, Model model) {
+	public String get_upd(String MCODE, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > get_upd() called");
 		int userId = (int) req.getAttribute("userId");
@@ -193,19 +156,12 @@ public class MethodController {
 		model.addAttribute("LIST", list);
 		
 		return "set.method.upd";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("upd")
-	@Operation(summary = "수정 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "수정 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "수정 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})
-	public String post_upd(
-			@ModelAttribute MethodUpdateRequestDto methodUpdateRequestDto, 
-			Model model) {
+	public String post_upd(@ModelAttribute MethodUpdateRequestDto methodUpdateRequestDto, Model model) {
 		
 		LogUtil.printWithTimestamp("MethodController > post_upd() called");
 		DtoUtil.printFieldValues(methodUpdateRequestDto);
@@ -221,7 +177,6 @@ public class MethodController {
 		}
 		
 		return "redirect";
-		
 	}
 	
 }

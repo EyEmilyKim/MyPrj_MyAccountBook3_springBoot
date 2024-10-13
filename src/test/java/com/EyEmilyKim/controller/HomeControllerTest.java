@@ -80,8 +80,8 @@ class HomeControllerTest {
 	@DisplayName("홈 Get")
 	void testGetIndex() throws Exception {
 		mockMvc.perform(get("/index"))
-			.andExpect(status().isOk())
-			.andExpect(view().name("root.index"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrl("/"));
 	}
 
 	/*-------- 시간 외 홈 화면 --------*/
