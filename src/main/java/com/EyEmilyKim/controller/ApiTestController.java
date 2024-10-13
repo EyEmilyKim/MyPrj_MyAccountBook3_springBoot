@@ -22,12 +22,15 @@ public class ApiTestController implements ApiTestControllerSpecification {
 	private final Logger logger = LoggerFactory.getLogger(ApiTestController.class);
 	private final String message = "Hello ApiTest!";
 	
+	
+	@Override
 	@GetMapping("echo")
 	public String echo(@RequestParam String msg) {
 		LogUtil.printWithTimestamp("ApiTestController > echo() : "+msg);
 		return message+"\n"+msg;
 	}
 	
+	@Override
 	@PostMapping("log")
 	public ResponseEntity<String> log(@RequestParam String level) {
 		LogUtil.printWithTimestamp("ApiTestController > log() : "+level);

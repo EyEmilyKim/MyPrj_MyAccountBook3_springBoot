@@ -11,6 +11,7 @@ public class PlanController implements PlanControllerSpecification {
 
 	/*-------- 계획하기 --------*/
 	
+	@Override
 	@GetMapping("/plan")
 	public String get_plan() {
 		LogUtil.printWithTimestamp("HomeController > get_plan() called");

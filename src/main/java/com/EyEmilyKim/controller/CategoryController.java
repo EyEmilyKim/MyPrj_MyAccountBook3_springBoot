@@ -40,6 +40,7 @@ public class CategoryController implements CategoryControllerSpecification {
 	
 	/*-------- 카테고리 목록 --------*/
 	
+	@Override
 	@GetMapping("list")
 	public String get_list(HttpServletRequest req, Model model) {
 
@@ -58,6 +59,7 @@ public class CategoryController implements CategoryControllerSpecification {
 	
 	/*-------- 카테고리 삭제 --------*/
 	
+	@Override
 	@GetMapping("del")
 	public String get_del(String CCODE, Model model) {
 		
@@ -72,6 +74,7 @@ public class CategoryController implements CategoryControllerSpecification {
 	}
 	
 	
+	@Override
 	@PostMapping("del")
 	public String post_del(String CCODE, Model model) {
 		
@@ -94,6 +97,7 @@ public class CategoryController implements CategoryControllerSpecification {
 	
 	/*-------- 카테고리 추가 --------*/
 	
+	@Override
 	@GetMapping("crt")
 	public String get_crt(HttpServletRequest req, Model model) {
 		
@@ -111,6 +115,7 @@ public class CategoryController implements CategoryControllerSpecification {
 	}
 	
 	
+	@Override
 	@PostMapping("crt")
 	public String post_crt(@ModelAttribute CategoryCreateRequestDto categoryCreateRequestDto, HttpServletRequest req, Model model) {
 		
@@ -135,6 +140,7 @@ public class CategoryController implements CategoryControllerSpecification {
 	
 	/*-------- 카테고리 수정 --------*/ 
 	
+	@Override
 	@GetMapping("upd")
 	public String get_upd(String CCODE, HttpServletRequest req, Model model) {
 		
@@ -153,6 +159,7 @@ public class CategoryController implements CategoryControllerSpecification {
 	}
 	
 	
+	@Override
 	@PostMapping("upd")
 	public String post_upd(@ModelAttribute CategoryUpdateRequestDto categoryUpdateRequestDto, Model model) {
 		

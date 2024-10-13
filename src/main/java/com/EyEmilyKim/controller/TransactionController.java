@@ -53,6 +53,7 @@ public class TransactionController implements TransactionControllerSpecification
 	/*-------- 거래기록 목록 --------*/
 	
 	// 전체 목록	
+	@Override
 	@GetMapping("listAll")
 	public String get_listAll(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
@@ -78,6 +79,7 @@ public class TransactionController implements TransactionControllerSpecification
 	
 	
 	// 수입 목록
+	@Override
 	@GetMapping("listIn")
 	public String get_listIn(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
@@ -103,6 +105,7 @@ public class TransactionController implements TransactionControllerSpecification
 	
 	
 	//지출 목록
+	@Override
 	@GetMapping("listEx") 
 	public String get_listEx(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
@@ -131,6 +134,7 @@ public class TransactionController implements TransactionControllerSpecification
 	
 	/*-------- 거래기록 삭제 --------*/
 	
+	@Override
 	@GetMapping("del")
 	public String get_del(String TRAN_ID, Model model) {
 		
@@ -144,6 +148,7 @@ public class TransactionController implements TransactionControllerSpecification
 	}
 	
 	
+	@Override
 	@PostMapping("del")
 	public String post_del(@ModelAttribute TranDeleteRequestDto tranDeleteRequestDto, Model model) {
 		
@@ -168,6 +173,7 @@ public class TransactionController implements TransactionControllerSpecification
 	
 	/*-------- 거래기록 추가 --------*/
 	
+	@Override
 	@GetMapping("crt")
 	public String get_crt(HttpServletRequest req, Model model) {
 		
@@ -186,6 +192,7 @@ public class TransactionController implements TransactionControllerSpecification
 	}
 	
 	
+	@Override
 	@PostMapping("crt")
 	public String post_crt(@ModelAttribute TranCreateRequestDto tranCreateRequestDto, HttpServletRequest req, Model model) {
 		
@@ -213,6 +220,7 @@ public class TransactionController implements TransactionControllerSpecification
 	
 	/*-------- 거래기록 수정 --------*/
 	
+	@Override
 	@GetMapping("upd")
 	public String get_upd(String TRAN_ID, HttpServletRequest req, Model model) {
 		
@@ -234,6 +242,7 @@ public class TransactionController implements TransactionControllerSpecification
 	}
 	
 	
+	@Override
 	@PostMapping("upd")
 	public String post_upd(@ModelAttribute TranUpdateRequestDto tranUpdateRequestDto, HttpServletRequest req, Model model) {
 		

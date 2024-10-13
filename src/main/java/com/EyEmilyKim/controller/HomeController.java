@@ -30,6 +30,7 @@ public class HomeController implements HomeControllerSpecification {
 	
 	/*-------- 홈 화면 --------*/
 	
+	@Override
 	@GetMapping("/")
 	public String get_home() {
 		LogUtil.printWithTimestamp("HomeController > get_home() called");
@@ -37,6 +38,7 @@ public class HomeController implements HomeControllerSpecification {
 		return "root.index";
 	}
 	
+	@Override
 	@GetMapping("/index")
 	public String get_index() {
 		LogUtil.printWithTimestamp("HomeController > get_index() called");
@@ -46,6 +48,7 @@ public class HomeController implements HomeControllerSpecification {
 	
 	/*-------- 시간 외 홈 화면 --------*/
 	
+	@Override
 	@GetMapping("/outOfOpHours")
 	public String get_outOfOpHours(HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > get_outOfOpHours() called");
@@ -66,6 +69,7 @@ public class HomeController implements HomeControllerSpecification {
 	
 	/*-------- 로그인 --------*/
 	
+	@Override
 	@GetMapping("/login")
 	public String get_login(HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > get_login() called");
@@ -78,6 +82,7 @@ public class HomeController implements HomeControllerSpecification {
 		return "root.login";
 	}
 	
+	@Override
 	@PostMapping("/login")
 	public String post_login(String LID, String PWD, Model model, HttpSession session) {
 		LogUtil.printWithTimestamp("HomeController > post_login() called");
@@ -107,6 +112,7 @@ public class HomeController implements HomeControllerSpecification {
 	
 	/*-------- 로그아웃 --------*/
 	
+	@Override
 	@GetMapping("logout")
 	public String get_logout(HttpSession session, Model model) {
 		LogUtil.printWithTimestamp("HomeController > get_logout() called");

@@ -18,6 +18,7 @@ public class ApiController implements ApiControllerSpecification {
 	private ApiProperties config; 
 	
 	
+	@Override
 	@GetMapping("email-to-developer")
 	public EmailToDeveloperResponseDto getEmailToDeveloper() {
 		LogUtil.printWithTimestamp("ApiController > getEmailToDeveloper()");

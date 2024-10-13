@@ -40,6 +40,7 @@ public class MethodController implements MethodControllerSpecification {
 	
 	/*-------- 결제수단 목록 --------*/ 
 	
+	@Override
 	@GetMapping("list")
 	public String get_list(HttpServletRequest req, Model model) {
 		
@@ -58,6 +59,7 @@ public class MethodController implements MethodControllerSpecification {
 
 	/*-------- 결제수단 삭제 --------*/
 	
+	@Override
 	@GetMapping("del")
 	public String get_del(String MCODE, Model model) {
 		
@@ -72,6 +74,7 @@ public class MethodController implements MethodControllerSpecification {
 	}
 	
 	
+	@Override
 	@PostMapping("del")
 	public String post_del(String MCODE, Model model) {
 		
@@ -94,6 +97,7 @@ public class MethodController implements MethodControllerSpecification {
 	
 	/*-------- 결제수단 추가 --------*/
 
+	@Override
 	@GetMapping("crt")
 	public String get_crt(HttpServletRequest req, Model model) {
 		
@@ -111,6 +115,7 @@ public class MethodController implements MethodControllerSpecification {
 	}
 	
 	
+	@Override
 	@PostMapping("crt")
 	public String post_crt(@ModelAttribute MethodCreateRequestDto methodCreateRequestDto, HttpServletRequest req, Model model) {
 		
@@ -135,6 +140,7 @@ public class MethodController implements MethodControllerSpecification {
 	
 	/*-------- 결제수단 수정 --------*/ 
 	
+	@Override
 	@GetMapping("upd")
 	public String get_upd(String MCODE, HttpServletRequest req, Model model) {
 		
@@ -153,6 +159,7 @@ public class MethodController implements MethodControllerSpecification {
 	}
 	
 	
+	@Override
 	@PostMapping("upd")
 	public String post_upd(@ModelAttribute MethodUpdateRequestDto methodUpdateRequestDto, Model model) {
 		
