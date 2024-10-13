@@ -80,8 +80,8 @@ class HomeControllerTest {
 	@DisplayName("홈 Get")
 	void testGetIndex() throws Exception {
 		mockMvc.perform(get("/index"))
-			.andExpect(status().isOk())
-			.andExpect(view().name("root.index"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrl("/"));
 	}
 
 	/*-------- 시간 외 홈 화면 --------*/
@@ -168,7 +168,7 @@ class HomeControllerTest {
 			.andExpect(model().attribute("MSG", "로그인에 성공했습니다.\\n반가워요, 테스트 유저 1 님~!"))
 			.andExpect(model().attribute("URL", "/mab3/"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("redirect"));
+			.andExpect(view().name("root.redirecting"));
 	}
 	
 	@Test
@@ -187,7 +187,7 @@ class HomeControllerTest {
 			.andExpect(model().attribute("MSG", "사용자를 찾을 수 없습니다."))
 			.andExpect(model().attribute("URL", "/mab3/login"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("redirect"));
+			.andExpect(view().name("root.redirecting"));
 	}
 	
 	@Test
@@ -206,7 +206,7 @@ class HomeControllerTest {
 			.andExpect(model().attribute("MSG", "비밀번호가 일치하지 않습니다."))
 			.andExpect(model().attribute("URL", "/mab3/login"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("redirect"));
+			.andExpect(view().name("root.redirecting"));
 	}
 
 	/*-------- 로그아웃 --------*/
@@ -223,7 +223,7 @@ class HomeControllerTest {
 		mockMvc.perform(get("/logout")
 				.session(mockHttpSession))
 			.andExpect(status().isOk())
-			.andExpect(view().name("redirect"));
+			.andExpect(view().name("root.redirecting"));
 		
 		// session.invalidate() 확인
 		assertThrows(IllegalStateException.class, () -> {

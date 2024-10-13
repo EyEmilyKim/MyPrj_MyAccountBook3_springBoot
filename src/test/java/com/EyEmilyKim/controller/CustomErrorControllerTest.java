@@ -56,7 +56,7 @@ class CustomErrorControllerTest {
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 404)
 				.header("Referer", referer))
 		.andExpect(status().isOk())
-		.andExpect(view().name("redirect"))
+		.andExpect(view().name("root.redirecting"))
 		.andExpect(model().attribute("MSG", errorMessage_404))
 		.andExpect(model().attribute("URL", referer));
 		
@@ -73,7 +73,7 @@ class CustomErrorControllerTest {
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 500)
 				.header("Referer", referer))
 		.andExpect(status().isOk())
-		.andExpect(view().name("redirect"))
+		.andExpect(view().name("root.redirecting"))
 		.andExpect(model().attribute("MSG", errorMessage_500))
 		.andExpect(model().attribute("URL", referer));
 		
@@ -90,7 +90,7 @@ class CustomErrorControllerTest {
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 777)
 				.header("Referer", referer))
 		.andExpect(status().isOk())
-		.andExpect(view().name("redirect"))
+		.andExpect(view().name("root.redirecting"))
 		.andExpect(model().attribute("MSG", errorMessage_else))
 		.andExpect(model().attribute("URL", referer));
 		

@@ -51,7 +51,7 @@ public class CustomErrorController implements ErrorController {
 			model.addAttribute("URL", nextUrl);
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 }

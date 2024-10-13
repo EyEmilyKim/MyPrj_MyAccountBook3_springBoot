@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.EyEmilyKim.config.AppConfig;
+import com.EyEmilyKim.controller.specification.TransactionControllerSpecification;
 import com.EyEmilyKim.dto.TransactionDto;
 import com.EyEmilyKim.dto.request.tran.TranCreateRequestDto;
 import com.EyEmilyKim.dto.request.tran.TranDeleteRequestDto;
@@ -29,16 +30,9 @@ import com.EyEmilyKim.util.DtoUtil;
 import com.EyEmilyKim.util.LogUtil;
 import com.EyEmilyKim.util.MessageUtil;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-
 @RequestMapping("/tran/")
 @Controller
-@Tag(name="view - 거래기록", description = "거래기록 페이지 그룹")
-public class TransactionController {
+public class TransactionController implements TransactionControllerSpecification {
 
 	@Autowired
 	private CategoryService categoryService;
@@ -59,12 +53,9 @@ public class TransactionController {
 	/*-------- 거래기록 목록 --------*/
 	
 	// 전체 목록	
+	@Override
 	@GetMapping("listAll")
-	@Operation(summary = "목록 페이지 : 전체", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_listAll(
-			@ModelAttribute TranListRequestDto tranListRequestDto, 
-			HttpServletRequest req, Model model) {
+	public String get_listAll(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_listAll() called");
 		Integer userId = (Integer) req.getAttribute("userId");
@@ -80,21 +71,17 @@ public class TransactionController {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listAll");
-			return "redirect";
+			return "root.redirecting";
 		}
 		
 		return "tran.list";
-		
 	}
 	
 	
 	// 수입 목록
+	@Override
 	@GetMapping("listIn")
-	@Operation(summary = "목록 페이지 : 수입", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_listIn(
-			@ModelAttribute TranListRequestDto tranListRequestDto, 
-			HttpServletRequest req, Model model) {
+	public String get_listIn(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_listIn() called");
 		Integer userId = (Integer) req.getAttribute("userId");
@@ -110,21 +97,17 @@ public class TransactionController {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listIn");
-			return "redirect";
+			return "root.redirecting";
 		}
 		
 		return "tran.list";
-		
 	}
 	
 	
 	//지출 목록
+	@Override
 	@GetMapping("listEx") 
-	@Operation(summary = "목록 페이지 : 지출", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_listEx(
-			@ModelAttribute TranListRequestDto tranListRequestDto, 
-			HttpServletRequest req, Model model) {
+	public String get_listEx(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_listEx() called");
 		Integer userId = (Integer) req.getAttribute("userId");
@@ -142,23 +125,18 @@ public class TransactionController {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listIn");
-			return "redirect";
+			return "root.redirecting";
 		}
 		
 		return "tran.list";
-		
 	}
 	
 	
 	/*-------- 거래기록 삭제 --------*/
 	
+	@Override
 	@GetMapping("del")
-	@Operation(summary = "삭제 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_del(
-			@Parameter(name = "TRAN_ID", description = "거래기록 ID", example = "", required = true)
-			String TRAN_ID, 
-			Model model) {
+	public String get_del(String TRAN_ID, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_del() called");
 		System.out.println("TRAN_ID : "+TRAN_ID);
@@ -167,19 +145,12 @@ public class TransactionController {
 		model.addAttribute("T", tran);
 		
 		return "tran.del";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("del")
-	@Operation(summary = "삭제 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "삭제 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "삭제 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})
-	public String post_del(
-			@ModelAttribute TranDeleteRequestDto tranDeleteRequestDto, 
-			Model model) {
+	public String post_del(@ModelAttribute TranDeleteRequestDto tranDeleteRequestDto, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > post_del() called");		
 		DtoUtil.printFieldValues(tranDeleteRequestDto);
@@ -196,16 +167,14 @@ public class TransactionController {
 		}
 		model.addAttribute("URL", nextUrl);
 		
-		return "redirect";
-		
+		return "root.redirecting";
 	}	
 
 	
 	/*-------- 거래기록 추가 --------*/
 	
+	@Override
 	@GetMapping("crt")
-	@Operation(summary = "추가 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
 	public String get_crt(HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_crt() called");
@@ -220,19 +189,12 @@ public class TransactionController {
 		model.addAttribute("METHLIST", methlist);
 		
 		return "tranCrt.crt";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("crt")
-	@Operation(summary = "추가 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "추가 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "추가 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})	
-	public String post_crt(
-			@ModelAttribute TranCreateRequestDto tranCreateRequestDto, 
-			HttpServletRequest req, Model model) {
+	public String post_crt(@ModelAttribute TranCreateRequestDto tranCreateRequestDto, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > post_crt() called");
 		int userId = (int) req.getAttribute("userId");
@@ -253,19 +215,14 @@ public class TransactionController {
 		model.addAttribute("URL_AGAIN", contextPath + "/tran/crt");
 		model.addAttribute("URL_NEXT", contextPath + "/tran/listAll");
 		
-		return "redirect";
-		
+		return "root.redirecting";
 	}
 	
 	/*-------- 거래기록 수정 --------*/
 	
+	@Override
 	@GetMapping("upd")
-	@Operation(summary = "수정 페이지", description = "")
-	@ApiResponse(responseCode = "200", description = "정상적으로 페이지 반환됨")
-	public String get_upd(
-			@Parameter(name = "TRAN_ID", description = "거래기록 ID", example = "", required = true)
-			String TRAN_ID, 
-			HttpServletRequest req, Model model) {
+	public String get_upd(String TRAN_ID, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > get_upd() called");
 		int userId = (int) req.getAttribute("userId");
@@ -282,19 +239,12 @@ public class TransactionController {
 		model.addAttribute("METHLIST", methlist);
 		
 		return "tran.upd";
-		
 	}
 	
 	
+	@Override
 	@PostMapping("upd")
-	@Operation(summary = "수정 페이지", description = "")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "수정 성공 알림, \n\n리다이렉트: 목록 페이지"),
-			@ApiResponse(responseCode = "500", description = "수정 실패 알림, \n\n리다이렉트: 목록 페이지")
-	})
-	public String post_upd(
-			@ModelAttribute TranUpdateRequestDto tranUpdateRequestDto, 
-			HttpServletRequest req, Model model) {
+	public String post_upd(@ModelAttribute TranUpdateRequestDto tranUpdateRequestDto, HttpServletRequest req, Model model) {
 		
 		LogUtil.printWithTimestamp("TransactionController > post_upd() called");
 		int userId = (int) req.getAttribute("userId");
@@ -310,8 +260,7 @@ public class TransactionController {
 		}
 		model.addAttribute("URL", tranUpdateRequestDto.getPREV_URL());
 		
-		return "redirect";
-		
+		return "root.redirecting";
 	}
 	
 }
