@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name="view - 계획하기", description = "계획 페이지 그룹")
+@Tag(name="[3] view - 계획하기", description = "계획 페이지 그룹")
 public interface PlanControllerSpecification {
 
 	/*-------- 계획하기 --------*/

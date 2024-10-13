@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name="view - 카테고리", description = "카테고리 페이지 그룹")
+@Tag(name="[5] view - 카테고리", description = "카테고리 페이지 그룹")
 public interface CategoryControllerSpecification {
 
 	/*-------- 카테고리 목록 --------*/

@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name="view - 결제수단", description = "결제수단 페이지 그룹")
+@Tag(name="[6] view - 결제수단", description = "결제수단 페이지 그룹")
 public interface MethodControllerSpecification {
 
 	/*-------- 결제수단 목록 --------*/ 

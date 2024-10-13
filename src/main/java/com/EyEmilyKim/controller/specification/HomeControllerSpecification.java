@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name="view - 홈", description = "루트 페이지 그룹")
+@Tag(name="[2] view - 홈", description = "루트 페이지 그룹")
 public interface HomeControllerSpecification {
 	
 	/*-------- 홈 화면 --------*/

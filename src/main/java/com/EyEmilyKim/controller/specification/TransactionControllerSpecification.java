@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name="view - 거래기록", description = "거래기록 페이지 그룹")
+@Tag(name="[4] view - 거래기록", description = "거래기록 페이지 그룹")
 public interface TransactionControllerSpecification {
 
 	/*-------- 거래기록 목록 --------*/

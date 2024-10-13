@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "API Test", description = "세부 작동 확인용 엔드포인트")
+@Tag(name = "[0] API Test", description = "기본 작동 확인용 엔드포인트")
 public interface ApiTestControllerSpecification {
 
 	@Operation(summary = "클라이언트에서 전달한 메세지 응답하기")
