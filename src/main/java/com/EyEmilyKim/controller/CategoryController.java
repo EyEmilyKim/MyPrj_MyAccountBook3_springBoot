@@ -91,7 +91,7 @@ public class CategoryController implements CategoryControllerSpecification {
 			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 	
@@ -134,7 +134,7 @@ public class CategoryController implements CategoryControllerSpecification {
 			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 	
@@ -176,7 +176,7 @@ public class CategoryController implements CategoryControllerSpecification {
 			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 }

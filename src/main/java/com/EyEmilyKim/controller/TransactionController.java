@@ -71,7 +71,7 @@ public class TransactionController implements TransactionControllerSpecification
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listAll");
-			return "redirect";
+			return "root.redirecting";
 		}
 		
 		return "tran.list";
@@ -97,7 +97,7 @@ public class TransactionController implements TransactionControllerSpecification
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listIn");
-			return "redirect";
+			return "root.redirecting";
 		}
 		
 		return "tran.list";
@@ -125,7 +125,7 @@ public class TransactionController implements TransactionControllerSpecification
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
 			model.addAttribute("URL", "/tran/listIn");
-			return "redirect";
+			return "root.redirecting";
 		}
 		
 		return "tran.list";
@@ -167,7 +167,7 @@ public class TransactionController implements TransactionControllerSpecification
 		}
 		model.addAttribute("URL", nextUrl);
 		
-		return "redirect";
+		return "root.redirecting";
 	}	
 
 	
@@ -215,7 +215,7 @@ public class TransactionController implements TransactionControllerSpecification
 		model.addAttribute("URL_AGAIN", contextPath + "/tran/crt");
 		model.addAttribute("URL_NEXT", contextPath + "/tran/listAll");
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 	/*-------- 거래기록 수정 --------*/
@@ -260,7 +260,7 @@ public class TransactionController implements TransactionControllerSpecification
 		}
 		model.addAttribute("URL", tranUpdateRequestDto.getPREV_URL());
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 }
