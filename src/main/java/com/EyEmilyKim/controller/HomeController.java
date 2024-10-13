@@ -107,7 +107,7 @@ public class HomeController implements HomeControllerSpecification {
 			model.addAttribute("URL", appConfig.getContextPath() + "/login");
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 	/*-------- 로그아웃 --------*/
@@ -131,7 +131,7 @@ public class HomeController implements HomeControllerSpecification {
 		model.addAttribute("URL", appConfig.getContextPath() + "/");
 		session.invalidate();
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 }

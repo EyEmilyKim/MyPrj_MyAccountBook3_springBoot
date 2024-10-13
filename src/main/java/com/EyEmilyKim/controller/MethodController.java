@@ -91,7 +91,7 @@ public class MethodController implements MethodControllerSpecification {
 			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 	
@@ -134,7 +134,7 @@ public class MethodController implements MethodControllerSpecification {
 			model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 	
@@ -176,7 +176,7 @@ public class MethodController implements MethodControllerSpecification {
 			 model.addAttribute("URL", appConfig.getContextPath() + nextUrl);
 		}
 		
-		return "redirect";
+		return "root.redirecting";
 	}
 	
 }
