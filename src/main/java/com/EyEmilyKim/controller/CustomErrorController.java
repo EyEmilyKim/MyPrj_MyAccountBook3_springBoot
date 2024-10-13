@@ -26,6 +26,13 @@ public class CustomErrorController implements ErrorController {
 	
 	@GetMapping(ERROR_PATH)
 	public String handleError(HttpServletRequest req, Model model) {
+		
+		// 사용자의 직접적인 ERROR_PATH 접근 차단 
+		if(req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE) == null) {
+			return "redirect:/";
+		}
+		
+		// 에러 처리 로직
 		Object status = req.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		String referer = req.getHeader("Referer");
 		String nextUrl = (referer != null) ? referer : appConfig.getContextPath();
