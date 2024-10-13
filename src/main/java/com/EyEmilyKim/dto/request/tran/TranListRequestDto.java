@@ -1,7 +1,5 @@
 package com.EyEmilyKim.dto.request.tran;
 
-import java.sql.Timestamp;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
