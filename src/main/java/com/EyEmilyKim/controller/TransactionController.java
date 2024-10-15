@@ -57,74 +57,48 @@ public class TransactionController implements TransactionControllerSpecification
 	@GetMapping("listAll")
 	public String get_listAll(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
-		LogUtil.printWithTimestamp("TransactionController > get_listAll() called");
-		Integer userId = (Integer) req.getAttribute("userId");
-		System.out.println("userId : "+userId);
-		DtoUtil.printFieldValues(tranListRequestDto);
-		
-		try {
-			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "ALL");
-			model.addAttribute("DTO", responseDto);
-			List<String> cname_list = categoryService.getNameList(userId, "ALL");
-			model.addAttribute("CNAME_LIST", cname_list);
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", "/tran/listAll");
-			return "root.redirecting";
-		}
-		
-		return "tran.list";
+		return this.handleListRequest(tranListRequestDto, req, model, "ALL");
 	}
-	
 	
 	// 수입 목록
 	@Override
 	@GetMapping("listIn")
 	public String get_listIn(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
-		LogUtil.printWithTimestamp("TransactionController > get_listIn() called");
-		Integer userId = (Integer) req.getAttribute("userId");
-		System.out.println("userId : "+userId);
-		DtoUtil.printFieldValues(tranListRequestDto);
-		
-		try {
-			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "IN");
-			model.addAttribute("DTO", responseDto);
-			List<String> cname_list = categoryService.getNameList(userId, "IN");
-			model.addAttribute("CNAME_LIST", cname_list);
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", "/tran/listIn");
-			return "root.redirecting";
-		}
-		
-		return "tran.list";
+		return this.handleListRequest(tranListRequestDto, req, model, "IN");
 	}
 	
-	
-	//지출 목록
+	// 지출 목록
 	@Override
 	@GetMapping("listEx") 
 	public String get_listEx(@ModelAttribute TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model) {
 		
-		LogUtil.printWithTimestamp("TransactionController > get_listEx() called");
+		return this.handleListRequest(tranListRequestDto, req, model, "EX");
+	}
+	
+	// 목록 공통 로직
+	private String handleListRequest(TranListRequestDto tranListRequestDto, HttpServletRequest req, Model model, String inex) {
+		
+		LogUtil.printWithTimestamp("TransactionController > handleListRequest() called : " + inex);
 		Integer userId = (Integer) req.getAttribute("userId");
 		System.out.println("userId : "+userId);
 		DtoUtil.printFieldValues(tranListRequestDto);
 		
 		try {
-			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, "EX");
+			TranListResponseDto responseDto = transactionService.getList(tranListRequestDto, userId, inex);
 			model.addAttribute("DTO", responseDto);
-			List<String> cname_list = categoryService.getNameList(userId, "EX");
+			List<String> cname_list = categoryService.getNameList(userId, inex);
 			model.addAttribute("CNAME_LIST", cname_list);
-			List<String> mname_list = methodService.getNameList(userId);
-			model.addAttribute("MNAME_LIST", mname_list);
+			if ("Ex".equals(inex)) {
+				List<String> mname_list = methodService.getNameList(userId);
+				model.addAttribute("MNAME_LIST", mname_list);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", messageUtil.getMessage("message-response", "msg.res.failure"));
-			model.addAttribute("URL", "/tran/listIn");
+			// all 대문자로 받은 inex 값을 핸들러 매핑에 맞게 첫 글자만 대문자로 변환
+			String inexCapitalized = inex.substring(0, 1).toUpperCase() + inex.substring(1).toLowerCase();
+			model.addAttribute("URL", appConfig.getContextPath() + "/tran/list" + inexCapitalized);
 			return "root.redirecting";
 		}
 		
@@ -217,6 +191,7 @@ public class TransactionController implements TransactionControllerSpecification
 		
 		return "root.redirecting";
 	}
+	
 	
 	/*-------- 거래기록 수정 --------*/
 	
