@@ -38,18 +38,17 @@ public class CustomErrorController implements ErrorController {
 		String nextUrl = (referer != null) ? referer : appConfig.getContextPath();
 		String errorMessage;
 		
-		if (status != null) {
 			Integer statusCode = Integer.valueOf(status.toString());
-			if (statusCode == 404) {
-				errorMessage = messageUtil.getMessage("message-error", "msg.error.404");
-			} else if (statusCode == 500) {
-				errorMessage = messageUtil.getMessage("message-error", "msg.error.500");
-			} else {
-				errorMessage = messageUtil.getMessage("message-error", "msg.error.else");
-			}
-			model.addAttribute("MSG", errorMessage);
-			model.addAttribute("URL", nextUrl);
+			
+		if (statusCode == 404) {
+			errorMessage = messageUtil.getMessage("message-error", "msg.error.404");
+		} else if (statusCode == 500) {
+			errorMessage = messageUtil.getMessage("message-error", "msg.error.500");
+		} else {
+			errorMessage = messageUtil.getMessage("message-error", "msg.error.else");
 		}
+		model.addAttribute("MSG", errorMessage);
+		model.addAttribute("URL", nextUrl);
 		
 		return "root.redirecting";
 	}
