@@ -2,7 +2,9 @@
 
 # My 가계부 3 ✨
 ### 💰 Java와 Spring Boot로 만들어보는 나만의 가계부 어플리케이션
-- **Servlet (v.1) → Spring (v.2) → Spring Boot (v.3)로 고도화**하여 만들어본 **3번째** 가계부 앱입니다.
+- [Servlet (v.1)](https://github.com/EyEmilyKim/MyPrj_MyAccountBook_servlet) 
+→ [Spring (v.2)](https://github.com/EyEmilyKim/MyPrj_MyAccountBook2_spring) 
+→ **Spring Boot (v.3)로 고도화**하여 만들어본 **3번째** 가계부 앱입니다.
 - 기획, 개발, 배포 - 모든 과정을 **1인으로 진행**했습니다.
 
 > ### 🔗 [**Live Site 바로 가기**](http://3.39.39.244/mab3)  
@@ -52,7 +54,8 @@
   
 ## 📅 개발 기간
 - **핵심 개발** : 2024.06.27 ~ 2024.08.02 (약 5주)
-- **유지 보수** : 2024.08.21 ~ 2024.10.15 (약 8주)  ➡️ 순수 작업일 **총 58일**
+- **유지 보수** : 2024.08.21 ~ 2024.10.15 (약 8주)  
+	/ ➡️ 순수 작업일 **총 58일**
 - **AWS 배포** : 2024.08.02 ~ 현재
 
 ## 💝 프로젝트 의의
